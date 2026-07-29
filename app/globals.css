@@ -68,6 +68,13 @@ h2 { font-size:clamp(54px,6.4vw,101px); margin:24px 0 38px; }
 .real-gym-caption small { color:var(--orange); font-weight:800; letter-spacing:1.6px; }
 .real-gym-caption strong { font:900 clamp(37px,4vw,65px)/.9 'Barlow Condensed'; }
 .real-gym-caption em { color:var(--orange); font-style:normal; }
+.gym-video { grid-column:1/-1; display:grid; grid-template-columns:.65fr 1.35fr; margin-top:22px; background:#090909; color:#fff; }
+.gym-video-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(30px,5vw,75px); }
+.gym-video-copy small { color:var(--orange); font-weight:800; letter-spacing:1.8px; }
+.gym-video-copy h3 { margin:18px 0; font:900 clamp(38px,4.4vw,70px)/.9 'Barlow Condensed'; }
+.gym-video-copy h3 em { color:var(--orange); font-style:normal; }
+.gym-video-copy p { color:#aaa; font-size:13px; line-height:1.7; }
+.gym-video video { display:block; width:100%; min-height:470px; height:100%; object-fit:cover; background:#000; }
 
 .courses { background:#0c0c0c; }
 .section-heading { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; }
@@ -97,11 +104,21 @@ h2 { font-size:clamp(54px,6.4vw,101px); margin:24px 0 38px; }
 .brand-grid span { font:700 12px 'Barlow Condensed'; color:var(--orange); }.brand-grid div:hover span { color:#fff; }
 .brand-grid strong { font:900 clamp(25px,2.6vw,42px)/.95 'Barlow Condensed'; text-transform:uppercase; }
 .brand-grid small { color:#777; text-transform:uppercase; letter-spacing:1.4px; font-size:9px; }.brand-grid div:hover small { color:#fff; }
-.equipment-gallery { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; margin-top:38px; }
+.equipment-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin-top:38px; }
 .equipment-gallery figure { position:relative; margin:0; aspect-ratio:1/1.15; overflow:hidden; background:#171717; }
 .equipment-gallery img { height:100%; object-fit:cover; filter:grayscale(.35); transition:.5s; }
 .equipment-gallery figure:hover img { transform:scale(1.05); filter:grayscale(0); }
 .equipment-gallery span { position:absolute; top:14px; right:14px; display:grid; place-items:center; width:34px; height:34px; background:var(--orange); color:#fff; font:800 12px 'Barlow Condensed'; }
+.boxing-section { display:grid; grid-template-columns:1.1fr .9fr; min-height:760px; background:#090909; }
+.boxing-media { position:relative; min-height:680px; overflow:hidden; }
+.boxing-media::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent 55%,#090909 100%); }
+.boxing-media img { height:100%; object-fit:cover; filter:grayscale(.2) contrast(1.06); }
+.boxing-media span { position:absolute; z-index:2; left:30px; bottom:28px; padding:12px 15px; background:var(--orange); font:800 11px 'Barlow Condensed'; letter-spacing:1.7px; }
+.boxing-copy { align-self:center; padding:80px 7vw 80px 5vw; }
+.boxing-copy h2 { font-size:clamp(55px,6vw,94px); margin:25px 0 35px; }
+.boxing-copy .lead { font-size:19px; line-height:1.5; font-weight:700; }
+.boxing-copy > p:not(.eyebrow):not(.lead) { color:#999; line-height:1.8; font-size:13px; }
+.boxing-copy .button { margin-top:30px; }
 .day-tabs { display:grid; grid-template-columns:repeat(6,1fr); background:#161616; }
 .day-tabs button { padding:20px 5px; color:#888; background:transparent; border:0; border-right:1px solid #333; font-weight:800; text-transform:uppercase; cursor:pointer; }
 .day-tabs button.active { background:var(--orange); color:#fff; }
@@ -156,7 +173,7 @@ footer .logo { color:#fff; font-size:18px; } footer .logo span { width:27px; hei
 
 @media (max-width:1050px) {
   .course-grid { grid-template-columns:1fr 1fr; gap:2px; }.course-card { min-height:520px; }
-  .philosophy { gap:5vw; }.philosophy-image img { height:530px; }.quote { left:-30px; }.real-gym-strip { grid-template-columns:1fr .75fr 1fr; }
+  .philosophy { gap:5vw; }.philosophy-image img { height:530px; }.quote { left:-30px; }.real-gym-strip { grid-template-columns:1fr .75fr 1fr; }.boxing-section { grid-template-columns:1fr 1fr; }
   .contact { gap:5vw; }.contact-form { padding:35px; }.hero-stats { display:none; }
 }
 @media (max-width:760px) {
@@ -164,7 +181,7 @@ footer .logo { color:#fff; font-size:18px; } footer .logo span { width:27px; hei
   .menu-toggle { display:block; } nav { display:none; position:absolute; top:67px; left:0; right:0; padding:30px 22px; background:#0a0a0a; flex-direction:column; align-items:stretch; gap:0; } nav.open { display:flex; } nav a { padding:16px 4px; border-bottom:1px solid #333; }.nav-cta { margin-top:12px; text-align:center; }
   .hero { min-height:830px; padding:120px 22px 85px; align-items:center; }.hero-shade { background:linear-gradient(90deg,rgba(5,5,5,.9),rgba(5,5,5,.35)),linear-gradient(0deg,#050505 0%,transparent 60%); }.hero-media { background-position:58% center; }
   h1 { font-size:clamp(60px,19vw,82px); letter-spacing:-2px; line-height:.88; }.hero-copy { font-size:14px; max-width:320px; }.hero-actions { align-items:flex-start; flex-direction:column; gap:26px; }.scroll-cue { display:none; }
-  .section { padding:85px 22px; }.section-index { display:none; }.philosophy { grid-template-columns:1fr; gap:65px; }.philosophy .lead { font-size:18px; }.philosophy-image img { height:430px; }.quote { left:14px; right:14px; bottom:-35px; width:auto; }.real-gym-strip { grid-template-columns:1fr 1fr; margin-top:20px; }.real-gym-caption { grid-column:1/-1; grid-row:1; min-height:220px; }.real-gym-strip figure img { min-height:350px; }.equipment-gallery { grid-template-columns:1fr 1fr; }
+  .section { padding:85px 22px; }.section-index { display:none; }.philosophy { grid-template-columns:1fr; gap:65px; }.philosophy .lead { font-size:18px; }.philosophy-image img { height:430px; }.quote { left:14px; right:14px; bottom:-35px; width:auto; }.real-gym-strip { grid-template-columns:1fr 1fr; margin-top:20px; }.real-gym-caption { grid-column:1/-1; grid-row:1; min-height:220px; }.real-gym-strip figure img { min-height:350px; }.gym-video { grid-template-columns:1fr; }.gym-video video { min-height:260px; }.equipment-gallery { grid-template-columns:1fr; }.boxing-section { grid-template-columns:1fr; }.boxing-media { min-height:430px; }.boxing-media::after { background:linear-gradient(0deg,#090909 0%,transparent 38%); }.boxing-copy { padding:40px 22px 85px; }
   .section-heading { display:block; }.section-heading > p { margin-top:25px; }.section-heading h2,h2 { letter-spacing:-2px; }
   .course-grid { grid-template-columns:1fr; }.course-card { min-height:510px; border-right:0; border-bottom:1px solid #333; }
   .brand-grid { grid-template-columns:1fr 1fr; }.brand-grid div { min-height:180px; border-bottom:1px solid #c7c4bc; }.brand-grid div:nth-child(2) { border-right:0; }

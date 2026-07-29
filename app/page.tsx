@@ -39,7 +39,7 @@ export default function Home() {
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><span>R</span> REVENGE <b>GYM</b></a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','filosofia'],['Aree','corsi'],['Attrezzatura','attrezzatura'],['Gallery','gallery'],['Contatti','contatti']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          {[['La palestra','filosofia'],['Aree','corsi'],['Attrezzatura','attrezzatura'],['Boxe','boxe'],['Gallery','gallery'],['Contatti','contatti']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
           <a className="nav-cta" href="#prova" onClick={() => setMenuOpen(false)}>Prova gratuita <span>↗</span></a>
         </nav>
       </header>
@@ -80,6 +80,13 @@ export default function Home() {
           <div className="real-gym-caption"><small>REVENGE GYM · LADISPOLI</small><strong>QUESTA È<br/>LA NOSTRA<br/><em>PALESTRA.</em></strong></div>
           <figure><img src="/photos/revenge-gym-05.jpg" alt="Esercizio con macchinario nella sala pesi di Revenge Gym" loading="lazy"/><figcaption>Spazi reali, risultati reali</figcaption></figure>
         </div>
+        <div className="gym-video reveal">
+          <div className="gym-video-copy"><small>TOUR DELLA PALESTRA</small><h3>ENTRA IN<br/><em>REVENGE GYM.</em></h3><p>Scopri gli ambienti, le aree di allenamento e l’atmosfera della palestra prima ancora di venirci a trovare.</p></div>
+          <video controls playsInline preload="metadata" poster="/media/sala-attrezzi.webp" aria-label="Video degli ambienti di Revenge Gym">
+            <source src="/media/revenge-gym-tour.mp4" type="video/mp4"/>
+            Il tuo browser non supporta la riproduzione video.
+          </video>
+        </div>
       </section>
 
       <section className="section courses" id="corsi">
@@ -103,13 +110,23 @@ export default function Home() {
         </div>
         <div className="equipment-gallery reveal" aria-label="Attrezzature di Revenge Gym">
           {[
-            ['/photos/revenge-gym-03.jpg', 'Struttura di un macchinario professionale'],
-            ['/photos/revenge-gym-04.jpg', 'Realizzazione delle attrezzature della palestra'],
-            ['/photos/revenge-gym-07.jpg', 'Macchinario professionale in lavorazione'],
-            ['/photos/revenge-gym-08.jpg', 'Attrezzatura selezionata per la sala pesi']
+            ['/media/sala-attrezzi.webp', 'Sala attrezzi completa di Revenge Gym'],
+            ['/media/macchinario-spalle.webp', 'Allenamento su macchinario professionale per le spalle'],
+            ['/media/macchinario-dorso.webp', 'Allenamento su macchinario professionale per il dorso']
           ].map(([src, alt], i) => <figure key={src}><img src={src} alt={alt} loading="lazy"/><span>0{i+1}</span></figure>)}
         </div>
         <p className="schedule-note">La dotazione può essere aggiornata nel tempo. Vieni a vedere la palestra dal vivo.</p>
+      </section>
+
+      <section className="boxing-section" id="boxe">
+        <div className="boxing-media reveal"><img src="/media/ring-boxe.webp" alt="Ring e sala boxe di Revenge Gym" loading="lazy"/><span>RING · SACCHI · TECNICA</span></div>
+        <div className="boxing-copy reveal">
+          <p className="eyebrow"><span></span> Area Boxe</p>
+          <h2>SALI SUL RING.<br/><em>TIRA FUORI IL CARATTERE.</em></h2>
+          <p className="lead">Revenge Gym non è solo sala pesi: dispone anche di un’area dedicata alla boxe con ring e sacchi.</p>
+          <p>Uno spazio pensato per allenare tecnica, coordinazione, resistenza e sicurezza. Contattaci per conoscere modalità di allenamento e disponibilità.</p>
+          <a href="#contatti" className="button primary">Informazioni sulla boxe <span>↗</span></a>
+        </div>
       </section>
 
       <section className="gallery-section" id="gallery">
