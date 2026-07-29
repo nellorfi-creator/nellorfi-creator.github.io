@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.GITHUB_PAGES === "true" ? "https://nellorfi-creator.github.io" : "https://revenge-box-ladispoli.nello-rfialt.chatgpt.site"),
   title: "Revenge Gym | Palestra e Sala Pesi a Ladispoli",
   description: "Revenge Gym è la palestra in Via Berna 8 a Ladispoli, con sala pesi, macchinari professionali e area boxe con ring e sacchi.",
   keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "Revenge Gym", "Panatta", "Hammer Strength"],

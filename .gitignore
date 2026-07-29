@@ -40,3 +40,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Original local media; the optimized files used by the site live in public/.
+/Foto e video/
