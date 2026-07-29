@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Revenge Box | Functional Training a Ladispoli",
-  description: "Functional training, weightlifting, open box e personal training a Ladispoli. Prenota la tua prova gratuita al Revenge Box.",
-  keywords: ["palestra Ladispoli", "functional training Ladispoli", "Revenge Box", "weightlifting", "personal training"],
+  title: "Revenge Gym | Palestra e Sala Pesi a Ladispoli",
+  description: "Revenge Gym è la palestra a Ladispoli con sala pesi e macchinari Panatta, Hammer Strength, Life Fitness e Precor.",
+  keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "Revenge Gym", "Panatta", "Hammer Strength"],
   openGraph: {
-    title: "Revenge Box | La tua rivincita inizia oggi",
-    description: "Functional training a Ladispoli. Allenati, evolvi, supera i tuoi limiti.",
+    title: "Revenge Gym | La tua rivincita inizia oggi",
+    description: "Palestra e sala pesi a Ladispoli. Allenati, evolvi, supera i tuoi limiti.",
     locale: "it_IT",
     type: "website",
-    images: [{ url: "/og.png", width: 1728, height: 909, alt: "Revenge Box — La tua rivincita inizia oggi" }],
+    images: [{ url: "/og.png", width: 1728, height: 909, alt: "Revenge Gym — La tua rivincita inizia oggi" }],
   },
-  twitter: { card: "summary_large_image", title: "Revenge Box", description: "La tua rivincita inizia oggi.", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", title: "Revenge Gym", description: "La tua rivincita inizia oggi.", images: ["/og.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
