@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Revenge Gym | Palestra e Sala Pesi a Ladispoli",
-  description: "Revenge Gym è la palestra a Ladispoli con sala pesi e macchinari Panatta, Hammer Strength, Life Fitness e Precor.",
+  description: "Revenge Gym è la palestra in Via Berna 8 a Ladispoli, con sala pesi e macchinari Panatta, Hammer Strength, Life Fitness e Precor.",
   keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "Revenge Gym", "Panatta", "Hammer Strength"],
   openGraph: {
     title: "Revenge Gym | La tua rivincita inizia oggi",

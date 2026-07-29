@@ -75,6 +75,11 @@ export default function Home() {
           <img src="https://images.unsplash.com/photo-1526401485004-2aa7c67f9c33?auto=format&fit=crop&w=1400&q=85" alt="Community che si allena insieme" loading="lazy" />
           <div className="quote"><span>“</span><p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p></div>
         </div>
+        <div className="real-gym-strip reveal" aria-label="Foto reali di Revenge Gym">
+          <figure><img src="/photos/revenge-gym-02.jpg" alt="Allenamento ai cavi nella sala di Revenge Gym" loading="lazy"/><figcaption>Allenamento in sala</figcaption></figure>
+          <div className="real-gym-caption"><small>REVENGE GYM · LADISPOLI</small><strong>QUESTA È<br/>LA NOSTRA<br/><em>PALESTRA.</em></strong></div>
+          <figure><img src="/photos/revenge-gym-05.jpg" alt="Esercizio con macchinario nella sala pesi di Revenge Gym" loading="lazy"/><figcaption>Spazi reali, risultati reali</figcaption></figure>
+        </div>
       </section>
 
       <section className="section courses" id="corsi">
@@ -96,6 +101,14 @@ export default function Home() {
         <div className="brand-grid reveal">
           {['PANATTA','HAMMER STRENGTH','LIFE FITNESS','PRECOR'].map((brand, i) => <div key={brand}><span>0{i+1}</span><strong>{brand}</strong><small>Performance equipment</small></div>)}
         </div>
+        <div className="equipment-gallery reveal" aria-label="Attrezzature di Revenge Gym">
+          {[
+            ['/photos/revenge-gym-03.jpg', 'Struttura di un macchinario professionale'],
+            ['/photos/revenge-gym-04.jpg', 'Realizzazione delle attrezzature della palestra'],
+            ['/photos/revenge-gym-07.jpg', 'Macchinario professionale in lavorazione'],
+            ['/photos/revenge-gym-08.jpg', 'Attrezzatura selezionata per la sala pesi']
+          ].map(([src, alt], i) => <figure key={src}><img src={src} alt={alt} loading="lazy"/><span>0{i+1}</span></figure>)}
+        </div>
         <p className="schedule-note">La dotazione può essere aggiornata nel tempo. Vieni a vedere la palestra dal vivo.</p>
       </section>
 
@@ -114,11 +127,11 @@ export default function Home() {
         <div className="contact-info reveal">
           <p className="eyebrow"><span></span> Parliamone</p><h2>CI VEDIAMO<br/>IN <em>PALESTRA.</em></h2>
           <div className="info-list">
-            <div><small>Dove siamo</small><p>Via da definire, Ladispoli (RM)</p><a href="https://maps.google.com/?q=Ladispoli" target="_blank" rel="noreferrer">Apri in Google Maps ↗</a></div>
+            <div><small>Dove siamo</small><p>Via Berna, 8<br/>00055 Ladispoli RM</p><a href="https://maps.google.com/?q=Via+Berna+8+00055+Ladispoli+RM" target="_blank" rel="noreferrer">Apri in Google Maps ↗</a></div>
             <div><small>Contatti</small><p><a href="tel:+393475368488">347 536 8488</a><br/><a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a></p></div>
-            <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox" target="_blank" rel="noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noreferrer">Messenger ↗</a></p></div>
+            <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noreferrer">Messenger ↗</a></p></div>
           </div>
-          <div className="map-placeholder"><iframe title="Mappa di Ladispoli" loading="lazy" src="https://www.google.com/maps?q=Ladispoli%2C%20RM&output=embed"></iframe></div>
+          <div className="map-placeholder"><iframe title="Mappa di Revenge Gym a Ladispoli" loading="lazy" src="https://www.google.com/maps?q=Via%20Berna%208%2C%2000055%20Ladispoli%20RM&output=embed"></iframe></div>
         </div>
         <form className="contact-form reveal" onSubmit={submitForm}>
           <span className="form-kicker">PRENOTA LA PROVA GRATUITA</span><h3>Pronto a iniziare?</h3>
