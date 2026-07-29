@@ -72,7 +72,7 @@ export default function Home() {
           <a href="#contatti" className="text-link orange">Conosci la nostra community <span>↗</span></a>
         </div>
         <div className="philosophy-image reveal">
-          <img src="https://images.unsplash.com/photo-1526401485004-2aa7c67f9c33?auto=format&fit=crop&w=1400&q=85" alt="Community che si allena insieme" loading="lazy" />
+          <img src="/media/sala-attrezzi.webp" alt="Vista panoramica della sala attrezzi di Revenge Gym" loading="lazy" />
           <div className="quote"><span>“</span><p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p></div>
         </div>
         <div className="real-gym-strip reveal" aria-label="Foto reali di Revenge Gym">
@@ -154,7 +154,7 @@ export default function Home() {
           <span className="form-kicker">PRENOTA LA PROVA GRATUITA</span><h3>Pronto a iniziare?</h3>
           <label>Nome e cognome<input required name="name" placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" placeholder="+39" /></label></div>
-          <label>Area di interesse<select name="course" defaultValue=""><option value="" disabled>Seleziona un’area</option>{courses.map(c => <option key={c.title}>{c.title}</option>)}</select></label>
+          <label>Area di interesse<select name="course" defaultValue=""><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
           <label>Messaggio<textarea name="message" placeholder="Raccontaci il tuo obiettivo..."></textarea></label>
           <label className="privacy"><input required type="checkbox" /> <span>Accetto il trattamento dei dati personali.</span></label>
           <button className="button primary" type="submit">Invia la richiesta <span>↗</span></button>
