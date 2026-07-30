@@ -18,14 +18,14 @@ const gallery = [
 ];
 
 const introFrames = [
-  ["/og.png", "RIVINCITA"],
+  ["https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=2000&q=90", "RIVINCITA"],
   ["/media/sala-attrezzi.webp", "FORZA"],
   ["/media/macchinario-spalle.webp", "POTENZA"],
   ["/photos/revenge-gym-02.jpg", "ENERGIA"],
   ["/media/ring-boxe.webp", "BOXE"],
   ["/media/macchinario-dorso.webp", "DISCIPLINA"],
   ["/photos/revenge-gym-05.jpg", "CARATTERE"],
-  ["/og.png", "REVENGE GYM"],
+  ["/media/sala-attrezzi.webp", "REVENGE GYM"],
 ];
 
 export default function Home() {
@@ -96,7 +96,7 @@ export default function Home() {
     <main>
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
         <div className={`intro-frames${introStarted ? " is-running" : ""}`}>
-          <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "/og.png"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>
+          <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=2000&q=90"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>
         </div>
         <div className="intro-shade"></div>
         <div className="intro-logo logo"><span>R</span> REVENGE <b>GYM</b></div>
@@ -226,7 +226,11 @@ export default function Home() {
             <div><small>Contatti</small><p><a href="tel:+393475368488">347 536 8488</a><br/><a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a></p></div>
             <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noreferrer">Messenger ↗</a></p></div>
           </div>
-          <div className="map-placeholder"><iframe title="Mappa di Revenge Gym a Ladispoli" loading="lazy" src="https://www.google.com/maps?q=Via%20Berna%208%2C%2000055%20Ladispoli%20RM&output=embed"></iframe></div>
+          <div className="map-placeholder">
+            <div className="map-label"><span>●</span><div><strong>REVENGE GYM</strong><small>Via Berna 8 · Ladispoli</small></div></div>
+            <iframe title="Mappa di Revenge Gym a Ladispoli" loading="lazy" src="https://www.google.com/maps?q=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM&z=14&output=embed" referrerPolicy="no-referrer-when-downgrade"></iframe>
+            <a className="map-open" href="https://www.google.com/maps/search/?api=1&query=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM" target="_blank" rel="noreferrer">Apri la mappa <span>↗</span></a>
+          </div>
         </div>
         <form className="contact-form reveal" onSubmit={submitForm}>
           <span className="form-kicker">PRENOTA LA PROVA GRATUITA</span><h3>Pronto a iniziare?</h3>
