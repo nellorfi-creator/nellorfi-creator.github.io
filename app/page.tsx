@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi." },
@@ -20,12 +20,50 @@ const gallery = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [introVisible, setIntroVisible] = useState(true);
+  const [introClosing, setIntroClosing] = useState(false);
+  const [introSound, setIntroSound] = useState(false);
+  const introAudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = introVisible ? "hidden" : "";
+    if (!introVisible) return;
+    const closingTimer = window.setTimeout(() => setIntroClosing(true), 10500);
+    const exitTimer = window.setTimeout(() => {
+      introAudioRef.current?.pause();
+      setIntroVisible(false);
+    }, 11200);
+    return () => {
+      window.clearTimeout(closingTimer);
+      window.clearTimeout(exitTimer);
+      document.body.style.overflow = "";
+    };
+  }, [introVisible]);
+
+  const closeIntro = () => {
+    setIntroClosing(true);
+    introAudioRef.current?.pause();
+    window.setTimeout(() => setIntroVisible(false), 700);
+  };
+
+  const toggleIntroSound = async () => {
+    const audio = introAudioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.volume = 0.48;
+      await audio.play();
+      setIntroSound(true);
+    } else {
+      audio.pause();
+      setIntroSound(false);
+    }
+  };
 
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,6 +73,23 @@ export default function Home() {
 
   return (
     <main>
+      {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
+        <div className="intro-backdrop" role="img" aria-label="Atleta durante un allenamento intenso"></div>
+        <div className="intro-shade"></div>
+        <div className="intro-logo logo"><span>R</span> REVENGE <b>GYM</b></div>
+        <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
+          <i>{introSound ? "▮▮" : "▶"}</i> {introSound ? "Musica attiva" : "Attiva musica"}
+        </button>
+        <div className="intro-content">
+          <p className="intro-kicker"><span></span> Ladispoli · Sala pesi · Boxe</p>
+          <h2>LA TUA<br/><em>RIVINCITA</em><br/>INIZIA QUI.</h2>
+          <p>Forza. Disciplina. Carattere.</p>
+          <button className="button primary" type="button" onClick={closeIntro}>Entra nella palestra <span>↗</span></button>
+        </div>
+        <button className="intro-skip" type="button" onClick={closeIntro}>Salta intro →</button>
+        <div className="intro-progress" aria-hidden="true"><span></span></div>
+        <audio ref={introAudioRef} src="/media/revenge-gym-tour.mp4" loop preload="auto"/>
+      </section>}
       <header className="nav-wrap">
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><span>R</span> REVENGE <b>GYM</b></a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
