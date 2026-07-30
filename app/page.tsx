@@ -17,11 +17,24 @@ const gallery = [
   ["https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=1200&q=85", "Workout ad alta intensità"],
 ];
 
+const introFrames = [
+  ["/og.png", "RIVINCITA"],
+  ["/media/sala-attrezzi.webp", "FORZA"],
+  ["/media/macchinario-spalle.webp", "POTENZA"],
+  ["/photos/revenge-gym-02.jpg", "ENERGIA"],
+  ["/media/ring-boxe.webp", "BOXE"],
+  ["/media/macchinario-dorso.webp", "DISCIPLINA"],
+  ["/photos/revenge-gym-05.jpg", "CARATTERE"],
+  ["/og.png", "REVENGE GYM"],
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
   const [introClosing, setIntroClosing] = useState(false);
+  const [introStarted, setIntroStarted] = useState(false);
+  const [introSlide, setIntroSlide] = useState(0);
   const [introSound, setIntroSound] = useState(false);
   const introAudioRef = useRef<HTMLAudioElement>(null);
 
@@ -33,18 +46,17 @@ export default function Home() {
 
   useEffect(() => {
     document.body.style.overflow = introVisible ? "hidden" : "";
-    if (!introVisible) return;
-    const closingTimer = window.setTimeout(() => setIntroClosing(true), 10500);
-    const exitTimer = window.setTimeout(() => {
-      introAudioRef.current?.pause();
-      setIntroVisible(false);
-    }, 11200);
+    if (!introVisible || !introStarted) return;
+    const slideTimer = window.setInterval(() => setIntroSlide((slide) => Math.min(slide + 1, introFrames.length - 1)), 720);
+    const closingTimer = window.setTimeout(() => setIntroClosing(true), 6400);
+    const exitTimer = window.setTimeout(() => { introAudioRef.current?.pause(); setIntroVisible(false); }, 7100);
     return () => {
+      window.clearInterval(slideTimer);
       window.clearTimeout(closingTimer);
       window.clearTimeout(exitTimer);
       document.body.style.overflow = "";
     };
-  }, [introVisible]);
+  }, [introVisible, introStarted]);
 
   const closeIntro = () => {
     setIntroClosing(true);
@@ -65,6 +77,15 @@ export default function Home() {
     }
   };
 
+  const startIntro = async () => {
+    const audio = introAudioRef.current;
+    if (audio) {
+      audio.volume = 0.55;
+      try { await audio.play(); setIntroSound(true); } catch { setIntroSound(false); }
+    }
+    setIntroStarted(true);
+  };
+
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSent(true);
@@ -74,20 +95,22 @@ export default function Home() {
   return (
     <main>
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
-        <div className="intro-backdrop" role="img" aria-label="Atleta durante un allenamento intenso"></div>
+        <div className={`intro-frames${introStarted ? " is-running" : ""}`}>
+          <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "/og.png"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>
+        </div>
         <div className="intro-shade"></div>
         <div className="intro-logo logo"><span>R</span> REVENGE <b>GYM</b></div>
-        <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
+        {introStarted && <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
           <i>{introSound ? "▮▮" : "▶"}</i> {introSound ? "Musica attiva" : "Attiva musica"}
-        </button>
-        <div className="intro-content">
+        </button>}
+        {!introStarted ? <div className="intro-content intro-launch">
           <p className="intro-kicker"><span></span> Ladispoli · Sala pesi · Boxe</p>
           <h2>LA TUA<br/><em>RIVINCITA</em><br/>INIZIA QUI.</h2>
-          <p>Forza. Disciplina. Carattere.</p>
-          <button className="button primary" type="button" onClick={closeIntro}>Entra nella palestra <span>↗</span></button>
-        </div>
+          <p>Alza il volume. Entra nell’esperienza.</p>
+          <button className="button primary intro-start" type="button" onClick={startIntro}><i>▶</i> Avvia con musica</button>
+        </div> : <div className="intro-flash" aria-live="polite"><strong key={introSlide}>{introFrames[introSlide][1]}</strong><span>{String(introSlide + 1).padStart(2,"0")} / {String(introFrames.length).padStart(2,"0")}</span></div>}
         <button className="intro-skip" type="button" onClick={closeIntro}>Salta intro →</button>
-        <div className="intro-progress" aria-hidden="true"><span></span></div>
+        {introStarted && <div className="intro-progress" aria-hidden="true"><span></span></div>}
         <audio ref={introAudioRef} src="/media/revenge-gym-tour.mp4" loop preload="auto"/>
       </section>}
       <header className="nav-wrap">
