@@ -247,7 +247,7 @@ export default function Home() {
       {activeBrand && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveBrand(null)}>
         <aside className="brand-drawer" role="dialog" aria-modal="true" aria-labelledby="brand-drawer-title">
           <button className="brand-drawer-close" type="button" onClick={() => setActiveBrand(null)} aria-label="Chiudi approfondimento">×</button>
-          <div className="brand-drawer-head"><span>BRAND PROFILE · REVENGE GYM</span><small>{activeBrand.origin}</small><h2 id="brand-drawer-title">{activeBrand.name}</h2><p>{activeBrand.intro}</p></div>
+          <div className="brand-drawer-head"><span>BRAND PROFILE · REVENGE GYM</span><small>{activeBrand.origin}</small><h2 id="brand-drawer-title" className={activeBrand.name.length > 12 ? "brand-title-long" : undefined}>{activeBrand.name}</h2><p>{activeBrand.intro}</p></div>
           <div className="brand-drawer-body">
             <section><small>LA STORIA</small><p>{activeBrand.history}</p></section>
             <section><small>COSA LO DISTINGUE</small><ul>{activeBrand.highlights.map(item => <li key={item}>{item}</li>)}</ul></section>
