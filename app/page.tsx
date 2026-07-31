@@ -17,6 +17,41 @@ const gallery = [
   ["https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=1200&q=85", "Workout ad alta intensità"],
 ];
 
+const equipmentBrands = [
+  {
+    name: "PANATTA", origin: "Apiro, Marche · Italia", since: "Dal 1973",
+    intro: "Una storia italiana nata dalla passione di Rudi Panatta per la cultura fisica e la biomeccanica applicata all’allenamento.",
+    history: "Dai primi pesi costruiti artigianalmente fino a un ciclo produttivo completamente controllato in Italia: progettazione, prototipazione, saldatura, verniciatura, assemblaggio e collaudo avvengono negli stabilimenti di Apiro, nelle Marche.",
+    highlights: ["Progettazione e produzione Made in Italy", "Ricerca biomeccanica interna", "Macchine isotoniche, cardio e plate-loaded", "Controllo diretto dell’intero processo produttivo"],
+    relevance: "In sala significa avere macchine progettate con particolare attenzione alla traiettoria del movimento, alle regolazioni e al lavoro muscolare mirato.",
+    source: "https://www.panattasport.com/it/azienda/", sourceLabel: "Storia ufficiale Panatta",
+  },
+  {
+    name: "HAMMER STRENGTH", origin: "Stati Uniti", since: "Dal 1989",
+    intro: "Il marchio creato da Gary Jones per portare nella sala pesi movimenti ispirati alla prestazione degli atleti.",
+    history: "Hammer Strength nacque combinando la progettazione di Gary Jones con il confronto diretto con atleti e preparatori, tra cui quelli dei Cincinnati Bengals. Nel 1997 il marchio entrò nel gruppo Life Fitness, ampliandone l’offerta dedicata alla forza.",
+    highlights: ["Tecnologia Iso-Lateral per allenare i due lati in modo indipendente", "Macchine plate-loaded e strutture per la forza", "Progettazione orientata a gesti fluidi e naturali", "Test di durata oltre gli standard di settore"],
+    relevance: "È un riferimento per chi cerca un allenamento di forza intenso, stabile e progressivo, con la libertà di caricare dischi e lavorare anche unilateralmente.",
+    source: "https://www.lifefitness.com/en-us/brands/hammer-strength", sourceLabel: "Profilo ufficiale Hammer Strength",
+  },
+  {
+    name: "LIFE FITNESS", origin: "Illinois · Stati Uniti", since: "Radici dal 1968",
+    intro: "La sua storia comincia con la Lifecycle, una delle attrezzature che ha contribuito a trasformare il cardio indoor.",
+    history: "L’idea della Lifecycle risale al 1968; l’azienda fu costituita nel 1977 e negli anni successivi estese la propria esperienza dalle bike a tapis roulant, cardio, forza e soluzioni digitali per le palestre di tutto il mondo.",
+    highlights: ["Esperienza storica nel cardio professionale", "Attrezzature per forza e allenamento funzionale", "Console e soluzioni connesse", "Gamma pensata per utilizzo commerciale intensivo"],
+    relevance: "La presenza di Life Fitness completa la sala con attrezzature intuitive e affidabili, adatte sia a chi comincia sia a chi si allena con continuità.",
+    source: "https://www.lifefitness.com/en-us", sourceLabel: "Sito ufficiale Life Fitness",
+  },
+  {
+    name: "PRECOR", origin: "Washington · Stati Uniti", since: "Dal 1980",
+    intro: "Un marchio costruito intorno a ergonomia, affidabilità e movimenti capaci di seguire il corpo dell’utilizzatore.",
+    history: "Fondata nel 1980 come Precision Corporation, lanciò il primo vogatore nel 1981 e assunse il nome Precor nel 1983. Nel 1995 presentò il primo Elliptical Fitness Crosstrainer EFX; in seguito introdusse l’Adaptive Motion Trainer e console cardio connesse.",
+    highlights: ["Pioniere dell’ellittica EFX", "Cardio, forza e functional training", "Movimenti ergonomici e regolazioni intuitive", "Attrezzature progettate per semplicità e affidabilità"],
+    relevance: "È particolarmente apprezzata nelle aree cardio e nei percorsi in cui comfort, fluidità del gesto e facilità d’uso sono essenziali.",
+    source: "https://www.precor.com/en-US/about-us", sourceLabel: "Storia ufficiale Precor",
+  },
+];
+
 const introFrames = [
   ["https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=2000&q=90", "RIVINCITA"],
   ["/media/sala-attrezzi.webp", "FORZA"],
@@ -36,6 +71,7 @@ export default function Home() {
   const [introStarted, setIntroStarted] = useState(false);
   const [introSlide, setIntroSlide] = useState(0);
   const [introSound, setIntroSound] = useState(false);
+  const [activeBrand, setActiveBrand] = useState<(typeof equipmentBrands)[number] | null>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -57,6 +93,18 @@ export default function Home() {
       document.body.style.overflow = "";
     };
   }, [introVisible, introStarted]);
+
+  useEffect(() => {
+    if (!activeBrand) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => event.key === "Escape" && setActiveBrand(null);
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [activeBrand]);
 
   const closeIntro = () => {
     setIntroClosing(true);
@@ -184,7 +232,7 @@ export default function Home() {
       <section className="section schedule-section" id="attrezzatura">
         <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Qualità in sala</p><h2>MACCHINARI<br/><em>SELEZIONATI.</em></h2></div><p>Una dotazione completa con alcuni dei marchi più riconosciuti nel mondo del fitness e della preparazione fisica.</p></div>
         <div className="brand-grid reveal">
-          {['PANATTA','HAMMER STRENGTH','LIFE FITNESS','PRECOR'].map((brand, i) => <div key={brand}><span>0{i+1}</span><strong>{brand}</strong><small>Performance equipment</small></div>)}
+          {equipmentBrands.map((brand, i) => <button type="button" key={brand.name} onClick={() => setActiveBrand(brand)} aria-label={`Scopri storia e caratteristiche di ${brand.name}`}><span>0{i+1}</span><strong>{brand.name}</strong><small>{brand.since}</small><i>Scopri il marchio ↗</i></button>)}
         </div>
         <div className="equipment-gallery reveal" aria-label="Attrezzature di Revenge Gym">
           {[
@@ -195,6 +243,19 @@ export default function Home() {
         </div>
         <p className="schedule-note">La dotazione può essere aggiornata nel tempo. Vieni a vedere la palestra dal vivo.</p>
       </section>
+
+      {activeBrand && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveBrand(null)}>
+        <aside className="brand-drawer" role="dialog" aria-modal="true" aria-labelledby="brand-drawer-title">
+          <button className="brand-drawer-close" type="button" onClick={() => setActiveBrand(null)} aria-label="Chiudi approfondimento">×</button>
+          <div className="brand-drawer-head"><span>BRAND PROFILE · REVENGE GYM</span><small>{activeBrand.origin}</small><h2 id="brand-drawer-title">{activeBrand.name}</h2><p>{activeBrand.intro}</p></div>
+          <div className="brand-drawer-body">
+            <section><small>LA STORIA</small><p>{activeBrand.history}</p></section>
+            <section><small>COSA LO DISTINGUE</small><ul>{activeBrand.highlights.map(item => <li key={item}>{item}</li>)}</ul></section>
+            <section className="brand-relevance"><small>PERCHÉ È IN REVENGE GYM</small><p>{activeBrand.relevance}</p></section>
+            <a className="brand-source" href={activeBrand.source} target="_blank" rel="noreferrer">{activeBrand.sourceLabel} <span>↗</span></a>
+          </div>
+        </aside>
+      </div>}
 
       <section className="boxing-section" id="boxe">
         <div className="boxing-media reveal"><img src="/media/ring-boxe.webp" alt="Ring e sala boxe di Revenge Gym" loading="lazy"/><span>RING · SACCHI · TECNICA</span></div>
