@@ -99,7 +99,7 @@ export default function Home() {
           <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=2000&q=90"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>
         </div>
         <div className="intro-shade"></div>
-        <div className="intro-logo logo"><span>R</span> REVENGE <b>GYM</b></div>
+        <div className="intro-logo logo"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></div>
         {introStarted && <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
           <i>{introSound ? "▮▮" : "▶"}</i> {introSound ? "Musica attiva" : "Attiva musica"}
         </button>}
@@ -114,7 +114,7 @@ export default function Home() {
         <audio ref={introAudioRef} src="/media/revenge-gym-tour.mp4" loop preload="auto"/>
       </section>}
       <header className="nav-wrap">
-        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><span>R</span> REVENGE <b>GYM</b></a>
+        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           {[['La palestra','filosofia'],['Aree','corsi'],['Attrezzatura','attrezzatura'],['Boxe','boxe'],['Gallery','gallery'],['Contatti','contatti']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
@@ -244,7 +244,7 @@ export default function Home() {
         </form>
       </section>
 
-      <footer><a href="#home" className="logo"><span>R</span> REVENGE <b>GYM</b></a><p>Sala pesi · Ladispoli</p><p>© 2026 Revenge Gym. Tutti i diritti riservati.</p><a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a></footer>
+      <footer><a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a><p>Sala pesi · Ladispoli</p><p>© 2026 Revenge Gym. Tutti i diritti riservati.</p><a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a></footer>
     </main>
   );
 }
