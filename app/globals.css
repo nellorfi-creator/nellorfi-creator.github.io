@@ -111,7 +111,7 @@ h2 { font-size:clamp(54px,6.4vw,101px); margin:24px 0 38px; }
 .section-heading h2 { margin-bottom:0; }
 .section-heading > p { max-width:410px; color:#999; line-height:1.7; font-size:14px; padding-bottom:8px; }
 .course-grid { display:grid; grid-template-columns:repeat(4,1fr); }
-.course-card { min-height:620px; position:relative; overflow:hidden; border-right:1px solid rgba(255,255,255,.2); }
+.course-card { min-height:620px; position:relative; overflow:hidden; padding:0; color:#fff; background:#111; border:0; border-right:1px solid rgba(255,255,255,.2); text-align:left; cursor:pointer; font:inherit; }
 .course-card img,.course-overlay { position:absolute; inset:0; height:100%; object-fit:cover; transition:.6s; }
 .course-card img { filter:grayscale(1); }
 .course-card:hover img { transform:scale(1.06); filter:grayscale(.2); }
@@ -122,8 +122,9 @@ h2 { font-size:clamp(54px,6.4vw,101px); margin:24px 0 38px; }
 .course-content small { color:var(--orange); text-transform:uppercase; letter-spacing:1.5px; font-weight:700; }
 .course-content h3 { font:800 35px 'Barlow Condensed'; text-transform:uppercase; margin:9px 0 12px; }
 .course-content p { color:#aaa; font-size:12px; line-height:1.6; min-height:60px; }
-.course-content a { display:flex; justify-content:space-between; border-top:1px solid #555; padding-top:16px; margin-top:22px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1.4px; }
-.course-content a span { color:var(--orange); }
+.course-open { display:flex; justify-content:space-between; border-top:1px solid #555; padding-top:16px; margin-top:22px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1.4px; }
+.course-card:focus-visible { outline:2px solid var(--orange); outline-offset:-2px; }.area-drawer-head { background-position:center; background-size:cover; }.area-drawer-head > span,.area-drawer-head > small,.area-drawer-head h2,.area-drawer-head p { position:relative; z-index:1; }
+.course-open > span { color:var(--orange); }
 
 .schedule-section { background:var(--paper); color:#111; }
 .schedule-section .eyebrow { color:#666; }

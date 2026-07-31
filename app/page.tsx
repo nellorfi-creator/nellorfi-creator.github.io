@@ -3,10 +3,10 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 
 const courses = [
-  { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi." },
-  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=85", text: "Attrezzature Panatta, Hammer Strength, Life Fitness e Precor per un allenamento preciso ed efficace." },
-  { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=85", text: "Uno spazio dedicato al lavoro cardiovascolare, al riscaldamento e al miglioramento della resistenza." },
-  { icon: "◎", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1200&q=85", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante." },
+  { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
+  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=85", text: "Attrezzature Panatta, Hammer Strength, Life Fitness e Precor per un allenamento preciso ed efficace.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
+  { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=85", text: "Uno spazio dedicato al lavoro cardiovascolare, al riscaldamento e al miglioramento della resistenza.", description: "Un’area dedicata ad attivazione, resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature per riscaldamento e lavoro aerobico", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
+  { icon: "◎", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1200&q=85", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante.", description: "Lo spazio in cui costruire la tua routine combinando esercizi, attrezzi e intensità secondo il livello di partenza e il risultato che vuoi raggiungere.", features: ["Libertà di combinare forza, mobilità e condizionamento", "Spazio adatto a circuiti e lavoro a corpo libero", "Allenamento autonomo, flessibile e sempre diverso"], ideal: "Per chi ama gestire il proprio programma, variare gli stimoli e allenarsi seguendo ritmi e obiettivi personali." },
 ];
 
 const gallery = [
@@ -72,6 +72,7 @@ export default function Home() {
   const [introSlide, setIntroSlide] = useState(0);
   const [introSound, setIntroSound] = useState(false);
   const [activeBrand, setActiveBrand] = useState<(typeof equipmentBrands)[number] | null>(null);
+  const [activeArea, setActiveArea] = useState<(typeof courses)[number] | null>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -81,7 +82,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = introVisible ? "hidden" : "";
     if (!introVisible || !introStarted) return;
     const slideTimer = window.setInterval(() => setIntroSlide((slide) => Math.min(slide + 1, introFrames.length - 1)), 720);
     const closingTimer = window.setTimeout(() => setIntroClosing(true), 6400);
@@ -90,21 +90,28 @@ export default function Home() {
       window.clearInterval(slideTimer);
       window.clearTimeout(closingTimer);
       window.clearTimeout(exitTimer);
-      document.body.style.overflow = "";
     };
   }, [introVisible, introStarted]);
 
   useEffect(() => {
-    if (!activeBrand) return;
+    if (!introVisible && !activeBrand && !activeArea) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const closeOnEscape = (event: KeyboardEvent) => event.key === "Escape" && setActiveBrand(null);
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [introVisible, activeBrand, activeArea]);
+
+  useEffect(() => {
+    if (!activeBrand && !activeArea) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setActiveBrand(null);
+      setActiveArea(null);
+    };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
-      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [activeBrand]);
+  }, [activeBrand, activeArea]);
 
   const closeIntro = () => {
     setIntroClosing(true);
@@ -221,13 +228,25 @@ export default function Home() {
           <p>Spazi e attrezzature per costruire un allenamento completo, efficace e adatto ai tuoi obiettivi.</p>
         </div>
         <div className="course-grid">
-          {courses.map((course, i) => <article className="course-card reveal" key={course.title}>
+          {courses.map((course, i) => <button type="button" className="course-card reveal" key={course.title} onClick={() => setActiveArea(course)} aria-label={`Scopri l’area ${course.title}`}>
             <img src={course.image} alt={course.title} loading="lazy" />
             <div className="course-overlay"></div><span className="course-number">0{i+1}</span>
-            <div className="course-content"><span className="course-icon">{course.icon}</span><small>{course.tag}</small><h3>{course.title}</h3><p>{course.text}</p><a href="#prova" aria-label={`Prova ${course.title}`}>Scopri il corso <span>↗</span></a></div>
-          </article>)}
+            <div className="course-content"><span className="course-icon">{course.icon}</span><small>{course.tag}</small><h3>{course.title}</h3><p>{course.text}</p><span className="course-open">Scopri l’area <span>↗</span></span></div>
+          </button>)}
         </div>
       </section>
+
+      {activeArea && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveArea(null)}>
+        <aside className="brand-drawer area-drawer" role="dialog" aria-modal="true" aria-labelledby="area-drawer-title">
+          <button className="brand-drawer-close" type="button" onClick={() => setActiveArea(null)} aria-label="Chiudi approfondimento">×</button>
+          <div className="brand-drawer-head area-drawer-head" style={{ backgroundImage: `linear-gradient(0deg,rgba(8,8,8,.96),rgba(8,8,8,.18) 75%),url(${activeArea.image})` }}><span>LE AREE · REVENGE GYM</span><small>{activeArea.tag}</small><h2 id="area-drawer-title" className={activeArea.title.length > 12 ? "brand-title-long" : undefined}>{activeArea.title}</h2><p>{activeArea.description}</p></div>
+          <div className="brand-drawer-body">
+            <section><small>COSA TROVI</small><ul>{activeArea.features.map(item => <li key={item}>{item}</li>)}</ul></section>
+            <section className="brand-relevance"><small>IDEALE PER</small><p>{activeArea.ideal}</p></section>
+            <a className="brand-source" href="#prova" onClick={() => setActiveArea(null)}>Prenota una prova gratuita <span>↗</span></a>
+          </div>
+        </aside>
+      </div>}
 
       <section className="section schedule-section" id="attrezzatura">
         <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Qualità in sala</p><h2>MACCHINARI<br/><em>SELEZIONATI.</em></h2></div><p>Una dotazione completa con alcuni dei marchi più riconosciuti nel mondo del fitness e della preparazione fisica.</p></div>
