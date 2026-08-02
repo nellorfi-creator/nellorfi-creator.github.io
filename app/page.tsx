@@ -63,6 +63,19 @@ const introFrames = [
   ["/media/sala-attrezzi.webp", "REVENGE GYM"],
 ];
 
+const gymZones = [
+  { id: "free", number: "01", title: "Pesi liberi", subtitle: "Forza e fondamentali", className: "zone-free", image: "/media/sala-attrezzi.webp", text: "L’area dedicata a bilancieri, manubri e panche: il punto di partenza per costruire forza, tecnica e massa muscolare.", equipment: ["Panche e postazioni regolabili", "Manubri e bilancieri", "Spazio per i principali esercizi multiarticolari"] },
+  { id: "isotonic", number: "02", title: "Isotonica", subtitle: "Movimento guidato", className: "zone-isotonic", image: "/media/macchinario-dorso.webp", text: "Macchinari professionali che guidano la traiettoria e permettono di concentrare il lavoro sul gruppo muscolare scelto.", equipment: ["Macchine Panatta e Hammer Strength", "Postazioni per dorso, petto, spalle e gambe", "Regolazioni adatte a livelli diversi"] },
+  { id: "cardio", number: "03", title: "Cardio", subtitle: "Fiato e resistenza", className: "zone-cardio", image: "/photos/revenge-gym-07.jpg", text: "Una zona per riscaldarsi, migliorare la capacità cardiovascolare o completare la seduta con un lavoro aerobico.", equipment: ["Attrezzature cardio professionali", "Intensità facilmente regolabile", "Utilizzabile prima o dopo la sala pesi"] },
+  { id: "boxing", number: "04", title: "Boxe", subtitle: "Tecnica e carattere", className: "zone-boxing", image: "/media/ring-boxe.webp", text: "Uno spazio distinto dedicato alla boxe, dove allenare tecnica, coordinazione, condizionamento e sicurezza.", equipment: ["Ring", "Sacchi", "Spazio per tecnica e preparazione atletica"] },
+];
+
+const magazineArticles = [
+  { category: "INIZIARE", time: "4 min", title: "La prima volta in sala pesi: cosa aspettarsi", excerpt: "Niente ansia e nessuna gara: ecco come affrontare il primo allenamento con ordine e sicurezza.", image: "/photos/revenge-gym-04.jpg", intro: "Entrare per la prima volta in sala pesi può sembrare complicato. In realtà basta partire con poche idee chiare: conoscere gli spazi, scegliere carichi gestibili e dare priorità alla tecnica.", paragraphs: ["Indossa abbigliamento comodo, porta acqua e un asciugamano. Prima di iniziare, dedica qualche minuto a capire dove si trovano le diverse aree e come si regolano le attrezzature.", "Nelle prime sedute non serve provare ogni macchina. Un allenamento semplice e completo permette di imparare i movimenti senza accumulare fatica inutile.", "Il carico giusto è quello che consente di completare ogni ripetizione in modo controllato. La progressione arriverà con la continuità: il primo obiettivo è costruire una routine sostenibile."], takeaway: "La prima seduta serve a prendere confidenza, non a dimostrare quanto sei forte." },
+  { category: "METODO", time: "5 min", title: "Allenarsi tre volte a settimana: una base concreta", excerpt: "Come distribuire forza, recupero e continuità quando il tempo non è infinito.", image: "/photos/revenge-gym-02.jpg", intro: "Tre allenamenti settimanali sono una frequenza solida per moltissime persone: lasciano spazio al recupero e permettono di stimolare con regolarità tutto il corpo.", paragraphs: ["Una soluzione semplice è alternare sedute complete, distribuendo in ogni giornata esercizi per gambe, spinta e tirata. In questo modo ogni gruppo muscolare viene allenato più volte senza concentrare tutto in una sola seduta.", "Lascia almeno un giorno di recupero tra due allenamenti impegnativi e mantieni una durata che puoi sostenere anche nelle settimane più piene.", "Annotare esercizi, serie e carichi aiuta a capire se stai migliorando. Piccoli progressi ripetuti nel tempo valgono più di una singola seduta estrema."], takeaway: "Il programma migliore non è il più complicato: è quello che riesci a seguire con costanza." },
+  { category: "TECNICA", time: "6 min", title: "Macchine o pesi liberi? Non devi scegliere", excerpt: "Due strumenti diversi che possono convivere nello stesso allenamento e completarsi a vicenda.", image: "/media/macchinario-spalle.webp", intro: "Pesi liberi e macchine non sono avversari. Offrono stimoli diversi e, combinati con criterio, permettono di costruire un allenamento più completo.", paragraphs: ["Bilancieri e manubri richiedono stabilizzazione e libertà di movimento. Sono strumenti versatili, particolarmente utili per sviluppare tecnica e coordinazione nei movimenti fondamentali.", "Le macchine guidano maggiormente la traiettoria e aiutano a concentrare il lavoro su un distretto specifico. Possono essere utili per imparare a percepire il muscolo e continuare una seduta in modo controllato.", "La scelta dipende dall’obiettivo, dall’esperienza e dalle caratteristiche personali. Nella stessa scheda è normale iniziare con un esercizio libero e proseguire con uno o più esercizi guidati."], takeaway: "Gli strumenti cambiano; ciò che conta è usarli con tecnica, progressione e uno scopo preciso." },
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
@@ -73,6 +86,8 @@ export default function Home() {
   const [introSound, setIntroSound] = useState(false);
   const [activeBrand, setActiveBrand] = useState<(typeof equipmentBrands)[number] | null>(null);
   const [activeArea, setActiveArea] = useState<(typeof courses)[number] | null>(null);
+  const [activeZone, setActiveZone] = useState(gymZones[0]);
+  const [activeArticle, setActiveArticle] = useState<(typeof magazineArticles)[number] | null>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -94,24 +109,25 @@ export default function Home() {
   }, [introVisible, introStarted]);
 
   useEffect(() => {
-    if (!introVisible && !activeBrand && !activeArea) return;
+    if (!introVisible && !activeBrand && !activeArea && !activeArticle) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = previousOverflow; };
-  }, [introVisible, activeBrand, activeArea]);
+  }, [introVisible, activeBrand, activeArea, activeArticle]);
 
   useEffect(() => {
-    if (!activeBrand && !activeArea) return;
+    if (!activeBrand && !activeArea && !activeArticle) return;
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
       setActiveBrand(null);
       setActiveArea(null);
+      setActiveArticle(null);
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [activeBrand, activeArea]);
+  }, [activeBrand, activeArea, activeArticle]);
 
   const closeIntro = () => {
     setIntroClosing(true);
@@ -172,7 +188,7 @@ export default function Home() {
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','filosofia'],['Aree','corsi'],['Attrezzatura','attrezzatura'],['Boxe','boxe'],['Gallery','gallery'],['Contatti','contatti']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          {[['La palestra','filosofia'],['Aree','corsi'],['Mappa','mappa'],['Boxe','boxe'],['Gallery','gallery'],['Magazine','magazine']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
           <a className="nav-cta" href="#prova" onClick={() => setMenuOpen(false)}>Prova gratuita <span>↗</span></a>
         </nav>
       </header>
@@ -261,6 +277,27 @@ export default function Home() {
           ].map(([src, alt], i) => <figure key={src}><img src={src} alt={alt} loading="lazy"/><span>0{i+1}</span></figure>)}
         </div>
         <p className="schedule-note">La dotazione può essere aggiornata nel tempo. Vieni a vedere la palestra dal vivo.</p>
+
+        <div className="gym-map reveal" id="mappa">
+          <div className="gym-map-copy">
+            <p className="eyebrow"><span></span> Esplora gli spazi</p>
+            <h3>DENTRO<br/><em>REVENGE.</em></h3>
+            <p>Seleziona una zona della palestra per scoprire cosa trovi e come può entrare nel tuo allenamento.</p>
+            <div className="gym-map-detail" aria-live="polite">
+              <small>{activeZone.number} · {activeZone.subtitle}</small>
+              <strong>{activeZone.title}</strong>
+              <p>{activeZone.text}</p>
+              <ul>{activeZone.equipment.map(item => <li key={item}>{item}</li>)}</ul>
+            </div>
+          </div>
+          <div className="floor-plan" aria-label="Mappa interattiva delle aree di Revenge Gym">
+            <div className="floor-plan-label">INGRESSO <span>→</span></div>
+            {gymZones.map(zone => <button key={zone.id} type="button" className={`floor-zone ${zone.className}${activeZone.id === zone.id ? " active" : ""}`} onClick={() => setActiveZone(zone)} aria-pressed={activeZone.id === zone.id}>
+              <span>{zone.number}</span><strong>{zone.title}</strong><small>{zone.subtitle}</small>
+            </button>)}
+            <div className="floor-core">REVENGE<br/><span>GYM</span></div>
+          </div>
+        </div>
       </section>
 
       {activeBrand && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveBrand(null)}>
@@ -293,6 +330,26 @@ export default function Home() {
           {gallery.map(([src, alt], i) => <figure className={`gallery-item g${i+1} reveal`} key={src}><img src={src} alt={alt} loading="lazy"/><figcaption>{alt}<span>↗</span></figcaption></figure>)}
         </div>
       </section>
+
+      <section className="section magazine" id="magazine">
+        <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Revenge Journal</p><h2>ALLENATI<br/><em>CON METODO.</em></h2></div><p>Guide semplici per orientarti in palestra, capire gli strumenti e costruire un percorso che duri nel tempo.</p></div>
+        <div className="magazine-grid">
+          {magazineArticles.map((article, i) => <article className={`article-card article-${i + 1} reveal`} key={article.title}>
+            <button type="button" onClick={() => setActiveArticle(article)} aria-label={`Leggi: ${article.title}`}>
+              <div className="article-image"><img src={article.image} alt="" loading="lazy"/><span>0{i + 1}</span></div>
+              <div className="article-copy"><small>{article.category} · {article.time} di lettura</small><h3>{article.title}</h3><p>{article.excerpt}</p><b>Leggi l’articolo <span>↗</span></b></div>
+            </button>
+          </article>)}
+        </div>
+      </section>
+
+      {activeArticle && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveArticle(null)}>
+        <article className="brand-drawer article-drawer" role="dialog" aria-modal="true" aria-labelledby="article-drawer-title">
+          <button className="brand-drawer-close" type="button" onClick={() => setActiveArticle(null)} aria-label="Chiudi articolo">×</button>
+          <div className="article-drawer-hero"><img src={activeArticle.image} alt=""/><div><small>{activeArticle.category} · {activeArticle.time} di lettura</small><h2 id="article-drawer-title">{activeArticle.title}</h2></div></div>
+          <div className="article-drawer-body"><p className="article-lead">{activeArticle.intro}</p>{activeArticle.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<blockquote><small>DA RICORDARE</small>{activeArticle.takeaway}</blockquote><a href="#prova" onClick={() => setActiveArticle(null)} className="button primary">Vieni a conoscere la palestra <span>↗</span></a></div>
+        </article>
+      </div>}
 
       <section className="trial" id="prova">
         <div className="trial-inner reveal"><p className="eyebrow"><span></span> Il primo passo è gratuito</p><h2>LA TUA RIVINCITA<br/>INIZIA <em>OGGI.</em></h2><p>Vieni a conoscere gli spazi e le attrezzature di Revenge Gym. Chiamaci per organizzare la tua prima visita.</p><a href="#contatti" className="button primary">Contatta la palestra <span>↗</span></a></div>
