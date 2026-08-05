@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 
 const machines = [
   { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.jpg", alt: "Pressa orizzontale Axiom Life Fitness" },
-  { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/photos/revenge-gym-04.jpg", alt: "Sala attrezzi Revenge Gym", illustrative: true },
+  { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/media/new-machines/panatta-dual-leg-extension-curl.webp", alt: "Dual Leg Extension e Seated Leg Curling Panatta 1SCD080" },
   { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: false, image: "/media/new-machines/gymleco-hacklift.png", alt: "Hacklift 244 Gymleco" },
   { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: false, image: "/photos/revenge-gym-06.jpg", alt: "Area allenamento Revenge Gym", illustrative: true },
   { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: false, image: "/media/new-machines/nautilus-lateral-raise.png", alt: "Nautilus Inspiration Deltoid Raise" },
@@ -123,7 +123,7 @@ export default function MachineShowcase() {
     <article className={`${styles.profile} ${styles.panattaProfile}`} id="leg-curl-extension">
       <div className={styles.profileHero}>
         <div><span>02 · DISPONIBILE IN SALA</span><small>PANATTA</small><h2>LEG CURL /<br/><em>LEG EXTENSION.</em></h2><p>Due esercizi fondamentali, un’unica postazione: lavoro completo sulla parte anteriore e posteriore della coscia.</p></div>
-        <figure className={`${styles.productPhoto} ${styles.illustrativePhoto}`}><img src="/photos/revenge-gym-04.jpg" alt="Sala attrezzi Revenge Gym"/><figcaption>Foto della sala · immagine specifica della macchina in aggiornamento</figcaption></figure>
+        <figure className={styles.productPhoto}><img src="/media/new-machines/panatta-dual-leg-extension-curl.webp" alt="Dual Leg Extension e Seated Leg Curling Panatta 1SCD080"/><figcaption>Panatta 1SCD080 · immagine ufficiale di prodotto</figcaption></figure>
       </div>
       <div className={styles.profileBody}>
         <section className={styles.leadSection}><p>La Dual Leg Extension / Seated Leg Curling Panatta riunisce in una sola macchina l’estensione e la flessione del ginocchio. Permette così di allenare quadricipiti e ischiocrurali con una postazione compatta, regolabile e progettata per accompagnare il movimento in modo naturale.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
