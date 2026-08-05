@@ -376,6 +376,19 @@ export default function Home() {
           <p>Uno spazio pensato per allenare tecnica, coordinazione, resistenza e sicurezza. Contattaci per conoscere modalità di allenamento e disponibilità.</p>
           <a href="#contatti" className="button primary">Informazioni sulla boxe <span>↗</span></a>
         </div>
+        <div className="boxing-reel reveal">
+          <div className="boxing-reel-copy">
+            <p className="eyebrow"><span></span> Revenge Boxing · In azione</p>
+            <h3>IL RING<br/><em>NON MENTE.</em></h3>
+            <p>Guarda l’energia, il ritmo e il lavoro tecnico dell’area Boxe di Revenge Gym. Un assaggio dell’allenamento prima di viverlo dal vivo.</p>
+            <a href="https://www.facebook.com/reel/1074233541830038" target="_blank" rel="noreferrer">Guarda il Reel su Facebook <span>↗</span></a>
+          </div>
+          <a className="boxing-reel-player" href="https://www.facebook.com/reel/1074233541830038" target="_blank" rel="noreferrer" aria-label="Guarda il Reel dell’area Boxe su Facebook">
+            <img src="/media/ring-boxe.webp" alt="Anteprima del Reel dell’area Boxe di Revenge Gym" loading="lazy" />
+            <span className="boxing-reel-play" aria-hidden="true">▶</span>
+            <span className="boxing-reel-label"><small>VIDEO SU FACEBOOK</small><strong>GUARDA IL REEL</strong><i>↗</i></span>
+          </a>
+        </div>
       </section>
 
       <section className="gallery-section" id="gallery">
