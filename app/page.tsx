@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
-  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=85", text: "Attrezzature Panatta, Hammer Strength, Life Fitness e Precor per un allenamento preciso ed efficace.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
+  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=85", text: "Attrezzature professionali di marchi selezionati per un allenamento preciso ed efficace.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
   { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=85", text: "Uno spazio dedicato al lavoro cardiovascolare, al riscaldamento e al miglioramento della resistenza.", description: "Un’area dedicata ad attivazione, resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature per riscaldamento e lavoro aerobico", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
   { icon: "◎", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1200&q=85", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante.", description: "Lo spazio in cui costruire la tua routine combinando esercizi, attrezzi e intensità secondo il livello di partenza e il risultato che vuoi raggiungere.", features: ["Libertà di combinare forza, mobilità e condizionamento", "Spazio adatto a circuiti e lavoro a corpo libero", "Allenamento autonomo, flessibile e sempre diverso"], ideal: "Per chi ama gestire il proprio programma, variare gli stimoli e allenarsi seguendo ritmi e obiettivi personali." },
 ];
@@ -49,6 +49,46 @@ const equipmentBrands = [
     highlights: ["Pioniere dell’ellittica EFX", "Cardio, forza e functional training", "Movimenti ergonomici e regolazioni intuitive", "Attrezzature progettate per semplicità e affidabilità"],
     relevance: "È particolarmente apprezzata nelle aree cardio e nei percorsi in cui comfort, fluidità del gesto e facilità d’uso sono essenziali.",
     source: "https://www.precor.com/en-US/about-us", sourceLabel: "Storia ufficiale Precor",
+  },
+  {
+    name: "HOIST FITNESS", origin: "San Diego, California · Stati Uniti", since: "Dal 1977",
+    intro: "Un marchio statunitense specializzato in attrezzature per la forza, riconoscibile per la ricerca applicata alla meccanica del movimento.",
+    history: "La storia inizia nel 1977 con Coast Health Studio; nel 1980 apre lo stabilimento di Solana Beach e nel 1985 arriva il primo circuito di macchine selectorized. Oggi HOIST sviluppa soluzioni professionali e home fitness, dalle linee a pacco pesi e plate-loaded alle panche, ai rack e alle bike.",
+    highlights: ["Macchine professionali per la forza", "Linee selectorized e plate-loaded", "Sistemi ROC-IT con movimento dinamico del sedile", "Gamma per club, centri sportivi e preparazione atletica"],
+    relevance: "A Revenge Gym amplia le possibilità di lavorare sulla forza con postazioni solide e regolabili, utili per impostare il gesto con controllo e progredire gradualmente con il carico.",
+    source: "https://www.hoistfitness.com/pages/about", sourceLabel: "Storia ufficiale HOIST Fitness",
+  },
+  {
+    name: "NAUTILUS", origin: "Stati Uniti", since: "Dal 1970",
+    intro: "Uno dei nomi che hanno segnato la storia moderna delle macchine per la forza e dell’allenamento a resistenza variabile.",
+    history: "L’eredità Nautilus nasce dal lavoro di Arthur Jones e dalla macchina presentata nel 1970, sviluppata per rendere la resistenza più coerente lungo l’arco del movimento. Il marchio è poi diventato un riferimento della sala pesi moderna; l’attuale offerta professionale comprende linee selectorized, plate-loaded, panche, rack e sistemi a cavi.",
+    highlights: ["Tradizione legata alla resistenza variabile", "Progettazione orientata alla biomeccanica", "Macchine selectorized e plate-loaded", "Soluzioni per forza guidata e allenamento funzionale"],
+    relevance: "In sala offre un lavoro muscolare guidato e leggibile, con regolazioni che aiutano utenti di esperienza diversa a trovare una posizione efficace e una progressione controllata.",
+    source: "https://shop.corehandf.com/collections/nautilus", sourceLabel: "Profilo ufficiale Nautilus Professional",
+  },
+  {
+    name: "STAR TRAC", origin: "California · Stati Uniti", since: "Oltre 40 anni di esperienza",
+    intro: "Un marchio professionale noto soprattutto per il cardio e per avere unito robustezza, facilità d’uso ed esperienza digitale.",
+    history: "Star Trac ha accompagnato l’evoluzione del cardio da palestra con tapis roulant, bike, cross trainer e stepper progettati per strutture ad alta frequentazione. Nel tempo ha introdotto soluzioni per l’intrattenimento integrato, il monitoraggio dell’allenamento e la gestione delle attrezzature, entrando nel portafoglio Core Health & Fitness.",
+    highlights: ["Cardio professionale per uso intensivo", "Tapis roulant, bike e cross trainer", "Console e tracciamento dei dati di allenamento", "Progettazione attenta anche alla gestione da parte del club"],
+    relevance: "Contribuisce a rendere più completa l’area cardio, offrendo strumenti adatti al riscaldamento, al lavoro aerobico e a sedute di resistenza con intensità facilmente modulabile.",
+    source: "https://www.corehandf.com/pages/cardio-products", sourceLabel: "Gamma ufficiale Star Trac",
+  },
+  {
+    name: "GYMLECO", origin: "Stoccolma · Svezia", since: "Dal 1994",
+    intro: "Un produttore scandinavo nato con l’obiettivo di creare macchine per la forza compatte, funzionali e semplici da mantenere.",
+    history: "Dopo gli studi di ingegneria e l’esperienza nel bodybuilding, Kari Jernvall progettò in Svezia le prime tre macchine nel 1994. L’interesse raccolto alla prima esposizione del 1995 portò all’ampliamento della gamma; dal 2005 iniziò l’espansione nordica e nel 2018 la partecipazione a FIBO accelerò la presenza internazionale.",
+    highlights: ["Progettazione e produzione svedese", "Ingombri studiati per sfruttare bene lo spazio", "Macchine per forza, pesi liberi e accessori", "Costruzione orientata a durata e manutenzione ridotta"],
+    relevance: "Aggiunge alla sala macchine essenziali e robuste, pensate per offrire un movimento diretto e sfruttare in modo efficiente lo spazio senza rinunciare alla qualità del lavoro.",
+    source: "https://gymleco.com/pages/our-history", sourceLabel: "Storia ufficiale Gymleco",
+  },
+  {
+    name: "GYM EQUIPE", origin: "Europa", since: "Attrezzature professionali",
+    intro: "Una presenza meno documentata online rispetto ai grandi gruppi internazionali, ma riconoscibile nella dotazione della palestra per le sue macchine dedicate alla forza.",
+    history: "Il nome Gym Equipe compare su attrezzature professionali per l’allenamento muscolare, incluse postazioni specifiche per gli arti inferiori. Le informazioni pubbliche sulla storia societaria sono limitate: per correttezza non attribuiamo al marchio date, brevetti o sedi che non risultano verificabili, concentrandoci sul ruolo concreto delle sue macchine in sala.",
+    highlights: ["Postazioni dedicate alla muscolazione", "Macchine guidate per distretti specifici", "Regolazione progressiva del carico", "Presenza verificata nella dotazione dichiarata da Revenge Gym"],
+    relevance: "Completa la varietà delle stazioni disponibili e permette di inserire esercizi guidati e mirati all’interno di percorsi di forza, ipertrofia e condizionamento generale.",
+    source: "https://www.google.com/search?q=%22Gym+Equipe%22+attrezzature+palestra", sourceLabel: "Cerca Gym Equipe sul web",
   },
 ];
 
@@ -206,7 +246,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-stats">
-          <div><strong>4</strong><span>Brand premium</span></div><div><strong>100%</strong><span>Allenamento</span></div><div><strong>1</strong><span>Grande community</span></div>
+          <div><strong>9</strong><span>Brand professionali</span></div><div><strong>100%</strong><span>Allenamento</span></div><div><strong>1</strong><span>Grande community</span></div>
         </div>
         <a href="#filosofia" className="scroll-cue" aria-label="Scorri alla sezione successiva">SCROLL <span>↓</span></a>
       </section>
@@ -217,7 +257,7 @@ export default function Home() {
           <p className="eyebrow"><span></span> Il nostro metodo</p>
           <h2>LA PALESTRA DOVE<br/>CAMBI DAVVERO.</h2>
           <p className="lead">Spazi curati, attrezzature di alto livello e una community che condivide la voglia di migliorarsi.</p>
-          <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala dispone di macchinari Panatta, Hammer Strength, Life Fitness e Precor.</p>
+          <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist Fitness, Nautilus, Star Trac, Gymleco e Gym Equipe.</p>
           <a href="#contatti" className="text-link orange">Conosci la nostra community <span>↗</span></a>
         </div>
         <div className="philosophy-image reveal">
