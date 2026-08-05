@@ -229,6 +229,7 @@ export default function Home() {
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           {[['La palestra','filosofia'],['Aree','corsi'],['Mappa','mappa'],['Boxe','boxe'],['Gallery','gallery'],['Magazine','magazine']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          <a href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</a>
           <a className="nav-cta" href="#prova" onClick={() => setMenuOpen(false)}>Prova gratuita <span>↗</span></a>
         </nav>
       </header>
