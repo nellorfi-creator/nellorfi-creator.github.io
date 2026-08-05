@@ -131,6 +131,14 @@ export default function Home() {
   const introAudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
+    const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
+    const alreadySeen = window.sessionStorage.getItem("revenge-intro-seen") === "1";
+    if (!skipRequested && !alreadySeen) return;
+    const skipTimer = window.setTimeout(() => setIntroVisible(false), 0);
+    return () => window.clearTimeout(skipTimer);
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
     return () => observer.disconnect();
@@ -140,7 +148,11 @@ export default function Home() {
     if (!introVisible || !introStarted) return;
     const slideTimer = window.setInterval(() => setIntroSlide((slide) => Math.min(slide + 1, introFrames.length - 1)), 720);
     const closingTimer = window.setTimeout(() => setIntroClosing(true), 6400);
-    const exitTimer = window.setTimeout(() => { introAudioRef.current?.pause(); setIntroVisible(false); }, 7100);
+    const exitTimer = window.setTimeout(() => {
+      introAudioRef.current?.pause();
+      window.sessionStorage.setItem("revenge-intro-seen", "1");
+      setIntroVisible(false);
+    }, 7100);
     return () => {
       window.clearInterval(slideTimer);
       window.clearTimeout(closingTimer);
@@ -172,6 +184,7 @@ export default function Home() {
   const closeIntro = () => {
     setIntroClosing(true);
     introAudioRef.current?.pause();
+    window.sessionStorage.setItem("revenge-intro-seen", "1");
     window.setTimeout(() => setIntroVisible(false), 700);
   };
 

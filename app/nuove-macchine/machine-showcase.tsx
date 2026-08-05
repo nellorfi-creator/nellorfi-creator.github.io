@@ -46,13 +46,24 @@ export default function MachineShowcase() {
     return () => window.removeEventListener("scroll", updateActive);
   }, []);
 
+  const goBack = () => {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = "/?skipIntro=1#home";
+  };
+
   return <main className={styles.page} id="top">
     <header className={styles.nav}>
-      <Link href="/" className={styles.logo} aria-label="Revenge Gym, torna alla home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
-      <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu macchine"><i></i><i></i></button>
+      <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home senza intro"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
+      <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu di navigazione"><i></i><i></i></button>
       <nav className={menuOpen ? styles.open : ""} aria-label="Menu nuove macchine">
+        <button className={styles.back} type="button" onClick={goBack}>← Indietro</button>
+        <Link className={styles.siteLink} href="/?skipIntro=1#home">Home</Link>
+        <Link className={styles.siteLink} href="/?skipIntro=1#filosofia">La palestra</Link>
+        <Link className={styles.siteLink} href="/?skipIntro=1#attrezzatura">Attrezzature</Link>
+        <Link className={styles.siteLink} href="/?skipIntro=1#magazine">Magazine</Link>
+        <span className={styles.navDivider} aria-hidden="true"></span>
         {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => setMenuOpen(false)}>{machine.number}</a>)}
-        <Link href="/#contatti" className={styles.contact}>Contatti ↗</Link>
+        <Link href="/?skipIntro=1#contatti" className={styles.contact}>Contatti ↗</Link>
       </nav>
     </header>
 
@@ -140,6 +151,6 @@ export default function MachineShowcase() {
     </section>)}
 
     <section className={styles.cta}><p className={styles.eyebrow}><span></span> Vieni a provarle</p><h2>LEGGERE AIUTA.<br/><em>ALLENARSI CAMBIA TUTTO.</em></h2><p>Scopri dal vivo le nuove macchine e chiedi allo staff come inserirle nel tuo allenamento.</p><Link href="/#contatti" className={styles.primary}>Contatta Revenge Gym <span>↗</span></Link></section>
-    <footer className={styles.footer}><Link href="/"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Via Berna 8 · Ladispoli</p><a href="#top">Torna su ↑</a></footer>
+    <footer className={styles.footer}><Link href="/?skipIntro=1#home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Via Berna 8 · Ladispoli</p><a href="#top">Torna su ↑</a></footer>
   </main>;
 }
