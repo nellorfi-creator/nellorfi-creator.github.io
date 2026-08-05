@@ -67,12 +67,12 @@ const equipmentBrands = [
     source: "https://shop.corehandf.com/collections/nautilus", sourceLabel: "Profilo ufficiale Nautilus Professional",
   },
   {
-    name: "STAR TRAC", origin: "California · Stati Uniti", since: "Oltre 40 anni di esperienza",
+    name: "STAR TRAC", origin: "California · Stati Uniti", since: "Dal 1979",
     intro: "Un marchio professionale noto soprattutto per il cardio e per avere unito robustezza, facilità d’uso ed esperienza digitale.",
-    history: "Star Trac ha accompagnato l’evoluzione del cardio da palestra con tapis roulant, bike, cross trainer e stepper progettati per strutture ad alta frequentazione. Nel tempo ha introdotto soluzioni per l’intrattenimento integrato, il monitoraggio dell’allenamento e la gestione delle attrezzature, entrando nel portafoglio Core Health & Fitness.",
+    history: "Le origini risalgono al 1979, quando Jim Doody fondò Unisen e iniziò a progettare componenti elettronici per tapis roulant. Nel 1987 arrivò Star Trac 2000, il primo tapis roulant commerciale alimentato in corrente continua sviluppato esclusivamente per gli health club; seguirono cardio, indoor cycling, console integrate e soluzioni connesse. Dal 2011 il marchio fa parte di Core Health & Fitness.",
     highlights: ["Cardio professionale per uso intensivo", "Tapis roulant, bike e cross trainer", "Console e tracciamento dei dati di allenamento", "Progettazione attenta anche alla gestione da parte del club"],
     relevance: "Contribuisce a rendere più completa l’area cardio, offrendo strumenti adatti al riscaldamento, al lavoro aerobico e a sedute di resistenza con intensità facilmente modulabile.",
-    source: "https://www.corehandf.com/pages/cardio-products", sourceLabel: "Gamma ufficiale Star Trac",
+    source: "https://www.corehandf.com/pages/complete-line-of-cardio", sourceLabel: "Gamma ufficiale Star Trac",
   },
   {
     name: "GYMLECO", origin: "Stoccolma · Svezia", since: "Dal 1994",
@@ -83,12 +83,12 @@ const equipmentBrands = [
     source: "https://gymleco.com/pages/our-history", sourceLabel: "Storia ufficiale Gymleco",
   },
   {
-    name: "GYM EQUIPE", origin: "Europa", since: "Attrezzature professionali",
+    name: "GYM EQUIPE", origin: "Origine non verificata", since: "Attrezzature professionali",
     intro: "Una presenza meno documentata online rispetto ai grandi gruppi internazionali, ma riconoscibile nella dotazione della palestra per le sue macchine dedicate alla forza.",
-    history: "Il nome Gym Equipe compare su attrezzature professionali per l’allenamento muscolare, incluse postazioni specifiche per gli arti inferiori. Le informazioni pubbliche sulla storia societaria sono limitate: per correttezza non attribuiamo al marchio date, brevetti o sedi che non risultano verificabili, concentrandoci sul ruolo concreto delle sue macchine in sala.",
-    highlights: ["Postazioni dedicate alla muscolazione", "Macchine guidate per distretti specifici", "Regolazione progressiva del carico", "Presenza verificata nella dotazione dichiarata da Revenge Gym"],
+    history: "Il nome Gym Equipe compare su attrezzature professionali per l’allenamento muscolare; tra i riferimenti pubblicamente rintracciabili figurano macchine leg curl e leg extension. Non emerge però un sito ufficiale certo né una storia societaria documentata: per correttezza non attribuiamo al marchio una sede, un anno di fondazione o tecnologie proprietarie non verificabili.",
+    highlights: ["Macchine guidate per la muscolazione", "Postazioni leg curl e leg extension documentate online", "Lavoro mirato su distretti specifici", "Presenza dichiarata nella dotazione di Revenge Gym"],
     relevance: "Completa la varietà delle stazioni disponibili e permette di inserire esercizi guidati e mirati all’interno di percorsi di forza, ipertrofia e condizionamento generale.",
-    source: "https://www.google.com/search?q=%22Gym+Equipe%22+attrezzature+palestra", sourceLabel: "Cerca Gym Equipe sul web",
+    source: "https://www.google.com/search?q=%22Gym+Equipe%22+attrezzature+palestra", sourceLabel: "Ricerca web Gym Equipe · sito ufficiale non reperito",
   },
 ];
 
