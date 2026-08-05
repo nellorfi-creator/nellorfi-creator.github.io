@@ -8,7 +8,7 @@ const machines = [
   { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.jpg", alt: "Pressa orizzontale Axiom Life Fitness" },
   { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/media/new-machines/panatta-dual-leg-extension-curl.webp", alt: "Dual Leg Extension e Seated Leg Curling Panatta 1SCD080" },
   { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: true, image: "/media/new-machines/gymleco-hacklift.png", alt: "Hacklift 244 Gymleco" },
-  { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: false, image: "/photos/revenge-gym-06.jpg", alt: "Area allenamento Revenge Gym", illustrative: true },
+  { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: true, image: "/media/new-machines/startrac-impact-biceps-curl.jpg", alt: "Star Trac Impact Biceps Curl LA-S5301" },
   { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: false, image: "/media/new-machines/nautilus-lateral-raise.png", alt: "Nautilus Inspiration Deltoid Raise" },
   { id: "back-row", number: "06", name: "Back Row", brand: "Marca da confermare", status: "Disponibile", ready: false, image: "/media/macchinario-dorso.webp", alt: "Macchinario per il dorso nella sala Revenge Gym", illustrative: true },
   { id: "incline-chest-press", number: "07", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: false, image: "/media/new-machines/hoist-incline-chest-press.jpg", alt: "Incline Chest Press RPL-5303 Hoist Fitness" },
@@ -28,6 +28,8 @@ const panattaBenefits = ["Sviluppo equilibrato di quadricipiti e femorali", "Mag
 const panattaErrors = ["Usare slancio o un carico che altera la postura", "Disallineare il ginocchio rispetto al perno", "Bloccare con violenza le ginocchia in estensione", "Sollevare il bacino durante il curl", "Abbandonare il peso nella fase di ritorno"];
 const hackPurposes = ["Sviluppare forza e massa negli arti inferiori", "Sovraccaricare lo schema di squat in un contesto guidato", "Concentrare il lavoro su quadricipiti e glutei", "Allenare la spinta senza dover stabilizzare un bilanciere", "Gestire progressioni di carico con una base stabile"];
 const hackErrors = ["Staccare schiena o bacino dal supporto", "Far collassare le ginocchia verso l’interno", "Perdere l’appoggio completo del piede", "Rimbalzare nella parte bassa del movimento", "Usare una profondità o un carico non controllabili", "Bloccare violentemente le ginocchia in alto"];
+const bicepsPurposes = ["Sviluppare forza nei flessori del gomito", "Aumentare il volume muscolare delle braccia", "Ridurre gli slanci grazie all’appoggio del braccio", "Controllare con precisione la fase eccentrica", "Completare il lavoro dopo trazioni e rematori"];
+const bicepsErrors = ["Sollevare i gomiti dal cuscino", "Muovere il busto per avviare la ripetizione", "Stringere le maniglie più del necessario", "Accorciare l’escursione per usare più peso", "Lasciare ricadere il pacco pesi", "Perdere l’allineamento tra gomito e fulcro"];
 
 export default function MachineShowcase() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -180,7 +182,39 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    {machines.slice(3).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
+    <article className={`${styles.profile} ${styles.panattaProfile}`} id="biceps-curl">
+      <div className={styles.profileHero}>
+        <div><span>04 · DISPONIBILE IN SALA</span><small>STAR TRAC · IMPACT STRENGTH</small><h2>BICEPS<br/><em>CURL.</em></h2><p>Appoggio stabile, movimento guidato e controllo continuo per un lavoro preciso sui flessori del gomito.</p></div>
+        <figure className={styles.productPhoto}><img src="/media/new-machines/startrac-impact-biceps-curl.jpg" alt="Star Trac Impact Biceps Curl LA-S5301"/><figcaption>Star Trac Impact LA-S5301 · immagine dal catalogo del modello</figcaption></figure>
+      </div>
+      <div className={styles.profileBody}>
+        <section className={styles.leadSection}><p>La Star Trac Impact Biceps Curl LA-S5301 è una macchina selectorized dedicata alla flessione del gomito. Sedile regolabile, appoggio per le braccia e movimento bilaterale o unilaterale aiutano a limitare le compensazioni e a concentrare l’attenzione sulla qualità di ogni ripetizione.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>01 · MUSCOLI COINVOLTI</small><h3>UN GESTO.<br/>PIÙ FLESSORI.</h3><div className={styles.dualList}><div><b>PRINCIPALI</b><p>Bicipite brachiale</p><p>Brachiale</p></div><div><b>IN ASSISTENZA</b><p>Brachioradiale</p><p>Flessori dell’avambraccio</p><p>Muscoli della presa</p><p>Deltoide anteriore, in stabilizzazione</p></div></div></section>
+          <section className={styles.darkPanel}><small>02 · A COSA SERVE</small><h3>PIÙ CONTROLLO.<br/>MENO SLANCIO.</h3><ul>{bicepsPurposes.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.howItWorks}><div><small>03 · COME FUNZIONA</small><h3>GOMITI STABILI.<br/><em>CURVA PULITA.</em></h3></div><div><p>Regola il sedile finché la parte superiore delle braccia poggia comodamente sul cuscino e i gomiti risultano coerenti con l’asse della macchina. Afferra le maniglie senza irrigidire polsi e spalle.</p><p>Fletti i gomiti senza sollevarli, raggiungi la chiusura controllabile e ritorna lentamente. Le leve consentono di lavorare con entrambe le braccia o concentrarsi su un lato alla volta.</p></div></section>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.accentPanel}><small>04 · IMPACT STRENGTH</small><h3>SEMPLICE DA<br/>REGOLARE.</h3><ul><li>Sedile con regolazione a scatti</li><li>Impugnature ergonomiche</li><li>Movimento unilaterale o bilaterale</li><li>Selezione del carico Lock N Load</li><li>Incrementi fini da 5 lb</li></ul></section>
+          <section><small>05 · DATI DEL MODELLO</small><h3>LA-S5301<br/>BICEPS CURL.</h3><ul><li>Ingombro: circa 117 × 119 × 152 cm</li><li>Pacco pesi: circa 91 kg</li><li>Peso di spedizione dichiarato: circa 209 kg</li><li>Linea: Star Trac Impact Strength</li><li>Tipologia: macchina a carico selezionabile</li></ul></section>
+        </div>
+
+        <section className={styles.positions}><div><small>06 · ESECUZIONE</small><h3>SALI CON INTENZIONE.<br/><em>SCENDI CON CONTROLLO.</em></h3></div><div className={styles.exerciseSteps}><div><b>PREPARAZIONE</b><p>Regola sedile e carico, appoggia bene le braccia e mantieni piedi, bacino e busto stabili.</p></div><div><b>FASE DI SALITA</b><p>Espira mentre fletti i gomiti. Evita di portare le spalle in avanti o di staccare i gomiti dal supporto.</p></div><div><b>FASE DI RITORNO</b><p>Inspira e accompagna lentamente le leve fino a recuperare una posizione distesa ma ancora controllata.</p></div></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>07 · MACCHINA O MANUBRI?</small><h3>STRUMENTI<br/>COMPLEMENTARI.</h3><p>Manubri e bilancieri richiedono libertà di traiettoria e maggiore stabilizzazione. La macchina offre invece appoggi e resistenza guidata: è utile per accumulare lavoro mirato, ma non “isola completamente” il bicipite e non sostituisce ogni altra variante.</p><ul><li>Ottima dopo trazioni o rematori</li><li>Utile nelle superserie braccia</li><li>Adatta a progressioni facilmente misurabili</li><li>Valida sia all’inizio sia a fine seduta</li></ul></section>
+          <section className={styles.errorPanel}><small>08 · ERRORI DA EVITARE</small><h3>IL PESO NON<br/>DEVE COMANDARE.</h3><ul>{bicepsErrors.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>TENSIONE<br/><em>FINO ALL’ULTIMO.</em></h3></div><blockquote>“Scegli un carico che non sposti gomiti, spalle o busto. La parte più utile della ripetizione è spesso il ritorno lento, non la salita ottenuta con slancio.”</blockquote></section>
+        <section className={styles.safety}><strong>FONTE E SICUREZZA</strong><p>Serie e codice sono riferiti alla Star Trac Impact LA-S5301 documentata nel catalogo. Interrompi l’esercizio in caso di dolore a gomito, polso o spalla e chiedi assistenza allo staff.</p><a href="https://img.athleticbusiness.com/files/base/abmedia/all/document/2013/12/ab.startrac-catalog4.pdf" target="_blank" rel="noreferrer">Catalogo Star Trac Impact <span>↗</span></a></section>
+      </div>
+    </article>
+
+    {machines.slice(4).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
       <span>{machine.number}</span><figure><img src={machine.image} alt={machine.alt}/>{machine.illustrative && <figcaption>Immagine provvisoria · foto specifica in aggiornamento</figcaption>}</figure><div><small>{machine.brand} · {machine.status}</small><h2>{machine.name}</h2><p>{machine.incoming ? "Una nuova macchina è in arrivo a Revenge Gym. La scheda tecnica completa sarà pubblicata dopo l’installazione e la verifica della configurazione effettiva." : "La macchina è già nella dotazione di Revenge Gym. La scheda dettagliata sarà inserita non appena il contenuto tecnico sarà verificato."}</p></div><i>{machine.ready ? "Scheda completa" : "Scheda in preparazione"}</i>
     </section>)}
 
