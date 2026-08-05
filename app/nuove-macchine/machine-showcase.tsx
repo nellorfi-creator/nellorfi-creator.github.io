@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 const machines = [
   { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.jpg", alt: "Pressa orizzontale Axiom Life Fitness" },
   { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/media/new-machines/panatta-dual-leg-extension-curl.webp", alt: "Dual Leg Extension e Seated Leg Curling Panatta 1SCD080" },
-  { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: false, image: "/media/new-machines/gymleco-hacklift.png", alt: "Hacklift 244 Gymleco" },
+  { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: true, image: "/media/new-machines/gymleco-hacklift.png", alt: "Hacklift 244 Gymleco" },
   { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: false, image: "/photos/revenge-gym-06.jpg", alt: "Area allenamento Revenge Gym", illustrative: true },
   { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: false, image: "/media/new-machines/nautilus-lateral-raise.png", alt: "Nautilus Inspiration Deltoid Raise" },
   { id: "back-row", number: "06", name: "Back Row", brand: "Marca da confermare", status: "Disponibile", ready: false, image: "/media/macchinario-dorso.webp", alt: "Macchinario per il dorso nella sala Revenge Gym", illustrative: true },
@@ -26,6 +26,8 @@ const footPositions = [
 ];
 const panattaBenefits = ["Sviluppo equilibrato di quadricipiti e femorali", "Maggiore controllo del ginocchio", "Incremento di forza e massa muscolare", "Supporto alla preparazione per corsa, ciclismo e sport di squadra", "Movimento stabile e facilmente regolabile"];
 const panattaErrors = ["Usare slancio o un carico che altera la postura", "Disallineare il ginocchio rispetto al perno", "Bloccare con violenza le ginocchia in estensione", "Sollevare il bacino durante il curl", "Abbandonare il peso nella fase di ritorno"];
+const hackPurposes = ["Sviluppare forza e massa negli arti inferiori", "Sovraccaricare lo schema di squat in un contesto guidato", "Concentrare il lavoro su quadricipiti e glutei", "Allenare la spinta senza dover stabilizzare un bilanciere", "Gestire progressioni di carico con una base stabile"];
+const hackErrors = ["Staccare schiena o bacino dal supporto", "Far collassare le ginocchia verso l’interno", "Perdere l’appoggio completo del piede", "Rimbalzare nella parte bassa del movimento", "Usare una profondità o un carico non controllabili", "Bloccare violentemente le ginocchia in alto"];
 
 export default function MachineShowcase() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -146,7 +148,39 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    {machines.slice(2).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
+    <article className={`${styles.profile} ${styles.panattaProfile}`} id="hack-squat">
+      <div className={styles.profileHero}>
+        <div><span>03 · DISPONIBILE IN SALA</span><small>GYMLECO · MODELLO 244</small><h2>HACK<br/><em>SQUAT.</em></h2><p>Una traiettoria guidata e una struttura compatta per costruire gambe forti con stabilità e controllo.</p></div>
+        <figure className={styles.productPhoto}><img src="/media/new-machines/gymleco-hacklift.png" alt="Hacklift 244 Gymleco, macchina professionale per hack squat"/><figcaption>Gymleco 244 Hacklift · fotografia ufficiale del modello</figcaption></figure>
+      </div>
+      <div className={styles.profileBody}>
+        <section className={styles.leadSection}><p>La Gymleco 244 Hacklift, chiamata anche Hack Squat dal produttore, guida il corpo lungo una traiettoria inclinata mentre schiena, testa e spalle restano sostenute. La struttura aperta e la grande pedana regolabile permettono di concentrarsi sulla spinta di gambe e anche, modulando posizione dei piedi e profondità in base alla propria mobilità.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>01 · MUSCOLI COINVOLTI</small><h3>SPINTA SOLIDA.<br/>GAMBE COMPLETE.</h3><div className={styles.dualList}><div><b>PRINCIPALI</b><p>Quadricipite femorale</p><p>Grande gluteo</p></div><div><b>IN ASSISTENZA</b><p>Ischiocrurali</p><p>Adduttori</p><p>Gastrocnemio e soleo</p><p>Muscolatura del tronco</p></div></div></section>
+          <section className={styles.darkPanel}><small>02 · A COSA SERVE</small><h3>FORZA CHE<br/>RESTA GUIDATA.</h3><ul>{hackPurposes.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.howItWorks}><div><small>03 · COME FUNZIONA</small><h3>APPOGGIA. SBLOCCA.<br/><em>SPINGI.</em></h3></div><div><p>Posiziona schiena e testa sui supporti, porta le spalle sotto le imbottiture e sistema entrambi i piedi sulla pedana. Dopo aver liberato i fermi, scendi flettendo insieme anche e ginocchia senza perdere il contatto con lo schienale.</p><p>Inverti il movimento spingendo attraverso l’intero piede. In alto conserva una leggera flessione controllata, poi riaggancia i fermi prima di uscire dalla macchina.</p></div></section>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.accentPanel}><small>04 · PROGETTO GYMLECO</small><h3>COMPATTA.<br/>ROBUSTA. FLUIDA.</h3><ul><li>Struttura aperta e ingombro contenuto</li><li>Grande pedana gommata e regolabile</li><li>Appoggi per spalle e testa</li><li>Carrello solido su traiettoria inclinata</li><li>Caricamento libero con dischi</li></ul></section>
+          <section><small>05 · DATI UFFICIALI</small><h3>MODELLO<br/>244 HACKLIFT.</h3><ul><li>Ingombro: 195 × 80 × 145 cm</li><li>Peso macchina: 137,5 kg</li><li>Peso del carrello: circa 47,5 kg</li><li>Inclinazione del carrello: 45°</li><li>Carico percepito a vuoto dichiarato: circa 33,5 kg</li></ul></section>
+        </div>
+
+        <section className={styles.positions}><div><small>06 · POSIZIONE DEI PIEDI</small><h3>CAMBIA L’APPOGGIO.<br/><em>MODULA IL LAVORO.</em></h3></div><div className={styles.positionGrid}>{footPositions.map(([title,text], index) => <div key={title}><span>0{index+1}</span><strong>{title}</strong><p>{text}</p></div>)}</div><p className={styles.positionNote}>Le variazioni di appoggio cambiano soprattutto angoli articolari, comfort e contributo relativo dei muscoli: non isolano completamente una singola porzione della coscia. Scegli sempre una posizione che mantenga piede stabile e ginocchio ben controllato.</p></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>07 · HACK SQUAT O SQUAT LIBERO?</small><h3>DUE STRUMENTI.<br/>NON DUE RIVALI.</h3><p>Lo squat con bilanciere richiede maggiore stabilizzazione e gestione libera della traiettoria. L’Hack Squat offre invece appoggi e percorso guidato: facilita il lavoro vicino alla fatica, ma non rende automaticamente sicuri carichi o profondità eccessivi.</p><ul><li>Più stabilità esterna durante la serie</li><li>Meno richiesta di equilibrio</li><li>Progressione semplice da misurare</li><li>Ottimo complemento, non sostituto obbligato</li></ul></section>
+          <section className={styles.errorPanel}><small>08 · ERRORI DA EVITARE</small><h3>CONTROLLO<br/>FINO IN FONDO.</h3><ul>{hackErrors.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>PROFONDITÀ<br/><em>GUADAGNATA.</em></h3></div><blockquote>“Riscalda anche e ginocchia, scegli un appoggio stabile e scendi soltanto fin dove mantieni schiena, piedi e ginocchia sotto controllo. Il carico viene dopo.”</blockquote></section>
+        <section className={styles.safety}><strong>FONTE E SICUREZZA</strong><p>I dati costruttivi provengono dalla scheda Gymleco del modello 244. Regola pedana, carico e profondità sulle tue caratteristiche; in presenza di dolore chiedi una valutazione qualificata.</p><a href="https://gymleco.com/products/244-hacklift" target="_blank" rel="noreferrer">Scheda ufficiale Gymleco <span>↗</span></a></section>
+      </div>
+    </article>
+
+    {machines.slice(3).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
       <span>{machine.number}</span><figure><img src={machine.image} alt={machine.alt}/>{machine.illustrative && <figcaption>Immagine provvisoria · foto specifica in aggiornamento</figcaption>}</figure><div><small>{machine.brand} · {machine.status}</small><h2>{machine.name}</h2><p>{machine.incoming ? "Una nuova macchina è in arrivo a Revenge Gym. La scheda tecnica completa sarà pubblicata dopo l’installazione e la verifica della configurazione effettiva." : "La macchina è già nella dotazione di Revenge Gym. La scheda dettagliata sarà inserita non appena il contenuto tecnico sarà verificato."}</p></div><i>{machine.ready ? "Scheda completa" : "Scheda in preparazione"}</i>
     </section>)}
 
