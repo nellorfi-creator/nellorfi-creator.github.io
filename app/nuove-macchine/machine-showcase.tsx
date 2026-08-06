@@ -9,7 +9,7 @@ const machines = [
   { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/media/new-machines/panatta-dual-leg-extension-curl.webp", alt: "Dual Leg Extension e Seated Leg Curling Panatta 1SCD080" },
   { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: true, image: "/media/new-machines/gymleco-hacklift.png", alt: "Hacklift 244 Gymleco" },
   { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: true, image: "/media/new-machines/startrac-impact-biceps-curl.jpg", alt: "Star Trac Impact Biceps Curl LA-S5301" },
-  { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: false, image: "/media/new-machines/nautilus-lateral-raise.png", alt: "Nautilus Inspiration Deltoid Raise" },
+  { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: true, image: "/media/new-machines/nautilus-lateral-raise.png", alt: "Nautilus Inspiration Deltoid Raise IPDR5" },
   { id: "back-row", number: "06", name: "Back Row", brand: "Marca da confermare", status: "Disponibile", ready: false, image: "/media/macchinario-dorso.webp", alt: "Macchinario per il dorso nella sala Revenge Gym", illustrative: true },
   { id: "incline-chest-press", number: "07", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: false, image: "/media/new-machines/hoist-incline-chest-press.jpg", alt: "Incline Chest Press RPL-5303 Hoist Fitness" },
   { id: "super-vertical-leg-press", number: "08", name: "Super Vertical Leg Press", brand: "Panatta", status: "In arrivo", ready: false, incoming: true, image: "/photos/revenge-gym-02.jpg", alt: "Sala Revenge Gym pronta ad accogliere la nuova macchina Panatta", illustrative: true },
@@ -30,12 +30,18 @@ const hackPurposes = ["Sviluppare forza e massa negli arti inferiori", "Sovracca
 const hackErrors = ["Staccare schiena o bacino dal supporto", "Far collassare le ginocchia verso l’interno", "Perdere l’appoggio completo del piede", "Rimbalzare nella parte bassa del movimento", "Usare una profondità o un carico non controllabili", "Bloccare violentemente le ginocchia in alto"];
 const bicepsPurposes = ["Sviluppare forza nei flessori del gomito", "Aumentare il volume muscolare delle braccia", "Ridurre gli slanci grazie all’appoggio del braccio", "Controllare con precisione la fase eccentrica", "Completare il lavoro dopo trazioni e rematori"];
 const bicepsErrors = ["Sollevare i gomiti dal cuscino", "Muovere il busto per avviare la ripetizione", "Stringere le maniglie più del necessario", "Accorciare l’escursione per usare più peso", "Lasciare ricadere il pacco pesi", "Perdere l’allineamento tra gomito e fulcro"];
+const lateralPurposes = ["Sviluppare il deltoide laterale", "Aumentare forza e controllo nell’abduzione del braccio", "Allenare un lato alla volta o entrambi insieme", "Ridurre lo slancio grazie alla posizione seduta", "Completare il lavoro dopo esercizi di spinta e tirata"];
+const lateralErrors = ["Sollevare le spalle verso le orecchie", "Spingere con mani e avambracci invece che guidare dai gomiti", "Usare un carico che riduce l’escursione controllabile", "Inarcare la schiena o staccare il busto dal supporto", "Lasciare ricadere le leve nella fase di ritorno", "Forzare l’altezza delle braccia oltre il proprio comfort"];
 
 export default function MachineShowcase() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMachine, setActiveMachine] = useState(machines[0].id);
 
   useEffect(() => {
+    const updateFromHash = () => {
+      const id = window.location.hash.slice(1);
+      if (machines.some((machine) => machine.id === id)) setActiveMachine(id);
+    };
     const updateActive = () => {
       const current = machines.find((machine) => {
         const element = document.getElementById(machine.id);
@@ -46,8 +52,19 @@ export default function MachineShowcase() {
       if (current) setActiveMachine(current.id);
     };
     window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("hashchange", updateFromHash);
+    updateFromHash();
     updateActive();
-    return () => window.removeEventListener("scroll", updateActive);
+    const initialCheck = window.requestAnimationFrame(() => {
+      updateFromHash();
+      const id = window.location.hash.slice(1);
+      if (machines.some((machine) => machine.id === id)) document.getElementById(id)?.scrollIntoView();
+    });
+    return () => {
+      window.cancelAnimationFrame(initialCheck);
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("hashchange", updateFromHash);
+    };
   }, []);
 
   const goBack = () => {
@@ -66,7 +83,7 @@ export default function MachineShowcase() {
         <Link className={styles.siteLink} href="/?skipIntro=1#attrezzatura">Attrezzature</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#magazine">Magazine</Link>
         <span className={styles.navDivider} aria-hidden="true"></span>
-        {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => setMenuOpen(false)}>{machine.number}</a>)}
+        {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => { setActiveMachine(machine.id); setMenuOpen(false); }}>{machine.number}</a>)}
         <Link href="/?skipIntro=1#contatti" className={styles.contact}>Contatti ↗</Link>
       </nav>
     </header>
@@ -214,7 +231,39 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    {machines.slice(4).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
+    <article className={`${styles.profile} ${styles.panattaProfile}`} id="lateral-raise">
+      <div className={styles.profileHero}>
+        <div><span>05 · DISPONIBILE IN SALA</span><small>NAUTILUS · INSPIRATION IPDR5</small><h2>LATERAL<br/><em>RAISE.</em></h2><p>Movimento guidato, assetto regolabile e lavoro unilaterale per costruire spalle forti con precisione.</p></div>
+        <figure className={styles.productPhoto}><img src="/media/new-machines/nautilus-lateral-raise.png" alt="Nautilus Inspiration Deltoid Raise IPDR5"/><figcaption>Nautilus Inspiration IPDR5 · immagine ufficiale del modello</figcaption></figure>
+      </div>
+      <div className={styles.profileBody}>
+        <section className={styles.leadSection}><p>La Nautilus Inspiration Deltoid Raise IPDR5 è una macchina selectorized progettata per allenare soprattutto il deltoide laterale, con il contributo del deltoide anteriore. La seduta, il sostegno del busto e i bracci indipendenti creano una postazione stabile, aiutando l’atleta a concentrarsi sulla traiettoria e sul controllo di ogni ripetizione.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>01 · MUSCOLI COINVOLTI</small><h3>LARGHEZZA E<br/>CONTROLLO.</h3><div className={styles.dualList}><div><b>PRINCIPALI</b><p>Deltoide laterale</p><p>Deltoide anteriore</p></div><div><b>IN ASSISTENZA</b><p>Sovraspinato</p><p>Trapezio superiore</p><p>Muscoli della cuffia dei rotatori</p><p>Core e stabilizzatori scapolari</p></div></div></section>
+          <section className={styles.darkPanel}><small>02 · A COSA SERVE</small><h3>SPALLE FORTI.<br/>GESTO PRECISO.</h3><ul>{lateralPurposes.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.howItWorks}><div><small>03 · COME FUNZIONA</small><h3>GUIDA DAI GOMITI.<br/><em>CONTROLLA IL RITORNO.</em></h3></div><div><p>Regola il sedile e il cuscino di stabilizzazione del busto, poi appoggia gli avambracci sui rulli mantenendo le spalle rilassate. Le impugnature servono a stabilizzare la posizione, non a tirare la leva con le mani.</p><p>Solleva lateralmente i gomiti entro un’ampiezza confortevole, fermati brevemente e accompagna il ritorno senza lasciare cadere il pacco pesi. I bracci indipendenti consentono un’esecuzione bilaterale o unilaterale.</p></div></section>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.accentPanel}><small>04 · PROGETTO NAUTILUS</small><h3>REGOLABILE.<br/>INTUITIVA.</h3><ul><li>Movimento unilaterale indipendente</li><li>Supporti flottanti per il posizionamento delle braccia</li><li>Cuscino di stabilizzazione del busto regolabile</li><li>Asse di rotazione evidenziato per facilitare l’allineamento</li><li>Sedile ergonomico assistito a gas</li><li>Selezione del carico Lock N Load</li></ul></section>
+          <section><small>05 · DATI UFFICIALI</small><h3>MODELLO<br/>IPDR5.</h3><ul><li>Ingombro: 132 × 119 × 163 cm</li><li>Pacco pesi: 91 kg</li><li>Peso complessivo: 280 kg</li><li>Peso di spedizione: 311 kg</li><li>Incrementi fini del carico: 5 lb</li></ul></section>
+        </div>
+
+        <section className={styles.positions}><div><small>06 · ESECUZIONE</small><h3>STABILE NEL BUSTO.<br/><em>FLUIDA NELLE BRACCIA.</em></h3></div><div className={styles.exerciseSteps}><div><b>PREPARAZIONE</b><p>Regola sedile, sostegno del busto e carico. Mantieni piedi stabili e allinea le spalle con il movimento delle leve.</p></div><div><b>FASE DI SALITA</b><p>Espira e porta i gomiti verso l’esterno senza alzare le spalle. Fermati prima che postura o comfort peggiorino.</p></div><div><b>FASE DI RITORNO</b><p>Inspira e accompagna lentamente le leve. Mantieni tensione e non far urtare il pacco pesi tra le ripetizioni.</p></div></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>07 · MACCHINA O MANUBRI?</small><h3>DUE MODI DI<br/>ALLENARE LE SPALLE.</h3><p>Le alzate con manubri lasciano libera la traiettoria e richiedono più stabilizzazione. La Nautilus offre invece sostegni e resistenza guidata, rendendo più semplice ripetere il gesto e misurare la progressione. Nessuna variante è universalmente superiore: possono convivere nello stesso programma.</p><ul><li>Utile come esercizio specifico per le spalle</li><li>Adatta al lavoro unilaterale</li><li>Facile da inserire in superserie</li><li>Efficace anche con carichi moderati e controllati</li></ul></section>
+          <section className={styles.errorPanel}><small>08 · ERRORI DA EVITARE</small><h3>NON LASCIARE<br/>CHE COMANDI IL PESO.</h3><ul>{lateralErrors.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>GOMITI GUIDA.<br/><em>TRAPEZIO CALMO.</em></h3></div><blockquote>“Scegli un carico che ti permetta di sentire il deltoide senza stringere il collo. Guida il movimento dai gomiti e rendi la discesa lenta quanto la salita.”</blockquote></section>
+        <section className={styles.safety}><strong>FONTE E SICUREZZA</strong><p>Modello e caratteristiche tecniche sono verificati sulla pagina ufficiale Nautilus/Core Health &amp; Fitness. Assetto, carico e ampiezza devono rispettare mobilità e comfort individuali; in caso di dolore alla spalla, interrompi l’esercizio e chiedi assistenza qualificata.</p><a href="https://shop.corehandf.com/products/nautilus-inspiration-deltoid-raise" target="_blank" rel="noreferrer">Scheda ufficiale Nautilus <span>↗</span></a></section>
+      </div>
+    </article>
+
+    {machines.slice(5).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
       <span>{machine.number}</span><figure><img src={machine.image} alt={machine.alt}/>{machine.illustrative && <figcaption>Immagine provvisoria · foto specifica in aggiornamento</figcaption>}</figure><div><small>{machine.brand} · {machine.status}</small><h2>{machine.name}</h2><p>{machine.incoming ? "Una nuova macchina è in arrivo a Revenge Gym. La scheda tecnica completa sarà pubblicata dopo l’installazione e la verifica della configurazione effettiva." : "La macchina è già nella dotazione di Revenge Gym. La scheda dettagliata sarà inserita non appena il contenuto tecnico sarà verificato."}</p></div><i>{machine.ready ? "Scheda completa" : "Scheda in preparazione"}</i>
     </section>)}
 
