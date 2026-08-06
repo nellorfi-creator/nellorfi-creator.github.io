@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Original local media; the optimized files used by the site live in public/.
 /Foto e video/
+
+# Raw catalog cutouts before dark-stage processing
+/public/media/new-machines/originals-white-bg/
