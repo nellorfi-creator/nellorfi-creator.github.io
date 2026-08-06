@@ -10,8 +10,8 @@ const machines = [
   { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: true, image: "/media/new-machines/gymleco-hacklift.png", alt: "Hacklift 244 Gymleco" },
   { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: true, image: "/media/new-machines/startrac-impact-biceps-curl.jpg", alt: "Star Trac Impact Biceps Curl LA-S5301" },
   { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: true, image: "/media/new-machines/nautilus-lateral-raise.png", alt: "Nautilus Inspiration Deltoid Raise IPDR5" },
-  { id: "back-row", number: "06", name: "Back Row", brand: "Marca da confermare", status: "Disponibile", ready: false, image: "/media/macchinario-dorso.webp", alt: "Macchinario per il dorso nella sala Revenge Gym", illustrative: true },
-  { id: "incline-chest-press", number: "07", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: false, image: "/media/new-machines/hoist-incline-chest-press.jpg", alt: "Incline Chest Press RPL-5303 Hoist Fitness" },
+  { id: "back-row", number: "06", name: "Back Row", brand: "Modello da confermare", status: "Disponibile", ready: true, image: "/media/macchinario-dorso.webp", alt: "Area di allenamento dorsale nella sala Revenge Gym", illustrative: true },
+  { id: "incline-chest-press", number: "07", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/hoist-incline-chest-press.jpg", alt: "Incline Chest Press ROC-IT RPL-5303 Hoist Fitness" },
   { id: "super-vertical-leg-press", number: "08", name: "Super Vertical Leg Press", brand: "Panatta", status: "In arrivo", ready: false, incoming: true, image: "/photos/revenge-gym-02.jpg", alt: "Sala Revenge Gym pronta ad accogliere la nuova macchina Panatta", illustrative: true },
 ];
 
@@ -32,6 +32,10 @@ const bicepsPurposes = ["Sviluppare forza nei flessori del gomito", "Aumentare i
 const bicepsErrors = ["Sollevare i gomiti dal cuscino", "Muovere il busto per avviare la ripetizione", "Stringere le maniglie più del necessario", "Accorciare l’escursione per usare più peso", "Lasciare ricadere il pacco pesi", "Perdere l’allineamento tra gomito e fulcro"];
 const lateralPurposes = ["Sviluppare il deltoide laterale", "Aumentare forza e controllo nell’abduzione del braccio", "Allenare un lato alla volta o entrambi insieme", "Ridurre lo slancio grazie alla posizione seduta", "Completare il lavoro dopo esercizi di spinta e tirata"];
 const lateralErrors = ["Sollevare le spalle verso le orecchie", "Spingere con mani e avambracci invece che guidare dai gomiti", "Usare un carico che riduce l’escursione controllabile", "Inarcare la schiena o staccare il busto dal supporto", "Lasciare ricadere le leve nella fase di ritorno", "Forzare l’altezza delle braccia oltre il proprio comfort"];
+const rowPurposes = ["Sviluppare forza nella trazione orizzontale", "Allenare dorsali, romboidi e trapezio medio", "Migliorare il controllo delle scapole sotto carico", "Completare il lavoro di Lat Machine e trazioni", "Bilanciare nel programma i movimenti di spinta"];
+const rowErrors = ["Usare lo slancio del busto per iniziare la trazione", "Sollevare le spalle e irrigidire il collo", "Arrotondare eccessivamente la zona lombare", "Tirare soltanto con mani e avambracci", "Accorciare la corsa per utilizzare più peso", "Abbandonare le leve nella fase di ritorno"];
+const hoistPurposes = ["Sviluppare la forza nella spinta inclinata", "Allenare la porzione clavicolare del grande pettorale", "Coinvolgere deltoide anteriore e tricipite", "Lavorare con entrambe le braccia o un lato alla volta", "Progredire con dischi in un movimento guidato"];
+const hoistErrors = ["Caricare dischi in modo diverso sui due lati senza intenzione", "Perdere il contatto con schienale e seduta", "Portare i gomiti in una posizione scomoda per le spalle", "Bloccare violentemente i gomiti a fine spinta", "Rimbalzare nella posizione di partenza", "Aggiungere peso prima di controllare il movimento dinamico"];
 
 export default function MachineShowcase() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -263,7 +267,71 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    {machines.slice(5).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
+    <article className={`${styles.profile} ${styles.panattaProfile}`} id="back-row">
+      <div className={styles.profileHero}>
+        <div><span>06 · DISPONIBILE IN SALA</span><small>BACK ROW · MODELLO IN VERIFICA</small><h2>BACK<br/><em>ROW.</em></h2><p>Trazione orizzontale guidata per allenare la schiena con stabilità, controllo e intenzione.</p></div>
+        <figure className={`${styles.productPhoto} ${styles.illustrativePhoto}`}><img src="/media/macchinario-dorso.webp" alt="Area di allenamento dorsale nella sala Revenge Gym"/><figcaption>Foto della sala · immagine specifica della Back Row in aggiornamento</figcaption></figure>
+      </div>
+      <div className={styles.profileBody}>
+        <section className={styles.leadSection}><p>La Back Row riproduce il gesto del rematore attraverso una trazione orizzontale guidata. A seconda della configurazione può offrire un appoggio toracico, leve indipendenti e più impugnature: elementi che aiutano a stabilizzare il busto e a concentrare il lavoro sulla muscolatura della schiena senza trasformare ogni ripetizione in uno slancio.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>01 · MUSCOLI COINVOLTI</small><h3>DAL DORSALE<br/>ALLE SCAPOLE.</h3><div className={styles.dualList}><div><b>PRINCIPALI</b><p>Grande dorsale</p><p>Romboidi</p><p>Trapezio medio e inferiore</p></div><div><b>IN ASSISTENZA</b><p>Deltoide posteriore</p><p>Grande rotondo</p><p>Bicipite e brachiale</p><p>Brachioradiale</p><p>Core e stabilizzatori del tronco</p></div></div></section>
+          <section className={styles.darkPanel}><small>02 · A COSA SERVE</small><h3>FORZA CHE<br/>TIRA VERSO DI TE.</h3><ul>{rowPurposes.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.howItWorks}><div><small>03 · COME FUNZIONA</small><h3>PETTO STABILE.<br/><em>GOMITI INDIETRO.</em></h3></div><div><p>Regola il sedile affinché le maniglie risultino coerenti con la traiettoria desiderata e, se presente, sistema il supporto toracico a contatto leggero con il petto. Mantieni piedi stabili, polsi neutri e colonna in posizione naturale.</p><p>Inizia la trazione portando i gomiti indietro senza alzare le spalle. Avvicina le scapole entro un movimento controllabile, fai una breve pausa e torna lentamente fino a distendere le braccia senza perdere l’assetto del busto.</p></div></section>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.accentPanel}><small>04 · BIOMECCANICA</small><h3>TRAZIONE<br/>ORIZZONTALE.</h3><ul><li>Estensione della spalla durante la tirata</li><li>Flessione del gomito con bicipite e brachiale in assistenza</li><li>Retrazione controllata delle scapole</li><li>Ritorno eccentrico lento e continuo</li><li>Busto stabile per limitare compensazioni</li></ul></section>
+          <section><small>05 · CONFIGURAZIONE</small><h3>IL MODELLO<br/>FA LA DIFFERENZA.</h3><p>Le Back Row professionali non sono tutte uguali. Marca e modello della macchina Revenge Gym devono ancora essere confermati; per questo non attribuiamo dati costruttivi non verificati.</p><ul><li>Carico selezionabile o a dischi</li><li>Leve unite oppure indipendenti</li><li>Una o più prese disponibili</li><li>Supporto toracico fisso o regolabile</li><li>Traiettoria convergente o lineare</li></ul></section>
+        </div>
+
+        <section className={styles.positions}><div><small>06 · IMPUGNATURE</small><h3>CAMBIA LA PRESA.<br/><em>CAMBIA L’ASSETTO.</em></h3></div><div className={styles.exerciseSteps}><div><b>PRESA NEUTRA</b><p>Palmi rivolti uno verso l’altro e gomiti vicini al busto: una posizione spesso confortevole per una trazione completa.</p></div><div><b>PRESA PRONA</b><p>Palmi verso il basso e gomiti più aperti possono aumentare l’enfasi relativa sulla parte alta della schiena e sul deltoide posteriore.</p></div><div><b>PRESA SUPINA</b><p>Palmi verso l’alto aumentano il contributo dei flessori del gomito. Usala soltanto se polsi e spalle restano comodi.</p></div></div><p className={styles.positionNote}>Le differenze dipendono anche da larghezza, altezza delle maniglie e traiettoria del modello. Nessuna presa isola completamente un singolo muscolo.</p></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>07 · BACK ROW O LAT MACHINE?</small><h3>DUE DIREZIONI.<br/>UNA SCHIENA COMPLETA.</h3><p>La Back Row sviluppa la trazione orizzontale; Lat Machine e trazioni lavorano invece lungo una direzione prevalentemente verticale. Sono schemi complementari e possono essere inseriti nella stessa seduta o distribuiti nella settimana.</p><ul><li>Back Row per la tirata verso il busto</li><li>Lat Machine per la tirata dall’alto</li><li>Progressioni di carico facili da misurare</li><li>Volume da adattare al resto del programma</li></ul></section>
+          <section className={styles.errorPanel}><small>08 · ERRORI DA EVITARE</small><h3>TIRA CON IL DORSO.<br/>NON CON LO SLANCIO.</h3><ul>{rowErrors.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>GOMITI INDIETRO.<br/><em>RITORNO LENTO.</em></h3></div><blockquote>“Apri il petto senza inarcare la schiena, guida la tirata dai gomiti e lascia che le braccia si distendano di nuovo senza perdere il controllo delle scapole.”</blockquote></section>
+        <section className={styles.safety}><strong>TECNICA E SICUREZZA</strong><p>La scheda descrive il movimento della Back Row; marca, modello e dati tecnici della macchina saranno aggiunti dopo verifica. Regola carico ed escursione sulle tue capacità e interrompi l’esercizio in caso di dolore.</p><a href="https://www.acefitness.org/resources/everyone/exercise-library/168/seated-row/" target="_blank" rel="noreferrer">Tecnica Seated Row · ACE <span>↗</span></a></section>
+      </div>
+    </article>
+
+    <article className={`${styles.profile} ${styles.panattaProfile}`} id="incline-chest-press">
+      <div className={styles.profileHero}>
+        <div><span>07 · DISPONIBILE IN SALA</span><small>HOIST FITNESS · ROC-IT RPL-5303</small><h2>INCLINE<br/><em>CHEST PRESS.</em></h2><p>Una spinta inclinata dinamica, convergente e caricata a dischi per allenare il torace superiore.</p></div>
+        <figure className={styles.productPhoto}><img src="/media/new-machines/hoist-incline-chest-press.jpg" alt="Incline Chest Press ROC-IT RPL-5303 Hoist Fitness"/><figcaption>Hoist ROC-IT RPL-5303 · immagine ufficiale del modello</figcaption></figure>
+      </div>
+      <div className={styles.profileBody}>
+        <section className={styles.leadSection}><p>La Hoist ROC-IT RPL-5303 è una Incline Chest Press professionale a dischi. Durante la spinta la seduta oscilla all’indietro, mantenendo l’utilizzatore allineato con i bracci di pressione e riproducendo la posizione inclinata. Le leve indipendenti e convergenti permettono un lavoro bilaterale o unilaterale con una traiettoria guidata.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>01 · MUSCOLI COINVOLTI</small><h3>SPINTA ALTA.<br/>TORACE COMPLETO.</h3><div className={styles.dualList}><div><b>PRINCIPALI</b><p>Grande pettorale, porzione clavicolare</p><p>Grande pettorale, porzione sternale</p></div><div><b>IN ASSISTENZA</b><p>Deltoide anteriore</p><p>Tricipite brachiale</p><p>Dentato anteriore</p><p>Muscoli stabilizzatori della spalla</p></div></div></section>
+          <section className={styles.darkPanel}><small>02 · A COSA SERVE</small><h3>FORZA LUNGO<br/>UNA NUOVA LINEA.</h3><ul>{hoistPurposes.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.howItWorks}><div><small>03 · TECNOLOGIA ROC-IT</small><h3>SPINGI AVANTI.<br/><em>IL CORPO ARRETRA.</em></h3></div><div><p>All’inizio le maniglie si trovano circa all’altezza del petto. Durante la spinta il sistema ROC-IT accompagna la seduta all’indietro, modificando dinamicamente l’assetto del corpo mentre i bracci convergono.</p><p>Hoist progetta questo movimento per mantenere una postura stabile e confortevole lungo la corsa. I bracci controbilanciati riducono il peso iniziale percepito e facilitano un avvio controllato anche prima di aggiungere molti dischi.</p></div></section>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.accentPanel}><small>04 · PROGETTO HOIST</small><h3>DINAMICA.<br/>INDIPENDENTE.</h3><ul><li>Tecnologia dinamica ROC-IT</li><li>Bracci di spinta indipendenti e convergenti</li><li>Leve controbilanciate per una partenza più leggera</li><li>Impugnature sagomate con più posizioni</li><li>Caricamento con dischi</li><li>Alloggiamenti integrati per riporre i pesi</li></ul></section>
+          <section><small>05 · DATI UFFICIALI</small><h3>MODELLO<br/>RPL-5303.</h3><ul><li>Ingombro: 230 × 133 × 183 cm</li><li>Peso macchina: 193 kg</li><li>Capacità massima di esercizio: 204 kg</li><li>Capacità massima di stoccaggio: 327 kg</li><li>Capacità massima complessiva: 363 kg</li></ul></section>
+        </div>
+
+        <section className={styles.positions}><div><small>06 · ESECUZIONE</small><h3>PETTO APERTO.<br/><em>SPINTA CONTROLLATA.</em></h3></div><div className={styles.exerciseSteps}><div><b>PREPARAZIONE</b><p>Carica i due lati in modo equilibrato, regola la seduta e scegli la presa che consente a polsi, gomiti e spalle di restare comodi.</p></div><div><b>FASE DI SPINTA</b><p>Espira e spingi senza staccarti dagli appoggi. Segui il movimento della seduta e termina senza bloccare violentemente i gomiti.</p></div><div><b>FASE DI RITORNO</b><p>Inspira e accompagna lentamente le leve. Fermati nella profondità in cui mantieni controllo e comfort della spalla.</p></div></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>07 · MACCHINA O PANCA INCLINATA?</small><h3>GUIDATA O LIBERA.<br/>ENTRAMBE UTILI.</h3><p>Manubri e bilanciere richiedono stabilizzazione e gestione libera della traiettoria. La Hoist guida il movimento e consente di lavorare senza dover portare i pesi in posizione. Questo non rende una variante superiore in assoluto: sono strumenti complementari.</p><ul><li>Utile come primo esercizio o dopo la panca</li><li>Adatta a progressioni con piccoli incrementi di dischi</li><li>Possibile lavoro unilaterale</li><li>Ottima in abbinamento a una Back Row</li></ul></section>
+          <section className={styles.errorPanel}><small>08 · ERRORI DA EVITARE</small><h3>SEGUI LA MACCHINA.<br/>NON COMBATTERLA.</h3><ul>{hoistErrors.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>PRIMA IL RITMO.<br/><em>POI I DISCHI.</em></h3></div><blockquote>“Impara prima il movimento della seduta con poco carico. Mantieni petto aperto, polsi neutri e una discesa lenta: aggiungi dischi soltanto quando la traiettoria resta fluida.”</blockquote></section>
+        <section className={styles.safety}><strong>FONTE E SICUREZZA</strong><p>Modello, caratteristiche e capacità sono verificati sulla scheda ufficiale Hoist. I limiti dichiarati non sono un obiettivo di allenamento: carico, presa ed escursione devono essere adattati alla persona.</p><a href="https://www.hoistfitness.com/products/rpl-5303-incline-chest-press" target="_blank" rel="noreferrer">Scheda ufficiale Hoist <span>↗</span></a></section>
+      </div>
+    </article>
+
+    {machines.slice(7).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
       <span>{machine.number}</span><figure><img src={machine.image} alt={machine.alt}/>{machine.illustrative && <figcaption>Immagine provvisoria · foto specifica in aggiornamento</figcaption>}</figure><div><small>{machine.brand} · {machine.status}</small><h2>{machine.name}</h2><p>{machine.incoming ? "Una nuova macchina è in arrivo a Revenge Gym. La scheda tecnica completa sarà pubblicata dopo l’installazione e la verifica della configurazione effettiva." : "La macchina è già nella dotazione di Revenge Gym. La scheda dettagliata sarà inserita non appena il contenuto tecnico sarà verificato."}</p></div><i>{machine.ready ? "Scheda completa" : "Scheda in preparazione"}</i>
     </section>)}
 
