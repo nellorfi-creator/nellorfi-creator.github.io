@@ -12,7 +12,7 @@ const machines = [
   { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: true, image: "/media/new-machines/nautilus-lateral-raise.png", alt: "Nautilus Inspiration Deltoid Raise IPDR5" },
   { id: "back-row", number: "06", name: "Back Row", brand: "Modello da confermare", status: "Disponibile", ready: true, image: "/media/macchinario-dorso.webp", alt: "Area di allenamento dorsale nella sala Revenge Gym", illustrative: true },
   { id: "incline-chest-press", number: "07", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/hoist-incline-chest-press.jpg", alt: "Incline Chest Press ROC-IT RPL-5303 Hoist Fitness" },
-  { id: "super-vertical-leg-press", number: "08", name: "Super Vertical Leg Press", brand: "Panatta", status: "In arrivo", ready: false, incoming: true, image: "/photos/revenge-gym-02.jpg", alt: "Sala Revenge Gym pronta ad accogliere la nuova macchina Panatta", illustrative: true },
+  { id: "super-vertical-leg-press", number: "08", name: "Super Vertical Leg Press", brand: "Panatta", status: "In arrivo", ready: true, incoming: true, image: "/media/new-machines/panatta-super-vertical-leg-press.webp", alt: "Super Vertical Leg Press Panatta 1FW093" },
 ];
 
 const primaryMuscles = ["Quadricipite femorale", "Grande gluteo", "Bicipite femorale", "Semitendinoso", "Semimembranoso"];
@@ -36,6 +36,8 @@ const rowPurposes = ["Sviluppare forza nella trazione orizzontale", "Allenare do
 const rowErrors = ["Usare lo slancio del busto per iniziare la trazione", "Sollevare le spalle e irrigidire il collo", "Arrotondare eccessivamente la zona lombare", "Tirare soltanto con mani e avambracci", "Accorciare la corsa per utilizzare più peso", "Abbandonare le leve nella fase di ritorno"];
 const hoistPurposes = ["Sviluppare la forza nella spinta inclinata", "Allenare la porzione clavicolare del grande pettorale", "Coinvolgere deltoide anteriore e tricipite", "Lavorare con entrambe le braccia o un lato alla volta", "Progredire con dischi in un movimento guidato"];
 const hoistErrors = ["Caricare dischi in modo diverso sui due lati senza intenzione", "Perdere il contatto con schienale e seduta", "Portare i gomiti in una posizione scomoda per le spalle", "Bloccare violentemente i gomiti a fine spinta", "Rimbalzare nella posizione di partenza", "Aggiungere peso prima di controllare il movimento dinamico"];
+const verticalPurposes = ["Sviluppare forza nell’estensione di anche e ginocchia", "Aumentare il volume di lavoro per quadricipiti e glutei", "Allenare le gambe lungo una traiettoria guidata", "Variare l’assetto attraverso pedana e schienale regolabili", "Gestire progressioni a dischi con finecorsa di sicurezza"];
+const verticalErrors = ["Staccare bacino o schiena dal supporto", "Scendere oltre l’escursione che si riesce a controllare", "Far collassare le ginocchia verso l’interno", "Perdere l’appoggio stabile dell’intero piede", "Rimbalzare nella parte bassa del movimento", "Bloccare violentemente le ginocchia o inseguire il carico massimo"];
 
 export default function MachineShowcase() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -331,9 +333,37 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    {machines.slice(7).map((machine) => <section className={`${styles.upcomingProfile} ${machine.incoming ? styles.incomingProfile : ""}`} id={machine.id} key={machine.id}>
-      <span>{machine.number}</span><figure><img src={machine.image} alt={machine.alt}/>{machine.illustrative && <figcaption>Immagine provvisoria · foto specifica in aggiornamento</figcaption>}</figure><div><small>{machine.brand} · {machine.status}</small><h2>{machine.name}</h2><p>{machine.incoming ? "Una nuova macchina è in arrivo a Revenge Gym. La scheda tecnica completa sarà pubblicata dopo l’installazione e la verifica della configurazione effettiva." : "La macchina è già nella dotazione di Revenge Gym. La scheda dettagliata sarà inserita non appena il contenuto tecnico sarà verificato."}</p></div><i>{machine.ready ? "Scheda completa" : "Scheda in preparazione"}</i>
-    </section>)}
+    <article className={`${styles.profile} ${styles.panattaProfile}`} id="super-vertical-leg-press">
+      <div className={styles.profileHero}>
+        <div><span>08 · IN ARRIVO A REVENGE GYM</span><small>PANATTA · FREEWEIGHT SPECIAL 1FW093</small><h2>SUPER VERTICAL<br/><em>LEG PRESS.</em></h2><p>La nuova protagonista dell’area gambe è in arrivo: traiettoria guidata, regolazioni evolute e caricamento a dischi.</p></div>
+        <figure className={styles.productPhoto}><img src="/media/new-machines/panatta-super-vertical-leg-press.webp" alt="Super Vertical Leg Press Panatta 1FW093"/><figcaption>Panatta 1FW093 · immagine del modello · macchina in arrivo</figcaption></figure>
+      </div>
+      <div className={styles.profileBody}>
+        <section className={styles.leadSection}><p>La Panatta Super Vertical Leg Press 1FW093 entrerà prossimamente nella dotazione di Revenge Gym. È una pressa professionale a dischi nella quale l’atleta spinge il carrello lungo una traiettoria quasi verticale, con schienale, pedana e finecorsa regolabili. La scheda descrive il modello ufficiale; configurazione e optional presenti in palestra saranno confermati dopo l’installazione.</p><div className={styles.rating}><span>VALUTAZIONE TECNICA</span><strong>5/5</strong><i>★★★★★</i></div></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>01 · MUSCOLI COINVOLTI</small><h3>SPINTA VERTICALE.<br/>GAMBE COMPLETE.</h3><div className={styles.dualList}><div><b>PRINCIPALI</b><p>Quadricipite femorale</p><p>Grande gluteo</p></div><div><b>IN ASSISTENZA</b><p>Ischiocrurali</p><p>Adduttori</p><p>Gastrocnemio e soleo</p><p>Muscoli stabilizzatori del tronco</p></div></div></section>
+          <section className={styles.darkPanel}><small>02 · A COSA SERVE</small><h3>FORZA CHE<br/>SALE IN VERTICALE.</h3><ul>{verticalPurposes.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.howItWorks}><div><small>03 · COME FUNZIONA</small><h3>REGOLA. SBLOCCA.<br/><em>SPINGI.</em></h3></div><div><p>Dopo aver scelto inclinazione dello schienale, assetto della pedana e altezza dei finecorsa, l’atleta si posiziona mantenendo bacino e schiena aderenti al supporto. La leva di sicurezza facilita lo sblocco iniziale del carrello.</p><p>La discesa deve fermarsi prima che bacino, piedi o ginocchia perdano posizione. Da lì si spinge attraverso l’intero piede, tornando verso l’alto senza bloccare violentemente le ginocchia e riagganciando il sistema prima di uscire.</p></div></section>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.accentPanel}><small>04 · PROGETTO PANATTA</small><h3>REGOLAZIONI<br/>AD ALTA INTENSITÀ.</h3><ul><li>Schienale regolabile su 3 inclinazioni</li><li>Pedana antiscivolo 80 × 60 cm</li><li>Pedana regolabile su 4 inclinazioni</li><li>Finecorsa di sicurezza su 5 posizioni</li><li>Leva per facilitare l’inizio del movimento</li><li>Controbilanciamento e porta dischi aggiuntivi disponibili come optional</li></ul></section>
+          <section><small>05 · DATI UFFICIALI</small><h3>MODELLO<br/>1FW093.</h3><ul><li>Ingombro: 205 × 205 × 205 cm</li><li>Peso macchina: 350 kg</li><li>Carico massimo dichiarato: 800 kg</li><li>Peso a vuoto del carrello: 90 kg</li><li>Linea: Panatta FreeWeight Special</li></ul></section>
+        </div>
+
+        <section className={styles.positions}><div><small>06 · POSIZIONE DEI PIEDI</small><h3>UNA GRANDE PEDANA.<br/><em>PIÙ ASSETTI POSSIBILI.</em></h3></div><div className={styles.positionGrid}>{footPositions.map(([title,text], index) => <div key={title}><span>0{index+1}</span><strong>{title}</strong><p>{text}</p></div>)}</div><p className={styles.positionNote}>Altezza, larghezza e inclinazione dei piedi modificano soprattutto angoli articolari, comfort e contributo relativo dei muscoli. Non isolano completamente una singola porzione della gamba: scegli sempre un appoggio stabile e compatibile con la tua mobilità.</p></section>
+
+        <div className={styles.contentGrid}>
+          <section><small>07 · VERTICALE O ORIZZONTALE?</small><h3>DUE PRESSE.<br/>DUE ESPERIENZE.</h3><p>La pressa orizzontale Life Fitness già presente e la nuova Panatta non sono doppioni. Cambiano orientamento, tipo di carico, regolazioni e sensazione di spinta; possono quindi occupare ruoli diversi nello stesso programma.</p><ul><li>Panatta con caricamento a dischi</li><li>Traiettoria quasi verticale e carrello guidato</li><li>Life Fitness con selezione rapida del carico</li><li>Entrambe da regolare sulla persona</li></ul></section>
+          <section className={styles.errorPanel}><small>08 · ERRORI DA EVITARE</small><h3>800 KG È UN LIMITE.<br/>NON UN OBIETTIVO.</h3><ul>{verticalErrors.map(item => <li key={item}>{item}</li>)}</ul></section>
+        </div>
+
+        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>CONOSCI LA MACCHINA.<br/><em>POI AUMENTA.</em></h3></div><blockquote>“Quando arriverà, impara prima regolazioni, leva di sicurezza e finecorsa con un carico gestibile. Profondità e peso contano soltanto se bacino, piedi e ginocchia restano sotto controllo.”</blockquote></section>
+        <section className={styles.safety}><strong>IN ARRIVO · FONTE UFFICIALE</strong><p>La macchina non è ancora utilizzabile in sala. Dati e caratteristiche provengono dalla scheda Panatta del modello 1FW093; colori e optional effettivi saranno verificati dopo consegna e montaggio.</p><a href="https://www.panattasport.com/it/free-weight-special/super-vertical-leg-press/" target="_blank" rel="noreferrer">Scheda ufficiale Panatta <span>↗</span></a></section>
+      </div>
+    </article>
 
     <section className={styles.cta}><p className={styles.eyebrow}><span></span> Vieni a provarle</p><h2>LEGGERE AIUTA.<br/><em>ALLENARSI CAMBIA TUTTO.</em></h2><p>Scopri dal vivo le nuove macchine e chiedi allo staff come inserirle nel tuo allenamento.</p><Link href="/#contatti" className={styles.primary}>Contatta Revenge Gym <span>↗</span></Link></section>
     <footer className={styles.footer}><Link href="/?skipIntro=1#home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Via Berna 8 · Ladispoli</p><a href="#top">Torna su ↑</a></footer>
