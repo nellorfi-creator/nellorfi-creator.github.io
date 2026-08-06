@@ -3,18 +3,18 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 
 const courses = [
-  { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
-  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=85", text: "Attrezzature professionali di marchi selezionati per un allenamento preciso ed efficace.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
-  { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=85", text: "Uno spazio dedicato al lavoro cardiovascolare, al riscaldamento e al miglioramento della resistenza.", description: "Un’area dedicata ad attivazione, resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature per riscaldamento e lavoro aerobico", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
-  { icon: "◎", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1200&q=85", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante.", description: "Lo spazio in cui costruire la tua routine combinando esercizi, attrezzi e intensità secondo il livello di partenza e il risultato che vuoi raggiungere.", features: ["Libertà di combinare forza, mobilità e condizionamento", "Spazio adatto a circuiti e lavoro a corpo libero", "Allenamento autonomo, flessibile e sempre diverso"], ideal: "Per chi ama gestire il proprio programma, variare gli stimoli e allenarsi seguendo ritmi e obiettivi personali." },
+  { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
+  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "/media/macchinario-dorso.webp", text: "Attrezzature professionali di marchi selezionati per un allenamento preciso ed efficace.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
+  { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "/photos/live/sala-community.webp", text: "Uno spazio dedicato al lavoro cardiovascolare, al riscaldamento e al miglioramento della resistenza.", description: "Un’area dedicata ad attivazione, resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature per riscaldamento e lavoro aerobico", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
+  { icon: "◎", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "/photos/live/boxe-sacchi.webp", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante.", description: "Lo spazio in cui costruire la tua routine combinando esercizi, attrezzi e intensità secondo il livello di partenza e il risultato che vuoi raggiungere.", features: ["Libertà di combinare forza, mobilità e condizionamento", "Spazio adatto a circuiti e lavoro a corpo libero", "Allenamento autonomo, flessibile e sempre diverso"], ideal: "Per chi ama gestire il proprio programma, variare gli stimoli e allenarsi seguendo ritmi e obiettivi personali." },
 ];
 
 const gallery = [
-  ["https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=85", "Allenamento funzionale di gruppo"],
-  ["https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=1200&q=85", "Atleta durante un workout"],
-  ["https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?auto=format&fit=crop&w=1200&q=85", "Allenamento con kettlebell"],
-  ["https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=1200&q=85", "Sala attrezzata della palestra"],
-  ["https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=1200&q=85", "Workout ad alta intensità"],
+  ["/photos/live/boxe-coach-ring.webp", "Corner · istruzioni tra un round e l’altro"],
+  ["/photos/live/sala-community.webp", "Community in sala pesi"],
+  ["/photos/live/boxe-allenamento.webp", "Lavoro al sacco"],
+  ["/photos/live/boxe-cintura.webp", "Ring · livello agonistico"],
+  ["/photos/live/boxe-team-lauro.webp", "Team Lauro Boxe"],
 ];
 
 const equipmentBrands = [
@@ -93,26 +93,26 @@ const equipmentBrands = [
 ];
 
 const introFrames = [
-  ["https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=2000&q=90", "RIVINCITA"],
+  ["/photos/live/hero-sala.webp", "RIVINCITA"],
   ["/media/sala-attrezzi.webp", "FORZA"],
   ["/media/macchinario-spalle.webp", "POTENZA"],
-  ["/photos/revenge-gym-02.jpg", "ENERGIA"],
-  ["/media/ring-boxe.webp", "BOXE"],
+  ["/photos/live/sala-community.webp", "ENERGIA"],
+  ["/photos/live/boxe-coach-ring.webp", "BOXE"],
   ["/media/macchinario-dorso.webp", "DISCIPLINA"],
-  ["/photos/revenge-gym-05.jpg", "CARATTERE"],
-  ["/media/sala-attrezzi.webp", "REVENGE GYM"],
+  ["/photos/live/boxe-sacchi.webp", "CARATTERE"],
+  ["/photos/live/hero-sala.webp", "REVENGE GYM"],
 ];
 
 const gymZones = [
-  { id: "free", number: "01", title: "Pesi liberi", subtitle: "Forza e fondamentali", className: "zone-free", image: "/media/sala-attrezzi.webp", text: "L’area dedicata a bilancieri, manubri e panche: il punto di partenza per costruire forza, tecnica e massa muscolare.", equipment: ["Panche e postazioni regolabili", "Manubri e bilancieri", "Spazio per i principali esercizi multiarticolari"] },
+  { id: "free", number: "01", title: "Pesi liberi", subtitle: "Forza e fondamentali", className: "zone-free", image: "/photos/live/hero-sala.webp", text: "L’area dedicata a bilancieri, manubri e panche: il punto di partenza per costruire forza, tecnica e massa muscolare.", equipment: ["Panche e postazioni regolabili", "Manubri e bilancieri", "Spazio per i principali esercizi multiarticolari"] },
   { id: "isotonic", number: "02", title: "Isotonica", subtitle: "Movimento guidato", className: "zone-isotonic", image: "/media/macchinario-dorso.webp", text: "Macchinari professionali che guidano la traiettoria e permettono di concentrare il lavoro sul gruppo muscolare scelto.", equipment: ["Macchine Panatta e Hammer Strength", "Postazioni per dorso, petto, spalle e gambe", "Regolazioni adatte a livelli diversi"] },
-  { id: "cardio", number: "03", title: "Cardio", subtitle: "Fiato e resistenza", className: "zone-cardio", image: "/photos/revenge-gym-07.jpg", text: "Una zona per riscaldarsi, migliorare la capacità cardiovascolare o completare la seduta con un lavoro aerobico.", equipment: ["Attrezzature cardio professionali", "Intensità facilmente regolabile", "Utilizzabile prima o dopo la sala pesi"] },
-  { id: "boxing", number: "04", title: "Boxe", subtitle: "Tecnica e carattere", className: "zone-boxing", image: "/media/ring-boxe.webp", text: "Uno spazio distinto dedicato alla boxe, dove allenare tecnica, coordinazione, condizionamento e sicurezza.", equipment: ["Ring", "Sacchi", "Spazio per tecnica e preparazione atletica"] },
+  { id: "cardio", number: "03", title: "Cardio", subtitle: "Fiato e resistenza", className: "zone-cardio", image: "/photos/live/sala-community.webp", text: "Una zona per riscaldarsi, migliorare la capacità cardiovascolare o completare la seduta con un lavoro aerobico.", equipment: ["Attrezzature cardio professionali", "Intensità facilmente regolabile", "Utilizzabile prima o dopo la sala pesi"] },
+  { id: "boxing", number: "04", title: "Boxe", subtitle: "Tecnica e carattere", className: "zone-boxing", image: "/photos/live/boxe-sacchi.webp", text: "Uno spazio distinto dedicato alla boxe, dove allenare tecnica, coordinazione, condizionamento e sicurezza.", equipment: ["Ring", "Sacchi", "Spazio per tecnica e preparazione atletica"] },
 ];
 
 const magazineArticles = [
-  { category: "INIZIARE", time: "4 min", title: "La prima volta in sala pesi: cosa aspettarsi", excerpt: "Niente ansia e nessuna gara: ecco come affrontare il primo allenamento con ordine e sicurezza.", image: "/photos/revenge-gym-04.jpg", intro: "Entrare per la prima volta in sala pesi può sembrare complicato. In realtà basta partire con poche idee chiare: conoscere gli spazi, scegliere carichi gestibili e dare priorità alla tecnica.", paragraphs: ["Indossa abbigliamento comodo, porta acqua e un asciugamano. Prima di iniziare, dedica qualche minuto a capire dove si trovano le diverse aree e come si regolano le attrezzature.", "Nelle prime sedute non serve provare ogni macchina. Un allenamento semplice e completo permette di imparare i movimenti senza accumulare fatica inutile.", "Il carico giusto è quello che consente di completare ogni ripetizione in modo controllato. La progressione arriverà con la continuità: il primo obiettivo è costruire una routine sostenibile."], takeaway: "La prima seduta serve a prendere confidenza, non a dimostrare quanto sei forte." },
-  { category: "METODO", time: "5 min", title: "Allenarsi tre volte a settimana: una base concreta", excerpt: "Come distribuire forza, recupero e continuità quando il tempo non è infinito.", image: "/photos/revenge-gym-02.jpg", intro: "Tre allenamenti settimanali sono una frequenza solida per moltissime persone: lasciano spazio al recupero e permettono di stimolare con regolarità tutto il corpo.", paragraphs: ["Una soluzione semplice è alternare sedute complete, distribuendo in ogni giornata esercizi per gambe, spinta e tirata. In questo modo ogni gruppo muscolare viene allenato più volte senza concentrare tutto in una sola seduta.", "Lascia almeno un giorno di recupero tra due allenamenti impegnativi e mantieni una durata che puoi sostenere anche nelle settimane più piene.", "Annotare esercizi, serie e carichi aiuta a capire se stai migliorando. Piccoli progressi ripetuti nel tempo valgono più di una singola seduta estrema."], takeaway: "Il programma migliore non è il più complicato: è quello che riesci a seguire con costanza." },
+  { category: "INIZIARE", time: "4 min", title: "La prima volta in sala pesi: cosa aspettarsi", excerpt: "Niente ansia e nessuna gara: ecco come affrontare il primo allenamento con ordine e sicurezza.", image: "/photos/live/hero-sala.webp", intro: "Entrare per la prima volta in sala pesi può sembrare complicato. In realtà basta partire con poche idee chiare: conoscere gli spazi, scegliere carichi gestibili e dare priorità alla tecnica.", paragraphs: ["Indossa abbigliamento comodo, porta acqua e un asciugamano. Prima di iniziare, dedica qualche minuto a capire dove si trovano le diverse aree e come si regolano le attrezzature.", "Nelle prime sedute non serve provare ogni macchina. Un allenamento semplice e completo permette di imparare i movimenti senza accumulare fatica inutile.", "Il carico giusto è quello che consente di completare ogni ripetizione in modo controllato. La progressione arriverà con la continuità: il primo obiettivo è costruire una routine sostenibile."], takeaway: "La prima seduta serve a prendere confidenza, non a dimostrare quanto sei forte." },
+  { category: "METODO", time: "5 min", title: "Allenarsi tre volte a settimana: una base concreta", excerpt: "Come distribuire forza, recupero e continuità quando il tempo non è infinito.", image: "/photos/live/sala-community.webp", intro: "Tre allenamenti settimanali sono una frequenza solida per moltissime persone: lasciano spazio al recupero e permettono di stimolare con regolarità tutto il corpo.", paragraphs: ["Una soluzione semplice è alternare sedute complete, distribuendo in ogni giornata esercizi per gambe, spinta e tirata. In questo modo ogni gruppo muscolare viene allenato più volte senza concentrare tutto in una sola seduta.", "Lascia almeno un giorno di recupero tra due allenamenti impegnativi e mantieni una durata che puoi sostenere anche nelle settimane più piene.", "Annotare esercizi, serie e carichi aiuta a capire se stai migliorando. Piccoli progressi ripetuti nel tempo valgono più di una singola seduta estrema."], takeaway: "Il programma migliore non è il più complicato: è quello che riesci a seguire con costanza." },
   { category: "TECNICA", time: "6 min", title: "Macchine o pesi liberi? Non devi scegliere", excerpt: "Due strumenti diversi che possono convivere nello stesso allenamento e completarsi a vicenda.", image: "/media/macchinario-spalle.webp", intro: "Pesi liberi e macchine non sono avversari. Offrono stimoli diversi e, combinati con criterio, permettono di costruire un allenamento più completo.", paragraphs: ["Bilancieri e manubri richiedono stabilizzazione e libertà di movimento. Sono strumenti versatili, particolarmente utili per sviluppare tecnica e coordinazione nei movimenti fondamentali.", "Le macchine guidano maggiormente la traiettoria e aiutano a concentrare il lavoro su un distretto specifico. Possono essere utili per imparare a percepire il muscolo e continuare una seduta in modo controllato.", "La scelta dipende dall’obiettivo, dall’esperienza e dalle caratteristiche personali. Nella stessa scheda è normale iniziare con un esercizio libero e proseguire con uno o più esercizi guidati."], takeaway: "Gli strumenti cambiano; ciò che conta è usarli con tecnica, progressione e uno scopo preciso." },
 ];
 
@@ -220,7 +220,7 @@ export default function Home() {
     <main>
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
         <div className={`intro-frames${introStarted ? " is-running" : ""}`}>
-          <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=2000&q=90"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>
+          <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "/photos/live/hero-sala.webp"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>
         </div>
         <div className="intro-shade"></div>
         <div className="intro-logo logo"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></div>
@@ -248,7 +248,7 @@ export default function Home() {
       </header>
 
       <section className="hero" id="home">
-        <div className="hero-media" role="img" aria-label="Atleta che si allena in palestra"></div>
+        <div className="hero-media" role="img" aria-label="Sala attrezzi di Revenge Gym a Ladispoli"></div>
         <div className="hero-shade"></div>
         <div className="hero-content reveal">
           <p className="eyebrow"><span></span> Sala pesi · Ladispoli</p>
@@ -279,9 +279,9 @@ export default function Home() {
           <div className="quote"><span>“</span><p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p></div>
         </div>
         <div className="real-gym-strip reveal" aria-label="Foto reali di Revenge Gym">
-          <figure><img src="/photos/revenge-gym-02.jpg" alt="Allenamento ai cavi nella sala di Revenge Gym" loading="lazy"/><figcaption>Allenamento in sala</figcaption></figure>
+          <figure><img src="/photos/live/sala-community.webp" alt="Community in sala pesi di Revenge Gym" loading="lazy"/><figcaption>Community in sala</figcaption></figure>
           <div className="real-gym-caption"><small>REVENGE GYM · LADISPOLI</small><strong>QUESTA È<br/>LA NOSTRA<br/><em>PALESTRA.</em></strong></div>
-          <figure><img src="/photos/revenge-gym-05.jpg" alt="Esercizio con macchinario nella sala pesi di Revenge Gym" loading="lazy"/><figcaption>Spazi reali, risultati reali</figcaption></figure>
+          <figure><img src="/photos/live/boxe-sacchi.webp" alt="Area boxe con sacchi a Revenge Gym" loading="lazy"/><figcaption>Sala boxe · sacchi e ring</figcaption></figure>
         </div>
         <div className="gym-video reveal">
           <div className="gym-video-copy"><small>TOUR DELLA PALESTRA</small><h3>ENTRA IN<br/><em>REVENGE GYM.</em></h3><p>Scopri gli ambienti, le aree di allenamento e l’atmosfera della palestra prima ancora di venirci a trovare.</p></div>
@@ -368,7 +368,7 @@ export default function Home() {
       </div>}
 
       <section className="boxing-section" id="boxe">
-        <div className="boxing-media reveal"><img src="/media/ring-boxe.webp" alt="Ring e sala boxe di Revenge Gym" loading="lazy"/><span>RING · SACCHI · TECNICA</span></div>
+        <div className="boxing-media reveal"><img src="/photos/live/boxe-coach-ring.webp" alt="Corner boxe a Revenge Gym" loading="lazy"/><span>RING · SACCHI · TECNICA</span></div>
         <div className="boxing-copy reveal">
           <p className="eyebrow"><span></span> Area Boxe</p>
           <h2>SALI SUL RING.<br/><em>TIRA FUORI IL CARATTERE.</em></h2>
@@ -384,7 +384,7 @@ export default function Home() {
             <a href="https://www.facebook.com/reel/1074233541830038" target="_blank" rel="noreferrer">Guarda il Reel su Facebook <span>↗</span></a>
           </div>
           <a className="boxing-reel-player" href="https://www.facebook.com/reel/1074233541830038" target="_blank" rel="noreferrer" aria-label="Guarda il Reel dell’area Boxe su Facebook">
-            <img src="/media/ring-boxe.webp" alt="Anteprima del Reel dell’area Boxe di Revenge Gym" loading="lazy" />
+            <img src="/photos/live/boxe-cintura.webp" alt="Anteprima del Reel dell’area Boxe di Revenge Gym" loading="lazy" />
             <span className="boxing-reel-play" aria-hidden="true">▶</span>
             <span className="boxing-reel-label"><small>VIDEO SU FACEBOOK</small><strong>GUARDA IL REEL</strong><i>↗</i></span>
           </a>
