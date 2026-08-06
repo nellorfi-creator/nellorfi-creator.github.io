@@ -1,48 +1,25 @@
-name: Pubblica Revenge Gym su GitHub Pages
+name: Verifica build Revenge Gym
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Scarica il sito
-        uses: actions/checkout@v4
-      - name: Configura Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - name: Installa le dipendenze
-        run: npm install
-      - name: Genera il sito statico
-        run: npm exec next build
+      - run: npm install
+      - run: npm exec next build
         env:
           GITHUB_PAGES: "true"
-      - name: Aggiorna docs per GitHub Pages
-        run: |
-          rm -rf docs
-          mkdir docs
-          cp -R out/. docs/
-          touch docs/.nojekyll
-      - name: Pubblica docs su main
-        run: |
-          if git diff --quiet -- docs; then
-            echo "Nessuna modifica in docs/"
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs
-          git commit -m "Aggiorna build statica per GitHub Pages [skip ci]"
-          git push
