@@ -6,9 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -31,20 +29,20 @@ jobs:
         run: npm exec next build
         env:
           GITHUB_PAGES: "true"
-      - name: Prepara GitHub Pages
-        uses: actions/configure-pages@v5
-      - name: Carica il sito
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Pubblica
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Aggiorna docs per GitHub Pages
+        run: |
+          rm -rf docs
+          mkdir docs
+          cp -R out/. docs/
+          touch docs/.nojekyll
+      - name: Pubblica docs su main
+        run: |
+          if git diff --quiet -- docs; then
+            echo "Nessuna modifica in docs/"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "Aggiorna build statica per GitHub Pages [skip ci]"
+          git push
