@@ -10,11 +10,26 @@ const courses = [
 ];
 
 const gallery = [
-  ["/photos/live/boxe-coach-ring.webp", "Corner · istruzioni tra un round e l’altro"],
+  ["/photos/live/boxe-sacco-jab.webp", "Colpi al sacco"],
   ["/photos/live/sala-community.webp", "Community in sala pesi"],
-  ["/photos/live/boxe-allenamento.webp", "Lavoro al sacco"],
+  ["/photos/live/boxe-coppia.webp", "Atleti · Revenge Gym"],
   ["/photos/live/boxe-cintura.webp", "Ring · livello agonistico"],
   ["/photos/live/boxe-team-lauro.webp", "Team Lauro Boxe"],
+];
+
+const boxingShots = [
+  ["/photos/live/boxe-sacco-jab.webp", "Colpi al sacco"],
+  ["/photos/live/boxe-coppia.webp", "Atleti in palestra"],
+  ["/photos/live/boxe-coach-ring.webp", "Corner e istruzioni"],
+  ["/photos/live/boxe-sacchi.webp", "Area sacchi"],
+  ["/photos/live/boxe-allenamento.webp", "Allenamento tecnico"],
+  ["/photos/live/boxe-cintura.webp", "Sul ring"],
+  ["/photos/live/boxe-corner.webp", "Corner tra i round"],
+  ["/photos/live/boxe-evento.webp", "Evento boxe"],
+  ["/photos/live/boxe-team-lauro.webp", "Team Lauro Boxe"],
+  ["/photos/live/boxe-ring-extra.webp", "Ring · atmosfera"],
+  ["/photos/live/boxe-allenamento-extra.webp", "Seduta di boxe"],
+  ["/photos/live/boxe-team-extra.webp", "Squadra e carattere"],
 ];
 
 const equipmentBrands = [
@@ -368,13 +383,28 @@ export default function Home() {
       </div>}
 
       <section className="boxing-section" id="boxe">
-        <div className="boxing-media reveal"><img src="/photos/live/boxe-coach-ring.webp" alt="Corner boxe a Revenge Gym" loading="lazy"/><span>RING · SACCHI · TECNICA</span></div>
+        <div className="boxing-media reveal"><img src="/photos/live/boxe-sacco-jab.webp" alt="Allenamento al sacco a Revenge Gym" loading="lazy"/><span>RING · SACCHI · TECNICA</span></div>
         <div className="boxing-copy reveal">
           <p className="eyebrow"><span></span> Area Boxe</p>
           <h2>SALI SUL RING.<br/><em>TIRA FUORI IL CARATTERE.</em></h2>
           <p className="lead">Revenge Gym non è solo sala pesi: dispone anche di un’area dedicata alla boxe con ring e sacchi.</p>
           <p>Uno spazio pensato per allenare tecnica, coordinazione, resistenza e sicurezza. Contattaci per conoscere modalità di allenamento e disponibilità.</p>
           <a href="#contatti" className="button primary">Informazioni sulla boxe <span>↗</span></a>
+        </div>
+        <div className="boxing-shots reveal" aria-label="Galleria foto area Boxe">
+          <div className="boxing-shots-head">
+            <p className="eyebrow"><span></span> Dentro l’area Boxe</p>
+            <h3>MOMENTI.<br/><em>COLPI. CARATTERE.</em></h3>
+            <p>Passa sopra le foto per ingrandirle: sacchi, ring, allenamenti e atleti di Revenge Gym.</p>
+          </div>
+          <div className="boxing-shots-rail">
+            {boxingShots.map(([src, label]) => (
+              <figure className="boxing-shot" key={src}>
+                <img src={src} alt={label} loading="lazy" />
+                <figcaption>{label}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
         <div className="boxing-reel reveal">
           <div className="boxing-reel-copy">
