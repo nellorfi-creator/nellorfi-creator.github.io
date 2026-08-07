@@ -12,14 +12,13 @@ const courses = [
 const gallery = [
   ["/photos/live/boxe-sacco-jab.webp", "Colpi al sacco"],
   ["/photos/live/sala-community.webp", "Community in sala pesi"],
-  ["/photos/live/boxe-coppia.webp", "Atleti · Revenge Gym"],
+  ["/photos/live/boxe-coach-ring.webp", "Corner · istruzioni"],
   ["/photos/live/boxe-cintura.webp", "Ring · livello agonistico"],
   ["/photos/live/boxe-team-lauro.webp", "Team Lauro Boxe"],
 ];
 
 const boxingShots = [
   ["/photos/live/boxe-sacco-jab.webp", "Colpi al sacco"],
-  ["/photos/live/boxe-coppia.webp", "Atleti in palestra"],
   ["/photos/live/boxe-coach-ring.webp", "Corner e istruzioni"],
   ["/photos/live/boxe-sacchi.webp", "Area sacchi"],
   ["/photos/live/boxe-allenamento.webp", "Allenamento tecnico"],
@@ -292,6 +291,17 @@ export default function Home() {
         <div className="philosophy-image reveal">
           <img src="/media/sala-attrezzi.webp" alt="Vista panoramica della sala attrezzi di Revenge Gym" loading="lazy" />
           <div className="quote"><span>“</span><p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p></div>
+        </div>
+        <div className="owners-spotlight reveal" aria-label="I titolari di Revenge Gym">
+          <figure className="owners-photo">
+            <img src="/photos/live/boxe-coppia.webp" alt="Gino e Stefania, titolari di Revenge Gym" loading="lazy" />
+          </figure>
+          <div className="owners-copy">
+            <p className="eyebrow"><span></span> I titolari</p>
+            <h3>GINO & STEFANIA.<br/><em>REVENGE GYM.</em></h3>
+            <p>La palestra di Ladispoli guidata da chi ci crede ogni giorno: cura degli spazi, attenzione alle persone e la stessa passione per l’allenamento che si respira in sala.</p>
+            <small>LADISPOLI · SALA PESI · BOXE</small>
+          </div>
         </div>
         <div className="real-gym-strip reveal" aria-label="Foto reali di Revenge Gym">
           <figure><img src="/photos/live/sala-community.webp" alt="Community in sala pesi di Revenge Gym" loading="lazy"/><figcaption>Community in sala</figcaption></figure>
