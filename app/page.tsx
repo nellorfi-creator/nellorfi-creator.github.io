@@ -153,9 +153,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
+    const items = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+    items.forEach((item) => observer.observe(item));
+    const failsafe = window.setTimeout(() => items.forEach((item) => item.classList.add("visible")), 1800);
+    return () => { observer.disconnect(); window.clearTimeout(failsafe); };
   }, []);
 
   useEffect(() => {
@@ -247,7 +249,7 @@ export default function Home() {
           <p>Alza il volume. Entra nell’esperienza.</p>
           <button className="button primary intro-start" type="button" onClick={startIntro}><i>▶</i> Avvia con musica</button>
         </div> : <div className="intro-flash" aria-live="polite"><strong key={introSlide}>{introFrames[introSlide][1]}</strong><span>{String(introSlide + 1).padStart(2,"0")} / {String(introFrames.length).padStart(2,"0")}</span></div>}
-        <button className="intro-skip" type="button" onClick={closeIntro}>Salta intro →</button>
+        <button className="intro-skip" type="button" onClick={closeIntro}>Salta intro <span>→</span></button>
         {introStarted && <div className="intro-progress" aria-hidden="true"><span></span></div>}
         <audio ref={introAudioRef} src="/media/revenge-gym-tour.mp4" loop preload="auto"/>
       </section>}
