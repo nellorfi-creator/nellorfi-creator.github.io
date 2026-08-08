@@ -461,7 +461,7 @@ export default function Home() {
       </div>}
 
       <section className="trial" id="prova">
-        <div className="trial-inner reveal"><p className="eyebrow"><span></span> Il primo passo è gratuito</p><h2>LA TUA RIVINCITA<br/>INIZIA <em>OGGI.</em></h2><p>Vieni a conoscere gli spazi e le attrezzature di Revenge Gym. Chiamaci per organizzare la tua prima visita.</p><a href="#contatti" className="button primary">Contatta la palestra <span>↗</span></a></div>
+        <div className="trial-inner reveal"><p className="eyebrow"><span></span> Prova gratuita su appuntamento</p><h2>PROVA PRIMA.<br/>DECIDI <em>DOPO.</em></h2><p>Non ti chiediamo di iscriverti al buio. Prenota un’ora in palestra: ti accogliamo, ti mostriamo gli spazi e le attrezzature professionali, e ti fai un’idea reale di Revenge Gym. Zero costi. Zero impegno. Solo la certezza di scegliere bene.</p><a href="#contatti" className="button primary">Prenota la prova gratuita <span>↗</span></a></div>
       </section>
 
       <section className="section contact" id="contatti">
@@ -479,14 +479,14 @@ export default function Home() {
           </div>
         </div>
         <form className="contact-form reveal" onSubmit={submitForm}>
-          <span className="form-kicker">PRENOTA LA PROVA GRATUITA</span><h3>Pronto a iniziare?</h3>
+          <span className="form-kicker">PROVA GRATUITA SU APPUNTAMENTO</span><h3>Fissa la tua ora in palestra</h3>
           <label>Nome e cognome<input required name="name" placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" placeholder="+39" /></label></div>
           <label>Area di interesse<select name="course" defaultValue=""><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
-          <label>Messaggio<textarea name="message" placeholder="Raccontaci il tuo obiettivo..."></textarea></label>
+          <label>Messaggio<textarea name="message" placeholder="Dicci quando preferisci venire e il tuo obiettivo..."></textarea></label>
           <label className="privacy"><input required type="checkbox" /> <span>Accetto il trattamento dei dati personali.</span></label>
-          <button className="button primary" type="submit">Invia la richiesta <span>↗</span></button>
-          {sent && <p className="success" role="status">Richiesta ricevuta! Ti ricontatteremo al più presto.</p>}
+          <button className="button primary" type="submit">Richiedi la prova gratuita <span>↗</span></button>
+          {sent && <p className="success" role="status">Richiesta ricevuta! Ti richiamiamo per fissare giorno e ora.</p>}
         </form>
       </section>
 
