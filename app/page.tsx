@@ -259,7 +259,7 @@ export default function Home() {
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           {[['La palestra','filosofia'],['Aree','corsi'],['Mappa','mappa'],['Boxe','boxe'],['Gallery','gallery'],['Magazine','magazine']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
           <a href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</a>
-          <a className="nav-cta" href="#prova" onClick={() => setMenuOpen(false)}>Prova gratuita <span>↗</span></a>
+          <a className="nav-cta" href="#contatti" onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></a>
         </nav>
       </header>
 
@@ -271,7 +271,7 @@ export default function Home() {
           <h1>NON CERCARE<br/>SCUSE. <em>CREA</em><br/>LA TUA <em>RIVINCITA.</em></h1>
           <p className="hero-copy">Una palestra completa, attrezzature di qualità e l’ambiente giusto per allenarti con costanza e superare ogni limite.</p>
           <div className="hero-actions">
-            <a href="#prova" className="button primary">Prenota una prova gratuita <span>↗</span></a>
+            <a href="#contatti" className="button primary">Chiedi info <span>↗</span></a>
             <a href="#corsi" className="text-link">Scopri la palestra <span>↓</span></a>
           </div>
         </div>
@@ -340,7 +340,7 @@ export default function Home() {
           <div className="brand-drawer-body">
             <section><small>COSA TROVI</small><ul>{activeArea.features.map(item => <li key={item}>{item}</li>)}</ul></section>
             <section className="brand-relevance"><small>IDEALE PER</small><p>{activeArea.ideal}</p></section>
-            <a className="brand-source" href="#prova" onClick={() => setActiveArea(null)}>Prenota una prova gratuita <span>↗</span></a>
+            <a className="brand-source" href="#contatti" onClick={() => setActiveArea(null)}>Chiedi info <span>↗</span></a>
           </div>
         </aside>
       </div>}
@@ -456,12 +456,12 @@ export default function Home() {
         <article className="brand-drawer article-drawer" role="dialog" aria-modal="true" aria-labelledby="article-drawer-title">
           <button className="brand-drawer-close" type="button" onClick={() => setActiveArticle(null)} aria-label="Chiudi articolo">×</button>
           <div className="article-drawer-hero"><img src={activeArticle.image} alt=""/><div><small>{activeArticle.category} · {activeArticle.time} di lettura</small><h2 id="article-drawer-title">{activeArticle.title}</h2></div></div>
-          <div className="article-drawer-body"><p className="article-lead">{activeArticle.intro}</p>{activeArticle.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<blockquote><small>DA RICORDARE</small>{activeArticle.takeaway}</blockquote><a href="#prova" onClick={() => setActiveArticle(null)} className="button primary">Vieni a conoscere la palestra <span>↗</span></a></div>
+          <div className="article-drawer-body"><p className="article-lead">{activeArticle.intro}</p>{activeArticle.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<blockquote><small>DA RICORDARE</small>{activeArticle.takeaway}</blockquote><a href="#contatti" onClick={() => setActiveArticle(null)} className="button primary">Chiedi info <span>↗</span></a></div>
         </article>
       </div>}
 
-      <section className="trial" id="prova">
-        <div className="trial-inner reveal"><p className="eyebrow"><span></span> Prova gratuita su appuntamento</p><h2>PROVA PRIMA.<br/>DECIDI <em>DOPO.</em></h2><p>Non ti chiediamo di iscriverti al buio. Prenota un’ora in palestra: ti accogliamo, ti mostriamo gli spazi e le attrezzature professionali, e ti fai un’idea reale di Revenge Gym. Zero costi. Zero impegno. Solo la certezza di scegliere bene.</p><a href="#contatti" className="button primary">Prenota la prova gratuita <span>↗</span></a></div>
+      <section className="trial" id="info">
+        <div className="trial-inner reveal"><p className="eyebrow"><span></span> Informazioni e iscrizioni</p><h2>HAI DOMANDE?<br/>SCRIVICI <em>ORA.</em></h2><p>Orari, abbonamenti, aree della palestra o la boxe: dicci cosa ti serve sapere. Ti rispondiamo noi e ti aiutiamo a capire come allenarti da Revenge Gym.</p><a href="#contatti" className="button primary">Chiedi info <span>↗</span></a></div>
       </section>
 
       <section className="section contact" id="contatti">
@@ -479,14 +479,14 @@ export default function Home() {
           </div>
         </div>
         <form className="contact-form reveal" onSubmit={submitForm}>
-          <span className="form-kicker">PROVA GRATUITA SU APPUNTAMENTO</span><h3>Fissa la tua ora in palestra</h3>
+          <span className="form-kicker">RICHIEDI INFORMAZIONI</span><h3>Scrivici, ti rispondiamo noi</h3>
           <label>Nome e cognome<input required name="name" placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" placeholder="+39" /></label></div>
           <label>Area di interesse<select name="course" defaultValue=""><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
-          <label>Messaggio<textarea name="message" placeholder="Dicci quando preferisci venire e il tuo obiettivo..."></textarea></label>
+          <label>Messaggio<textarea name="message" placeholder="Dicci cosa vuoi sapere: orari, abbonamenti, obiettivi..."></textarea></label>
           <label className="privacy"><input required type="checkbox" /> <span>Accetto il trattamento dei dati personali.</span></label>
-          <button className="button primary" type="submit">Richiedi la prova gratuita <span>↗</span></button>
-          {sent && <p className="success" role="status">Richiesta ricevuta! Ti richiamiamo per fissare giorno e ora.</p>}
+          <button className="button primary" type="submit">Chiedi info <span>↗</span></button>
+          {sent && <p className="success" role="status">Richiesta ricevuta! Ti richiamiamo al più presto.</p>}
         </form>
       </section>
 
