@@ -16,7 +16,6 @@
 }
 .page em{color:var(--orange);font-style:italic}
 
-/* —— Nav —— */
 .nav{
   position:fixed;z-index:100;inset:0 0 auto;height:var(--nav-h);
   display:flex;align-items:center;justify-content:space-between;
@@ -25,23 +24,17 @@
 }
 .logo img{width:auto;height:54px}
 .nav nav{display:flex;align-items:center;gap:10px}
-.nav nav>a{
-  display:grid;place-items:center;min-width:30px;height:34px;
-  color:#888;border-bottom:2px solid transparent;
-  font:700 11px 'Inter';letter-spacing:.6px;transition:.2s;
-}
-.nav nav>a:hover,.nav nav>a.active{color:#fff;border-color:var(--orange)}
 .siteLink{
-  width:auto!important;min-width:0!important;padding:0 8px;
-  color:#d8d8d8!important;font-size:10px!important;letter-spacing:.8px;text-transform:uppercase;
+  display:grid;place-items:center;height:34px;padding:0 8px;
+  color:#d8d8d8;border-bottom:2px solid transparent;
+  font:700 10px 'Inter';letter-spacing:.8px;text-transform:uppercase;transition:.2s;
 }
-.siteLink:hover{color:#fff!important}
+.siteLink:hover{color:#fff;border-color:var(--orange)}
 .contact{
-  width:auto!important;padding:0 16px!important;color:#fff!important;
-  background:var(--orange);border:0!important;font-weight:800!important;
+  display:grid;place-items:center;height:34px;padding:0 16px;
+  color:#fff;background:var(--orange);font:800 11px 'Inter';letter-spacing:.6px;transition:.2s;
 }
 .contact:hover{background:var(--orange-hot)}
-.navDivider{width:1px;height:23px;margin:0 4px;background:#383838}
 .menuToggle{display:none}
 
 .zoneMenu{position:relative}
@@ -68,246 +61,142 @@
 .zoneSoon{color:#666!important;cursor:default}
 .zoneSoon i{color:#555;font-style:normal;font-size:9px}
 
-/* —— Hero —— */
 .hero{
-  position:relative;min-height:100svh;display:flex;align-items:flex-end;
-  overflow:hidden;padding:140px 7vw 110px;
-}
-.heroMedia{
-  position:absolute;inset:0;
+  position:relative;min-height:100svh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:120px 0 0;overflow:hidden;
   background:
-    linear-gradient(115deg,rgba(255,77,0,.18),transparent 42%),
-    url('/media/new-machines/gymleco-hacklift.webp') 72% 40%/min(920px,70vw) auto no-repeat,
-    url('/media/sala-attrezzi.webp') center/cover;
-  filter:contrast(1.08) saturate(1.05);
-  animation:heroDrift 18s ease-in-out infinite alternate;
+    radial-gradient(circle at 80% 10%,rgba(255,77,0,.22),transparent 34%),
+    linear-gradient(180deg,#101010 0%,#070707 55%,#050505 100%);
 }
 .heroShade{
-  position:absolute;inset:0;
-  background:
-    linear-gradient(90deg,rgba(5,5,5,.97) 0%,rgba(5,5,5,.88) 36%,rgba(5,5,5,.55) 62%,rgba(5,5,5,.35)),
-    linear-gradient(0deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.4) 42%,transparent 72%);
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,5,5,.2),transparent 40%);
 }
-.heroGlow{
-  position:absolute;width:55vw;height:55vw;right:-10vw;bottom:-20vw;
-  background:radial-gradient(circle,rgba(255,77,0,.28),transparent 68%);
-  pointer-events:none;animation:glowPulse 7s ease-in-out infinite;
-}
-.heroContent{position:relative;z-index:2;max-width:min(980px,100%)}
+.heroContent{position:relative;z-index:2;padding:0 7vw 36px;max-width:980px}
 .eyebrow{
   display:flex;align-items:center;gap:12px;margin:0;color:#d0d0d0;
   text-transform:uppercase;font-size:11px;font-weight:700;letter-spacing:2.2px;
 }
 .eyebrow span{width:34px;height:2px;background:var(--orange)}
 .hero h1{
-  margin:28px 0;font-size:clamp(56px,9vw,148px);line-height:.82;
-  letter-spacing:-.035em;text-shadow:0 10px 50px rgba(0,0,0,.5);
-  animation:riseIn .9s cubic-bezier(.2,.7,.2,1) both;
+  margin:24px 0 22px;font-size:clamp(56px,9vw,140px);line-height:.82;
+  letter-spacing:-.035em;animation:riseIn .85s cubic-bezier(.2,.7,.2,1) both;
 }
 .heroContent>p:not(.eyebrow){
-  max-width:620px;color:#e4e4e4;font-size:17px;line-height:1.7;
-  text-shadow:0 2px 18px rgba(0,0,0,.5);animation:riseIn .9s .12s both;
+  max-width:620px;margin:0;color:#d8d8d8;font-size:16px;line-height:1.7;
+  animation:riseIn .85s .1s both;
 }
-.heroActions{
-  display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:34px;
-  animation:riseIn .9s .22s both;
+.heroMeta{
+  display:flex;gap:1px;margin-top:34px;width:fit-content;background:#2a2a2a;
+  animation:riseIn .85s .18s both;
 }
-.primary{
-  display:inline-flex;align-items:center;gap:22px;min-height:57px;padding:0 24px;
-  background:var(--orange);color:#fff;font-size:12px;font-weight:800;
-  letter-spacing:1px;text-transform:uppercase;transition:.25s;
-}
-.primary:hover{background:var(--orange-hot);transform:translateY(-2px)}
-.ghost{
-  display:inline-flex;align-items:center;min-height:57px;padding:0 8px;
-  color:#fff;border-bottom:1px solid #666;font:800 12px/1 'Inter';
-  letter-spacing:1px;text-transform:uppercase;transition:.2s;
-}
-.ghost:hover{border-color:var(--orange);color:var(--orange)}
-.heroStats{
-  position:absolute;z-index:2;right:4vw;bottom:0;display:flex;
-  background:rgba(8,8,8,.92);border:1px solid rgba(255,255,255,.08);
-  border-bottom:0;backdrop-filter:blur(12px);
-}
-.heroStats div{padding:22px 28px;border-left:1px solid #333}
-.heroStats div:first-child{border-left:0}
-.heroStats strong{display:block;font:800 30px 'Barlow Condensed'}
-.heroStats span{color:#999;font-size:9px;text-transform:uppercase;letter-spacing:1.4px}
+.heroMeta div{padding:16px 22px;background:#111}
+.heroMeta strong{display:block;font:800 28px 'Barlow Condensed'}
+.heroMeta span{color:#888;font-size:9px;text-transform:uppercase;letter-spacing:1.3px}
 
-/* —— Intro / muscle map —— */
-.intro{
-  display:grid;grid-template-columns:1.05fr .95fr;gap:6vw;
-  padding:110px 7vw;border-top:1px solid var(--line);
-  background:linear-gradient(180deg,#0b0b0b,#080808);
+.marqueeWrap{position:relative;z-index:3;padding:10px 0 42px}
+.marqueeHint{
+  margin:0 7vw 14px;color:#777;font-size:10px;font-weight:700;
+  letter-spacing:1.4px;text-transform:uppercase;
 }
-.introCopy h2{margin:22px 0 28px;font-size:clamp(46px,6vw,92px);line-height:.86}
-.introCopy>p:last-child{max-width:520px;color:#a8a8a8;font-size:15px;line-height:1.85}
-.muscleMap{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#2a2a2a;align-self:center}
-.muscleMap article{
-  min-height:170px;padding:28px;background:#111;
-  transition:background .25s,transform .25s;
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.marqueeTrack{
+  display:flex;gap:16px;width:max-content;padding:28px 7vw;
+  animation:marqueeScroll 75s linear infinite;
 }
-.muscleMap article:hover{background:#161616;transform:translateY(-2px)}
-.muscleMap span{color:var(--orange);font:800 12px 'Barlow Condensed'}
-.muscleMap strong{
-  display:block;margin:28px 0 10px;font:900 28px/1 'Barlow Condensed';text-transform:uppercase;
+.marquee:hover .marqueeTrack{animation-play-state:paused}
+.marqueeCard{
+  position:relative;flex:0 0 auto;width:min(220px,58vw);aspect-ratio:3/4;
+  overflow:hidden;border:1px solid #2a2a2a;background:#101010;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .25s,z-index 0s;
+  transform-origin:center bottom;
 }
-.muscleMap p{margin:0;color:#888;font-size:12px;line-height:1.55}
-
-/* —— Index —— */
-.index{padding:110px 7vw;background:#0c0c0c;border-top:1px solid var(--line)}
-.sectionIntro{display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:6vw;margin-bottom:60px}
-.sectionIntro h2{margin:22px 0 0;font-size:clamp(48px,6.4vw,96px);line-height:.86}
-.sectionIntro>p:last-child{max-width:460px;color:#8a8a8a;line-height:1.8}
-.machineGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.machineCard{
-  position:relative;display:grid;grid-template-columns:.9fr 1.1fr;min-height:280px;
-  overflow:hidden;background:#101010;border:1px solid #242424;color:#fff;transition:.3s;
-}
-.machineCard:hover{border-color:rgba(255,77,0,.55);transform:translateY(-4px);box-shadow:0 24px 50px rgba(0,0,0,.35)}
-.cardMedia{
-  display:grid;place-items:center;padding:24px;
-  background:
-    radial-gradient(ellipse at 50% 45%,#1c1c1c 0%,#0a0a0a 70%),
-    linear-gradient(160deg,rgba(255,77,0,.12),transparent 55%);
-}
-.cardMedia img{
-  width:100%;height:210px;object-fit:contain;
-  filter:drop-shadow(0 16px 24px rgba(0,0,0,.55));
+.marqueeCard img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.05) contrast(1.05);
   transition:transform .45s;
 }
-.machineCard:hover .cardMedia img{transform:scale(1.06) translateY(-4px)}
-.cardBody{display:flex;flex-direction:column;padding:28px 28px 24px}
-.cardBody span{color:var(--orange);font:800 13px 'Barlow Condensed'}
-.cardBody small{margin-top:auto;color:#777;font-size:9px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}
-.cardBody strong{margin:10px 0 12px;font:900 clamp(26px,2.8vw,42px)/.92 'Barlow Condensed';text-transform:uppercase}
-.cardBody p{margin:0 0 18px;color:#9a9a9a;font-size:13px;line-height:1.55}
-.cardBody i{color:var(--orange);font-size:10px;font-style:normal;font-weight:800;text-transform:uppercase}
-.incomingCard{box-shadow:inset 0 0 0 1px rgba(255,77,0,.35)}
+.marqueeCard span{
+  position:absolute;left:0;right:0;bottom:0;padding:16px 14px 14px;
+  background:linear-gradient(0deg,rgba(0,0,0,.92),rgba(0,0,0,.35) 70%,transparent);
+  transform:translateY(8px);opacity:.92;transition:.3s;
+}
+.marqueeCard small{
+  display:block;color:var(--orange);font-size:8px;font-weight:800;
+  letter-spacing:1.2px;text-transform:uppercase;
+}
+.marqueeCard b{
+  display:block;margin-top:4px;font:800 18px/1.05 'Barlow Condensed';text-transform:uppercase;
+}
+.marqueeCard:hover{
+  z-index:5;transform:scale(1.22) translateY(-10px);
+  border-color:rgba(255,77,0,.7);
+  box-shadow:0 24px 50px rgba(0,0,0,.55);
+}
+.marqueeCard:hover img{transform:scale(1.06)}
+.marqueeCard:hover span{transform:none;opacity:1}
 
-/* —— Profiles —— */
-.profile{scroll-margin-top:var(--nav-h);border-top:1px solid var(--line);background:#090909}
-.incomingProfile{background:#0b0b0b}
-.profileHero{
-  min-height:620px;display:grid;grid-template-columns:1.25fr .75fr;align-items:end;gap:4vw;
-  padding:110px 7vw 70px;
-  background:
-    radial-gradient(circle at 88% 12%,rgba(255,77,0,.3),transparent 36%),
-    linear-gradient(145deg,#151515,#060606);
+.index{padding:100px 7vw;border-top:1px solid var(--line);background:#0a0a0a}
+.sectionIntro{display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:6vw;margin-bottom:48px}
+.sectionIntro h2{margin:20px 0 0;font-size:clamp(46px,6vw,92px);line-height:.86}
+.sectionIntro>p:last-child{max-width:460px;color:#8a8a8a;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gridCard{
+  display:grid;grid-template-rows:220px 1fr;overflow:hidden;
+  background:#101010;border:1px solid #242424;color:#fff;transition:.3s;
 }
-.profileCopy span,.profileCopy small,.profileBody section>small{
-  display:block;color:var(--orange);font-size:9px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase;
+.gridCard:hover{border-color:rgba(255,77,0,.55);transform:translateY(-4px)}
+.gridMedia{
+  display:grid;place-items:center;padding:18px;
+  background:radial-gradient(ellipse at 50% 45%,#1c1c1c 0%,#0a0a0a 70%);
 }
-.profileCopy small{margin:28px 0 10px;color:#888}
-.profileCopy h2{margin:0;font-size:clamp(48px,7vw,112px);line-height:.84;letter-spacing:-.03em}
-.profileCopy p{max-width:580px;margin:28px 0 0;color:#c8c8c8;font-size:17px;line-height:1.7}
-.profileCopy b{
-  display:inline-block;margin-top:28px;padding:10px 14px;border:1px solid #3a3a3a;
-  color:#ddd;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;
-}
-.productPhoto{
-  justify-self:end;width:min(100%,520px);margin:0;padding:28px;
-  border:1px solid #2a2a2a;
-  background:radial-gradient(ellipse at 50% 42%,#1a1a1a 0%,#0b0b0b 68%,#070707 100%);
-  box-shadow:inset 0 -40px 60px rgba(0,0,0,.35);
-}
-.productPhoto img{
-  display:block;width:100%;height:360px;object-fit:contain;
-  filter:drop-shadow(0 18px 28px rgba(0,0,0,.55));
-}
-.productPhoto figcaption{margin-top:14px;color:#6e6e6e;font-size:8px;letter-spacing:1.1px;text-transform:uppercase}
+.gridMedia img{width:100%;height:180px;object-fit:contain;filter:drop-shadow(0 14px 22px rgba(0,0,0,.5));transition:transform .4s}
+.gridCard:hover .gridMedia img{transform:scale(1.05)}
+.gridBody{display:flex;flex-direction:column;padding:20px 22px 22px}
+.gridBody span{color:var(--orange);font:800 12px 'Barlow Condensed'}
+.gridBody small{margin-top:auto;color:#777;font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}
+.gridBody strong{margin:8px 0 10px;font:900 clamp(22px,2.2vw,34px)/.92 'Barlow Condensed';text-transform:uppercase}
+.gridBody p{margin:0 0 14px;color:#9a9a9a;font-size:12px;line-height:1.5}
+.gridBody i{color:var(--orange);font-size:10px;font-style:normal;font-weight:800;text-transform:uppercase}
 
-.profileBody{padding:0 7vw 110px}
-.profileBody h3{margin:18px 0 28px;font-size:clamp(34px,4vw,64px);line-height:.9}
-.profileBody p{color:#aaa;font-size:14px;line-height:1.85}
-.leadSection{
-  display:grid;grid-template-columns:1.35fr .65fr;gap:6vw;padding:80px 0;
-  border-bottom:1px solid #292929;
-}
-.leadSection>p{max-width:820px;margin:0;color:#ddd;font-size:19px;line-height:1.75}
-.focusBadge{align-self:center;padding:28px;border:1px solid #333;background:#101010}
-.focusBadge span{color:#888;font-size:9px;font-weight:800;letter-spacing:1.4px}
-.focusBadge strong{display:block;margin-top:12px;color:#fff;font:800 28px/1.15 'Barlow Condensed';text-transform:uppercase}
-
-.contentGrid{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #292929}
-.contentGrid>section{padding:70px 4vw 70px 0}
-.contentGrid>section+section{padding-left:4vw;border-left:1px solid #292929}
-.dualList{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.dualList b{display:block;margin-bottom:16px;color:var(--orange);font-size:10px}
-.dualList p{margin:7px 0;padding-bottom:7px;border-bottom:1px solid #282828;font-size:12px}
-.profileBody ul{display:grid;gap:12px;padding:0;list-style:none;margin:0}
-.profileBody li{position:relative;padding-left:22px;color:#d5d5d5;font-size:13px;line-height:1.55}
-.profileBody li:before{content:'↗';position:absolute;left:0;color:var(--orange)}
-.darkPanel{background:#141414}
-.accentPanel{margin-left:-7vw;padding-left:7vw!important;background:var(--orange)}
-.accentPanel small,.accentPanel h3,.accentPanel li{color:#fff!important}
-.accentPanel li:before{color:#111}
-.errorPanel{background:#200d08}
-.gallerySlot{background:#0e0e0e}
-.gallerySlot h3 em{color:var(--orange)}
-.galleryPlaceholders{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
-.galleryPlaceholders div{
-  aspect-ratio:4/5;border:1px dashed #333;
-  background:
-    linear-gradient(135deg,rgba(255,77,0,.08),transparent 50%),
-    repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(255,255,255,.03) 8px,rgba(255,255,255,.03) 9px);
-}
-
-.trainer{display:grid;grid-template-columns:1fr 1fr;gap:6vw;padding:90px 0 20px}
-.trainer blockquote{
-  align-self:center;margin:0;padding:34px;border-left:4px solid var(--orange);
-  background:#141414;color:#ddd;font:700 clamp(20px,2vw,30px)/1.5 'Barlow Condensed';text-transform:uppercase;
-}
-
-/* —— Session —— */
-.session{
-  padding:110px 7vw;border-top:1px solid var(--line);
-  background:linear-gradient(180deg,#0c0c0c,#090909);
-}
-.sessionGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#2a2a2a}
-.sessionGrid article{min-height:240px;padding:28px;background:#111}
-.sessionGrid span{color:var(--orange);font:800 12px 'Barlow Condensed'}
-.sessionGrid strong{display:block;margin:40px 0 14px;font:900 26px/1 'Barlow Condensed';text-transform:uppercase}
-.sessionGrid p{margin:0;color:#9a9a9a;font-size:12px;line-height:1.6}
-
-/* —— CTA / footer —— */
 .cta{
-  padding:120px 7vw;
+  padding:110px 7vw;border-top:1px solid var(--line);
   background:
-    linear-gradient(90deg,rgba(5,5,5,.96),rgba(5,5,5,.55) 55%,rgba(5,5,5,.35)),
-    url('/media/new-machines/life-fitness-leg-press.webp') 80% 40%/cover;
-  border-top:1px solid var(--line);
+    linear-gradient(90deg,rgba(5,5,5,.96),rgba(5,5,5,.55) 55%,rgba(5,5,5,.4)),
+    url('/photos/machines/gambe/pressa-orizzontale-life-fitness.webp') 80% 40%/cover;
 }
-.cta h2{max-width:980px;margin:24px 0;font-size:clamp(46px,6.5vw,104px);line-height:.86}
-.cta>p:not(.eyebrow){max-width:540px;color:#bbb;line-height:1.7}
-.cta .primary{margin-top:28px}
+.cta h2{max-width:980px;margin:22px 0;font-size:clamp(44px,6vw,100px);line-height:.86}
+.cta>p:not(.eyebrow){max-width:520px;color:#bbb;line-height:1.7}
+.primary{
+  display:inline-flex;align-items:center;gap:20px;min-height:57px;margin-top:28px;padding:0 24px;
+  background:var(--orange);color:#fff;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;transition:.25s;
+}
+.primary:hover{background:var(--orange-hot);transform:translateY(-2px)}
 .footer{
   display:flex;align-items:center;justify-content:space-between;gap:24px;
-  padding:28px 4vw;background:var(--ink);border-top:1px solid var(--line);
+  padding:28px 4vw;border-top:1px solid var(--line);
 }
 .footer img{width:auto;height:48px}
 .footer p{margin:0;color:#888;font-size:10px;text-transform:uppercase;letter-spacing:1.2px}
-.backTop{
-  display:grid;place-items:center;width:42px;height:42px;border:1px solid #444;color:#fff;transition:.2s;
-}
+.backTop{display:grid;place-items:center;width:42px;height:42px;border:1px solid #444;color:#fff;transition:.2s}
 .backTop:hover{border-color:var(--orange);color:var(--orange)}
 
+@keyframes marqueeScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
 @keyframes riseIn{
-  from{opacity:0;transform:translateY(28px)}
+  from{opacity:0;transform:translateY(24px)}
   to{opacity:1;transform:none}
 }
-@keyframes heroDrift{
-  from{transform:scale(1.02) translate3d(0,0,0)}
-  to{transform:scale(1.06) translate3d(-1.5%,1%,0)}
-}
-@keyframes glowPulse{
-  0%,100%{opacity:.55}
-  50%{opacity:.9}
+
+@media (prefers-reduced-motion:reduce){
+  .marqueeTrack{animation:none;flex-wrap:wrap;width:auto;justify-content:flex-start}
+  .marquee{overflow:auto}
 }
 
 @media(max-width:1100px){
-  .machineGrid{grid-template-columns:1fr}
-  .sessionGrid{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:900px){
   .nav{--nav-h:67px;padding-inline:18px}
@@ -318,36 +207,24 @@
   .nav nav.open{display:flex}
   .menuToggle{display:block;padding:10px;background:none;border:0}
   .menuToggle i{display:block;width:25px;height:2px;margin:6px;background:#fff}
-  .nav nav .siteLink,.nav nav>a,.zoneTrigger,.contact{
-    width:100%!important;height:44px;justify-content:flex-start;place-items:center start;
-    padding:0 4px!important;border:0!important;border-bottom:1px solid #2b2b2b!important;
-    font-size:11px!important;
+  .siteLink,.zoneTrigger,.contact{
+    width:100%;height:44px;justify-content:flex-start;place-items:center start;
+    padding:0 4px;border:0;border-bottom:1px solid #2b2b2b;font-size:11px;
   }
   .zoneMenu{width:100%}
   .zonePanel{position:static;display:none;margin:0 0 8px;box-shadow:none}
   .zoneOpen .zonePanel{display:flex}
-  .navDivider{display:none}
-  .contact{justify-content:center!important;margin-top:10px;height:48px!important;border:0!important}
-  .hero{padding:110px 22px 90px}
-  .heroStats{left:0;right:0}
-  .heroStats div{flex:1;padding:16px}
-  .intro,.index,.profileBody,.session,.cta{padding-left:22px;padding-right:22px}
-  .intro,.sectionIntro,.profileHero,.leadSection,.contentGrid,.trainer{grid-template-columns:1fr}
-  .muscleMap{margin-top:40px}
-  .machineCard{grid-template-columns:1fr}
-  .cardMedia img{height:180px}
-  .profileHero{min-height:auto;padding:100px 22px 50px}
-  .productPhoto{width:100%;margin-top:28px}
-  .productPhoto img{height:280px}
-  .contentGrid>section,.contentGrid>section+section{padding:55px 0;border-left:0;border-bottom:1px solid #292929}
-  .accentPanel,.darkPanel,.errorPanel,.gallerySlot{margin-inline:-22px;padding-inline:22px!important}
-  .sessionGrid{grid-template-columns:1fr}
+  .contact{justify-content:center;margin-top:10px;height:48px;border:0}
+  .heroContent,.index,.cta{padding-left:22px;padding-right:22px}
+  .sectionIntro{grid-template-columns:1fr}
+  .marqueeHint{margin-inline:22px}
+  .marqueeTrack{padding-inline:22px;gap:12px;animation-duration:55s}
+  .marqueeCard{width:160px}
+  .marqueeCard:hover{transform:scale(1.12) translateY(-6px)}
   .footer{flex-wrap:wrap;padding:28px 22px}
   .backTop{margin-left:auto}
 }
 @media(max-width:560px){
-  .hero h1{font-size:clamp(46px,14vw,64px)}
-  .heroStats{position:relative;margin-top:28px}
-  .dualList,.galleryPlaceholders,.muscleMap{grid-template-columns:1fr}
-  .profileCopy h2{font-size:clamp(40px,12vw,58px)}
+  .grid{grid-template-columns:1fr}
+  .hero h1{font-size:clamp(48px,14vw,64px)}
 }

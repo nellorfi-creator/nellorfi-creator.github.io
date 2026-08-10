@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import LegsShowcase from "./legs-showcase";
+import LegsHub from "./legs-hub";
 
 export const metadata: Metadata = {
-  title: "Allenamento Gambe | Macchine e metodo | Revenge Gym Ladispoli",
+  title: "Allenamento Gambe | 21 macchine | Revenge Gym Ladispoli",
   description:
-    "Area gambe Revenge Gym: Pressa Life Fitness, Leg Curl/Extension Panatta, Hack Squat Gymleco e Super Vertical Leg Press Panatta in arrivo. Cue tecnici e programmazione professionale.",
+    "Allena le gambe a Revenge Gym: pressa, hack squat, leg curl, hip thrust, glute machine e molto altro. Scegli la macchina e apri la scheda tecnica.",
   openGraph: {
     title: "Allenamento Gambe | Revenge Gym",
-    description: "Macchine, tecnica e programmazione per gli arti inferiori a Ladispoli.",
-    images: [{ url: "/media/new-machines/life-fitness-leg-press.webp", alt: "Pressa Life Fitness — Revenge Gym" }],
+    description: "Catalogo completo arti inferiori con foto reali dalla sala di Ladispoli.",
+    images: [{ url: "/photos/machines/gambe/pressa-orizzontale-life-fitness.webp", alt: "Pressa Life Fitness — Revenge Gym" }],
   },
 };
 
 export default function LegsPage() {
-  return <LegsShowcase />;
+  return <LegsHub />;
 }
