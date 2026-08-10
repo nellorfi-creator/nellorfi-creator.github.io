@@ -7,6 +7,12 @@ export default function VersionRefresh() {
     const currentVersion = process.env.NEXT_PUBLIC_SITE_VERSION;
     if (!currentVersion) return;
 
+    const visibleUrl = new URL(window.location.href);
+    if (visibleUrl.searchParams.has("siteVersion")) {
+      visibleUrl.searchParams.delete("siteVersion");
+      window.history.replaceState(null, "", visibleUrl.toString());
+    }
+
     const checkVersion = () => {
       fetch(`/site-version.json?check=${Date.now()}`, { cache: "no-store" })
         .then((response) => response.json())
