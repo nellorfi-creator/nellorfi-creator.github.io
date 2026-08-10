@@ -50,3 +50,7 @@
   .fpiBadge img{width:92px;height:92px}
   .fpiBadge strong{font-size:23px}
 }
+@media(max-width:700px){
+  .nav nav{position:static;inset:auto;display:flex;flex-direction:row;align-items:center;width:auto;padding:0;background:transparent;border:0}
+  .nav nav>a{padding:0;border:0}
+}
