@@ -239,7 +239,10 @@ export default function MachineDetail({ machine, prev, next }: Props) {
         <p>
           {machine.brand} · Gambe
         </p>
-        <p>© 2026 Revenge Gym · <span className={styles.byNello}>by nello 2026</span></p>
+        <p className={styles.footerLegal}>
+          <span>© 2026 Revenge Gym</span>
+          <span className={styles.byNello}>by nello 2026</span>
+        </p>
       </footer>
     </main>
   );

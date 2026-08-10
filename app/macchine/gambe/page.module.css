@@ -195,7 +195,8 @@
 }
 .footer img{width:auto;height:48px}
 .footer p{margin:0;color:#888;font-size:10px;text-transform:uppercase;letter-spacing:1.2px}
-.byNello{color:var(--orange);font-weight:800}
+.footerLegal{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:0;text-align:right}
+.byNello{color:var(--orange);font-weight:800;font-size:12px;letter-spacing:1.6px;white-space:nowrap}
 .backTop{display:grid;place-items:center;width:42px;height:42px;border:1px solid #444;color:#fff;transition:.2s}
 .backTop:hover{border-color:var(--orange);color:var(--orange)}
 
@@ -242,6 +243,7 @@
   .marqueeCard{width:160px}
   .marqueeCard:hover{transform:scale(1.12) translateY(-6px)}
   .footer{flex-wrap:wrap;padding:28px 22px}
+  .footerLegal{align-items:flex-start;text-align:left;width:100%}
   .backTop{margin-left:auto}
 }
 @media(max-width:560px){

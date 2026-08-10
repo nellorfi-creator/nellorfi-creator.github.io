@@ -189,7 +189,10 @@ export default function LegsHub() {
           <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <p>Allenamento · Gambe · Ladispoli</p>
-        <p>© 2026 Revenge Gym · <span className={styles.byNello}>by nello 2026</span></p>
+        <p className={styles.footerLegal}>
+          <span>© 2026 Revenge Gym</span>
+          <span className={styles.byNello}>by nello 2026</span>
+        </p>
         <a href="#top" className={styles.backTop} aria-label="Torna su">
           ↑
         </a>
