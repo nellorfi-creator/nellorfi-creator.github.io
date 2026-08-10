@@ -46,17 +46,19 @@ export default function LegsHub() {
               Per zona <span>▾</span>
             </button>
             <div className={styles.zonePanel} role="menu">
-              {bodyZones.map((zone) =>
-                zone.ready ? (
-                  <Link key={zone.label} href={zone.href} role="menuitem" onClick={() => { setZonesOpen(false); setMenuOpen(false); }}>
-                    {zone.label}
-                  </Link>
-                ) : (
-                  <span key={zone.label} className={styles.zoneSoon} role="menuitem" aria-disabled="true">
-                    {zone.label} <i>presto</i>
-                  </span>
-                ),
-              )}
+              <div className={styles.zonePanelInner}>
+                {bodyZones.map((zone) =>
+                  zone.ready ? (
+                    <Link key={zone.label} href={zone.href} role="menuitem" onClick={() => { setZonesOpen(false); setMenuOpen(false); }}>
+                      {zone.label}
+                    </Link>
+                  ) : (
+                    <span key={zone.label} className={styles.zoneSoon} role="menuitem" aria-disabled="true">
+                      {zone.label} <i>presto</i>
+                    </span>
+                  ),
+                )}
+              </div>
             </div>
           </div>
           <Link className={styles.siteLink} href="/nuove-macchine" onClick={() => setMenuOpen(false)}>

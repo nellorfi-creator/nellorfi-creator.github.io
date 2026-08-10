@@ -261,11 +261,13 @@ export default function Home() {
           <div className="nav-flyout">
             <button type="button" className="nav-flyout-trigger" aria-haspopup="true">Per zona <span>▾</span></button>
             <div className="nav-flyout-panel" role="menu">
-              <a href="/macchine/gambe" role="menuitem" onClick={() => setMenuOpen(false)}>Gambe</a>
-              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Petto <i>presto</i></span>
-              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Dorso <i>presto</i></span>
-              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Spalle <i>presto</i></span>
-              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Braccia <i>presto</i></span>
+              <div className="nav-flyout-panel-inner">
+                <a href="/macchine/gambe" role="menuitem" onClick={() => setMenuOpen(false)}>Gambe</a>
+                <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Petto <i>presto</i></span>
+                <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Dorso <i>presto</i></span>
+                <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Spalle <i>presto</i></span>
+                <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Braccia <i>presto</i></span>
+              </div>
             </div>
           </div>
           <a href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</a>

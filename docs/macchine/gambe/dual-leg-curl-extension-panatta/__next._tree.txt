@@ -1,3 +1,3 @@
-:HL["/_next/static/chunks/11-6ew7h75a1_.css","style"]
-:HL["/_next/static/chunks/0csrtow7l3-2d.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dual-leg-curl-extension-panatta","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"-zHNos601GZbh7cSGY4Kp"}
+:HL["/_next/static/chunks/0lcmzd~9hlr6v.css","style"]
+:HL["/_next/static/chunks/16_jj6nkv58hb.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dual-leg-curl-extension-panatta","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"pNvVKjVc8ifMcVVLf9Nuc"}
