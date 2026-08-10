@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { legMachines } from "@/lib/leg-machines";
 
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
@@ -274,6 +275,17 @@ export default function Home() {
           <a className="nav-cta" href="#contatti" onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></a>
         </nav>
       </header>
+
+      <div className="machine-ticker" aria-label="Anteprima macchinari Revenge Gym" role="presentation">
+        <div className="machine-ticker-track">
+          {[...legMachines, ...legMachines].map((machine, index) => (
+            <div className="machine-ticker-item" key={`${machine.id}-${index}`} aria-hidden="true">
+              <img src={machine.image} alt="" />
+              <span>{machine.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <section className="hero" id="home">
         <div className="hero-media" role="img" aria-label="Sala attrezzi di Revenge Gym a Ladispoli"></div>
