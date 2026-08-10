@@ -258,6 +258,16 @@ export default function Home() {
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           {[['La palestra','filosofia'],['Aree','corsi'],['Mappa','mappa'],['Boxe','boxe'],['Gallery','gallery'],['Magazine','magazine']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          <div className="nav-flyout">
+            <button type="button" className="nav-flyout-trigger" aria-haspopup="true">Per zona <span>▾</span></button>
+            <div className="nav-flyout-panel" role="menu">
+              <a href="/macchine/gambe" role="menuitem" onClick={() => setMenuOpen(false)}>Gambe</a>
+              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Petto <i>presto</i></span>
+              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Dorso <i>presto</i></span>
+              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Spalle <i>presto</i></span>
+              <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Braccia <i>presto</i></span>
+            </div>
+          </div>
           <a href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</a>
           <a className="nav-cta" href="#contatti" onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></a>
         </nav>

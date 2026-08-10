@@ -57,6 +57,26 @@ nav > a:hover::after { width:100%; }
 .nav-cta span,.button span { margin-left:14px; }
 .menu-toggle { display:none; border:0; background:none; padding:12px; }
 .menu-toggle i { display:block; width:25px; height:2px; background:#fff; margin:6px; }
+.nav-flyout { position:relative; }
+.nav-flyout-trigger {
+  display:inline-flex; align-items:center; gap:6px; padding:0; border:0; background:none;
+  color:inherit; font:inherit; letter-spacing:inherit; text-transform:uppercase; cursor:pointer;
+}
+.nav-flyout-trigger span { color:var(--orange); }
+.nav-flyout-panel {
+  position:absolute; top:calc(100% + 14px); left:50%; transform:translateX(-50%);
+  display:none; flex-direction:column; min-width:176px; padding:10px;
+  background:#0c0c0c; border:1px solid #333; box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+.nav-flyout:hover .nav-flyout-panel, .nav-flyout:focus-within .nav-flyout-panel { display:flex; }
+.nav-flyout-panel a, .nav-flyout-soon {
+  display:flex; align-items:center; justify-content:space-between; min-height:40px; padding:0 12px;
+  color:#ddd; font-size:11px; letter-spacing:.6px; border-bottom:1px solid #222;
+}
+.nav-flyout-panel a:last-child, .nav-flyout-soon:last-child { border:0; }
+.nav-flyout-panel a:hover { color:var(--orange); background:#141414; }
+.nav-flyout-soon { color:#666; cursor:default; }
+.nav-flyout-soon i { font-style:normal; font-size:9px; color:#555; }
 
 .hero { min-height:100svh; position:relative; display:flex; align-items:center; padding:130px 7vw 90px; overflow:hidden; }
 .hero-media { position:absolute; inset:0; background:url('/photos/live/hero-sala.webp') center 40%/cover; transform:scale(1.02); }
@@ -274,6 +294,11 @@ footer .logo img { height:48px; }.back-top { display:grid; place-items:center; w
   .intro-frames img { object-position:60% center; }.intro-flash strong { font-size:clamp(56px,16vw,96px); }.intro-flash span { left:20px; bottom:25px; }
   html { scroll-padding-top:67px; } :root { --nav-h:67px; }.nav-wrap { height:67px; padding:0 18px; }.nav-wrap .logo img { height:43px; }
   .menu-toggle { display:block; } nav { display:none; position:absolute; top:67px; left:0; right:0; padding:22px 22px 28px; background:#0a0a0a; flex-direction:column; align-items:stretch; gap:0; border-bottom:1px solid var(--line); } nav.open { display:flex; } nav a { padding:15px 4px; border-bottom:1px solid #333; }.nav-cta { margin-top:14px; text-align:center; }
+  .nav-flyout { width:100%; border-bottom:1px solid #333; }
+  .nav-flyout-trigger { width:100%; justify-content:space-between; padding:15px 4px; }
+  .nav-flyout-panel { position:static; display:none; transform:none; min-width:0; margin:0 0 8px; box-shadow:none; border-color:#2a2a2a; }
+  .nav-flyout:hover .nav-flyout-panel, .nav-flyout:focus-within .nav-flyout-panel { display:flex; }
+  .nav-flyout-panel a, .nav-flyout-soon { border-bottom-color:#2a2a2a; }
   .hero { min-height:100svh; padding:110px 22px 80px; align-items:flex-end; }.hero-shade { background:linear-gradient(180deg,rgba(5,5,5,.55) 0%,rgba(5,5,5,.72) 38%,rgba(5,5,5,.94) 100%),linear-gradient(90deg,rgba(5,5,5,.7),rgba(5,5,5,.25)); }.hero-media { background-position:58% center; }
   h1 { font-size:clamp(44px,13.5vw,68px); letter-spacing:-1.2px; line-height:.9; margin:18px 0 22px; }.hero-copy { font-size:14px; max-width:100%; color:#ebebeb; }.hero-actions { align-items:flex-start; flex-direction:column; gap:22px; }.scroll-cue { display:none; }
   .section { padding:85px 22px; }.section-index { display:none; }.philosophy { grid-template-columns:1fr; gap:65px; }.philosophy .lead { font-size:18px; }.philosophy-image img { height:430px; }.owners-spotlight { grid-template-columns:1fr; margin-top:40px; min-height:auto; }.owners-photo img { min-height:420px; object-position:center 12%; }.owners-copy { padding:42px 22px 50px; border-left:0; border-top:4px solid var(--orange); }.quote { left:14px; right:14px; bottom:-35px; width:auto; }.real-gym-strip { grid-template-columns:1fr 1fr; margin-top:20px; }.real-gym-caption { grid-column:1/-1; grid-row:1; min-height:220px; }.real-gym-strip figure img { min-height:350px; }.gym-video { grid-template-columns:1fr; }.gym-video video { min-height:260px; }.equipment-gallery { grid-template-columns:1fr; }.boxing-section { grid-template-columns:1fr; }.boxing-media { min-height:430px; }.boxing-media::after { background:linear-gradient(0deg,#090909 0%,transparent 38%); }.boxing-copy { padding:40px 22px 85px; }.boxing-shots { padding:55px 22px 70px; }.boxing-shots-rail { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }.boxing-shot:hover img,.boxing-shot:focus-within img { transform:scale(1.1); }.boxing-reel { grid-template-columns:1fr; padding:80px 22px 95px; gap:50px; }.boxing-reel-player { width:min(100%,500px); justify-self:center; box-shadow:12px 12px 0 var(--orange); }.boxing-reel-copy h3 { font-size:clamp(44px,12vw,72px); }
