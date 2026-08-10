@@ -10,3 +10,6 @@
 .fpiBadge{position:absolute;z-index:3;right:4vw;bottom:112px;display:flex;align-items:center;gap:13px;width:210px;padding:10px 14px 10px 10px;background:rgba(255,255,255,.94);color:#0b456b;border-left:4px solid var(--orange);box-shadow:0 18px 45px rgba(0,0,0,.34);backdrop-filter:blur(8px)}
 .fpiBadge img{width:58px;height:74px;object-fit:contain;background:#fff}.fpiBadge div{display:flex;flex-direction:column;gap:5px}.fpiBadge small{color:#6c7378;font-size:7px;font-weight:800;letter-spacing:1px;text-transform:uppercase}.fpiBadge strong{font:900 17px/1 'Barlow Condensed';letter-spacing:.5px}
 @media(max-width:700px){.fpiBadge{top:84px;right:18px;bottom:auto;width:164px;gap:9px;padding:7px 10px 7px 7px}.fpiBadge img{width:42px;height:55px}.fpiBadge small{font-size:6px}.fpiBadge strong{font-size:14px}}
+.fpiBadge{width:236px;background:rgba(7,7,7,.9);color:#fff}
+.fpiBadge img{width:94px;height:58px;background:#000}
+@media(max-width:700px){.fpiBadge{width:184px}.fpiBadge img{width:72px;height:45px}}

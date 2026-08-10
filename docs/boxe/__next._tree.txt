@@ -1,5 +1,5 @@
 :HL["/_next/static/css/5c869df2e9db9dbd.css","style"]
-:HL["/_next/static/css/395cad1706d56a19.css","style"]
+:HL["/_next/static/css/8b4187e611d5d3d4.css","style"]
 :HL["/brand/revenge-gym-logo.png","image"]
 :HL["/photos/boxe/fpi-logo.jpg","image"]
 :HL["/photos/boxe/sala-ring-sacchi.jpg","image"]
@@ -7,4 +7,4 @@
 :HL["/photos/boxe/sala-sacchi.jpg","image"]
 :HL["/photos/boxe/corner-bono-bianco-nero.jpg","image"]
 :HL["/photos/boxe/corner-bono.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"j6YkM6GydGx42BfhYapGV"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"VjPzGa9Eb-eR-VcPrHJnz"}
