@@ -1,11 +1,11 @@
-:HL["/_next/static/chunks/14eub.5_ev.pl.css","style"]
-:HL["/_next/static/chunks/0s8m74h_cks~-.css","style"]
+:HL["/_next/static/css/18c2499e1a2579eb.css","style"]
+:HL["/_next/static/css/2fbf76f7d9910276.css","style"]
 :HL["/brand/revenge-gym-logo.png","image"]
-:HL["/photos/live/gino-corner-bono.webp","image"]
 :HL["/photos/boxe/fpi-logo-circolare.jpg","image"]
+:HL["/photos/live/gino-corner-bono.webp","image"]
 :HL["/photos/boxe/sala-ring-sacchi.jpg","image"]
 :HL["/photos/boxe/ring-revenge.jpg","image"]
 :HL["/photos/boxe/sala-sacchi.jpg","image"]
 :HL["/photos/boxe/corner-bono-bianco-nero.jpg","image"]
 :HL["/photos/boxe/corner-bono.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"y8QZyoCglD3eLK_1razAS"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"WJcmpTKXHxlpfALVSED76"}

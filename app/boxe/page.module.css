@@ -39,3 +39,6 @@
     background:linear-gradient(90deg,transparent 60%,rgba(3,3,3,.4) 100%),linear-gradient(0deg,rgba(3,3,3,.25),transparent 42%);
   }
 }
+@media(max-width:700px){
+  .fpiBadge{position:relative;top:auto;right:auto;bottom:auto;margin:18px 0 0;width:184px}
+}

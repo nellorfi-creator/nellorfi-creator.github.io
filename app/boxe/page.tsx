@@ -62,6 +62,10 @@ export default function BoxePage() {
           <h1>IL RING<br/><em>NON MENTE.</em></h1>
           <p className={styles.heroLead}>Qui non contano le scorciatoie. Contano presenza, tecnica e carattere.</p>
           <a className={styles.primary} href="#spazio">Entra nell’area Boxe <span>↓</span></a>
+          <div className={styles.fpiBadge} aria-label="Revenge Gym affiliata alla Federazione Pugilistica Italiana">
+            <img src="/photos/boxe/fpi-logo-circolare.jpg" alt="Federazione Pugilistica Italiana" />
+            <div><small>Affiliazione ufficiale</small><strong>AFFILIATA FPI</strong></div>
+          </div>
           <figure className={styles.heroPhoto}>
             <img
               src="/photos/live/gino-corner-bono.webp"
@@ -70,10 +74,6 @@ export default function BoxePage() {
               decoding="async"
             />
           </figure>
-        </div>
-        <div className={styles.fpiBadge} aria-label="Revenge Gym affiliata alla Federazione Pugilistica Italiana">
-          <img src="/photos/boxe/fpi-logo-circolare.jpg" alt="Federazione Pugilistica Italiana" />
-          <div><small>Affiliazione ufficiale</small><strong>AFFILIATA FPI</strong></div>
         </div>
         <div className={styles.heroFacts}>
           <div><strong>01</strong><span>Ring</span></div>
