@@ -492,7 +492,6 @@ export default function Home() {
       </div>}
 
       <section className="trial" id="info">
-        <img className="trial-bg" src="/photos/live/gino-corner-cta.webp" alt="" decoding="async" />
         <div className="trial-inner reveal"><p className="eyebrow"><span></span> Informazioni e iscrizioni</p><h2>HAI DOMANDE?<br/>SCRIVICI <em>ORA.</em></h2><p>Orari, abbonamenti, aree della palestra o la boxe: dicci cosa ti serve sapere. Ti rispondiamo noi e ti aiutiamo a capire come allenarti da Revenge Gym.</p><a href="#contatti" className="button primary">Chiedi info <span>↗</span></a></div>
       </section>
 
