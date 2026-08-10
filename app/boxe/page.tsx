@@ -103,11 +103,12 @@ export default function BoxePage() {
         <div className={styles.videoIntro}>
           <p className={styles.eyebrow}><span /> Guarda lo spazio</p>
           <h2>DENTRO<br/><em>REVENGE BOXING.</em></h2>
-          <p>Due passaggi reali dentro la sala: il ring, le postazioni, i sacchi e lo spazio in cui prende forma il lavoro.</p>
+          <p>Tre sguardi reali dentro Revenge Boxing: la sala, il ring e l’energia del lavoro tecnico in azione.</p>
         </div>
         <div className={styles.videoGrid}>
           <article><div className={styles.player}><video controls playsInline preload="metadata" poster="/photos/boxe/sala-ring-sacchi.jpg"><source src="/media/boxe/tour-sala-sacchi.mp4" type="video/mp4"/></video></div><div><span>01 · TOUR</span><h3>LA SALA E I SACCHI.</h3></div></article>
           <article><div className={styles.player}><video controls playsInline preload="metadata" poster="/photos/boxe/ring-revenge.jpg"><source src="/media/boxe/tour-ring.mp4" type="video/mp4"/></video></div><div><span>02 · RING</span><h3>DENTRO LE CORDE.</h3></div></article>
+          <article><div className={styles.player}><video controls playsInline preload="metadata" poster="/media/boxe-ring-non-mente-poster.jpg"><source src="/media/boxe-ring-non-mente.mp4" type="video/mp4"/></video></div><div><span>03 · IN AZIONE</span><h3>IL RING NON MENTE.</h3></div></article>
         </div>
       </section>
 
