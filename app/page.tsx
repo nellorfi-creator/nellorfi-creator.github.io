@@ -502,7 +502,7 @@ export default function Home() {
         </form>
       </section>
 
-      <footer><a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a><p>Sala pesi · Ladispoli</p><p>© 2026 Revenge Gym. Tutti i diritti riservati.</p><a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a></footer>
+      <footer><a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a><p>Sala pesi · Ladispoli</p><p>© 2026 Revenge Gym. Tutti i diritti riservati. <span className="by-nello">by nello 2026</span></p><a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a></footer>
     </main>
   );
 }

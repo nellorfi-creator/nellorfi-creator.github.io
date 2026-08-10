@@ -195,6 +195,7 @@
 }
 .footer img{width:auto;height:48px}
 .footer p{margin:0;color:#888;font-size:10px;text-transform:uppercase;letter-spacing:1.2px}
+.byNello{color:var(--orange);font-weight:800}
 .backTop{display:grid;place-items:center;width:42px;height:42px;border:1px solid #444;color:#fff;transition:.2s}
 .backTop:hover{border-color:var(--orange);color:var(--orange)}
 

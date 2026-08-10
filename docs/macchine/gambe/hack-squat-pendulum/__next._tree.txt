@@ -1,3 +1,3 @@
-:HL["/_next/static/chunks/050chigv_yyd1.css","style"]
-:HL["/_next/static/chunks/16_jj6nkv58hb.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"hack-squat-pendulum","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"lJ_2h8IxswgZD3Lz9Vy-N"}
+:HL["/_next/static/chunks/0xe9xfy_lfket.css","style"]
+:HL["/_next/static/chunks/0r3ejeeaq6yfm.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"hack-squat-pendulum","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"osdRsrnlj5VSIE6gEFu9u"}
