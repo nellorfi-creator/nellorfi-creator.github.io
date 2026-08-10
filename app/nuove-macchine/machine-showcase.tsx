@@ -87,7 +87,7 @@ export default function MachineShowcase() {
         <Link className={styles.siteLink} href="/?skipIntro=1#filosofia" onClick={() => setMenuOpen(false)}>La palestra</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#corsi" onClick={() => setMenuOpen(false)}>Aree</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#mappa" onClick={() => setMenuOpen(false)}>Mappa</Link>
-        <Link className={styles.siteLink} href="/?skipIntro=1#boxe" onClick={() => setMenuOpen(false)}>Boxe</Link>
+        <Link className={styles.siteLink} href="/boxe/" onClick={() => setMenuOpen(false)}>Boxe</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#gallery" onClick={() => setMenuOpen(false)}>Gallery</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#magazine" onClick={() => setMenuOpen(false)}>Magazine</Link>
         <Link className={styles.siteLink} href="/macchine/gambe" onClick={() => setMenuOpen(false)}>Gambe</Link>

@@ -1,0 +1,9 @@
+:HL["/_next/static/css/8ffb19cff13c19da.css","style"]
+:HL["/_next/static/css/49e07f87f9af2771.css","style"]
+:HL["/brand/revenge-gym-logo.png","image"]
+:HL["/photos/boxe/sala-ring-sacchi.jpg","image"]
+:HL["/photos/boxe/ring-revenge.jpg","image"]
+:HL["/photos/boxe/sala-sacchi.jpg","image"]
+:HL["/photos/boxe/corner-bono-bianco-nero.jpg","image"]
+:HL["/photos/boxe/corner-bono.jpg","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"PsqwZONLP3nrfbaOkimu8"}

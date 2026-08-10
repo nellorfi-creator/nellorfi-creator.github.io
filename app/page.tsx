@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
 
 const courses = [
@@ -258,12 +259,12 @@ export default function Home() {
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','filosofia'],['Aree','corsi'],['Mappa','mappa'],['Boxe','boxe'],['Gallery','gallery'],['Magazine','magazine']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          {[['La palestra','#filosofia'],['Aree','#corsi'],['Mappa','#mappa'],['Boxe','/boxe/'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</Link>)}
           <div className="nav-flyout">
             <button type="button" className="nav-flyout-trigger" aria-haspopup="true">Per zona <span>▾</span></button>
             <div className="nav-flyout-panel" role="menu">
               <div className="nav-flyout-panel-inner">
-                <a href="/macchine/gambe" role="menuitem" onClick={() => setMenuOpen(false)}>Gambe</a>
+                <Link href="/macchine/gambe" role="menuitem" onClick={() => setMenuOpen(false)}>Gambe</Link>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Petto <i>presto</i></span>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Dorso <i>presto</i></span>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Spalle <i>presto</i></span>
@@ -271,7 +272,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <a href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</a>
+          <Link href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</Link>
           <a className="nav-cta" href="#contatti" onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></a>
         </nav>
       </header>
@@ -425,7 +426,7 @@ export default function Home() {
           <h2>SALI SUL RING.<br/><em>TIRA FUORI IL CARATTERE.</em></h2>
           <p className="lead">Revenge Gym non è solo sala pesi: dispone anche di un’area dedicata alla boxe con ring e sacchi.</p>
           <p>Uno spazio pensato per allenare tecnica, coordinazione, resistenza e sicurezza. Contattaci per conoscere modalità di allenamento e disponibilità.</p>
-          <a href="#contatti" className="button primary">Informazioni sulla boxe <span>↗</span></a>
+          <Link href="/boxe/" className="button primary">Scopri Revenge Boxing <span>↗</span></Link>
         </div>
         <div className="boxing-shots reveal" aria-label="Galleria foto area Boxe">
           <div className="boxing-shots-head">
