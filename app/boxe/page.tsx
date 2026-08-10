@@ -64,7 +64,7 @@ export default function BoxePage() {
           <a className={styles.primary} href="#spazio">Entra nell’area Boxe <span>↓</span></a>
         </div>
         <div className={styles.fpiBadge} aria-label="Revenge Gym affiliata alla Federazione Pugilistica Italiana">
-          <img src="/photos/boxe/fpi-logo.jpg" alt="Federazione Pugilistica Italiana" />
+          <img src="/photos/boxe/fpi-logo-circolare.jpg" alt="Federazione Pugilistica Italiana" />
           <div><small>Affiliazione ufficiale</small><strong>AFFILIATA FPI</strong></div>
         </div>
         <div className={styles.heroFacts}>
