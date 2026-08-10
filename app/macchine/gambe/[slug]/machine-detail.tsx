@@ -241,7 +241,7 @@ export default function MachineDetail({ machine, prev, next }: Props) {
         </p>
         <p className={styles.footerLegal}>
           <span>© 2026 Revenge Gym</span>
-          <span className={styles.byNello}>by nello 2026</span>
+          <span className={styles.byNello} style={{ textTransform: "none" }}>by nello 2026</span>
         </p>
       </footer>
     </main>

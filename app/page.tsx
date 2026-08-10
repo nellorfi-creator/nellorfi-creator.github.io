@@ -466,7 +466,7 @@ export default function Home() {
         <p>Sala pesi · Ladispoli</p>
         <p className="footer-legal">
           <span>© 2026 Revenge Gym. Tutti i diritti riservati.</span>
-          <span className="by-nello">by nello 2026</span>
+          <span className="by-nello" style={{ textTransform: "none" }}>by nello 2026</span>
         </p>
         <a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a>
       </footer>
