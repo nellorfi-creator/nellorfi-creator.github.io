@@ -45,6 +45,7 @@ export default function BoxePage() {
           <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <nav aria-label="Navigazione Boxe">
+          <Link className={styles.homeLink} href="/?skipIntro=1#home">Torna alla home</Link>
           <a href="#spazio">Lo spazio</a>
           <a href="#metodo">Il metodo</a>
           <a href="#video">Video</a>

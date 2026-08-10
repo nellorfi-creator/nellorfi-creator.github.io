@@ -5,3 +5,5 @@
 .cta{background:linear-gradient(90deg,rgba(4,4,4,.98),rgba(4,4,4,.52)),url('/photos/live/boxe-coach-ring.webp') center/cover!important}
 .videoGrid{grid-template-columns:repeat(3,1fr)}
 @media(max-width:900px){.videoGrid{grid-template-columns:1fr}}
+@media(max-width:1000px){.nav nav>a.homeLink{display:flex}}
+@media(max-width:700px){.homeLink{font-size:8px!important;letter-spacing:.7px!important}.nav nav{gap:9px}}
