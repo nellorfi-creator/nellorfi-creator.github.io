@@ -447,13 +447,20 @@ export default function Home() {
             <p className="eyebrow"><span></span> Revenge Boxing · In azione</p>
             <h3>IL RING<br/><em>NON MENTE.</em></h3>
             <p>Guarda l’energia, il ritmo e il lavoro tecnico dell’area Boxe di Revenge Gym. Un assaggio dell’allenamento prima di viverlo dal vivo.</p>
-            <a href="https://www.facebook.com/reel/1074233541830038" target="_blank" rel="noreferrer">Guarda il Reel su Facebook <span>↗</span></a>
+            <a href="#boxe-video">Guarda il video <span>↓</span></a>
           </div>
-          <a className="boxing-reel-player" href="https://www.facebook.com/reel/1074233541830038" target="_blank" rel="noreferrer" aria-label="Guarda il Reel dell’area Boxe su Facebook">
-            <img src="/photos/live/boxe-cintura.webp" alt="Anteprima del Reel dell’area Boxe di Revenge Gym" loading="lazy" />
-            <span className="boxing-reel-play" aria-hidden="true">▶</span>
-            <span className="boxing-reel-label"><small>VIDEO SU FACEBOOK</small><strong>GUARDA IL REEL</strong><i>↗</i></span>
-          </a>
+          <div className="boxing-reel-player" id="boxe-video">
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster="/media/boxe-ring-non-mente-poster.jpg"
+              aria-label="Video dell’area Boxe di Revenge Gym"
+            >
+              <source src="/media/boxe-ring-non-mente.mp4" type="video/mp4" />
+              Il tuo browser non supporta la riproduzione video.
+            </video>
+          </div>
         </div>
       </section>
 
