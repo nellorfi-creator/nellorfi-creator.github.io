@@ -164,7 +164,7 @@
   .grid2{grid-template-columns:1fr}
   .grid2>section,.grid2>section+section{padding:55px 0;border-left:0;border-bottom:1px solid #292929}
   .accent,.dark,.error,.qualityBlock{margin-inline:-22px;padding-inline:22px!important}
-  .pager{grid-template-columns:1fr;gap:10px}
+  .pager{position:static;inset:auto;grid-template-columns:1fr;gap:10px}
   .pagerNext{text-align:left}
   .footer{flex-wrap:wrap;padding:28px 22px}
   .footerLegal{align-items:flex-start;text-align:left;width:100%}
