@@ -117,6 +117,24 @@ export default function LegsHub() {
         </div>
       </section>
 
+      <section className={styles.manifesto} id="qualita">
+        <div className={styles.manifestoCopy}>
+          <p className={styles.eyebrow}>
+            <span></span> Perché Revenge
+          </p>
+          <h2>
+            {legZone.manifestoTitle[0]}
+            <br />
+            <em>{legZone.manifestoTitle[1]}</em>
+          </h2>
+        </div>
+        <div className={styles.manifestoText}>
+          {legZone.manifesto.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+          ))}
+        </div>
+      </section>
+
       <section className={styles.index} id="elenco">
         <div className={styles.sectionIntro}>
           <p className={styles.eyebrow}>
@@ -127,7 +145,9 @@ export default function LegsHub() {
             <br />
             <em>MACCHINA.</em>
           </h2>
-          <p>Tutte le postazioni fotografate in sala per l’allenamento degli arti inferiori. Apri la scheda per marchio, muscoli, tecnica e programmazione.</p>
+          <p>
+            Ventuno postazioni fotografate in sala per gli arti inferiori. Brand professionali, testi tecnici corposo, focus su chi allena per qualità — non per trovare l’abbonamento più basso della zona.
+          </p>
         </div>
         <div className={styles.grid}>
           {legMachines.map((machine) => (

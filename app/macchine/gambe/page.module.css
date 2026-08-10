@@ -136,6 +136,16 @@
 .marqueeCard:hover img{transform:scale(1.06)}
 .marqueeCard:hover span{transform:none;opacity:1}
 
+.manifesto{
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:6vw;align-items:start;
+  padding:100px 7vw;border-top:1px solid var(--line);
+  background:linear-gradient(180deg,#0d0d0d,#090909);
+}
+.manifestoCopy h2{margin:22px 0 0;font-size:clamp(46px,6vw,92px);line-height:.86}
+.manifestoText{display:grid;gap:22px;padding-top:8px}
+.manifestoText p{margin:0;max-width:640px;color:#c2c2c2;font-size:16px;line-height:1.85}
+.manifestoText p:first-child{color:#e4e4e4;font-size:18px}
+
 .index{padding:100px 7vw;border-top:1px solid var(--line);background:#0a0a0a}
 .sectionIntro{display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:6vw;margin-bottom:48px}
 .sectionIntro h2{margin:20px 0 0;font-size:clamp(46px,6vw,92px);line-height:.86}
@@ -215,8 +225,9 @@
   .zonePanel{position:static;display:none;margin:0 0 8px;box-shadow:none}
   .zoneOpen .zonePanel{display:flex}
   .contact{justify-content:center;margin-top:10px;height:48px;border:0}
-  .heroContent,.index,.cta{padding-left:22px;padding-right:22px}
-  .sectionIntro{grid-template-columns:1fr}
+  .heroContent,.index,.cta,.manifesto{padding-left:22px;padding-right:22px}
+  .sectionIntro,.manifesto{grid-template-columns:1fr}
+  .manifestoText{margin-top:28px}
   .marqueeHint{margin-inline:22px}
   .marqueeTrack{padding-inline:22px;gap:12px;animation-duration:55s}
   .marqueeCard{width:160px}

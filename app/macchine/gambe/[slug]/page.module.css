@@ -84,8 +84,11 @@
 .body h2{margin:18px 0 24px;font-size:clamp(38px,4.5vw,72px);line-height:.88}
 .body h3{margin:16px 0 24px;font-size:clamp(32px,3.6vw,56px);line-height:.9}
 .body p{color:#aaa;font-size:15px;line-height:1.85}
-.brandBlock,.leadBlock{padding:70px 0;border-bottom:1px solid #292929}
-.brandBlock p,.leadBlock p{max-width:900px;margin:0;color:#ddd;font-size:18px;line-height:1.75}
+.brandBlock,.leadBlock,.qualityBlock{padding:70px 0;border-bottom:1px solid #292929}
+.brandBlock p,.leadBlock p,.qualityBlock p{max-width:900px;margin:0 0 18px;color:#ddd;font-size:18px;line-height:1.75}
+.brandBlock p:last-child,.leadBlock p:last-child,.qualityBlock p:last-child{margin-bottom:0}
+.qualityBlock{background:linear-gradient(90deg,rgba(255,77,0,.12),transparent 55%);margin-inline:-7vw;padding-inline:7vw}
+.qualityBlock p{color:#f0f0f0;font-size:19px}
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #292929}
 .grid2>section{padding:70px 4vw 70px 0}
@@ -150,7 +153,7 @@
   .heroPhoto img{height:280px}
   .grid2{grid-template-columns:1fr}
   .grid2>section,.grid2>section+section{padding:55px 0;border-left:0;border-bottom:1px solid #292929}
-  .accent,.dark,.error{margin-inline:-22px;padding-inline:22px!important}
+  .accent,.dark,.error,.qualityBlock{margin-inline:-22px;padding-inline:22px!important}
   .pager{grid-template-columns:1fr;gap:10px}
   .pagerNext{text-align:left}
   .footer{flex-wrap:wrap;padding:28px 22px}

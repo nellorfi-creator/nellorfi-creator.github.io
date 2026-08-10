@@ -101,7 +101,9 @@ export default function MachineDetail({ machine, prev, next }: Props) {
             <br />
             <em>MACCHINA.</em>
           </h2>
-          <p>{machine.brandNote}</p>
+          {machine.brandNote.map((paragraph) => (
+            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+          ))}
         </section>
 
         <section className={styles.leadBlock}>
@@ -111,7 +113,19 @@ export default function MachineDetail({ machine, prev, next }: Props) {
             <br />
             <em>IN SALA.</em>
           </h2>
-          <p>{machine.lead}</p>
+          {machine.lead.map((paragraph) => (
+            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+          ))}
+        </section>
+
+        <section className={styles.qualityBlock}>
+          <small>STANDARD REVENGE</small>
+          <h2>
+            QUALITÀ,
+            <br />
+            <em>NON PREZZO.</em>
+          </h2>
+          <p>{machine.qualityEdge}</p>
         </section>
 
         <div className={styles.grid2}>
