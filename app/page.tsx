@@ -118,6 +118,7 @@ const magazineArticles = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [zoneMenuOpen, setZoneMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
   const [introClosing, setIntroClosing] = useState(false);
@@ -241,14 +242,14 @@ export default function Home() {
       </section>}
       <header className="nav-wrap">
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
+        <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','#filosofia'],['Aree','#corsi'],['Mappa','#mappa'],['Boxe','/boxe/'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</Link>)}
+          {[['La palestra','#filosofia'],['Aree','#corsi'],['Mappa','#mappa'],['Boxe','/boxe/'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
           <div className="nav-flyout">
-            <button type="button" className="nav-flyout-trigger" aria-haspopup="true">Per zona <span>▾</span></button>
-            <div className="nav-flyout-panel" role="menu">
+            <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={zoneMenuOpen} onClick={() => setZoneMenuOpen(!zoneMenuOpen)}>Per zona <span>▾</span></button>
+            <div className={`nav-flyout-panel${zoneMenuOpen ? " open" : ""}`} role="menu">
               <div className="nav-flyout-panel-inner">
-                <Link href="/macchine/gambe" role="menuitem" onClick={() => setMenuOpen(false)}>Gambe</Link>
+                <Link href="/macchine/gambe" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Gambe</Link>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Petto <i>presto</i></span>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Dorso <i>presto</i></span>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Spalle <i>presto</i></span>
@@ -256,8 +257,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <Link href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</Link>
-          <a className="nav-cta" href="#contatti" onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></a>
+          <Link href="/nuove-macchine" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Nuove macchine</Link>
+          <a className="nav-cta" href="#contatti" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Chiedi info <span>↗</span></a>
         </nav>
       </header>
 
