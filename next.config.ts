@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
-const siteVersion = Date.now().toString();
 
 const nextConfig: NextConfig = {
   // Keep Turbopack scoped to this project when another lockfile exists higher
@@ -16,7 +15,6 @@ const nextConfig: NextConfig = {
   // The static site does not use the Cloudflare-only database/worker files.
   // Vinext still validates them for the normal hosted build.
   typescript: { ignoreBuildErrors: isGitHubPages },
-  env: { NEXT_PUBLIC_SITE_VERSION: siteVersion },
 };
 
 export default nextConfig;

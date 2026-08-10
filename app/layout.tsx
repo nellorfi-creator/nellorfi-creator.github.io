@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import VersionRefresh from "./version-refresh";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://revenge-gym.github.io"),
@@ -18,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="it"><body><VersionRefresh />{children}</body></html>;
+  return <html lang="it"><body>{children}</body></html>;
 }
