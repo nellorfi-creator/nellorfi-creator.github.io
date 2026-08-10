@@ -63,6 +63,10 @@ export default function BoxePage() {
           <p className={styles.heroLead}>Qui non contano le scorciatoie. Contano presenza, tecnica e carattere.</p>
           <a className={styles.primary} href="#spazio">Entra nell’area Boxe <span>↓</span></a>
         </div>
+        <div className={styles.fpiBadge} aria-label="Revenge Gym affiliata alla Federazione Pugilistica Italiana">
+          <img src="/photos/boxe/fpi-logo.jpg" alt="Federazione Pugilistica Italiana" />
+          <div><small>Affiliazione ufficiale</small><strong>AFFILIATA FPI</strong></div>
+        </div>
         <div className={styles.heroFacts}>
           <div><strong>01</strong><span>Ring</span></div>
           <div><strong>02</strong><span>Area sacchi</span></div>
