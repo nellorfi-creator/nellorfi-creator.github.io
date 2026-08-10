@@ -42,3 +42,11 @@
 @media(max-width:700px){
   .fpiBadge{position:relative;top:auto;right:auto;bottom:auto;margin:18px 0 0;width:184px}
 }
+.fpiBadge{width:248px;gap:16px;padding:9px 16px 9px 9px}
+.fpiBadge img{width:86px;height:86px;border-radius:50%}
+.fpiBadge strong{font-size:22px;white-space:nowrap}
+@media(max-width:700px){
+  .fpiBadge{width:258px;gap:15px;padding:9px 15px 9px 9px}
+  .fpiBadge img{width:92px;height:92px}
+  .fpiBadge strong{font-size:23px}
+}
