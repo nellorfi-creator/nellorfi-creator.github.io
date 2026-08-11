@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[5443,["500","static/chunks/500-c99b8dfd3de17c86.js","249","static/chunks/app/macchine/dorso/page-ed151c6cabdca1b9.js"],"default"]
+3:I[484,[],"OutletBoundary"]
+4:"$Sreact.suspense"
+:HL["/_next/static/css/1582ffb22e3cfb40.css","style"]
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/1582ffb22e3cfb40.css","precedence":"next"}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"lpAU2Zag5VKMYhaVSX1Bc"}
+5:null

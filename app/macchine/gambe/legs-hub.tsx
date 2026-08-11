@@ -9,7 +9,7 @@ import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 const bodyZones = [
   { label: "Gambe", href: "/macchine/gambe", ready: true },
   { label: "Petto", href: "/macchine/petto", ready: true },
-  { label: "Dorso", href: "#", ready: false },
+  { label: "Dorso", href: "/macchine/dorso", ready: true },
   { label: "Spalle", href: "#", ready: false },
   { label: "Braccia", href: "#", ready: false },
 ];
