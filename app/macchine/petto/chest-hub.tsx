@@ -69,7 +69,7 @@ export default function ChestHub() {
       </section>
 
       <section className={styles.index} id="elenco">
-        <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Catalogo completo</p><h2>SCEGLI LA<br /><em>MACCHINA.</em></h2><p>Dodici postazioni fotografate nella sala per allenare il petto da angoli diversi. Apri ogni scheda per funzione, muscoli, impostazione, programmazione ed errori comuni.</p></div>
+        <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Catalogo completo</p><h2>SCEGLI LA<br /><em>MACCHINA.</em></h2><p>Dodici postazioni per allenare il petto da angoli diversi. Apri ogni scheda per scoprire funzione, muscoli coinvolti, impostazione, programmazione ed errori comuni.</p></div>
         <div className={styles.grid}>{chestMachines.map((machine) => (
           <Link key={machine.id} href={`/macchine/petto/${machine.id}`} className={styles.gridCard}>
             <div className={styles.gridMedia}><img src={machine.image} alt="" /></div>
