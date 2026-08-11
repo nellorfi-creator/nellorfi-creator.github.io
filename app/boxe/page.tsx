@@ -164,6 +164,13 @@ export default function BoxePage() {
           <div><p className={styles.eyebrow}><span /> Dentro Revenge Boxing</p><h2>FOTO DAL RING.<br/><em>NESSUNA POSA.</em></h2></div>
           <p>La sala, il lavoro, gli atleti e il corner. Immagini reali di un’identità che fa parte di Revenge Gym.</p>
         </div>
+        <img
+          className={styles.galleryAthlete}
+          src="/photos/boxe/atleta-pugile-jab.webp"
+          alt="Pugile in jab, Revenge Boxing"
+          loading="lazy"
+          decoding="async"
+        />
         <div className={styles.galleryGrid}>
           {gallery.map(([src, label], index) => <figure className={index === 0 || index === 5 || index === 10 ? styles.wide : ""} key={src}><img src={src} alt={label} loading="lazy"/><figcaption><span>{String(index + 1).padStart(2,"0")}</span>{label}</figcaption></figure>)}
         </div>
