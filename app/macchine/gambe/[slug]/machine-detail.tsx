@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 
 const bodyZones = [
   { label: "Gambe", href: "/macchine/gambe", ready: true },
-  { label: "Petto", href: "#", ready: false },
+  { label: "Petto", href: "/macchine/petto", ready: true },
   { label: "Dorso", href: "#", ready: false },
   { label: "Spalle", href: "#", ready: false },
   { label: "Braccia", href: "#", ready: false },

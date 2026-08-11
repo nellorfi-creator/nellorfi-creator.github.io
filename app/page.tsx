@@ -252,7 +252,7 @@ export default function Home() {
             <div className={`nav-flyout-panel${zoneMenuOpen ? " open" : ""}`} role="menu">
               <div className="nav-flyout-panel-inner">
                 <Link href="/macchine/gambe" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Gambe</Link>
-                <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Petto <i>presto</i></span>
+                <Link href="/macchine/petto" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Petto</Link>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Dorso <i>presto</i></span>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Spalle <i>presto</i></span>
                 <span className="nav-flyout-soon" role="menuitem" aria-disabled="true">Braccia <i>presto</i></span>

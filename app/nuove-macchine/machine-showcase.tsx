@@ -93,6 +93,7 @@ export default function MachineShowcase() {
         <Link className={styles.siteLink} href="/?skipIntro=1#gallery" onClick={() => setMenuOpen(false)}>Gallery</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#magazine" onClick={() => setMenuOpen(false)}>Magazine</Link>
         <Link className={styles.siteLink} href="/macchine/gambe" onClick={() => setMenuOpen(false)}>Gambe</Link>
+        <Link className={styles.siteLink} href="/macchine/petto" onClick={() => setMenuOpen(false)}>Petto</Link>
         <span className={styles.navDivider} aria-hidden="true"></span>
         {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => { setActiveMachine(machine.id); setMenuOpen(false); }}>{machine.number}</a>)}
         <Link href="/?skipIntro=1#contatti" className={styles.contact} onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></Link>
