@@ -8,7 +8,7 @@ type MobileSwipeBackProps = {
   label?: string;
 };
 
-export default function MobileSwipeBack({ onSwipe, edgeOnly = true, label = "Torna indietro" }: MobileSwipeBackProps) {
+export default function MobileSwipeBack({ onSwipe, edgeOnly = false, label = "Torna indietro" }: MobileSwipeBackProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
