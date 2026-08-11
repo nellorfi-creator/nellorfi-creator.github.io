@@ -74,6 +74,7 @@ export default function LegsHub() {
 
       <section className={styles.hero}>
         <div className={styles.heroShade} aria-hidden="true"></div>
+        <img className={styles.heroAthlete} src="/photos/athletes/gambe-athlete-hero.webp" alt="Atleta dedicata all’allenamento delle gambe" />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
             <span></span> {legZone.eyebrow}

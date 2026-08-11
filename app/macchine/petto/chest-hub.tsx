@@ -45,6 +45,7 @@ export default function ChestHub() {
 
       <section className={styles.hero}>
         <div className={styles.heroShade} aria-hidden="true"></div>
+        <img className={styles.heroAthlete} src="/photos/athletes/petto-athlete-hero.webp" alt="Atleta dedicato all’allenamento del petto" />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}><span></span> {chestZone.eyebrow}</p>
           <h1>{chestZone.heroTitle[0]}<br />{chestZone.heroTitle[1]}<br /><em>{chestZone.heroTitle[2]}</em></h1>
