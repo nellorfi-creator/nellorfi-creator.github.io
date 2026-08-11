@@ -111,7 +111,7 @@ export default function BoxePage() {
       <section className={styles.method} id="metodo">
         <img
           className={styles.methodAthlete}
-          src="/photos/boxe/atleta-pugile-guanti.webp"
+          src="/photos/boxe/atleta-pugile-guardia-cutout.webp"
           alt="Pugile in guardia, area Boxe Revenge Gym"
           loading="lazy"
           decoding="async"
