@@ -12,7 +12,9 @@
 .page h1,.page h2,.page h3{
   font-family:'Barlow Condensed',sans-serif;
   text-transform:uppercase;
-  overflow-wrap:anywhere;
+  overflow-wrap:normal;
+  word-break:normal;
+  hyphens:none;
 }
 .page em{color:var(--orange);font-style:italic}
 
@@ -92,8 +94,8 @@
   text-transform:uppercase;font-size:11px;font-weight:700;letter-spacing:2.2px;
 }
 .eyebrow span{width:34px;height:2px;background:var(--orange)}
-.hero h1{
-  margin:24px 0 22px;font-size:clamp(56px,9vw,140px);line-height:.82;
+.hero h1{white-space:nowrap;overflow-wrap:normal;word-break:keep-all;
+  margin:24px 0 22px;font-size:clamp(40px,min(8.4vw,12vh),140px);line-height:.82;
   letter-spacing:-.035em;animation:riseIn .85s cubic-bezier(.2,.7,.2,1) both;
 }
 .heroContent>p:not(.eyebrow){
@@ -262,7 +264,7 @@
 }
 @media(max-width:560px){
   .grid{grid-template-columns:1fr}
-  .hero h1{font-size:clamp(48px,14vw,64px)}
+  .hero h1{font-size:clamp(36px,11vw,58px);white-space:nowrap}
 }
 
 /* Fondale unico ereditato dal body, senza rettangoli tra le sezioni. */
