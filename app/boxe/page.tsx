@@ -109,20 +109,17 @@ export default function BoxePage() {
       </section>
 
       <section className={styles.method} id="metodo">
-        <div className={styles.methodTop}>
-          <div className={styles.methodHead}>
-            <p className={styles.eyebrow}><span /> Il lavoro</p>
-            <h2>OGNI ROUND<br/><em>HA UNO SCOPO.</em></h2>
-            <p>La boxe è ripetizione intelligente: si costruiscono fondamentali, si affina il controllo e si impara a mantenere qualità anche sotto fatica.</p>
-          </div>
-          <figure className={styles.methodAthlete}>
-            <img
-              src="/photos/boxe/atleta-pugile-guanti.webp"
-              alt="Atleta pugile con guanti in posa"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+        <img
+          className={styles.methodAthlete}
+          src="/photos/boxe/atleta-pugile-guanti.webp"
+          alt="Pugile in guardia, area Boxe Revenge Gym"
+          loading="lazy"
+          decoding="async"
+        />
+        <div className={styles.methodHead}>
+          <p className={styles.eyebrow}><span /> Il lavoro</p>
+          <h2>OGNI ROUND<br/><em>HA UNO SCOPO.</em></h2>
+          <p>La boxe è ripetizione intelligente: si costruiscono fondamentali, si affina il controllo e si impara a mantenere qualità anche sotto fatica.</p>
         </div>
         <div className={styles.pillars}>
           {pillars.map(([number, title, text]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}
