@@ -63,3 +63,10 @@
   .nav nav{position:static;inset:auto;display:flex;flex-direction:row;align-items:center;width:auto;padding:0;background:transparent;border:0}
   .nav nav>a{padding:0;border:0}
 }
+
+/* Il gradiente appartiene alla pagina; le sezioni non creano pannelli sovrapposti. */
+.page{background:transparent}
+.manifesto,.method,.videos,.corner,.gallery{background:transparent}
+.spaceShowcase{background:transparent}
+.pillars article{background:transparent}
+.footer{background:rgba(5,5,5,.34)}

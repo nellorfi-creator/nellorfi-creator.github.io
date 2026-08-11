@@ -254,3 +254,11 @@
   .grid{grid-template-columns:1fr}
   .hero h1{font-size:clamp(48px,14vw,64px)}
 }
+
+/* Fondale unico ereditato dal body, senza rettangoli tra le sezioni. */
+.page,.hero,.manifesto,.index{background:transparent}
+.heroMeta{background:rgba(255,255,255,.12)}
+.heroMeta div{background:rgba(7,7,7,.2)}
+.gridCard{background:rgba(7,7,7,.2);backdrop-filter:blur(2px)}
+.gridMedia{background:radial-gradient(ellipse at 50% 45%,rgba(48,20,15,.34),transparent 72%)}
+.footer{background:rgba(5,5,5,.34)}

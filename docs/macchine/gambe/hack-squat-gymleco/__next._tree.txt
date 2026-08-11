@@ -1,3 +1,3 @@
-:HL["/_next/static/chunks/0la2~ggz0.6wc.css","style"]
-:HL["/_next/static/chunks/0gi47899yrtik.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"hack-squat-gymleco","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"tbeCfqwDtI0zNeMcbKcXv"}
+:HL["/_next/static/chunks/08qvs4fp308ac.css","style"]
+:HL["/_next/static/chunks/17p_y3se-qu92.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"hack-squat-gymleco","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"VqqSg6SkntwS6aCJE_vYi"}

@@ -10,7 +10,7 @@
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + var(--ticker-h)); }
-body { margin:0; background:var(--revenge-gradient); color:#fff; font-family:'Inter',sans-serif; overflow-x:hidden; }
+body { margin:0; background-color:#090909; background-image:var(--revenge-gradient); background-attachment:fixed; background-size:cover; color:#fff; font-family:'Inter',sans-serif; overflow-x:hidden; }
 a { color:inherit; text-decoration:none; }
 button,input,textarea,select { font:inherit; }
 img { display:block; width:100%; }
@@ -411,3 +411,28 @@ footer .footer-legal { display:flex; flex-direction:column; align-items:flex-end
 .swipe-back-cue.visible { opacity:1; }.swipe-back-cue.ready { color:var(--orange); border-color:var(--orange); }
 .swipe-back-cue span { font-size:20px; line-height:1; }.swipe-back-cue small { font-size:9px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
 @media (min-width:901px) and (pointer:fine) { .swipe-back-cue { display:none; } }
+
+/* Un solo fondale continuo: le sezioni lasciano vedere il gradiente della pagina. */
+main,
+.philosophy,.courses,.schedule-section,.gym-map,.boxing-section,.boxing-shots,
+.boxing-reel,.gallery-section,.magazine,.contact,
+.owners-spotlight,.real-gym-strip,.gym-video {
+  background:transparent;
+}
+.philosophy,.schedule-section,.magazine { border-color:rgba(255,255,255,.12); }
+.owners-spotlight { border-block:1px solid rgba(255,255,255,.12); }
+.owners-copy { border-left-color:var(--orange); }
+.real-gym-strip,.gym-video { border:1px solid rgba(255,255,255,.12); }
+.real-gym-caption { border-color:rgba(255,255,255,.12); }
+.brand-grid { background:rgba(255,255,255,.12); }
+.brand-grid button,
+.article-card,.article-card button {
+  background:rgba(7,7,7,.22);
+  backdrop-filter:blur(2px);
+}
+.brand-grid button:hover,.brand-grid button:focus-visible,
+.article-card button:hover,.article-card button:focus-visible {
+  background:rgba(91,26,15,.42);
+}
+.contact-form { background:rgba(7,7,7,.24); border:1px solid rgba(255,255,255,.12); }
+footer { background:rgba(5,5,5,.34); }
