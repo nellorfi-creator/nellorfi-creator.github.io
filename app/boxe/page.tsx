@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./page.module.css";
+import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 
 export const metadata: Metadata = {
   title: "Boxe a Ladispoli | Ring e area sacchi · Revenge Gym",
@@ -40,6 +41,7 @@ const pillars = [
 export default function BoxePage() {
   return (
     <main className={styles.page}>
+      <MobileSwipeBack />
       <header className={styles.nav}>
         <Link className={styles.logo} href="/?skipIntro=1#home" aria-label="Revenge Gym home">
           <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />

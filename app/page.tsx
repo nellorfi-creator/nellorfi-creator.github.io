@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
+import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
@@ -221,6 +222,7 @@ export default function Home() {
 
   return (
     <main>
+      {(activeBrand || activeArea || activeArticle) && <MobileSwipeBack edgeOnly={false} label="Chiudi" onSwipe={() => { setActiveBrand(null); setActiveArea(null); setActiveArticle(null); }} />}
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
         <div className={`intro-frames${introStarted ? " is-running" : ""}`}>
           <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "/photos/live/hero-sala.webp"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>

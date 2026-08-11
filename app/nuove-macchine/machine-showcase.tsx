@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
+import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 
 const machines = [
   { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.webp", alt: "Pressa orizzontale Axiom Life Fitness" },
@@ -79,6 +80,7 @@ export default function MachineShowcase() {
   };
 
   return <main className={styles.page} id="top">
+    <MobileSwipeBack onSwipe={goBack} />
     <header className={styles.nav}>
       <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home senza intro"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
       <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu di navigazione"><i></i><i></i></button>

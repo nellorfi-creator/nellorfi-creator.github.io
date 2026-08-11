@@ -50,6 +50,14 @@
   .fpiBadge img{width:92px;height:92px}
   .fpiBadge strong{font-size:23px}
 }
+
+.videos,.gallery{
+  color:#fff;
+  background:radial-gradient(circle at 88% 8%,rgba(255,77,0,.11),transparent 30%),linear-gradient(145deg,#151515,#090909 58%,#050505);
+  border-color:var(--line);
+}
+.videos .eyebrow,.gallery .eyebrow{color:#a0a0a0}
+.videoIntro>p:last-child,.galleryHead>p{color:#a6a6a6}
 @media(max-width:700px){
   .nav nav{position:static;inset:auto;display:flex;flex-direction:row;align-items:center;width:auto;padding:0;background:transparent;border:0}
   .nav nav>a{padding:0;border:0}
