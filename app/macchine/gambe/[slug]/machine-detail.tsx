@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { LegMachine } from "@/lib/leg-machines";
+import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import styles from "./page.module.css";
 
 const bodyZones = [
@@ -28,6 +29,7 @@ export default function MachineDetail({ machine, prev, next }: Props) {
 
   return (
     <main className={styles.page} id="top">
+      <MobileSwipeBack />
       <header className={styles.nav}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home">
           <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
