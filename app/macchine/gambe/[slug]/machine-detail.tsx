@@ -92,6 +92,7 @@ export default function MachineDetail({ machine, prev, next }: Props) {
           <b>{machine.focus}</b>
         </div>
         <figure className={styles.heroPhoto}>
+          <span className={styles.photoNumber} aria-hidden="true">{machine.number}</span>
           <img src={machine.image} alt={machine.alt} />
           <figcaption>Foto dalla sala · Revenge Gym Ladispoli</figcaption>
         </figure>

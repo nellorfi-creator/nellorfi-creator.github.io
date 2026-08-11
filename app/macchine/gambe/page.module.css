@@ -258,6 +258,63 @@
 /* Fondale unico ereditato dal body, senza rettangoli tra le sezioni. */
 .page,.hero,.manifesto,.index{background:transparent}
 .heroMeta{background:rgba(255,255,255,.12)}
+
+/* Catalogo fotografico: le immagini sono la superficie, non un contenuto dentro un box. */
+.marqueeCard{
+  border:0;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);
+  box-shadow:0 22px 50px rgba(0,0,0,.3);
+}
+.marqueeCard::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.13),inset 0 -3px 0 var(--orange);
+}
+.grid{gap:28px 18px;padding-bottom:34px}
+.gridCard{
+  position:relative;display:block;min-height:clamp(440px,42vw,590px);
+  overflow:hidden;border:0;background:#100b09;isolation:isolate;
+  clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,0 100%);
+  box-shadow:0 26px 60px rgba(0,0,0,.28);
+  transition:transform .45s cubic-bezier(.2,.75,.2,1),filter .45s;
+}
+.gridCard::after{
+  content:'';position:absolute;z-index:3;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 -4px 0 var(--orange);
+  transition:box-shadow .35s;
+}
+.gridCard:nth-child(3n + 2){transform:translateY(28px)}
+.gridCard:hover,.gridCard:nth-child(3n + 2):hover{transform:translateY(-8px)}
+.gridMedia{position:absolute;inset:0;display:block;padding:0;background:none}
+.gridMedia::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.04) 24%,rgba(8,3,2,.18) 50%,rgba(8,3,2,.96) 100%);
+}
+.gridMedia img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:saturate(.94) contrast(1.06);transition:transform .8s cubic-bezier(.2,.75,.2,1),filter .5s;
+}
+.gridCard:hover .gridMedia img{transform:scale(1.055);filter:saturate(1.08) contrast(1.08)}
+.gridBody{
+  position:absolute;z-index:2;inset:0;display:flex;justify-content:flex-end;
+  padding:28px 26px 27px;background:none;
+}
+.gridBody span{
+  position:absolute;top:20px;right:22px;color:rgba(255,255,255,.82);
+  font:900 52px/.8 'Barlow Condensed';letter-spacing:-.04em;text-shadow:0 4px 20px rgba(0,0,0,.45);
+}
+.gridBody small{margin:0 0 8px;color:var(--orange);font-size:9px}
+.gridBody strong{max-width:95%;margin:0 0 10px;font-size:clamp(27px,2.5vw,40px);text-shadow:0 3px 20px rgba(0,0,0,.8)}
+.gridBody p{max-width:95%;margin:0 0 16px;color:#d1d1d1;font-size:12px}
+.gridBody i{width:max-content;padding-top:9px;border-top:1px solid rgba(255,77,0,.7)}
+
+@media(max-width:1100px){
+  .gridCard:nth-child(3n + 2){transform:none}
+}
+@media(max-width:560px){
+  .grid{gap:18px}
+  .gridCard{min-height:clamp(470px,138vw,640px)}
+  .gridBody{padding:24px 22px}
+  .gridBody span{top:18px;right:19px;font-size:46px}
+}
 .heroMeta div{background:rgba(7,7,7,.2)}
 .gridCard{background:rgba(7,7,7,.2);backdrop-filter:blur(2px)}
 .gridMedia{background:radial-gradient(ellipse at 50% 45%,rgba(48,20,15,.34),transparent 72%)}

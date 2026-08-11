@@ -44,7 +44,7 @@ export default function ChestMachineDetail({ machine, prev, next }: Props) {
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}><span>{machine.number} · {machine.category.toUpperCase()}</span><small>{machine.brand}</small><h1>{first ? <>{first}<br /><em>{last}.</em></> : <em>{last}.</em>}</h1><p>{machine.tagline}</p><b>{machine.focus}</b></div>
-        <figure className={styles.heroPhoto}><img src={machine.image} alt={machine.alt} /><figcaption>Revenge Gym · Ladispoli</figcaption></figure>
+        <figure className={styles.heroPhoto}><span className={styles.photoNumber} aria-hidden="true">{machine.number}</span><img src={machine.image} alt={machine.alt} /><figcaption>Revenge Gym · Ladispoli</figcaption></figure>
       </section>
 
       <div className={styles.body}>
