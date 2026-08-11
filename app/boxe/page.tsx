@@ -127,9 +127,18 @@ export default function BoxePage() {
       </section>
 
       <section className={styles.videos} id="video">
+        <img
+          className={styles.videoAthlete}
+          src="/photos/boxe/atleta-pugile-pugno.webp"
+          alt="Pugile in azione, Revenge Boxing"
+          loading="lazy"
+          decoding="async"
+        />
         <div className={styles.videoIntro}>
-          <p className={styles.eyebrow}><span /> Guarda lo spazio</p>
-          <h2>DENTRO<br/><em>REVENGE BOXING.</em></h2>
+          <div>
+            <p className={styles.eyebrow}><span /> Guarda lo spazio</p>
+            <h2>DENTRO<br/><em>REVENGE BOXING.</em></h2>
+          </div>
           <p>Tre sguardi reali dentro Revenge Boxing: la sala, il ring e l’energia del lavoro tecnico in azione.</p>
         </div>
         <div className={styles.videoGrid}>
