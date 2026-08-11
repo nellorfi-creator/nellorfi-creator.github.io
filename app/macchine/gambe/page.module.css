@@ -200,6 +200,10 @@
 .backTop{display:grid;place-items:center;width:42px;height:42px;border:1px solid #444;color:#fff;transition:.2s}
 .backTop:hover{border-color:var(--orange);color:var(--orange)}
 
+.page{background:radial-gradient(ellipse 95% 72% at 84% 15%,rgba(104,29,16,.78),rgba(64,17,11,.54) 34%,transparent 70%),linear-gradient(135deg,#080808,#160a08 62%,#070707)}
+.index,.manifesto{background:radial-gradient(ellipse 95% 72% at 84% 15%,rgba(104,29,16,.76),transparent 70%),linear-gradient(135deg,#080808,#180a08 62%,#070707)}
+.gridCard{background:linear-gradient(145deg,#25100c,#0f0d0c)}
+
 @keyframes marqueeScroll{
   from{transform:translateX(0)}
   to{transform:translateX(-50%)}

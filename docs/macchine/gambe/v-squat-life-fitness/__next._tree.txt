@@ -1,3 +1,3 @@
-:HL["/_next/static/chunks/05c783wgy-7.q.css","style"]
+:HL["/_next/static/chunks/0la2~ggz0.6wc.css","style"]
 :HL["/_next/static/chunks/0gi47899yrtik.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"v-squat-life-fitness","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"25cMONj9flqAgydvp4znC"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"v-squat-life-fitness","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"tbeCfqwDtI0zNeMcbKcXv"}
