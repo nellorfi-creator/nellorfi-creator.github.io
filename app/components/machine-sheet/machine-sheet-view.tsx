@@ -3,22 +3,13 @@
 import Link from "next/link";
 import type { LegMachine } from "@/lib/leg-machines";
 import type { MachineSheet } from "@/lib/machine-sheets";
-import PressaOrizzontaleIllustration from "./pressa-orizzontale-illustration";
+import LegSheetIllustration from "./leg-sheet-illustration";
 import styles from "./sheet.module.css";
 
 type Props = {
   machine: LegMachine;
   sheet: MachineSheet;
 };
-
-function Illustration({ kind }: { kind: MachineSheet["illustration"] }) {
-  switch (kind) {
-    case "pressa-orizzontale":
-      return <PressaOrizzontaleIllustration />;
-    default:
-      return null;
-  }
-}
 
 export default function MachineSheetView({ machine, sheet }: Props) {
   const handlePrint = () => window.print();
@@ -57,10 +48,8 @@ export default function MachineSheetView({ machine, sheet }: Props) {
             <img src={machine.image} alt={machine.alt} />
             <figcaption>Foto reale · {machine.name} {machine.brand} in sala</figcaption>
           </figure>
-          <Illustration kind={sheet.illustration} />
-          <p className={styles.illustrationCaption}>
-            Schema a due fasi — discesa controllata e spinta. Confronta con la foto sopra.
-          </p>
+          <LegSheetIllustration type={sheet.illustration} machineName={machine.name} />
+          <p className={styles.illustrationCaption}>{sheet.caption}</p>
         </section>
 
         <section className={styles.setupBlock}>
