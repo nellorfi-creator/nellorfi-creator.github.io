@@ -133,7 +133,7 @@ const magazineArticles = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [zoneMenuOpen, setZoneMenuOpen] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [introVisible, setIntroVisible] = useState(true);
   const [introClosing, setIntroClosing] = useState(false);
   const [introStarted, setIntroStarted] = useState(false);
@@ -243,10 +243,28 @@ export default function Home() {
     setIntroStarted(true);
   };
 
-  const submitForm = (event: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSent(true);
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    setFormStatus("sending");
+    const data = new FormData(form);
+    data.set("_subject", "Revenge Gym — richiesta informazioni");
+    data.set("_template", "table");
+    data.set("_captcha", "false");
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/laurogino@tiscali.it", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      const result = (await response.json().catch(() => null)) as { success?: string | boolean } | null;
+      const ok = response.ok && result?.success !== false && result?.success !== "false";
+      if (!ok) throw new Error("send failed");
+      setFormStatus("sent");
+      form.reset();
+    } catch {
+      setFormStatus("error");
+    }
   };
 
   return (
@@ -522,15 +540,19 @@ export default function Home() {
             <a className="map-open" href="https://www.google.com/maps/search/?api=1&query=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM" target="_blank" rel="noreferrer">Apri la mappa <span>↗</span></a>
           </div>
         </div>
-        <form className="contact-form reveal" onSubmit={submitForm}>
+        <form className="contact-form reveal" onSubmit={submitForm} noValidate={false}>
           <span className="form-kicker">RICHIEDI INFORMAZIONI</span><h3>Scrivici, ti rispondiamo noi</h3>
+          <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="form-honey" aria-hidden="true" />
           <label>Nome e cognome<input required name="name" placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" placeholder="+39" /></label></div>
-          <label>Area di interesse<select name="course" defaultValue=""><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
+          <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
           <label>Messaggio<textarea name="message" placeholder="Dicci cosa vuoi sapere: orari, abbonamenti, obiettivi..."></textarea></label>
-          <label className="privacy"><input required type="checkbox" /> <span>Accetto il trattamento dei dati personali.</span></label>
-          <button className="button primary" type="submit">Chiedi info <span>↗</span></button>
-          {sent && <p className="success" role="status">Richiesta ricevuta! Ti richiamiamo al più presto.</p>}
+          <label className="privacy"><input required type="checkbox" name="privacy" value="accepted" /> <span>Accetto il trattamento dei dati personali.</span></label>
+          <button className="button primary" type="submit" disabled={formStatus === "sending"}>
+            {formStatus === "sending" ? "Invio in corso…" : <>Chiedi info <span>↗</span></>}
+          </button>
+          {formStatus === "sent" && <p className="success" role="status">Richiesta ricevuta! Ti richiamiamo al più presto.</p>}
+          {formStatus === "error" && <p className="form-error" role="alert">Invio non riuscito. Riprova o scrivi a laurogino@tiscali.it.</p>}
         </form>
       </section>
 
