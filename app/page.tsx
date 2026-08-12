@@ -20,6 +20,17 @@ const gallery = [
   ["/photos/live/pesi-liberi-oggi.webp", "Pesi liberi e manubri"],
 ];
 
+const philosophyShots = [
+  { src: "/photos/live/philosophy/sala-wide.webp", alt: "Vista ampia della sala attrezzi di Revenge Gym", label: "Sala completa", focus: "center 42%" },
+  { src: "/photos/live/philosophy/macchine-centrale.webp", alt: "Macchinari arancioni al centro della sala", label: "Cuore della sala", focus: "center 48%" },
+  { src: "/photos/live/philosophy/corridoio-arancio.webp", alt: "Fila di macchine Precor nella sala pesi", label: "Linea macchine", focus: "58% 45%" },
+  { src: "/photos/live/philosophy/plate-row.webp", alt: "Fila di macchine plate-loaded", label: "Plate loaded", focus: "center 40%" },
+  { src: "/photos/live/philosophy/isotonica-brand.webp", alt: "Area isotonica con scritta Revenge Gym", label: "Isotonica", focus: "35% 42%" },
+  { src: "/photos/live/philosophy/cardio.webp", alt: "Area cardio con tapis roulant", label: "Cardio", focus: "center 55%" },
+  { src: "/photos/live/philosophy/pesi-linea.webp", alt: "Rastrelliera manubri e pesi liberi", label: "Pesi liberi", focus: "center 38%" },
+  { src: "/photos/live/philosophy/cavi-verticale.webp", alt: "Area cavi vista in verticale", label: "Cavi", focus: "center 28%" },
+];
+
 const equipmentBrands = [
   {
     name: "PANATTA", origin: "Apiro, Marche · Italia", since: "Dal 1973",
@@ -132,6 +143,8 @@ export default function Home() {
   const [activeArea, setActiveArea] = useState<(typeof courses)[number] | null>(null);
   const [activeZone, setActiveZone] = useState(gymZones[0]);
   const [activeArticle, setActiveArticle] = useState<(typeof magazineArticles)[number] | null>(null);
+  const [philosophySlide, setPhilosophySlide] = useState(0);
+  const [philosophyPaused, setPhilosophyPaused] = useState(false);
   const introAudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -186,6 +199,15 @@ export default function Home() {
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [activeBrand, activeArea, activeArticle]);
+
+  useEffect(() => {
+    if (philosophyPaused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setPhilosophySlide((slide) => (slide + 1) % philosophyShots.length);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [philosophyPaused]);
 
   const closeIntro = () => {
     setIntroClosing(true);
@@ -306,9 +328,52 @@ export default function Home() {
           <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist Fitness, Nautilus, Star Trac, Gymleco e Gym Equipe.</p>
           <a href="#contatti" className="text-link orange">Conosci la nostra community <span>↗</span></a>
         </div>
-        <div className="philosophy-image reveal">
-          <img src="/photos/revenge-gym-02.jpg" alt="Atleta in allenamento nella sala pesi di Revenge Gym" loading="lazy" />
-          <div className="quote"><span>“</span><p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p></div>
+        <div
+          className="philosophy-visual reveal"
+          onMouseEnter={() => setPhilosophyPaused(true)}
+          onMouseLeave={() => setPhilosophyPaused(false)}
+          onFocusCapture={() => setPhilosophyPaused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setPhilosophyPaused(false);
+          }}
+        >
+          <div className="philosophy-stage" aria-live="polite" aria-atomic="true">
+            {philosophyShots.map((shot, index) => (
+              <img
+                key={shot.src}
+                src={shot.src}
+                alt={shot.alt}
+                className={index === philosophySlide ? "is-active" : undefined}
+                style={{ objectPosition: shot.focus }}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            ))}
+            <div className="philosophy-stage-veil" aria-hidden="true"></div>
+          </div>
+          <div className="philosophy-slide-meta">
+            <div className="philosophy-slide-copy">
+              <small>{String(philosophySlide + 1).padStart(2, "0")} / {String(philosophyShots.length).padStart(2, "0")}</small>
+              <strong>{philosophyShots[philosophySlide].label}</strong>
+            </div>
+            <div className="philosophy-progress" role="tablist" aria-label="Foto della palestra">
+              {philosophyShots.map((shot, index) => (
+                <button
+                  key={shot.src}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === philosophySlide}
+                  aria-label={`Mostra foto: ${shot.label}`}
+                  className={index === philosophySlide ? "is-active" : undefined}
+                  onClick={() => setPhilosophySlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="quote">
+            <span>“</span>
+            <p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p>
+          </div>
         </div>
         <div className="owners-spotlight reveal" aria-label="I titolari di Revenge Gym">
           <figure className="owners-photo">
