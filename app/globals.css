@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  --orange:#ff4d00; --orange-hot:#ff6a2a; --ink:#090909; --ink-soft:#0c0c0c; --ink-panel:#111;
+  --orange:#ff4d00; --orange-hot:#ff6a2a; --boxe-gold:#e2b84a; --boxe-gold-hot:#f0cf6a; --ink:#090909; --ink-soft:#0c0c0c; --ink-panel:#111;
   --burgundy:#681d10; --burgundy-deep:#2d0d09;
   --revenge-gradient:radial-gradient(ellipse 95% 72% at 84% 15%,rgba(104,29,16,.78) 0%,rgba(64,17,11,.54) 34%,transparent 70%),linear-gradient(135deg,#080808 0%,#160a08 62%,#070707 100%);
   --paper:#f2f0e9; --paper-line:#d8d4c8; --paper-muted:#666; --muted:#a3a3a3; --line:#292929;
@@ -85,9 +85,42 @@ img { display:block; width:100%; }
   .machine-ticker-track { animation:none; }
 }
 nav { display:flex; align-items:center; gap:clamp(12px,2vw,2.1vw); font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
-nav > a:not(.nav-cta) { position:relative; white-space:nowrap; }
-nav > a:not(.nav-cta)::after { content:""; position:absolute; left:0; bottom:-8px; width:0; height:2px; background:var(--orange); transition:.25s; }
-nav > a:hover::after { width:100%; }
+nav > a:not(.nav-cta):not(.nav-boxe) { position:relative; white-space:nowrap; }
+nav > a:not(.nav-cta):not(.nav-boxe)::after { content:""; position:absolute; left:0; bottom:-8px; width:0; height:2px; background:var(--orange); transition:.25s; }
+nav > a:not(.nav-cta):not(.nav-boxe):hover::after { width:100%; }
+.nav-boxe {
+  position:relative; z-index:1; white-space:nowrap; color:var(--boxe-gold);
+  text-shadow:0 0 18px rgba(226,184,74,.16); transition:color .25s, text-shadow .35s;
+}
+nav > a.nav-boxe::after {
+  content:""; position:absolute; left:0; bottom:-8px; width:0; height:2px;
+  background:linear-gradient(90deg,var(--boxe-gold),var(--burgundy)); transition:.25s;
+}
+nav > a.nav-boxe:hover::after, nav > a.nav-boxe:focus-visible::after { width:100%; }
+.nav-boxe:hover, .nav-boxe:focus-visible { color:var(--boxe-gold-hot); text-shadow:0 0 22px rgba(240,207,106,.28); }
+.nav-boxe-gloves { position:absolute; inset:-20px -30px -12px; pointer-events:none; }
+.nav-boxe-glove {
+  position:absolute; top:50%; width:36px; height:40px; opacity:0;
+  background:url('/icons/boxing-glove.svg') center/contain no-repeat;
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.62)) drop-shadow(0 2px 0 rgba(255,255,255,.05));
+  transition:opacity .38s ease, transform .42s cubic-bezier(.18,.88,.24,1);
+  will-change:opacity, transform;
+}
+.nav-boxe-glove-left { left:-2px; transform:translateY(-42%) scale(.72) rotate(-22deg); }
+.nav-boxe-glove-right { right:-2px; transform:translateY(-42%) scale(.72) scaleX(-1) rotate(-22deg); }
+@media (hover:hover) and (pointer:fine) {
+  .nav-boxe:hover .nav-boxe-glove, .nav-boxe:focus-visible .nav-boxe-glove { opacity:.92; }
+  .nav-boxe:hover .nav-boxe-glove-left, .nav-boxe:focus-visible .nav-boxe-glove-left {
+    transform:translateY(-58%) scale(1) rotate(-10deg) translateX(-3px);
+  }
+  .nav-boxe:hover .nav-boxe-glove-right, .nav-boxe:focus-visible .nav-boxe-glove-right {
+    transform:translateY(-58%) scale(1) scaleX(-1) rotate(-10deg) translateX(-3px);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .nav-boxe-glove { transition:none; }
+  .nav-boxe:hover .nav-boxe-glove, .nav-boxe:focus-visible .nav-boxe-glove { opacity:.75; transform:translateY(-50%) scale(.9); }
+}
 .nav-cta { padding:13px 18px; background:var(--orange); transition:.25s; }
 .nav-cta:hover,.primary:hover { background:var(--orange-hot); transform:translateY(-2px); }
 .nav-cta span,.button span { margin-left:14px; }
@@ -409,6 +442,7 @@ footer .footer-legal { display:flex; flex-direction:column; align-items:flex-end
   .nav-flyout-panel-inner { box-shadow:none; border-color:#2a2a2a; }
   .nav-flyout:focus-within .nav-flyout-panel { display:flex; }
   .nav-flyout-panel a, .nav-flyout-soon { border-bottom-color:#2a2a2a; }
+  .nav-boxe-gloves { display:none; }
   .hero { min-height:100svh; padding:calc(110px + var(--ticker-h)) 22px 80px; align-items:flex-end; }.hero-shade { background:linear-gradient(180deg,rgba(5,5,5,.55) 0%,rgba(5,5,5,.72) 38%,rgba(5,5,5,.94) 100%),linear-gradient(90deg,rgba(5,5,5,.7),rgba(5,5,5,.25)); }.hero-media { background-position:58% center; }
   .machine-ticker-item span { max-width:145px; font-size:11px; }
   .machine-ticker-item { height:72px; gap:12px; padding:4px 14px 4px 4px; }

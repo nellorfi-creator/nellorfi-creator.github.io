@@ -89,13 +89,19 @@ export default function MachineShowcase() {
         <Link className={styles.siteLink} href="/?skipIntro=1#filosofia" onClick={() => setMenuOpen(false)}>La palestra</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#corsi" onClick={() => setMenuOpen(false)}>Aree</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#mappa" onClick={() => setMenuOpen(false)}>Mappa</Link>
-        <Link className={styles.siteLink} href="/boxe/" onClick={() => setMenuOpen(false)}>Boxe</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#gallery" onClick={() => setMenuOpen(false)}>Gallery</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#magazine" onClick={() => setMenuOpen(false)}>Magazine</Link>
         <Link className={styles.siteLink} href="/macchine/gambe" onClick={() => setMenuOpen(false)}>Gambe</Link>
         <Link className={styles.siteLink} href="/macchine/petto" onClick={() => setMenuOpen(false)}>Petto</Link>
         <span className={styles.navDivider} aria-hidden="true"></span>
         {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => { setActiveMachine(machine.id); setMenuOpen(false); }}>{machine.number}</a>)}
+        <Link href="/boxe/" className="nav-boxe" onClick={() => setMenuOpen(false)}>
+          <span className="nav-boxe-gloves" aria-hidden="true">
+            <span className="nav-boxe-glove nav-boxe-glove-left" />
+            <span className="nav-boxe-glove nav-boxe-glove-right" />
+          </span>
+          Boxe
+        </Link>
         <Link href="/?skipIntro=1#contatti" className={styles.contact} onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></Link>
       </nav>
     </header>

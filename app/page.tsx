@@ -293,7 +293,7 @@ export default function Home() {
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','#filosofia'],['Aree','#corsi'],['Mappa','#mappa'],['Boxe','/boxe/'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
+          {[['La palestra','#filosofia'],['Aree','#corsi'],['Mappa','#mappa'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
           <div className="nav-flyout">
             <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={zoneMenuOpen} onClick={() => setZoneMenuOpen(!zoneMenuOpen)}>Per zona <span>▾</span></button>
             <div className={`nav-flyout-panel${zoneMenuOpen ? " open" : ""}`} role="menu">
@@ -309,6 +309,13 @@ export default function Home() {
             </div>
           </div>
           <Link href="/nuove-macchine" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Nuove macchine</Link>
+          <Link href="/boxe/" className="nav-boxe" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>
+            <span className="nav-boxe-gloves" aria-hidden="true">
+              <span className="nav-boxe-glove nav-boxe-glove-left" />
+              <span className="nav-boxe-glove nav-boxe-glove-right" />
+            </span>
+            Boxe
+          </Link>
           <a className="nav-cta" href="#contatti" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Chiedi info <span>↗</span></a>
         </nav>
       </header>
