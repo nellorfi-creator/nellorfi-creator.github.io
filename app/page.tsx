@@ -259,6 +259,7 @@ export default function Home() {
                 <Link href="/macchine/spalle" role="menuitem">Spalle</Link>
                 <Link href="/macchine/bicipiti" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Bicipiti</Link>
                 <Link href="/macchine/tricipiti" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Tricipiti</Link>
+                <Link href="/macchine/addominali" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Addominali</Link>
               </div>
             </div>
           </div>

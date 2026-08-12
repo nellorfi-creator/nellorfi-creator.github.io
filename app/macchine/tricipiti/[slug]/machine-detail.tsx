@@ -13,6 +13,7 @@ const bodyZones = [
   { label: "Spalle", href: "/macchine/spalle", ready: true },
   { label: "Bicipiti", href: "/macchine/bicipiti", ready: true },
   { label: "Tricipiti", href: "/macchine/tricipiti", ready: true },
+  { label: "Addominali", href: "/macchine/addominali", ready: true },
 ];
 
 type Props = { machine: LegMachine; prev: LegMachine; next: LegMachine };
