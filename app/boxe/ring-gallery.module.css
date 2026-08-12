@@ -157,10 +157,12 @@
 .track {
   display: flex;
   gap: clamp(14px, 2vw, 22px);
-  padding: 8px 7vw 34px;
+  /* Padding laterale ≈ metà viewport: prima/ultima card possono centrarsi davvero
+     (senza questo scrollIntoView/frecce restano bloccati agli estremi). */
+  padding: 8px max(7vw, calc(50% - 160px)) 34px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: 7vw;
+  scroll-padding-inline: max(7vw, calc(50% - 160px));
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -431,8 +433,8 @@
   }
 
   .track {
-    padding-inline: 22px;
-    scroll-padding-inline: 22px;
+    padding-inline: max(22px, calc(50% - 130px));
+    scroll-padding-inline: max(22px, calc(50% - 130px));
   }
 
   .cardStagger {

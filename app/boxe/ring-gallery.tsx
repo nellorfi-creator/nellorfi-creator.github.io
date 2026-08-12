@@ -17,39 +17,91 @@ type RingGalleryProps = {
 
 export default function RingGallery({ photos }: RingGalleryProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(0);
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const featured = photos.filter((p) => p.featured);
   const strip = photos.filter((p) => !p.featured);
 
-  const scrollTo = useCallback((index: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const card = track.children[index] as HTMLElement | undefined;
-    card?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  const syncActive = useCallback((index: number) => {
+    activeRef.current = index;
+    setActive(index);
   }, []);
+
+  const getClosestIndex = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return 0;
+    const cards = Array.from(track.children) as HTMLElement[];
+    if (!cards.length) return 0;
+
+    const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+
+    cards.forEach((card, index) => {
+      const rect = card.getBoundingClientRect();
+      const dist = Math.abs(rect.left + rect.width / 2 - trackCenter);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = index;
+      }
+    });
+
+    return best;
+  }, []);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      const track = trackRef.current;
+      if (!track) return;
+
+      const clamped = Math.max(0, Math.min(strip.length - 1, index));
+      const card = track.children[clamped] as HTMLElement | undefined;
+      if (!card) return;
+
+      const trackRect = track.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      // Posizione assoluta rispetto allo scroll: centra la card nel viewport del track.
+      const target =
+        track.scrollLeft + (cardRect.left - trackRect.left) - (track.clientWidth - cardRect.width) / 2;
+      const maxLeft = Math.max(0, track.scrollWidth - track.clientWidth);
+      const nextLeft = Math.max(0, Math.min(maxLeft, target));
+
+      syncActive(clamped);
+      track.scrollTo({ left: nextLeft, behavior: "smooth" });
+    },
+    [strip.length, syncActive],
+  );
+
+  const goPrev = useCallback(() => {
+    // Usa il massimo: a fine strip lo stato può dire "ultima" mentre il centro
+    // geometrico è ancora sulla penultima — così indietro parte sempre dal punto UI.
+    scrollTo(Math.max(activeRef.current, getClosestIndex()) - 1);
+  }, [getClosestIndex, scrollTo]);
+
+  const goNext = useCallback(() => {
+    scrollTo(Math.max(activeRef.current, getClosestIndex()) + 1);
+  }, [getClosestIndex, scrollTo]);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    const cards = Array.from(track.children) as HTMLElement[];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
-            const idx = cards.indexOf(entry.target as HTMLElement);
-            if (idx >= 0) setActive(idx);
-          }
-        }
-      },
-      { root: track, threshold: [0.55, 0.75] },
-    );
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        syncActive(getClosestIndex());
+      });
+    };
 
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, [strip.length]);
+    track.addEventListener("scroll", onScroll, { passive: true });
+    syncActive(getClosestIndex());
+    return () => track.removeEventListener("scroll", onScroll);
+  }, [getClosestIndex, strip.length, syncActive]);
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -99,10 +151,10 @@ export default function RingGallery({ photos }: RingGalleryProps) {
           <span>{String(strip.length).padStart(2, "0")}</span>
         </div>
         <div className={styles.stripNav}>
-          <button type="button" onClick={() => scrollTo(Math.max(0, active - 1))} disabled={active === 0} aria-label="Round precedente">
+          <button type="button" onClick={goPrev} disabled={active === 0} aria-label="Round precedente">
             ←
           </button>
-          <button type="button" onClick={() => scrollTo(Math.min(strip.length - 1, active + 1))} disabled={active === strip.length - 1} aria-label="Round successivo">
+          <button type="button" onClick={goNext} disabled={active === strip.length - 1} aria-label="Round successivo">
             →
           </button>
         </div>
