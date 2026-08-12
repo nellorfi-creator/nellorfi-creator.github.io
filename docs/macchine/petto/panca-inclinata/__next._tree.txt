@@ -1,3 +1,3 @@
-:HL["/_next/static/chunks/0offs4153y0yr.css","style"]
+:HL["/_next/static/chunks/0oqelvlcts8zj.css","style"]
 :HL["/_next/static/chunks/02wjako_rnscf.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"petto","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"panca-inclinata","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"COF1FwP1rdPKaNyTourt0"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"petto","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"panca-inclinata","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"OcAtBWX-H_JkV7ULUOYvf"}

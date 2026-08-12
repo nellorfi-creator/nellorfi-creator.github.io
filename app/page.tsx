@@ -202,12 +202,17 @@ export default function Home() {
 
   useEffect(() => {
     if (philosophyPaused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => {
       setPhilosophySlide((slide) => (slide + 1) % philosophyShots.length);
     }, 4200);
     return () => window.clearInterval(timer);
   }, [philosophyPaused]);
+
+  const pausePhilosophyHover = (paused: boolean) => {
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    setPhilosophyPaused(paused);
+  };
 
   const closeIntro = () => {
     setIntroClosing(true);
@@ -330,12 +335,8 @@ export default function Home() {
         </div>
         <div
           className="philosophy-visual reveal"
-          onMouseEnter={() => setPhilosophyPaused(true)}
-          onMouseLeave={() => setPhilosophyPaused(false)}
-          onFocusCapture={() => setPhilosophyPaused(true)}
-          onBlurCapture={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setPhilosophyPaused(false);
-          }}
+          onMouseEnter={() => pausePhilosophyHover(true)}
+          onMouseLeave={() => pausePhilosophyHover(false)}
         >
           <div className="philosophy-stage" aria-live="polite" aria-atomic="true">
             {philosophyShots.map((shot, index) => (
@@ -345,8 +346,9 @@ export default function Home() {
                 alt={shot.alt}
                 className={index === philosophySlide ? "is-active" : undefined}
                 style={{ objectPosition: shot.focus }}
-                loading={index === 0 ? "eager" : "lazy"}
+                loading="eager"
                 decoding="async"
+                fetchPriority={index === 0 ? "high" : "low"}
               />
             ))}
             <div className="philosophy-stage-veil" aria-hidden="true"></div>

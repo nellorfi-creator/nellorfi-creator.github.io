@@ -198,6 +198,10 @@ h2 { font-size:clamp(46px,5.8vw,96px); margin:24px 0 38px; }
 .philosophy-progress button {
   width:28px; height:3px; padding:0; border:0; cursor:pointer;
   background:rgba(255,255,255,.28); transition:background .25s ease, transform .25s ease;
+  position:relative;
+}
+.philosophy-progress button::before {
+  content:""; position:absolute; inset:-14px -4px;
 }
 .philosophy-progress button.is-active,
 .philosophy-progress button[aria-selected="true"] {
