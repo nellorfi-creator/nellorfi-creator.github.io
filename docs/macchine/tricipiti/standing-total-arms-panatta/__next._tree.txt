@@ -1,3 +1,3 @@
-:HL["/_next/static/chunks/0za01g6o_2wk_.css","style"]
+:HL["/_next/static/chunks/0u3_1lhuprvoj.css","style"]
 :HL["/_next/static/chunks/17sdx2a7gc.mh.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"tricipiti","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"standing-total-arms-panatta","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"LRkXoQV_CPUEyWwotxPM5"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"tricipiti","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"standing-total-arms-panatta","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"5E5bYFf1bjTWVEoF02PGM"}
