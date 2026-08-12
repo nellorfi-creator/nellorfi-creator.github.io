@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 const bodyZones = [
   { label: "Gambe", href: "/macchine/gambe", ready: true }, { label: "Petto", href: "/macchine/petto", ready: true },
   { label: "Dorso", href: "/macchine/dorso", ready: true }, { label: "Spalle", href: "/macchine/spalle", ready: true },
-  { label: "Braccia", href: "#", ready: false },
+  { label: "Bicipiti", href: "/macchine/bicipiti", ready: true },
 ];
 
 export default function ShouldersHub() {
