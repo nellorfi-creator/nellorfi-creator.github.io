@@ -145,7 +145,9 @@ export default function Home() {
   const [activeZone, setActiveZone] = useState(gymZones[0]);
   const [activeArticle, setActiveArticle] = useState<(typeof magazineArticles)[number] | null>(null);
   const [philosophySlide, setPhilosophySlide] = useState(0);
-  const [philosophyPaused, setPhilosophyPaused] = useState(false);
+  const [philosophyInView, setPhilosophyInView] = useState(false);
+  const [philosophyTimerKey, setPhilosophyTimerKey] = useState(0);
+  const philosophyVisualRef = useRef<HTMLDivElement>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -202,17 +204,39 @@ export default function Home() {
   }, [activeBrand, activeArea, activeArticle]);
 
   useEffect(() => {
-    if (philosophyPaused) return;
-    const timer = window.setInterval(() => {
-      setPhilosophySlide((slide) => (slide + 1) % philosophyShots.length);
-    }, 4200);
-    return () => window.clearInterval(timer);
-  }, [philosophyPaused]);
+    const visual = philosophyVisualRef.current;
+    if (!visual) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setPhilosophyInView(entry.isIntersecting && entry.intersectionRatio >= 0.25),
+      { threshold: [0, 0.25, 0.5, 0.75] },
+    );
+    observer.observe(visual);
+    return () => observer.disconnect();
+  }, []);
 
-  const pausePhilosophyHover = (paused: boolean) => {
-    if (typeof window === "undefined") return;
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    setPhilosophyPaused(paused);
+  useEffect(() => {
+    if (!philosophyInView) return;
+
+    const advance = () => {
+      if (document.hidden) return;
+      setPhilosophySlide((slide) => (slide + 1) % philosophyShots.length);
+    };
+
+    const timer = window.setInterval(advance, 3000);
+    const onVisibility = () => {
+      // Al ritorno tab: riavvia il ciclo invece di restare su una foto “congelata”.
+      if (!document.hidden) setPhilosophyTimerKey((key) => key + 1);
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [philosophyInView, philosophyTimerKey]);
+
+  const selectPhilosophySlide = (index: number) => {
+    setPhilosophySlide(index);
+    setPhilosophyTimerKey((key) => key + 1);
   };
 
   const closeIntro = () => {
@@ -357,11 +381,7 @@ export default function Home() {
           <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist Fitness, Nautilus, Star Trac, Gymleco e Gym Equipe.</p>
           <a href="#contatti" className="text-link orange">Conosci la nostra community <span>↗</span></a>
         </div>
-        <div
-          className="philosophy-visual reveal"
-          onMouseEnter={() => pausePhilosophyHover(true)}
-          onMouseLeave={() => pausePhilosophyHover(false)}
-        >
+        <div className="philosophy-visual reveal" ref={philosophyVisualRef}>
           <div className="philosophy-stage" aria-live="polite" aria-atomic="true">
             {philosophyShots.map((shot, index) => (
               <img
@@ -391,7 +411,7 @@ export default function Home() {
                   aria-selected={index === philosophySlide}
                   aria-label={`Mostra foto: ${shot.label}`}
                   className={index === philosophySlide ? "is-active" : undefined}
-                  onClick={() => setPhilosophySlide(index)}
+                  onClick={() => selectPhilosophySlide(index)}
                 />
               ))}
             </div>

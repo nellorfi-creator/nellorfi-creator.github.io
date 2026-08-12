@@ -1,3 +1,3 @@
-:HL["/_next/static/chunks/10vpoemr-pj90.css","style"]
+:HL["/_next/static/chunks/00gzfki9v6wec.css","style"]
 :HL["/_next/static/chunks/0i0sk.knm3y~~.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"pressa-orizzontale-life-fitness","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"Y9mZNs2wSyxV8xo4o2kRV"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"macchine","param":null,"prefetchHints":0,"slots":{"children":{"name":"gambe","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"pressa-orizzontale-life-fitness","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"HeufRI91GRErWbmhtJS1M"}
