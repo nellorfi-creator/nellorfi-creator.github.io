@@ -12,6 +12,7 @@ const bodyZones = [
   { label: "Dorso", href: "/macchine/dorso", ready: true },
   { label: "Spalle", href: "/macchine/spalle", ready: true },
   { label: "Bicipiti", href: "/macchine/bicipiti", ready: true },
+  { label: "Tricipiti", href: "/macchine/tricipiti", ready: true },
 ];
 
 export default function BicepsHub() {
