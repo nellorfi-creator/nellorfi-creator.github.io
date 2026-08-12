@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./page.module.css";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
+import RingGallery, { type RingPhoto } from "./ring-gallery";
 
 export const metadata: Metadata = {
   title: "Boxe a Ladispoli | Ring e area sacchi · Revenge Gym",
@@ -14,23 +15,23 @@ export const metadata: Metadata = {
   },
 };
 
-const gallery = [
-  ["/photos/boxe/ring-revenge.jpg", "Il ring Revenge"],
-  ["/photos/live/boxe-sacco-jab.webp", "Colpi al sacco"],
-  ["/photos/boxe/sala-ring-sacchi.jpg", "La sala completa"],
-  ["/photos/live/boxe-coach-ring.webp", "Il lavoro dal corner"],
-  ["/photos/boxe/sala-sacchi.jpg", "Area sacchi"],
-  ["/photos/live/boxe-allenamento.webp", "Allenamento tecnico"],
-  ["/photos/live/boxe-cintura.webp", "Esperienza sul ring"],
-  ["/photos/boxe/corner-bono-bianco-nero.jpg", "Il corner"],
-  ["/photos/live/boxe-corner.webp", "Tra un round e l’altro"],
-  ["/photos/live/boxe-evento.webp", "Atmosfera da match"],
-  ["/photos/live/boxe-team-lauro.webp", "Team Lauro Boxe"],
-  ["/photos/boxe/corner-bono.jpg", "Dopo il combattimento"],
-  ["/photos/live/boxe-ring-extra.webp", "Dentro le corde"],
-  ["/photos/live/boxe-allenamento-extra.webp", "Seduta di boxe"],
-  ["/photos/live/boxe-team-extra.webp", "Squadra e carattere"],
-] as const;
+const gallery: RingPhoto[] = [
+  { src: "/photos/boxe/ring-gallery/ring-15.webp", label: "Il lavoro dal corner", round: "15", variant: "landscape", featured: true },
+  { src: "/photos/boxe/ring-gallery/ring-01.webp", label: "In guardia sul ring", round: "01", variant: "portrait", featured: true },
+  { src: "/photos/boxe/ring-gallery/ring-14.webp", label: "Allenamento tecnico", round: "14", variant: "landscape", featured: true },
+  { src: "/photos/boxe/ring-gallery/ring-10.webp", label: "Atmosfera da match", round: "10", variant: "landscape", featured: true },
+  { src: "/photos/boxe/ring-gallery/ring-02.webp", label: "Pronti al gong", round: "02", variant: "square" },
+  { src: "/photos/boxe/ring-gallery/ring-03.webp", label: "Focus e controllo", round: "03", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-04.webp", label: "Dentro le corde", round: "04", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-05.webp", label: "Il corner", round: "05", variant: "landscape" },
+  { src: "/photos/boxe/ring-gallery/ring-06.webp", label: "Sul ring", round: "06", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-07.webp", label: "Colpi al sacco", round: "07", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-08.webp", label: "Tecnica e ritmo", round: "08", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-09.webp", label: "Sotto fatica", round: "09", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-11.webp", label: "Tra un round e l’altro", round: "11", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-12.webp", label: "Presenza sul ring", round: "12", variant: "portrait" },
+  { src: "/photos/boxe/ring-gallery/ring-13.webp", label: "Carattere Revenge", round: "13", variant: "portrait" },
+];
 
 const pillars = [
   ["01", "TECNICA", "Guardia, spostamenti, combinazioni e precisione: ogni dettaglio costruisce un gesto più pulito e consapevole."],
@@ -162,18 +163,9 @@ export default function BoxePage() {
       <section className={styles.gallery} id="gallery">
         <div className={styles.galleryHead}>
           <div><p className={styles.eyebrow}><span /> Dentro Revenge Boxing</p><h2>FOTO DAL RING.<br/><em>NESSUNA POSA.</em></h2></div>
-          <p>La sala, il lavoro, gli atleti e il corner. Immagini reali di un’identità che fa parte di Revenge Gym.</p>
+          <p>La sala, il lavoro, gli atleti e il corner. Scorri round dopo round: niente posa, solo l’energia vera di Revenge Boxing.</p>
         </div>
-        <img
-          className={styles.galleryAthlete}
-          src="/photos/boxe/atleta-pugile-jab.webp"
-          alt="Pugile in jab, Revenge Boxing"
-          loading="lazy"
-          decoding="async"
-        />
-        <div className={styles.galleryGrid}>
-          {gallery.map(([src, label], index) => <figure className={index === 0 || index === 5 || index === 10 ? styles.wide : ""} key={src}><img src={src} alt={label} loading="lazy"/><figcaption><span>{String(index + 1).padStart(2,"0")}</span>{label}</figcaption></figure>)}
-        </div>
+        <RingGallery photos={gallery} />
       </section>
 
       <section className={styles.cta}>
