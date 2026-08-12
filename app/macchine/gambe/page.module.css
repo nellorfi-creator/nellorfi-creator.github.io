@@ -22,7 +22,7 @@
   position:fixed;z-index:100;inset:0 0 auto;height:var(--nav-h);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 3vw;background:rgba(7,7,7,.92);
-  border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 .logo img{width:auto;height:54px}
 .nav nav{display:flex;align-items:center;gap:10px}
@@ -331,7 +331,7 @@
   .gridBody{padding:24px 22px}
   .gridBody span{top:18px;right:19px;font-size:46px}
 }
-.heroMeta div{background:rgba(7,7,7,.2)}
-.gridCard{background:rgba(7,7,7,.2);backdrop-filter:blur(2px)}
+.heroMeta div{background:rgba(7,7,7,.55)}
+.gridCard{background:rgba(7,7,7,.55)}
 .gridMedia{background:radial-gradient(ellipse at 50% 45%,rgba(48,20,15,.34),transparent 72%)}
 .footer{background:rgba(5,5,5,.34)}

@@ -22,7 +22,7 @@
   position:fixed;z-index:100;inset:0 0 auto;height:var(--nav-h);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 3vw;background:rgba(7,7,7,.92);
-  border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 .logo img{width:auto;height:54px}
 .nav nav{display:flex;align-items:center;gap:10px}
@@ -189,7 +189,7 @@
 .dark,.error,.accent{background:transparent}
 .accent{border-left:4px solid var(--orange)}
 .accent li:before{color:var(--orange)}
-.trainer blockquote{background:rgba(7,7,7,.2)}
+.trainer blockquote{background:rgba(7,7,7,.55)}
 .pager a{background:rgba(7,7,7,.16)}
 .footer{background:rgba(5,5,5,.34)}
 

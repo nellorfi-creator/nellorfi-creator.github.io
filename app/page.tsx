@@ -147,8 +147,10 @@ export default function Home() {
   const [philosophySlide, setPhilosophySlide] = useState(0);
   const [philosophyInView, setPhilosophyInView] = useState(false);
   const [philosophyTimerKey, setPhilosophyTimerKey] = useState(0);
+  const [tickerPaused, setTickerPaused] = useState(false);
   const philosophyVisualRef = useRef<HTMLDivElement>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
+  const tickerMachines = legMachines.slice(0, 10);
 
   useEffect(() => {
     const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
@@ -215,6 +217,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const pauseTicker = () => setTickerPaused(document.hidden);
+    pauseTicker();
+    document.addEventListener("visibilitychange", pauseTicker);
+    return () => document.removeEventListener("visibilitychange", pauseTicker);
+  }, []);
+
+  useEffect(() => {
     if (!philosophyInView) return;
 
     const advance = () => {
@@ -233,6 +242,13 @@ export default function Home() {
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [philosophyInView, philosophyTimerKey]);
+
+  const philosophyWindow = [
+    (philosophySlide - 1 + philosophyShots.length) % philosophyShots.length,
+    philosophySlide,
+    (philosophySlide + 1) % philosophyShots.length,
+  ];
+  const philosophyVisible = Array.from(new Set(philosophyWindow));
 
   const selectPhilosophySlide = (index: number) => {
     setPhilosophySlide(index);
@@ -312,7 +328,7 @@ export default function Home() {
         </div> : <div className="intro-flash" aria-live="polite"><strong key={introSlide}>{introFrames[introSlide][1]}</strong><span>{String(introSlide + 1).padStart(2,"0")} / {String(introFrames.length).padStart(2,"0")}</span></div>}
         <button className="intro-skip" type="button" onClick={closeIntro}>Salta intro <span>→</span></button>
         {introStarted && <div className="intro-progress" aria-hidden="true"><span></span></div>}
-        <audio ref={introAudioRef} src="/media/revenge-gym-tour.mp4" loop preload="auto"/>
+        <audio ref={introAudioRef} src="/media/revenge-gym-intro.m4a" loop preload="none"/>
       </section>}
       <header className="nav-wrap">
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
@@ -343,11 +359,11 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className="machine-ticker" aria-label="Anteprima macchinari Revenge Gym" role="presentation">
+      <div className={`machine-ticker${tickerPaused ? " is-paused" : ""}`} aria-label="Anteprima macchinari Revenge Gym" role="presentation">
         <div className="machine-ticker-track">
-          {[...legMachines, ...legMachines].map((machine, index) => (
+          {[...tickerMachines, ...tickerMachines].map((machine, index) => (
             <div className="machine-ticker-item" key={`${machine.id}-${index}`} aria-hidden="true">
-              <img src={machine.image} alt="" />
+              <img src={machine.image} alt="" width={76} height={76} decoding="async" loading={index < 6 ? "eager" : "lazy"} />
               <span>{machine.name}</span>
             </div>
           ))}
@@ -383,18 +399,21 @@ export default function Home() {
         </div>
         <div className="philosophy-visual reveal" ref={philosophyVisualRef}>
           <div className="philosophy-stage" aria-live="polite" aria-atomic="true">
-            {philosophyShots.map((shot, index) => (
-              <img
-                key={shot.src}
-                src={shot.src}
-                alt={shot.alt}
-                className={index === philosophySlide ? "is-active" : undefined}
-                style={{ objectPosition: shot.focus }}
-                loading="eager"
-                decoding="async"
-                fetchPriority={index === 0 ? "high" : "low"}
-              />
-            ))}
+            {philosophyVisible.map((index) => {
+              const shot = philosophyShots[index];
+              return (
+                <img
+                  key={shot.src}
+                  src={shot.src}
+                  alt={shot.alt}
+                  className={index === philosophySlide ? "is-active" : undefined}
+                  style={{ objectPosition: shot.focus }}
+                  loading={index === philosophySlide ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={index === philosophySlide ? "high" : "low"}
+                />
+              );
+            })}
             <div className="philosophy-stage-veil" aria-hidden="true"></div>
           </div>
           <div className="philosophy-slide-meta">
@@ -423,7 +442,7 @@ export default function Home() {
         </div>
         <div className="owners-spotlight reveal" aria-label="I titolari di Revenge Gym">
           <figure className="owners-photo">
-            <img src="/photos/live/gino-stefania-revenge-gym.png" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" />
+            <img src="/photos/live/gino-stefania-revenge-gym.webp" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1797} decoding="async" />
           </figure>
           <div className="owners-copy">
             <p className="eyebrow"><span></span> I titolari</p>
