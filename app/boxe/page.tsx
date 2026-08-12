@@ -165,6 +165,13 @@ export default function BoxePage() {
           <div><p className={styles.eyebrow}><span /> Dentro Revenge Boxing</p><h2>FOTO DAL RING.<br/><em>NESSUNA POSA.</em></h2></div>
           <p>La sala, il lavoro, gli atleti e il corner. Scorri round dopo round: niente posa, solo l’energia vera di Revenge Boxing.</p>
         </div>
+        <img
+          className={styles.galleryAthlete}
+          src="/photos/boxe/atleta-pugile-jab.webp"
+          alt="Pugile in jab, Revenge Boxing"
+          loading="lazy"
+          decoding="async"
+        />
         <RingGallery photos={gallery} />
       </section>
 
