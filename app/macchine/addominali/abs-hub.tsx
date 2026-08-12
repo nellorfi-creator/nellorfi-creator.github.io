@@ -19,7 +19,8 @@ const bodyZones = [
 export default function AbsHub() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [zonesOpen, setZonesOpen] = useState(false);
-  const loop = [...absMachines, ...absMachines];
+  const singleMachine = absMachines.length === 1;
+  const loop = singleMachine ? absMachines : [...absMachines, ...absMachines];
   return (
     <main className={styles.page} id="top">
       <MobileSwipeBack />
@@ -88,13 +89,13 @@ export default function AbsHub() {
             </div>
             <div>
               <strong>01</strong>
-              <span>Passa · pausa · click</span>
+              <span>{singleMachine ? "Apri la scheda" : "Passa · pausa · click"}</span>
             </div>
           </div>
         </div>
         <div className={styles.marqueeWrap} aria-label="Galleria macchine addominali">
-          <p className={styles.marqueeHint}>Scorri con lo sguardo · ferma al passaggio · click per la scheda</p>
-          <div className={styles.marquee}>
+          {!singleMachine && <p className={styles.marqueeHint}>Scorri con lo sguardo · ferma al passaggio · click per la scheda</p>}
+          <div className={`${styles.marquee}${singleMachine ? ` ${styles.marqueeStatic}` : ""}`}>
             <div className={styles.marqueeTrack}>
               {loop.map((machine, index) => (
                 <Link key={`${machine.id}-${index}`} href={`/macchine/addominali/${machine.id}`} className={styles.marqueeCard} aria-label={`${machine.name} · ${machine.brand}`}>
