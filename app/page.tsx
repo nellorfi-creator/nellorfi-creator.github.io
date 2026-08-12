@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
+import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
 
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
@@ -310,9 +311,9 @@ export default function Home() {
           </div>
           <Link href="/nuove-macchine" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Nuove macchine</Link>
           <Link href="/boxe/" className="nav-boxe" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>
-            <img className="nav-boxe-glove nav-boxe-glove-left" src="/icons/boxing-glove.svg?v=4" alt="" aria-hidden="true" width={36} height={40} />
+            <BoxingGloveIcon className="nav-boxe-glove nav-boxe-glove-left" />
             <span className="nav-boxe-label">Boxe</span>
-            <img className="nav-boxe-glove nav-boxe-glove-right" src="/icons/boxing-glove.svg?v=4" alt="" aria-hidden="true" width={36} height={40} />
+            <BoxingGloveIcon className="nav-boxe-glove nav-boxe-glove-right" />
           </Link>
           <a className="nav-cta" href="#contatti" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Chiedi info <span>↗</span></a>
         </nav>

@@ -90,40 +90,42 @@ nav > a:not(.nav-cta):not(.nav-boxe)::after { content:""; position:absolute; lef
 nav > a:not(.nav-cta):not(.nav-boxe):hover::after { width:100%; }
 .nav-boxe {
   position:relative; z-index:1; white-space:nowrap; color:var(--boxe-gold);
-  display:inline-flex; align-items:center; gap:7px;
-  padding:6px 10px; margin-inline:2px;
-  text-shadow:0 0 18px rgba(226,184,74,.16);
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 12px; margin-inline:2px;
+  background:rgba(255,42,42,.1);
+  box-shadow:inset 0 0 0 1px rgba(255,42,42,.28);
+  text-shadow:0 0 18px rgba(226,184,74,.2);
   transition:color .25s, text-shadow .35s, background .25s, box-shadow .25s, transform .25s;
 }
-.nav-boxe-label { position:relative; z-index:1; }
+.nav-boxe-label { position:relative; z-index:1; font-weight:800; }
 nav > a.nav-boxe::after {
-  content:""; position:absolute; left:10px; right:10px; bottom:2px; width:auto; height:2px;
-  background:linear-gradient(90deg,var(--boxe-gold),#ff4433); transition:transform .25s; transform:scaleX(0); transform-origin:left;
+  content:""; position:absolute; left:12px; right:12px; bottom:3px; height:2px;
+  background:linear-gradient(90deg,var(--boxe-gold),#ff2a2a); transition:transform .25s; transform:scaleX(0); transform-origin:left;
 }
 nav > a.nav-boxe:hover::after, nav > a.nav-boxe:focus-visible::after { transform:scaleX(1); }
 .nav-boxe-glove {
-  flex:none; display:block; width:36px; height:40px; object-fit:contain;
-  filter:drop-shadow(0 0 6px rgba(255,68,51,.85)) drop-shadow(0 2px 4px rgba(0,0,0,.45));
+  flex:none; display:block; width:46px; height:50px;
+  filter:drop-shadow(0 0 8px rgba(255,42,42,.95)) drop-shadow(0 2px 5px rgba(0,0,0,.5));
   transition:transform .28s ease, filter .28s ease;
 }
-.nav-boxe-glove-left { transform:rotate(-14deg); }
-.nav-boxe-glove-right { transform:scaleX(-1) rotate(-14deg); }
+.nav-boxe-glove-left { transform:rotate(-12deg); }
+.nav-boxe-glove-right { transform:scaleX(-1) rotate(-12deg); }
 @media (hover:hover) and (pointer:fine) {
   .nav-boxe:hover, .nav-boxe:focus-visible {
     color:var(--boxe-gold-hot);
-    text-shadow:0 0 24px rgba(240,207,106,.42);
-    background:rgba(255,68,51,.12);
-    box-shadow:0 0 0 1px rgba(255,213,74,.35), 0 8px 24px rgba(255,68,51,.28);
+    text-shadow:0 0 24px rgba(240,207,106,.5);
+    background:rgba(255,42,42,.2);
+    box-shadow:inset 0 0 0 1px rgba(255,213,74,.45), 0 8px 24px rgba(255,42,42,.35);
     transform:translateY(-1px);
   }
   .nav-boxe:hover .nav-boxe-glove, .nav-boxe:focus-visible .nav-boxe-glove {
-    filter:drop-shadow(0 0 12px rgba(255,68,51,1)) drop-shadow(0 0 4px rgba(255,213,74,.7)) drop-shadow(0 4px 8px rgba(0,0,0,.5));
+    filter:drop-shadow(0 0 14px rgba(255,42,42,1)) drop-shadow(0 0 6px rgba(255,213,74,.8)) drop-shadow(0 4px 8px rgba(0,0,0,.55));
   }
   .nav-boxe:hover .nav-boxe-glove-left, .nav-boxe:focus-visible .nav-boxe-glove-left {
-    transform:rotate(-6deg) scale(1.12) translateX(-2px);
+    transform:rotate(-4deg) scale(1.14) translateX(-3px);
   }
   .nav-boxe:hover .nav-boxe-glove-right, .nav-boxe:focus-visible .nav-boxe-glove-right {
-    transform:scaleX(-1) rotate(-6deg) scale(1.12) translateX(-2px);
+    transform:scaleX(-1) rotate(-4deg) scale(1.14) translateX(-3px);
   }
 }
 @media (prefers-reduced-motion:reduce) {
@@ -450,8 +452,8 @@ footer .footer-legal { display:flex; flex-direction:column; align-items:flex-end
   .nav-flyout-panel-inner { box-shadow:none; border-color:#2a2a2a; }
   .nav-flyout:focus-within .nav-flyout-panel { display:flex; }
   .nav-flyout-panel a, .nav-flyout-soon { border-bottom-color:#2a2a2a; }
-  .nav-boxe { width:100%; justify-content:flex-start; gap:10px; padding:15px 4px; }
-  .nav-boxe-glove { width:40px; height:44px; }
+  .nav-boxe { width:100%; justify-content:flex-start; gap:12px; padding:15px 4px; }
+  .nav-boxe-glove { width:44px; height:48px; }
   .hero { min-height:100svh; padding:calc(110px + var(--ticker-h)) 22px 80px; align-items:flex-end; }.hero-shade { background:linear-gradient(180deg,rgba(5,5,5,.55) 0%,rgba(5,5,5,.72) 38%,rgba(5,5,5,.94) 100%),linear-gradient(90deg,rgba(5,5,5,.7),rgba(5,5,5,.25)); }.hero-media { background-position:58% center; }
   .machine-ticker-item span { max-width:145px; font-size:11px; }
   .machine-ticker-item { height:72px; gap:12px; padding:4px 14px 4px 4px; }
