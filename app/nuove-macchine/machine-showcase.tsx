@@ -96,11 +96,9 @@ export default function MachineShowcase() {
         <span className={styles.navDivider} aria-hidden="true"></span>
         {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => { setActiveMachine(machine.id); setMenuOpen(false); }}>{machine.number}</a>)}
         <Link href="/boxe/" className="nav-boxe" onClick={() => setMenuOpen(false)}>
-          <span className="nav-boxe-gloves" aria-hidden="true">
-            <span className="nav-boxe-glove nav-boxe-glove-left" />
-            <span className="nav-boxe-glove nav-boxe-glove-right" />
-          </span>
-          Boxe
+          <img className="nav-boxe-glove nav-boxe-glove-left" src="/icons/boxing-glove.svg?v=4" alt="" aria-hidden="true" width={36} height={40} />
+          <span className="nav-boxe-label">Boxe</span>
+          <img className="nav-boxe-glove nav-boxe-glove-right" src="/icons/boxing-glove.svg?v=4" alt="" aria-hidden="true" width={36} height={40} />
         </Link>
         <Link href="/?skipIntro=1#contatti" className={styles.contact} onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></Link>
       </nav>

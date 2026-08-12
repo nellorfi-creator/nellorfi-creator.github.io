@@ -310,11 +310,9 @@ export default function Home() {
           </div>
           <Link href="/nuove-macchine" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Nuove macchine</Link>
           <Link href="/boxe/" className="nav-boxe" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>
-            <span className="nav-boxe-gloves" aria-hidden="true">
-              <span className="nav-boxe-glove nav-boxe-glove-left" />
-              <span className="nav-boxe-glove nav-boxe-glove-right" />
-            </span>
-            Boxe
+            <img className="nav-boxe-glove nav-boxe-glove-left" src="/icons/boxing-glove.svg?v=4" alt="" aria-hidden="true" width={36} height={40} />
+            <span className="nav-boxe-label">Boxe</span>
+            <img className="nav-boxe-glove nav-boxe-glove-right" src="/icons/boxing-glove.svg?v=4" alt="" aria-hidden="true" width={36} height={40} />
           </Link>
           <a className="nav-cta" href="#contatti" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Chiedi info <span>↗</span></a>
         </nav>
