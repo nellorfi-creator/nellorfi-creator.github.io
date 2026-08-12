@@ -307,7 +307,7 @@ export default function Home() {
           <a href="#contatti" className="text-link orange">Conosci la nostra community <span>↗</span></a>
         </div>
         <div className="philosophy-image reveal">
-          <img src="/media/sala-attrezzi.webp" alt="Vista panoramica della sala attrezzi di Revenge Gym" loading="lazy" />
+          <img src="/photos/revenge-gym-02.jpg" alt="Atleta in allenamento nella sala pesi di Revenge Gym" loading="lazy" />
           <div className="quote"><span>“</span><p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p></div>
         </div>
         <div className="owners-spotlight reveal" aria-label="I titolari di Revenge Gym">
