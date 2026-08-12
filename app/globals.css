@@ -90,36 +90,40 @@ nav > a:not(.nav-cta):not(.nav-boxe)::after { content:""; position:absolute; lef
 nav > a:not(.nav-cta):not(.nav-boxe):hover::after { width:100%; }
 .nav-boxe {
   position:relative; z-index:1; white-space:nowrap; color:var(--boxe-gold);
+  padding-inline:10px; margin-inline:2px;
   text-shadow:0 0 18px rgba(226,184,74,.16); transition:color .25s, text-shadow .35s;
 }
 nav > a.nav-boxe::after {
-  content:""; position:absolute; left:0; bottom:-8px; width:0; height:2px;
-  background:linear-gradient(90deg,var(--boxe-gold),var(--burgundy)); transition:.25s;
+  content:""; position:absolute; left:10px; right:10px; bottom:-8px; width:auto; height:2px;
+  background:linear-gradient(90deg,var(--boxe-gold),var(--burgundy)); transition:transform .25s; transform:scaleX(0); transform-origin:left;
 }
-nav > a.nav-boxe:hover::after, nav > a.nav-boxe:focus-visible::after { width:100%; }
+nav > a.nav-boxe:hover::after, nav > a.nav-boxe:focus-visible::after { transform:scaleX(1); }
 .nav-boxe:hover, .nav-boxe:focus-visible { color:var(--boxe-gold-hot); text-shadow:0 0 22px rgba(240,207,106,.28); }
-.nav-boxe-gloves { position:absolute; inset:-20px -30px -12px; pointer-events:none; }
+.nav-boxe-gloves { position:absolute; inset:-28px -52px -16px; pointer-events:none; overflow:visible; }
 .nav-boxe-glove {
-  position:absolute; top:50%; width:36px; height:40px; opacity:0;
+  position:absolute; top:50%; width:52px; height:58px; opacity:0;
   background:url('/icons/boxing-glove.svg') center/contain no-repeat;
-  filter:drop-shadow(0 10px 16px rgba(0,0,0,.62)) drop-shadow(0 2px 0 rgba(255,255,255,.05));
-  transition:opacity .38s ease, transform .42s cubic-bezier(.18,.88,.24,1);
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.55)) drop-shadow(0 0 12px rgba(216,36,36,.35));
+  transition:opacity .32s ease, transform .4s cubic-bezier(.18,.88,.24,1), filter .35s ease;
   will-change:opacity, transform;
 }
-.nav-boxe-glove-left { left:-2px; transform:translateY(-42%) scale(.72) rotate(-22deg); }
-.nav-boxe-glove-right { right:-2px; transform:translateY(-42%) scale(.72) scaleX(-1) rotate(-22deg); }
+.nav-boxe-glove-left { left:-24px; transform:translateY(-48%) scale(.65) rotate(-28deg); }
+.nav-boxe-glove-right { right:-24px; transform:translateY(-48%) scale(.65) scaleX(-1) rotate(-28deg); }
 @media (hover:hover) and (pointer:fine) {
-  .nav-boxe:hover .nav-boxe-glove, .nav-boxe:focus-visible .nav-boxe-glove { opacity:.92; }
+  .nav-boxe:hover .nav-boxe-glove, .nav-boxe:focus-visible .nav-boxe-glove {
+    opacity:1;
+    filter:drop-shadow(0 10px 18px rgba(0,0,0,.65)) drop-shadow(0 0 16px rgba(255,90,66,.55)) drop-shadow(0 0 4px rgba(226,184,74,.4));
+  }
   .nav-boxe:hover .nav-boxe-glove-left, .nav-boxe:focus-visible .nav-boxe-glove-left {
-    transform:translateY(-58%) scale(1) rotate(-10deg) translateX(-3px);
+    transform:translateY(-62%) scale(1.08) rotate(-14deg) translateX(-6px);
   }
   .nav-boxe:hover .nav-boxe-glove-right, .nav-boxe:focus-visible .nav-boxe-glove-right {
-    transform:translateY(-58%) scale(1) scaleX(-1) rotate(-10deg) translateX(-3px);
+    transform:translateY(-62%) scale(1.08) scaleX(-1) rotate(-14deg) translateX(-6px);
   }
 }
 @media (prefers-reduced-motion:reduce) {
   .nav-boxe-glove { transition:none; }
-  .nav-boxe:hover .nav-boxe-glove, .nav-boxe:focus-visible .nav-boxe-glove { opacity:.75; transform:translateY(-50%) scale(.9); }
+  .nav-boxe:hover .nav-boxe-glove, .nav-boxe:focus-visible .nav-boxe-glove { opacity:.9; transform:translateY(-55%) scale(.95); }
 }
 .nav-cta { padding:13px 18px; background:var(--orange); transition:.25s; }
 .nav-cta:hover,.primary:hover { background:var(--orange-hot); transform:translateY(-2px); }

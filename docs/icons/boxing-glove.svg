@@ -1,22 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72" fill="none" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 80" fill="none" aria-hidden="true">
   <defs>
-    <linearGradient id="gloveBody" x1="18" y1="8" x2="52" y2="66" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#4a1510"/>
-      <stop offset=".45" stop-color="#7a2418"/>
-      <stop offset="1" stop-color="#2a0c08"/>
+    <linearGradient id="gloveRed" x1="14" y1="6" x2="58" y2="72" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff5a42"/>
+      <stop offset=".42" stop-color="#d82424"/>
+      <stop offset="1" stop-color="#8f1414"/>
     </linearGradient>
-    <linearGradient id="gloveHighlight" x1="24" y1="10" x2="40" y2="42" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#c96a52" stop-opacity=".55"/>
-      <stop offset="1" stop-color="#c96a52" stop-opacity="0"/>
+    <linearGradient id="gloveShine" x1="28" y1="10" x2="48" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="gloveCuff" x1="16" y1="48" x2="48" y2="68" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1a0907"/>
-      <stop offset="1" stop-color="#3d1210"/>
+    <linearGradient id="gloveCuff" x1="18" y1="52" x2="54" y2="76" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1a1a1a"/>
+      <stop offset="1" stop-color="#333"/>
     </linearGradient>
   </defs>
-  <path d="M34 6c8 0 14 5 16 13 1 4 1 8-1 12-2 5-6 9-11 11l-2 18c-.5 3-3 5-6 5h-8c-3 0-5-2-6-5l-3-20c-2-11 4-22 15-26 2-1 4-1 6-1v3z" fill="url(#gloveBody)"/>
-  <path d="M34 6c8 0 14 5 16 13 1 4 1 8-1 12-2 5-6 9-11 11l-2 18c-.5 3-3 5-6 5h-8c-3 0-5-2-6-5l-3-20c-2-11 4-22 15-26 2-1 4-1 6-1v3z" fill="url(#gloveHighlight)"/>
-  <path d="M18 48h28l2 12c.4 2.5-1.2 4.8-3.7 5.2-2.5.4-4.8-1.2-5.2-3.7l-1-8H22l-1 8c-.4 2.5-2.7 4.1-5.2 3.7-2.5-.4-4.1-2.7-3.7-5.2L18 48z" fill="url(#gloveCuff)"/>
-  <path d="M22 52h20" stroke="#120605" stroke-opacity=".45" stroke-width="1.2"/>
-  <ellipse cx="40" cy="22" rx="5" ry="7" fill="#fff" fill-opacity=".06"/>
+  <!-- Guantone: sagoma più leggibile, rosso classico, polso scuro con striscia -->
+  <path d="M38 4c9.5 0 17 6 19 15 1.2 4.8 1 9.6-1.2 14-2.4 5.8-7 10.6-13 12.8l-2.2 20c-.6 3.4-3.4 5.8-6.8 5.8h-9c-3.4 0-6-2.4-6.8-5.8l-3.4-22C12.2 24.8 19 12 31 7.2 33.4 5.8 35.8 4.8 38 4Z" fill="url(#gloveRed)"/>
+  <path d="M38 4c9.5 0 17 6 19 15 1.2 4.8 1 9.6-1.2 14-2.4 5.8-7 10.6-13 12.8l-2.2 20c-.6 3.4-3.4 5.8-6.8 5.8h-9c-3.4 0-6-2.4-6.8-5.8l-3.4-22C12.2 24.8 19 12 31 7.2 33.4 5.8 35.8 4.8 38 4Z" fill="url(#gloveShine)"/>
+  <path d="M20 50h32l2.4 13.5c.5 2.8-1.4 5.4-4.2 5.8-2.8.5-5.4-1.4-5.8-4.2l-1.2-9H24l-1.2 9c-.5 2.8-3 4.7-5.8 4.2-2.8-.5-4.7-3-4.2-5.8L20 50Z" fill="url(#gloveCuff)"/>
+  <path d="M20 56.5h32" stroke="#e2b84a" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M20 62h32" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/>
+  <ellipse cx="46" cy="24" rx="6" ry="8" fill="#fff" fill-opacity=".18"/>
 </svg>
