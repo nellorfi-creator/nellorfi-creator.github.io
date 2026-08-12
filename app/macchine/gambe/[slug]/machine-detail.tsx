@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { LegMachine } from "@/lib/leg-machines";
+import { getSheetPath, hasMachineSheet } from "@/lib/machine-sheets";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import styles from "./page.module.css";
 
@@ -92,6 +93,12 @@ export default function MachineDetail({ machine, prev, next }: Props) {
           </h1>
           <p>{machine.tagline}</p>
           <b>{machine.focus}</b>
+          {hasMachineSheet(machine.id) ? (
+            <Link href={getSheetPath("gambe", machine.id)} className={styles.sheetLink}>
+              Scarica la scheda · {machine.name}
+              <span aria-hidden="true">↗</span>
+            </Link>
+          ) : null}
         </div>
         <figure className={styles.heroPhoto}>
           <span className={styles.photoNumber} aria-hidden="true">{machine.number}</span>
