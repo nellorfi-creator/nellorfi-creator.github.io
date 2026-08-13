@@ -107,16 +107,10 @@ const equipmentBrands = [
   },
 ];
 
-const introFrames = [
-  ["/photos/live/hero-sala.webp", "RIVINCITA"],
-  ["/media/sala-attrezzi.webp", "FORZA"],
-  ["/photos/live/sala-isotonica-oggi.webp", "POTENZA"],
-  ["/photos/live/sala-community.webp", "ENERGIA"],
-  ["/photos/live/boxe-coach-ring.webp", "BOXE"],
-  ["/photos/live/sala-cavi-oggi.webp", "DISCIPLINA"],
-  ["/photos/live/boxe-sacchi.webp", "CARATTERE"],
-  ["/photos/live/hero-sala.webp", "REVENGE GYM"],
-];
+const introBeats = ["RIVINCITA", "FORZA", "POTENZA", "ENERGIA", "BOXE", "DISCIPLINA", "CARATTERE", "REVENGE GYM"];
+const INTRO_BEAT_MS = 1210;
+const INTRO_CLOSE_MS = 9800;
+const INTRO_EXIT_MS = 10500;
 
 const gymZones = [
   { id: "free", number: "01", title: "Pesi liberi", subtitle: "Forza e fondamentali", className: "zone-free", image: "/photos/live/pesi-liberi-oggi.webp", text: "L’area dedicata a bilancieri, manubri e panche: il punto di partenza per costruire forza, tecnica e massa muscolare.", equipment: ["Panche e postazioni regolabili", "Manubri e bilancieri", "Spazio per i principali esercizi multiarticolari"] },
@@ -137,7 +131,6 @@ export default function Home() {
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [introVisible, setIntroVisible] = useState(true);
   const [introClosing, setIntroClosing] = useState(false);
-  const [introStarted, setIntroStarted] = useState(false);
   const [introSlide, setIntroSlide] = useState(0);
   const [introSound, setIntroSound] = useState(false);
   const [activeBrand, setActiveBrand] = useState<(typeof equipmentBrands)[number] | null>(null);
@@ -150,12 +143,15 @@ export default function Home() {
   const [tickerPaused, setTickerPaused] = useState(false);
   const philosophyVisualRef = useRef<HTMLDivElement>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
+  const introVideoRef = useRef<HTMLVideoElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const tickerMachines = legMachines.slice(0, 10);
 
   useEffect(() => {
     const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
     const alreadySeen = window.sessionStorage.getItem("revenge-intro-seen") === "1";
-    if (!skipRequested && !alreadySeen) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!skipRequested && !alreadySeen && !reducedMotion) return;
     const skipTimer = window.setTimeout(() => setIntroVisible(false), 0);
     return () => window.clearTimeout(skipTimer);
   }, []);
@@ -169,20 +165,41 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!introVisible || !introStarted) return;
-    const slideTimer = window.setInterval(() => setIntroSlide((slide) => Math.min(slide + 1, introFrames.length - 1)), 720);
-    const closingTimer = window.setTimeout(() => setIntroClosing(true), 6400);
+    if (!introVisible) return;
+    const slideTimer = window.setInterval(() => setIntroSlide((slide) => Math.min(slide + 1, introBeats.length - 1)), INTRO_BEAT_MS);
+    const closingTimer = window.setTimeout(() => setIntroClosing(true), INTRO_CLOSE_MS);
     const exitTimer = window.setTimeout(() => {
       introAudioRef.current?.pause();
+      introVideoRef.current?.pause();
       window.sessionStorage.setItem("revenge-intro-seen", "1");
       setIntroVisible(false);
-    }, 7100);
+    }, INTRO_EXIT_MS);
     return () => {
       window.clearInterval(slideTimer);
       window.clearTimeout(closingTimer);
       window.clearTimeout(exitTimer);
     };
-  }, [introVisible, introStarted]);
+  }, [introVisible]);
+
+  useEffect(() => {
+    if (!introVisible) return;
+    const audio = introAudioRef.current;
+    if (!audio) return;
+    audio.volume = 0.55;
+    audio.play().then(() => setIntroSound(true)).catch(() => setIntroSound(false));
+  }, [introVisible]);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    const sync = () => {
+      if (document.hidden || introVisible) video.pause();
+      else video.play().catch(() => {});
+    };
+    sync();
+    document.addEventListener("visibilitychange", sync);
+    return () => document.removeEventListener("visibilitychange", sync);
+  }, [introVisible]);
 
   useEffect(() => {
     if (!introVisible && !activeBrand && !activeArea && !activeArticle) return;
@@ -258,6 +275,7 @@ export default function Home() {
   const closeIntro = () => {
     setIntroClosing(true);
     introAudioRef.current?.pause();
+    introVideoRef.current?.pause();
     window.sessionStorage.setItem("revenge-intro-seen", "1");
     window.setTimeout(() => setIntroVisible(false), 700);
   };
@@ -273,15 +291,6 @@ export default function Home() {
       audio.pause();
       setIntroSound(false);
     }
-  };
-
-  const startIntro = async () => {
-    const audio = introAudioRef.current;
-    if (audio) {
-      audio.volume = 0.55;
-      try { await audio.play(); setIntroSound(true); } catch { setIntroSound(false); }
-    }
-    setIntroStarted(true);
   };
 
   const submitForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -312,22 +321,19 @@ export default function Home() {
     <main>
       {(activeBrand || activeArea || activeArticle) && <MobileSwipeBack edgeOnly={false} label="Chiudi" onSwipe={() => { setActiveBrand(null); setActiveArea(null); setActiveArticle(null); }} />}
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
-        <div className={`intro-frames${introStarted ? " is-running" : ""}`}>
-          <img key={introStarted ? introSlide : "cover"} src={introStarted ? introFrames[introSlide][0] : "/photos/live/hero-sala.webp"} alt="Sequenza degli spazi e degli allenamenti di Revenge Gym"/>
+        <div className="intro-frames is-running">
+          <video ref={introVideoRef} className="intro-video" autoPlay muted playsInline preload="auto" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true" onEnded={closeIntro}>
+            <source src="/media/intro-cinematic.mp4" type="video/mp4" />
+          </video>
         </div>
         <div className="intro-shade"></div>
         <div className="intro-logo logo"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></div>
-        {introStarted && <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
+        <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
           <i>{introSound ? "▮▮" : "▶"}</i> {introSound ? "Musica attiva" : "Attiva musica"}
-        </button>}
-        {!introStarted ? <div className="intro-content intro-launch">
-          <p className="intro-kicker"><span></span> Ladispoli · Sala pesi · Boxe</p>
-          <h2>LA TUA<br/><em>RIVINCITA</em><br/>INIZIA QUI.</h2>
-          <p>Alza il volume. Entra nell’esperienza.</p>
-          <button className="button primary intro-start" type="button" onClick={startIntro}><i>▶</i> Avvia con musica</button>
-        </div> : <div className="intro-flash" aria-live="polite"><strong key={introSlide}>{introFrames[introSlide][1]}</strong><span>{String(introSlide + 1).padStart(2,"0")} / {String(introFrames.length).padStart(2,"0")}</span></div>}
+        </button>
+        <div className="intro-flash" aria-live="polite"><strong key={introSlide}>{introBeats[introSlide]}</strong><span>{String(introSlide + 1).padStart(2,"0")} / {String(introBeats.length).padStart(2,"0")}</span></div>
         <button className="intro-skip" type="button" onClick={closeIntro}>Salta intro <span>→</span></button>
-        {introStarted && <div className="intro-progress" aria-hidden="true"><span></span></div>}
+        <div className="intro-progress" aria-hidden="true"><span></span></div>
         <audio ref={introAudioRef} src="/media/revenge-gym-intro.m4a" loop preload="none"/>
       </section>}
       <header className="nav-wrap">
@@ -371,7 +377,11 @@ export default function Home() {
       </div>
 
       <section className="hero" id="home">
-        <div className="hero-media" role="img" aria-label="Sala attrezzi di Revenge Gym a Ladispoli"></div>
+        <div className="hero-media" role="img" aria-label="Sala attrezzi di Revenge Gym a Ladispoli">
+          <video ref={heroVideoRef} className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true">
+            <source src="/media/hero-loop.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div className="hero-shade"></div>
         <div className="hero-content reveal">
           <p className="eyebrow"><span></span> Sala pesi · Ladispoli</p>
