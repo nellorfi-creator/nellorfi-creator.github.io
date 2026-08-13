@@ -4,6 +4,7 @@ import ChestHub from "./chest-hub";
 export const metadata: Metadata = {
   title: "Allenamento Petto | 12 macchine | Revenge Gym Ladispoli",
   description: "Esplora le 12 postazioni per il petto di Revenge Gym: presse, panche, Pec Fly, Panatta, HOIST, Life Fitness e Precor, con schede complete.",
+  alternates: { canonical: "/macchine/petto/" },
   openGraph: {
     title: "Allenamento Petto | Revenge Gym",
     description: "Catalogo completo dell’area petto di Revenge Gym Ladispoli.",

@@ -1,5 +1,6 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import Link from "next/link";
 import type { LegMachine } from "@/lib/leg-machines";
 import type { MachineSheet } from "@/lib/machine-sheets";
@@ -30,7 +31,7 @@ export default function MachineSheetView({ machine, sheet }: Props) {
       <article className={styles.sheet} id="machine-sheet">
         <header className={styles.header}>
           <div className={styles.brandRow}>
-            <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" className={styles.logo} />
+            <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" className={styles.logo} />
             <div className={styles.meta}>
               <span>Gambe · {machine.number}</span>
               <strong>{machine.brand}</strong>
@@ -45,7 +46,7 @@ export default function MachineSheetView({ machine, sheet }: Props) {
 
         <section className={styles.illustrationBlock} aria-label="Schema d’uso">
           <figure className={styles.photoRef}>
-            <img src={machine.image} alt={machine.alt} />
+            <SiteImage src={machine.image} alt={machine.alt} />
             <figcaption>Foto reale · {machine.name} {machine.brand} in sala</figcaption>
           </figure>
           <LegSheetIllustration type={sheet.illustration} machineName={machine.name} />

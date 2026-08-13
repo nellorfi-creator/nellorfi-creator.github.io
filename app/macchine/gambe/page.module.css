@@ -10,7 +10,7 @@
   overflow-x:hidden;
 }
 .page h1,.page h2,.page h3{
-  font-family:'Barlow Condensed',sans-serif;
+  font-family:var(--font-barlow),sans-serif;
   text-transform:uppercase;
   overflow-wrap:normal;
   word-break:normal;
@@ -29,12 +29,12 @@
 .siteLink{
   display:grid;place-items:center;height:34px;padding:0 8px;
   color:#d8d8d8;border-bottom:2px solid transparent;
-  font:700 10px 'Inter';letter-spacing:.8px;text-transform:uppercase;transition:.2s;
+  font:700 10px var(--font-inter);letter-spacing:.8px;text-transform:uppercase;transition:.2s;
 }
 .siteLink:hover{color:#fff;border-color:var(--orange)}
 .contact{
   display:grid;place-items:center;height:34px;padding:0 16px;
-  color:#fff;background:var(--orange);font:800 11px 'Inter';letter-spacing:.6px;transition:.2s;
+  color:#fff;background:var(--orange);font:800 11px var(--font-inter);letter-spacing:.6px;transition:.2s;
 }
 .contact:hover{background:var(--orange-hot)}
 .menuToggle{display:none}
@@ -42,7 +42,7 @@
 .zoneMenu{position:relative}
 .zoneTrigger{
   height:34px;padding:0 10px;color:#fff;background:transparent;
-  border:1px solid #3a3a3a;font:800 9px 'Inter';letter-spacing:.8px;
+  border:1px solid #3a3a3a;font:800 9px var(--font-inter);letter-spacing:.8px;
   text-transform:uppercase;cursor:pointer;transition:.2s;
 }
 .zoneTrigger span{margin-left:6px;color:var(--orange)}
@@ -62,7 +62,7 @@
 }
 .zonePanel a,.zonePanel span{
   display:flex;align-items:center;justify-content:space-between;
-  min-height:40px;padding:0 12px;color:#ddd;font:700 11px 'Inter';
+  min-height:40px;padding:0 12px;color:#ddd;font:700 11px var(--font-inter);
   letter-spacing:.6px;text-transform:uppercase;border-bottom:1px solid #222;
 }
 .zonePanel a:last-child,.zonePanel span:last-child{border:0}
@@ -107,7 +107,7 @@
   animation:riseIn .85s .18s both;
 }
 .heroMeta div{padding:16px 22px;background:#111}
-.heroMeta strong{display:block;font:800 28px 'Barlow Condensed'}
+.heroMeta strong{display:block;font:800 28px var(--font-barlow)}
 .heroMeta span{color:#888;font-size:9px;text-transform:uppercase;letter-spacing:1.3px}
 
 .marqueeWrap{position:relative;z-index:3;padding:10px 0 42px}
@@ -142,7 +142,7 @@
   letter-spacing:1.2px;text-transform:uppercase;
 }
 .marqueeCard b{
-  display:block;margin-top:4px;font:800 18px/1.05 'Barlow Condensed';text-transform:uppercase;
+  display:block;margin-top:4px;font:800 18px/1.05 var(--font-barlow);text-transform:uppercase;
 }
 .marqueeCard:hover{
   z-index:5;transform:scale(1.22) translateY(-10px);
@@ -179,9 +179,9 @@
 .gridMedia img{width:100%;height:180px;object-fit:contain;filter:drop-shadow(0 14px 22px rgba(0,0,0,.5));transition:transform .4s}
 .gridCard:hover .gridMedia img{transform:scale(1.05)}
 .gridBody{display:flex;flex-direction:column;padding:20px 22px 22px}
-.gridBody span{color:var(--orange);font:800 12px 'Barlow Condensed'}
+.gridBody span{color:var(--orange);font:800 12px var(--font-barlow)}
 .gridBody small{margin-top:auto;color:#777;font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}
-.gridBody strong{margin:8px 0 10px;font:900 clamp(22px,2.2vw,34px)/.92 'Barlow Condensed';text-transform:uppercase}
+.gridBody strong{margin:8px 0 10px;font:900 clamp(22px,2.2vw,34px)/.92 var(--font-barlow);text-transform:uppercase}
 .gridBody p{margin:0 0 14px;color:#9a9a9a;font-size:12px;line-height:1.5}
 .gridBody i{color:var(--orange);font-size:10px;font-style:normal;font-weight:800;text-transform:uppercase}
 
@@ -315,7 +315,7 @@
 }
 .gridBody span{
   position:absolute;top:20px;right:22px;color:rgba(255,255,255,.82);
-  font:900 52px/.8 'Barlow Condensed';letter-spacing:-.04em;text-shadow:0 4px 20px rgba(0,0,0,.45);
+  font:900 52px/.8 var(--font-barlow);letter-spacing:-.04em;text-shadow:0 4px 20px rgba(0,0,0,.45);
 }
 .gridBody small{margin:0 0 8px;color:var(--orange);font-size:9px}
 .gridBody strong{max-width:95%;margin:0 0 10px;font-size:clamp(27px,2.5vw,40px);text-shadow:0 3px 20px rgba(0,0,0,.8)}

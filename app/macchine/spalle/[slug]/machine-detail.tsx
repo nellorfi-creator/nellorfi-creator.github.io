@@ -1,10 +1,11 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useState } from "react";
 import Link from "next/link";
 import type { LegMachine } from "@/lib/leg-machines";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
-import styles from "./page.module.css";
+import styles from "../../machine-detail.module.css";
 
 const bodyZones = [
   { label: "Gambe", href: "/macchine/gambe", ready: true }, { label: "Petto", href: "/macchine/petto", ready: true },
@@ -20,10 +21,10 @@ export default function ShoulderMachineDetail({ machine, prev, next }: Props) {
   const nameParts = machine.name.split(" "); const last = nameParts.pop() ?? machine.name; const first = nameParts.join(" ");
   return <main className={styles.page} id="top">
     <MobileSwipeBack />
-    <header className={styles.nav}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu"><i></i><i></i></button><nav className={menuOpen ? styles.open : ""} aria-label="Menu scheda macchina spalle">
+    <header className={styles.nav}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu"><i></i><i></i></button><nav className={menuOpen ? styles.open : ""} aria-label="Menu scheda macchina spalle">
       <Link className={styles.siteLink} href="/macchine/spalle" onClick={() => setMenuOpen(false)}>← Spalle</Link><div className={`${styles.zoneMenu} ${zonesOpen ? styles.zoneOpen : ""}`}><button type="button" className={styles.zoneTrigger} aria-expanded={zonesOpen} onClick={() => setZonesOpen(!zonesOpen)}>Per zona <span>▾</span></button><div className={styles.zonePanel} role="menu"><div className={styles.zonePanelInner}>{bodyZones.map((zone) => zone.ready ? <Link key={zone.label} href={zone.href} role="menuitem" onClick={() => { setZonesOpen(false); setMenuOpen(false); }}>{zone.label}</Link> : <span key={zone.label} className={styles.zoneSoon} role="menuitem" aria-disabled="true">{zone.label} <i>presto</i></span>)}</div></div></div><Link className={styles.siteLink} href="/nuove-macchine" onClick={() => setMenuOpen(false)}>Nuove macchine</Link><Link href="/?skipIntro=1#contatti" className={styles.contact} onClick={() => setMenuOpen(false)}>Chiedi info <span>↗</span></Link>
     </nav></header>
-    <section className={styles.hero}><div className={styles.heroCopy}><span>{machine.number} · {machine.category.toUpperCase()}</span><small>{machine.brand}</small><h1>{first ? <>{first}<br /><em>{last}.</em></> : <em>{last}.</em>}</h1><p>{machine.tagline}</p><b>{machine.focus}</b></div><figure className={styles.heroPhoto}><span className={styles.photoNumber} aria-hidden="true">{machine.number}</span><img src={machine.image} alt={machine.alt} /><figcaption>Revenge Gym · Ladispoli</figcaption></figure></section>
+    <section className={styles.hero}><div className={styles.heroCopy}><span>{machine.number} · {machine.category.toUpperCase()}</span><small>{machine.brand}</small><h1>{first ? <>{first}<br /><em>{last}.</em></> : <em>{last}.</em>}</h1><p>{machine.tagline}</p><b>{machine.focus}</b></div><figure className={styles.heroPhoto}><span className={styles.photoNumber} aria-hidden="true">{machine.number}</span><SiteImage src={machine.image} alt={machine.alt} /><figcaption>Revenge Gym · Ladispoli</figcaption></figure></section>
     <div className={styles.body}>
       <section className={styles.brandBlock}><small>01 · LA MACCHINA</small><h2>PERCHÉ QUESTA<br /><em>POSTAZIONE.</em></h2>{machine.brandNote.map((paragraph) => <p key={paragraph.slice(0, 48)}>{paragraph}</p>)}</section>
       <section className={styles.leadBlock}><small>02 · ALLENAMENTO SPALLE</small><h2>COME SI USA<br /><em>IN SALA.</em></h2>{machine.lead.map((paragraph) => <p key={paragraph.slice(0, 48)}>{paragraph}</p>)}</section>
@@ -33,6 +34,6 @@ export default function ShoulderMachineDetail({ machine, prev, next }: Props) {
       <div className={styles.grid2}><section className={styles.error}><small>07 · ERRORI</small><h3>CONTROLLO,<br />NON FRETTA.</h3><ul>{machine.errors.map((item) => <li key={item}>{item}</li>)}</ul></section><section className={styles.trainer}><small>CONSIGLI DEL TRAINER</small><blockquote>“{machine.trainer}”</blockquote></section></div>
     </div>
     <nav className={styles.pager} aria-label="Altre macchine spalle"><Link href={`/macchine/spalle/${prev.id}`}><span>← Precedente</span><strong>{prev.name}</strong></Link><Link href="/macchine/spalle" className={styles.pagerHome}>Tutte le spalle</Link><Link href={`/macchine/spalle/${next.id}`} className={styles.pagerNext}><span>Successiva →</span><strong>{next.name}</strong></Link></nav>
-    <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>{machine.brand} · Spalle</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p></footer>
+    <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>{machine.brand} · Spalle</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p></footer>
   </main>;
 }

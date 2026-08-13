@@ -1,10 +1,11 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useState } from "react";
 import Link from "next/link";
 import type { LegMachine } from "@/lib/leg-machines";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
-import styles from "./page.module.css";
+import styles from "../../machine-detail.module.css";
 
 const bodyZones = [
   { label: "Gambe", href: "/macchine/gambe", ready: true },
@@ -29,7 +30,7 @@ export default function TricepsMachineDetail({ machine, prev, next }: Props) {
       <MobileSwipeBack />
       <header className={styles.nav}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu">
           <i></i>
@@ -91,7 +92,7 @@ export default function TricepsMachineDetail({ machine, prev, next }: Props) {
           <span className={styles.photoNumber} aria-hidden="true">
             {machine.number}
           </span>
-          <img src={machine.image} alt={machine.alt} />
+          <SiteImage src={machine.image} alt={machine.alt} />
           <figcaption>Revenge Gym · Ladispoli</figcaption>
         </figure>
       </section>
@@ -227,7 +228,7 @@ export default function TricepsMachineDetail({ machine, prev, next }: Props) {
       </nav>
       <footer className={styles.footer}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <p>
           {machine.brand} · Tricipiti

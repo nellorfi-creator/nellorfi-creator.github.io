@@ -1,5 +1,6 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./ring-gallery.module.css";
 
@@ -17,6 +18,8 @@ type RingGalleryProps = {
 
 export default function RingGallery({ photos }: RingGalleryProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  const lightboxCloseRef = useRef<HTMLButtonElement>(null);
   const activeRef = useRef(0);
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
@@ -105,16 +108,32 @@ export default function RingGallery({ photos }: RingGalleryProps) {
 
   useEffect(() => {
     if (lightbox === null) return;
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    lightboxCloseRef.current?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setLightbox(null);
       if (event.key === "ArrowRight") setLightbox((i) => (i === null ? null : (i + 1) % photos.length));
       if (event.key === "ArrowLeft") setLightbox((i) => (i === null ? null : (i - 1 + photos.length) % photos.length));
+      if (event.key === "Tab" && lightboxRef.current) {
+        const focusable = Array.from(lightboxRef.current.querySelectorAll<HTMLButtonElement>("button:not([disabled])"));
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
     };
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKey);
+      previouslyFocused?.focus();
     };
   }, [lightbox, photos.length]);
 
@@ -134,7 +153,7 @@ export default function RingGallery({ photos }: RingGalleryProps) {
                 onClick={() => openLightbox(globalIndex)}
                 aria-label={`${photo.label}, round ${photo.round}`}
               >
-                <img src={photo.src} alt="" loading={i === 0 ? "eager" : "lazy"} decoding="async" />
+                <SiteImage src={photo.src} alt="" loading={i === 0 ? "eager" : "lazy"} decoding="async" />
                 <span className={styles.heroRound}>{photo.round}</span>
                 <span className={styles.heroLabel}>{photo.label}</span>
               </button>
@@ -182,7 +201,7 @@ export default function RingGallery({ photos }: RingGalleryProps) {
                 {photo.round}
               </span>
               <div className={styles.cardFrame}>
-                <img src={photo.src} alt="" loading="lazy" decoding="async" />
+                <SiteImage src={photo.src} alt="" loading="lazy" decoding="async" />
               </div>
               <span className={styles.cardTape} aria-hidden="true" />
               <figcaption>
@@ -207,8 +226,8 @@ export default function RingGallery({ photos }: RingGalleryProps) {
       </div>
 
       {lightbox !== null && (
-        <div className={styles.lightbox} role="dialog" aria-modal="true" aria-label="Anteprima foto dal ring" onClick={() => setLightbox(null)}>
-          <button type="button" className={styles.lightboxClose} onClick={() => setLightbox(null)} aria-label="Chiudi">
+        <div ref={lightboxRef} className={styles.lightbox} role="dialog" aria-modal="true" aria-label="Anteprima foto dal ring" onClick={() => setLightbox(null)}>
+          <button ref={lightboxCloseRef} type="button" className={styles.lightboxClose} onClick={() => setLightbox(null)} aria-label="Chiudi">
             ×
           </button>
           <button
@@ -223,7 +242,7 @@ export default function RingGallery({ photos }: RingGalleryProps) {
             ←
           </button>
           <figure onClick={(e) => e.stopPropagation()}>
-            <img src={photos[lightbox].src} alt={photos[lightbox].label} />
+            <SiteImage src={photos[lightbox].src} alt={photos[lightbox].label} />
             <figcaption>
               <span>ROUND {photos[lightbox].round}</span>
               {photos[lightbox].label}

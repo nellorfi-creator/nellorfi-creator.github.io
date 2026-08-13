@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${machine.name} · ${machine.brand} | Dorso | Revenge Gym`,
     description: machine.lead[0]?.slice(0, 155) ?? machine.tagline,
+    alternates: { canonical: `/macchine/dorso/${machine.id}/` },
     openGraph: { title: `${machine.name} · Revenge Gym`, description: machine.tagline, images: [{ url: machine.image, alt: machine.alt }] },
   };
 }

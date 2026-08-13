@@ -1,10 +1,11 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useState } from "react";
 import Link from "next/link";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { bicepsMachines, bicepsZone } from "@/lib/biceps-machines";
-import styles from "./page.module.css";
+import styles from "../machine-area.module.css";
 
 const bodyZones = [
   { label: "Gambe", href: "/macchine/gambe", ready: true },
@@ -25,7 +26,7 @@ export default function BicepsHub() {
       <MobileSwipeBack />
       <header className={styles.nav}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu">
           <i></i>
@@ -68,7 +69,7 @@ export default function BicepsHub() {
       </header>
       <section className={styles.hero}>
         <div className={styles.heroShade} aria-hidden="true"></div>
-        <img className={styles.heroAthlete} src="/photos/athletes/bicipiti-athlete-hero.webp" alt="Atleta dedicato all’allenamento dei bicipiti" />
+        <SiteImage className={styles.heroAthlete} src="/photos/athletes/bicipiti-athlete-hero.webp" alt="Atleta dedicato all’allenamento dei bicipiti" />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
             <span></span> {bicepsZone.eyebrow}
@@ -98,7 +99,7 @@ export default function BicepsHub() {
             <div className={styles.marqueeTrack}>
               {loop.map((machine, index) => (
                 <Link key={`${machine.id}-${index}`} href={`/macchine/bicipiti/${machine.id}`} className={styles.marqueeCard} aria-label={`${machine.name} · ${machine.brand}`}>
-                  <img src={machine.image} alt="" />
+                  <SiteImage src={machine.image} alt="" />
                   <span>
                     <small>{machine.brand}</small>
                     <b>{machine.name}</b>
@@ -142,7 +143,7 @@ export default function BicepsHub() {
           {bicepsMachines.map((machine) => (
             <Link key={machine.id} href={`/macchine/bicipiti/${machine.id}`} className={styles.gridCard}>
               <div className={styles.gridMedia}>
-                <img src={machine.image} alt="" />
+                <SiteImage src={machine.image} alt="" />
               </div>
               <div className={styles.gridBody}>
                 <span>{machine.number}</span>
@@ -171,7 +172,7 @@ export default function BicepsHub() {
       </section>
       <footer className={styles.footer}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <p>Allenamento · Bicipiti · Ladispoli</p>
         <p className={styles.footerLegal}>

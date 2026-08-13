@@ -1,5 +1,6 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useState } from "react";
 import Link from "next/link";
 import { legMachines, legZone } from "@/lib/leg-machines";
@@ -26,7 +27,7 @@ export default function LegsHub() {
       <MobileSwipeBack />
       <header className={styles.nav}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <button
           className={styles.menuToggle}
@@ -76,7 +77,7 @@ export default function LegsHub() {
 
       <section className={styles.hero}>
         <div className={styles.heroShade} aria-hidden="true"></div>
-        <img className={styles.heroAthlete} src="/photos/athletes/gambe-athlete-hero.webp" alt="Atleta dedicata all’allenamento delle gambe" />
+        <SiteImage className={styles.heroAthlete} src="/photos/athletes/gambe-athlete-hero.webp" alt="Atleta dedicata all’allenamento delle gambe" />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
             <span></span> {legZone.eyebrow}
@@ -112,7 +113,7 @@ export default function LegsHub() {
                   className={styles.marqueeCard}
                   aria-label={`${machine.name} · ${machine.brand}`}
                 >
-                  <img src={machine.image} alt="" />
+                  <SiteImage src={machine.image} alt="" />
                   <span>
                     <small>{machine.brand}</small>
                     <b>{machine.name}</b>
@@ -160,7 +161,7 @@ export default function LegsHub() {
           {legMachines.map((machine) => (
             <Link key={machine.id} href={`/macchine/gambe/${machine.id}`} className={styles.gridCard}>
               <div className={styles.gridMedia}>
-                <img src={machine.image} alt="" />
+                <SiteImage src={machine.image} alt="" />
               </div>
               <div className={styles.gridBody}>
                 <span>{machine.number}</span>
@@ -191,7 +192,7 @@ export default function LegsHub() {
 
       <footer className={styles.footer}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <p>Allenamento · Gambe · Ladispoli</p>
         <p className={styles.footerLegal}>

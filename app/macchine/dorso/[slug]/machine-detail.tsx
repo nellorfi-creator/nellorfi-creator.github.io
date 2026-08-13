@@ -1,10 +1,11 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useState } from "react";
 import Link from "next/link";
 import type { LegMachine } from "@/lib/leg-machines";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
-import styles from "./page.module.css";
+import styles from "../../machine-detail.module.css";
 
 const bodyZones = [
   { label: "Gambe", href: "/macchine/gambe", ready: true },
@@ -29,7 +30,7 @@ export default function BackMachineDetail({ machine, prev, next }: Props) {
     <main className={styles.page} id="top">
       <MobileSwipeBack />
       <header className={styles.nav}>
-        <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
+        <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
         <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu"><i></i><i></i></button>
         <nav className={menuOpen ? styles.open : ""} aria-label="Menu scheda macchina dorso">
           <Link className={styles.siteLink} href="/macchine/dorso" onClick={() => setMenuOpen(false)}>← Dorso</Link>
@@ -46,7 +47,7 @@ export default function BackMachineDetail({ machine, prev, next }: Props) {
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}><span>{machine.number} · {machine.category.toUpperCase()}</span><small>{machine.brand}</small><h1>{first ? <>{first}<br /><em>{last}.</em></> : <em>{last}.</em>}</h1><p>{machine.tagline}</p><b>{machine.focus}</b></div>
-        <figure className={styles.heroPhoto}><span className={styles.photoNumber} aria-hidden="true">{machine.number}</span><img src={machine.image} alt={machine.alt} /><figcaption>Revenge Gym · Ladispoli</figcaption></figure>
+        <figure className={styles.heroPhoto}><span className={styles.photoNumber} aria-hidden="true">{machine.number}</span><SiteImage src={machine.image} alt={machine.alt} /><figcaption>Revenge Gym · Ladispoli</figcaption></figure>
       </section>
 
       <div className={styles.body}>
@@ -72,7 +73,7 @@ export default function BackMachineDetail({ machine, prev, next }: Props) {
         <Link href="/macchine/dorso" className={styles.pagerHome}>Tutto il dorso</Link>
         <Link href={`/macchine/dorso/${next.id}`} className={styles.pagerNext}><span>Successiva →</span><strong>{next.name}</strong></Link>
       </nav>
-      <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>{machine.brand} · Dorso</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p></footer>
+      <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>{machine.brand} · Dorso</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p></footer>
     </main>
   );
 }

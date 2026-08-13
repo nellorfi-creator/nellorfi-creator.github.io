@@ -121,11 +121,6 @@
   animation:marqueeScroll 75s linear infinite;
 }
 .marquee:hover .marqueeTrack{animation-play-state:paused}
-.marqueeStatic{overflow:visible;mask-image:none}
-.marqueeStatic .marqueeTrack{
-  width:auto;margin:0 auto;padding:28px 7vw;justify-content:center;
-  animation:none;
-}
 .marqueeCard{
   position:relative;flex:0 0 auto;width:min(220px,58vw);aspect-ratio:3/4;
   overflow:hidden;border:1px solid #2a2a2a;background:#101010;

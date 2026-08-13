@@ -12,9 +12,6 @@ const nextConfig: NextConfig = {
   // Emit /nuove-macchine/index.html so GitHub Pages resolves /nuove-macchine/.
   trailingSlash: isGitHubPages ? true : undefined,
   images: { unoptimized: isGitHubPages },
-  // The static site does not use the Cloudflare-only database/worker files.
-  // Vinext still validates them for the normal hosted build.
-  typescript: { ignoreBuildErrors: isGitHubPages },
 };
 
 export default nextConfig;

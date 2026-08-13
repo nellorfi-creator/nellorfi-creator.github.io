@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Scheda ${machine.name} · ${machine.brand} | Revenge Gym`,
     description: `Guida illustrata per usare ${machine.name} ${machine.brand} in sala.`,
+    alternates: { canonical: `/macchine/gambe/${machine.id}/scheda/` },
     robots: { index: false },
   };
 }

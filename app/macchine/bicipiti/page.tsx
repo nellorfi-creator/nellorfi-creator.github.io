@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Allenamento Bicipiti | 4 macchine | Revenge Gym Ladispoli",
   description:
     "Esplora le 4 postazioni per i bicipiti di Revenge Gym: Hammer, Star Trac, Precor e Panatta, con schede complete.",
+  alternates: { canonical: "/macchine/bicipiti/" },
   openGraph: {
     title: "Allenamento Bicipiti | Revenge Gym",
     description: "Catalogo completo dell’area bicipiti di Revenge Gym Ladispoli.",

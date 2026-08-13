@@ -12,7 +12,6 @@ import {
   TwoPhaseSheet,
   WeightStack,
   type Phase,
-  type Point,
 } from "./sheet-illustration-shared";
 
 export type LegIllustrationType =
@@ -339,7 +338,7 @@ function AbductorIllustration() {
       headerSubtitle="Apertura controllata delle anche"
       phaseA={{ title: "① CHIUSO", subtitle: "Posizione iniziale", headerFill: "#1a1a1a", phase: "start" }}
       phaseB={{ title: "② APERTO", subtitle: "Apri con controllo", headerFill: "#ff4d00", phase: "end" }}
-      renderScene={(phase) => <HipSpreadScene phase={phase} spread={phase === "end"} label="GLUTEO MEDIO" />}
+      renderScene={(phase) => <HipSpreadScene spread={phase === "end"} label="GLUTEO MEDIO" />}
     />
   );
 }
@@ -352,12 +351,12 @@ function AdductorIllustration() {
       headerSubtitle="Chiusura controllata · catena mediale"
       phaseA={{ title: "① APERTO", subtitle: "Posizione iniziale", headerFill: "#1a1a1a", phase: "start" }}
       phaseB={{ title: "② CHIUSO", subtitle: "Chiudi con controllo", headerFill: "#ff4d00", phase: "end" }}
-      renderScene={(phase) => <HipSpreadScene phase={phase} spread={phase === "start"} label="ADDUTTORI" invert />}
+      renderScene={(phase) => <HipSpreadScene spread={phase === "start"} label="ADDUTTORI" invert />}
     />
   );
 }
 
-function HipSpreadScene({ phase, spread, label, invert }: { phase: Phase; spread: boolean; label: string; invert?: boolean }) {
+function HipSpreadScene({ spread, label, invert }: { spread: boolean; label: string; invert?: boolean }) {
   const spreadAmt = spread ? 28 : 8;
   return (
     <>

@@ -1,3 +1,4 @@
+import SiteImage from "@/app/components/site-image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -7,6 +8,7 @@ import RingGallery, { type RingPhoto } from "./ring-gallery";
 export const metadata: Metadata = {
   title: "Boxe a Ladispoli | Ring e area sacchi · Revenge Gym",
   description: "Scopri l’area Boxe di Revenge Gym a Ladispoli: ring, sacchi, spazio tecnico, preparazione e immagini reali della sala.",
+  alternates: { canonical: "/boxe/" },
   keywords: ["boxe Ladispoli", "palestra boxe Ladispoli", "ring boxe", "sacchi boxe", "Revenge Gym"],
   openGraph: {
     title: "Revenge Boxing · Il ring non mente",
@@ -45,7 +47,7 @@ export default function BoxePage() {
       <MobileSwipeBack />
       <header className={styles.nav}>
         <Link className={styles.logo} href="/?skipIntro=1#home" aria-label="Revenge Gym home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <nav aria-label="Navigazione Boxe">
           <Link className={styles.homeLink} href="/?skipIntro=1#home">Torna alla home</Link>
@@ -66,11 +68,11 @@ export default function BoxePage() {
           <p className={styles.heroLead}>Qui non contano le scorciatoie. Contano presenza, tecnica e carattere.</p>
           <a className={styles.primary} href="#spazio">Entra nell’area Boxe <span>↓</span></a>
           <div className={styles.fpiBadge} aria-label="Revenge Gym affiliata alla Federazione Pugilistica Italiana">
-            <img src="/photos/boxe/fpi-logo-rotondo-grande.jpg" alt="Federazione Pugilistica Italiana" />
+            <SiteImage src="/photos/boxe/fpi-logo-rotondo-grande.jpg" alt="Federazione Pugilistica Italiana" />
             <div><strong>AFFILIATA FPI</strong></div>
           </div>
           <figure className={styles.heroPhoto}>
-            <img
+            <SiteImage
               src="/photos/live/gino-corner-bono.webp"
               alt="Corner Revenge Boxing: istruzioni tra un round e l’altro"
               loading="eager"
@@ -104,13 +106,13 @@ export default function BoxePage() {
       </section>
 
       <section className={styles.spaceShowcase}>
-        <figure className={styles.spaceMain}><img src="/photos/boxe/sala-ring-sacchi.jpg" alt="Sala boxe di Revenge Gym con ring e sacchi"/><figcaption>La sala · Ring e area sacchi</figcaption></figure>
-        <figure><img src="/photos/boxe/ring-revenge.jpg" alt="Ring Revenge Boxing"/><figcaption>Il ring</figcaption></figure>
-        <figure><img src="/photos/boxe/sala-sacchi.jpg" alt="Sacchi dell’area boxe di Revenge Gym"/><figcaption>Lo spazio tecnico</figcaption></figure>
+        <figure className={styles.spaceMain}><SiteImage src="/photos/boxe/sala-ring-sacchi.jpg" alt="Sala boxe di Revenge Gym con ring e sacchi"/><figcaption>La sala · Ring e area sacchi</figcaption></figure>
+        <figure><SiteImage src="/photos/boxe/ring-revenge.jpg" alt="Ring Revenge Boxing"/><figcaption>Il ring</figcaption></figure>
+        <figure><SiteImage src="/photos/boxe/sala-sacchi.jpg" alt="Sacchi dell’area boxe di Revenge Gym"/><figcaption>Lo spazio tecnico</figcaption></figure>
       </section>
 
       <section className={styles.method} id="metodo">
-        <img
+        <SiteImage
           className={styles.methodAthlete}
           src="/photos/boxe/atleta-pugile-guardia-v2.webp"
           alt="Pugile in guardia, area Boxe Revenge Gym"
@@ -128,7 +130,7 @@ export default function BoxePage() {
       </section>
 
       <section className={styles.videos} id="video">
-        <img
+        <SiteImage
           className={styles.videoAthlete}
           src="/photos/boxe/atleta-pugile-pugno.webp"
           alt="Pugile in azione, Revenge Boxing"
@@ -150,14 +152,14 @@ export default function BoxePage() {
       </section>
 
       <section className={styles.corner}>
-        <figure><img src="/photos/boxe/corner-bono-bianco-nero.jpg" alt="Boxeur e uomo del corner dopo un incontro"/></figure>
+        <figure><SiteImage src="/photos/boxe/corner-bono-bianco-nero.jpg" alt="Boxeur e uomo del corner dopo un incontro"/></figure>
         <div>
           <p className={styles.eyebrow}><span /> Identità</p>
           <h2>IL CORNER.<br/><em>LA PRESENZA.</em></h2>
           <p className={styles.lead}>La boxe non è mai soltanto il momento del colpo. È ascolto, preparazione, esperienza e fiducia costruita round dopo round.</p>
           <p>Ogni immagine dal ring porta con sé lavoro invisibile: sedute, correzioni, fatica, recupero e la lucidità necessaria per restare concentrati.</p>
         </div>
-        <figure className={styles.cornerColor}><img src="/photos/boxe/corner-bono.jpg" alt="Boxeur con il suo corner dopo il combattimento"/></figure>
+        <figure className={styles.cornerColor}><SiteImage src="/photos/boxe/corner-bono.jpg" alt="Boxeur con il suo corner dopo il combattimento"/></figure>
       </section>
 
       <section className={styles.gallery} id="gallery">
@@ -165,7 +167,7 @@ export default function BoxePage() {
           <div><p className={styles.eyebrow}><span /> Dentro Revenge Boxing</p><h2>FOTO DAL RING.<br/><em>NESSUNA POSA.</em></h2></div>
           <p>La sala, il lavoro, gli atleti e il corner. Scorri round dopo round: niente posa, solo l’energia vera di Revenge Boxing.</p>
         </div>
-        <img
+        <SiteImage
           className={styles.galleryAthlete}
           src="/photos/boxe/atleta-pugile-jab.webp"
           alt="Pugile in jab, Revenge Boxing"
@@ -181,7 +183,7 @@ export default function BoxePage() {
       </section>
 
       <footer className={styles.footer}>
-        <Link className={styles.logo} href="/?skipIntro=1#home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym"/></Link>
+        <Link className={styles.logo} href="/?skipIntro=1#home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym"/></Link>
         <p>Via Berna, 8 · Ladispoli RM</p>
         <p>© 2026 Revenge Gym</p>
         <a href="#top" aria-label="Torna in alto">↑</a>

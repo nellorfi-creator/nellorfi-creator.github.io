@@ -1,5 +1,6 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useState } from "react";
 import Link from "next/link";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
@@ -25,7 +26,7 @@ export default function ChestHub() {
     <main className={styles.page} id="top">
       <MobileSwipeBack />
       <header className={styles.nav}>
-        <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
+        <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
         <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu"><i></i><i></i></button>
         <nav className={menuOpen ? styles.open : ""} aria-label="Menu allenamento petto">
           <Link className={styles.siteLink} href="/?skipIntro=1#filosofia" onClick={() => setMenuOpen(false)}>La palestra</Link>
@@ -47,7 +48,7 @@ export default function ChestHub() {
 
       <section className={styles.hero}>
         <div className={styles.heroShade} aria-hidden="true"></div>
-        <img className={styles.heroAthlete} src="/photos/athletes/petto-athlete-hero.webp" alt="Atleta dedicato all’allenamento del petto" />
+        <SiteImage className={styles.heroAthlete} src="/photos/athletes/petto-athlete-hero.webp" alt="Atleta dedicato all’allenamento del petto" />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}><span></span> {chestZone.eyebrow}</p>
           <h1>{chestZone.heroTitle[0]}<br />{chestZone.heroTitle[1]}<br /><em>{chestZone.heroTitle[2]}</em></h1>
@@ -59,7 +60,7 @@ export default function ChestHub() {
           <div className={styles.marquee}><div className={styles.marqueeTrack}>
             {loop.map((machine, index) => (
               <Link key={`${machine.id}-${index}`} href={`/macchine/petto/${machine.id}`} className={styles.marqueeCard} aria-label={`${machine.name} · ${machine.brand}`}>
-                <img src={machine.image} alt="" /><span><small>{machine.brand}</small><b>{machine.name}</b></span>
+                <SiteImage src={machine.image} alt="" /><span><small>{machine.brand}</small><b>{machine.name}</b></span>
               </Link>
             ))}
           </div></div>
@@ -75,14 +76,14 @@ export default function ChestHub() {
         <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Catalogo completo</p><h2>SCEGLI LA<br /><em>MACCHINA.</em></h2><p>Dodici postazioni per allenare il petto da angoli diversi. Apri ogni scheda per scoprire funzione, muscoli coinvolti, impostazione, programmazione ed errori comuni.</p></div>
         <div className={styles.grid}>{chestMachines.map((machine) => (
           <Link key={machine.id} href={`/macchine/petto/${machine.id}`} className={styles.gridCard}>
-            <div className={styles.gridMedia}><img src={machine.image} alt="" /></div>
+            <div className={styles.gridMedia}><SiteImage src={machine.image} alt="" /></div>
             <div className={styles.gridBody}><span>{machine.number}</span><small>{machine.brand}</small><strong>{machine.name}</strong><p>{machine.tagline}</p><i>{machine.category} ↘</i></div>
           </Link>
         ))}</div>
       </section>
 
       <section className={styles.cta}><p className={styles.eyebrow}><span></span> In sala</p><h2>LEGGERE AIUTA.<br /><em>SPINGERE CAMBIA TUTTO.</em></h2><p>Vieni a Revenge Gym e costruisci la tua progressione petto con lo staff.</p><Link href="/?skipIntro=1#contatti" className={styles.primary}>Chiedi info <span>↗</span></Link></section>
-      <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Allenamento · Petto · Ladispoli</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p><a href="#top" className={styles.backTop} aria-label="Torna su">↑</a></footer>
+      <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Allenamento · Petto · Ladispoli</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p><a href="#top" className={styles.backTop} aria-label="Torna su">↑</a></footer>
     </main>
   );
 }

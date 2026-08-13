@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Allenamento Addominali | 1 macchina | Revenge Gym Ladispoli",
   description:
     "Esplora la postazione addominali di Revenge Gym: Plate Loaded Abdominal Oblique Crunch Hammer Strength, con scheda completa.",
+  alternates: { canonical: "/macchine/addominali/" },
   openGraph: {
     title: "Allenamento Addominali | Revenge Gym",
     description: "Catalogo dell’area addominali di Revenge Gym Ladispoli.",

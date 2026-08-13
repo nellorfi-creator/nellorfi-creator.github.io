@@ -1,5 +1,6 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { useState } from "react";
 import Link from "next/link";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
@@ -26,7 +27,7 @@ export default function AbsHub() {
       <MobileSwipeBack />
       <header className={styles.nav}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu">
           <i></i>
@@ -69,7 +70,7 @@ export default function AbsHub() {
       </header>
       <section className={styles.hero}>
         <div className={styles.heroShade} aria-hidden="true"></div>
-        <img className={styles.heroAthlete} src="/photos/athletes/addominali-athlete-hero.webp" alt="Atleta dedicato all’allenamento degli addominali" />
+        <SiteImage className={styles.heroAthlete} src="/photos/athletes/addominali-athlete-hero.webp" alt="Atleta dedicato all’allenamento degli addominali" />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
             <span></span> {absZone.eyebrow}
@@ -99,7 +100,7 @@ export default function AbsHub() {
             <div className={styles.marqueeTrack}>
               {loop.map((machine, index) => (
                 <Link key={`${machine.id}-${index}`} href={`/macchine/addominali/${machine.id}`} className={styles.marqueeCard} aria-label={`${machine.name} · ${machine.brand}`}>
-                  <img src={machine.image} alt="" />
+                  <SiteImage src={machine.image} alt="" />
                   <span>
                     <small>{machine.brand}</small>
                     <b>{machine.name}</b>
@@ -143,7 +144,7 @@ export default function AbsHub() {
           {absMachines.map((machine) => (
             <Link key={machine.id} href={`/macchine/addominali/${machine.id}`} className={styles.gridCard}>
               <div className={styles.gridMedia}>
-                <img src={machine.image} alt="" />
+                <SiteImage src={machine.image} alt="" />
               </div>
               <div className={styles.gridBody}>
                 <span>{machine.number}</span>
@@ -172,7 +173,7 @@ export default function AbsHub() {
       </section>
       <footer className={styles.footer}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home">
-          <img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
         </Link>
         <p>Allenamento · Addominali · Ladispoli</p>
         <p className={styles.footerLegal}>

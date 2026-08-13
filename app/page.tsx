@@ -1,10 +1,12 @@
 "use client";
 
+import SiteImage from "@/app/components/site-image";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
+import { useViewportVideo } from "@/app/hooks/use-viewport-video";
 
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
@@ -148,8 +150,14 @@ export default function Home() {
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const gymTourVideoRef = useRef<HTMLVideoElement>(null);
   const relaxVideoRef = useRef<HTMLVideoElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
+  const drawerCloseRef = useRef<HTMLButtonElement>(null);
   const [relaxSound, setRelaxSound] = useState(false);
   const tickerMachines = legMachines.slice(0, 10);
+  const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
+
+  useViewportVideo(gymTourVideoRef, { paused: overlaysOpen });
+  useViewportVideo(relaxVideoRef, { paused: overlaysOpen, volume: 0.42, playbackRate: 0.8 });
 
   useEffect(() => {
     const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
@@ -206,76 +214,6 @@ export default function Home() {
   }, [introVisible]);
 
   useEffect(() => {
-    const video = gymTourVideoRef.current;
-    if (!video) return;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) return;
-
-    let inView = false;
-    const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
-    const sync = () => {
-      if (document.hidden || overlaysOpen || !inView) {
-        video.pause();
-        return;
-      }
-      video.play().catch(() => {});
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        inView = entry.isIntersecting && entry.intersectionRatio >= 0.18;
-        sync();
-      },
-      { threshold: [0, 0.1, 0.18, 0.35, 0.5, 0.75, 1] },
-    );
-    observer.observe(video);
-    document.addEventListener("visibilitychange", sync);
-    sync();
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", sync);
-      video.pause();
-    };
-  }, [introVisible, activeBrand, activeArea, activeArticle]);
-
-  useEffect(() => {
-    const video = relaxVideoRef.current;
-    if (!video) return;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) return;
-
-    video.volume = 0.42;
-    video.playbackRate = 0.8;
-    video.preservesPitch = true;
-    let inView = false;
-    const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
-
-    const sync = () => {
-      if (document.hidden || overlaysOpen || !inView) {
-        video.pause();
-        return;
-      }
-      video.play().catch(() => {});
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        inView = entry.isIntersecting && entry.intersectionRatio >= 0.18;
-        sync();
-      },
-      { threshold: [0, 0.1, 0.18, 0.35, 0.5, 0.75, 1] },
-    );
-    observer.observe(video);
-    document.addEventListener("visibilitychange", sync);
-    sync();
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", sync);
-      video.pause();
-    };
-  }, [introVisible, activeBrand, activeArea, activeArticle]);
-
-  useEffect(() => {
     if (!introVisible && !activeBrand && !activeArea && !activeArticle) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -284,15 +222,32 @@ export default function Home() {
 
   useEffect(() => {
     if (!activeBrand && !activeArea && !activeArticle) return;
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    drawerCloseRef.current?.focus();
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      setActiveBrand(null);
-      setActiveArea(null);
-      setActiveArticle(null);
+      if (event.key === "Escape") {
+        setActiveBrand(null);
+        setActiveArea(null);
+        setActiveArticle(null);
+        return;
+      }
+      if (event.key !== "Tab" || !drawerRef.current) return;
+      const focusable = Array.from(drawerRef.current.querySelectorAll<HTMLElement>("a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex='-1'])"));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       window.removeEventListener("keydown", closeOnEscape);
+      previouslyFocused?.focus();
     };
   }, [activeBrand, activeArea, activeArticle]);
 
@@ -420,7 +375,7 @@ export default function Home() {
           </video>
         </div>
         <div className="intro-shade"></div>
-        <div className="intro-logo logo"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></div>
+        <div className="intro-logo logo"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></div>
         <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
           <i>{introSound ? "▮▮" : "▶"}</i> {introSound ? "Musica attiva" : "Attiva musica"}
         </button>
@@ -430,7 +385,7 @@ export default function Home() {
         <audio ref={introAudioRef} src="/media/revenge-gym-intro.m4a" loop preload="none"/>
       </section>}
       <header className="nav-wrap">
-        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
+        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           {[['La palestra','#filosofia'],['Aree','#corsi'],['Relax','#sala-relax'],['Mappa','#mappa'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
@@ -462,7 +417,7 @@ export default function Home() {
         <div className="machine-ticker-track">
           {[...tickerMachines, ...tickerMachines].map((machine, index) => (
             <div className="machine-ticker-item" key={`${machine.id}-${index}`} aria-hidden="true">
-              <img src={machine.image} alt="" width={76} height={76} decoding="async" loading={index < 6 ? "eager" : "lazy"} />
+              <SiteImage src={machine.image} alt="" width={76} height={76} decoding="async" loading={index < 6 ? "eager" : "lazy"} />
               <span>{machine.name}</span>
             </div>
           ))}
@@ -505,7 +460,7 @@ export default function Home() {
             {philosophyVisible.map((index) => {
               const shot = philosophyShots[index];
               return (
-                <img
+                <SiteImage
                   key={shot.src}
                   src={shot.src}
                   alt={shot.alt}
@@ -545,7 +500,7 @@ export default function Home() {
         </div>
         <div className="owners-spotlight reveal" aria-label="I titolari di Revenge Gym">
           <figure className="owners-photo">
-            <img src="/photos/live/gino-stefania-revenge-gym.webp" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1797} decoding="async" />
+            <SiteImage src="/photos/live/gino-stefania-revenge-gym.webp" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1797} decoding="async" />
           </figure>
           <div className="owners-copy">
             <p className="eyebrow"><span></span> I titolari</p>
@@ -555,9 +510,9 @@ export default function Home() {
           </div>
         </div>
         <div className="real-gym-strip reveal" aria-label="Foto reali di Revenge Gym">
-          <figure><img src="/photos/live/sala-community.webp" alt="Community in sala pesi di Revenge Gym" loading="lazy"/><figcaption>Community in sala</figcaption></figure>
+          <figure><SiteImage src="/photos/live/sala-community.webp" alt="Community in sala pesi di Revenge Gym" loading="lazy"/><figcaption>Community in sala</figcaption></figure>
           <div className="real-gym-caption"><small>REVENGE GYM · LADISPOLI</small><strong>QUESTA È<br/>LA NOSTRA<br/><em>PALESTRA.</em></strong></div>
-          <figure><img src="/photos/live/boxe-sacchi.webp" alt="Area boxe con sacchi a Revenge Gym" loading="lazy"/><figcaption>Sala boxe · sacchi e ring</figcaption></figure>
+          <figure><SiteImage src="/photos/live/boxe-sacchi.webp" alt="Area boxe con sacchi a Revenge Gym" loading="lazy"/><figcaption>Sala boxe · sacchi e ring</figcaption></figure>
         </div>
         <div className="gym-video reveal">
           <div className="gym-video-copy"><small>TOUR DELLA PALESTRA</small><h3>ENTRA IN<br/><em>REVENGE GYM.</em></h3><p>Scopri gli ambienti, le aree di allenamento e l’atmosfera della palestra prima ancora di venirci a trovare.</p></div>
@@ -629,7 +584,7 @@ export default function Home() {
         </div>
         <div className="course-grid">
           {courses.map((course, i) => <button type="button" className="course-card reveal" key={course.title} onClick={() => setActiveArea(course)} aria-label={`Scopri l’area ${course.title}`}>
-            <img src={course.image} alt={course.title} loading="lazy" />
+            <SiteImage src={course.image} alt={course.title} loading="lazy" />
             <div className="course-overlay"></div><span className="course-number">0{i+1}</span>
             <div className="course-content"><span className="course-icon">{course.icon}</span><small>{course.tag}</small><h3>{course.title}</h3><p>{course.text}</p><span className="course-open">Scopri l’area <span>↗</span></span></div>
           </button>)}
@@ -637,8 +592,8 @@ export default function Home() {
       </section>
 
       {activeArea && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveArea(null)}>
-        <aside className="brand-drawer area-drawer" role="dialog" aria-modal="true" aria-labelledby="area-drawer-title">
-          <button className="brand-drawer-close" type="button" onClick={() => setActiveArea(null)} aria-label="Chiudi approfondimento">×</button>
+        <aside ref={drawerRef} className="brand-drawer area-drawer" role="dialog" aria-modal="true" aria-labelledby="area-drawer-title">
+          <button ref={drawerCloseRef} className="brand-drawer-close" type="button" onClick={() => setActiveArea(null)} aria-label="Chiudi approfondimento">×</button>
           <div className="brand-drawer-head area-drawer-head" style={{ backgroundImage: `linear-gradient(0deg,rgba(8,8,8,.96),rgba(8,8,8,.18) 75%),url(${activeArea.image})` }}><span>LE AREE · REVENGE GYM</span><small>{activeArea.tag}</small><h2 id="area-drawer-title" className={activeArea.title.length > 12 ? "brand-title-long" : undefined}>{activeArea.title}</h2><p>{activeArea.description}</p></div>
           <div className="brand-drawer-body">
             <section><small>COSA TROVI</small><ul>{activeArea.features.map(item => <li key={item}>{item}</li>)}</ul></section>
@@ -658,7 +613,7 @@ export default function Home() {
             ['/media/sala-attrezzi.webp', 'Panoramica completa di Revenge Gym'],
             ['/photos/live/sala-panoramica-oggi.webp', 'Macchinari professionali della sala'],
             ['/photos/live/sala-cavi-oggi.webp', 'Area cavi e macchine isotoniche']
-          ].map(([src, alt], i) => <figure key={src}><img src={src} alt={alt} loading="lazy"/><span>0{i+1}</span></figure>)}
+          ].map(([src, alt], i) => <figure key={src}><SiteImage src={src} alt={alt} loading="lazy"/><span>0{i+1}</span></figure>)}
         </div>
         <p className="schedule-note">La dotazione può essere aggiornata nel tempo. Vieni a vedere la palestra dal vivo.</p>
 
@@ -686,8 +641,8 @@ export default function Home() {
       </section>
 
       {activeBrand && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveBrand(null)}>
-        <aside className="brand-drawer" role="dialog" aria-modal="true" aria-labelledby="brand-drawer-title">
-          <button className="brand-drawer-close" type="button" onClick={() => setActiveBrand(null)} aria-label="Chiudi approfondimento">×</button>
+        <aside ref={drawerRef} className="brand-drawer" role="dialog" aria-modal="true" aria-labelledby="brand-drawer-title">
+          <button ref={drawerCloseRef} className="brand-drawer-close" type="button" onClick={() => setActiveBrand(null)} aria-label="Chiudi approfondimento">×</button>
           <div className="brand-drawer-head"><span>BRAND PROFILE · REVENGE GYM</span><small>{activeBrand.origin}</small><h2 id="brand-drawer-title" className={activeBrand.name.length > 12 ? "brand-title-long" : undefined}>{activeBrand.name}</h2><p>{activeBrand.intro}</p></div>
           <div className="brand-drawer-body">
             <section><small>LA STORIA</small><p>{activeBrand.history}</p></section>
@@ -701,7 +656,7 @@ export default function Home() {
       <section className="gallery-section" id="gallery">
         <div className="gallery-title reveal"><p className="eyebrow"><span></span> Dentro Revenge Gym</p><h2>SUDORE. ENERGIA.<br/><em>RISULTATI.</em></h2></div>
         <div className="gallery-grid">
-          {gallery.map(([src, alt], i) => <figure className={`gallery-item g${i+1} reveal`} key={src}><img src={src} alt={alt} loading="lazy"/><figcaption>{alt}<span>↗</span></figcaption></figure>)}
+          {gallery.map(([src, alt], i) => <figure className={`gallery-item g${i+1} reveal`} key={src}><SiteImage src={src} alt={alt} loading="lazy"/><figcaption>{alt}<span>↗</span></figcaption></figure>)}
         </div>
       </section>
 
@@ -710,7 +665,7 @@ export default function Home() {
         <div className="magazine-grid">
           {magazineArticles.map((article, i) => <article className={`article-card article-${i + 1} reveal`} key={article.title}>
             <button type="button" onClick={() => setActiveArticle(article)} aria-label={`Leggi: ${article.title}`}>
-              <div className="article-image"><img src={article.image} alt="" loading="lazy"/><span>0{i + 1}</span></div>
+              <div className="article-image"><SiteImage src={article.image} alt="" loading="lazy"/><span>0{i + 1}</span></div>
               <div className="article-copy"><small>{article.category} · {article.time} di lettura</small><h3>{article.title}</h3><p>{article.excerpt}</p><b>Leggi l’articolo <span>↗</span></b></div>
             </button>
           </article>)}
@@ -718,9 +673,9 @@ export default function Home() {
       </section>
 
       {activeArticle && <div className="brand-drawer-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActiveArticle(null)}>
-        <article className="brand-drawer article-drawer" role="dialog" aria-modal="true" aria-labelledby="article-drawer-title">
-          <button className="brand-drawer-close" type="button" onClick={() => setActiveArticle(null)} aria-label="Chiudi articolo">×</button>
-          <div className="article-drawer-hero"><img src={activeArticle.image} alt=""/><div><small>{activeArticle.category} · {activeArticle.time} di lettura</small><h2 id="article-drawer-title">{activeArticle.title}</h2></div></div>
+        <article ref={drawerRef} className="brand-drawer article-drawer" role="dialog" aria-modal="true" aria-labelledby="article-drawer-title">
+          <button ref={drawerCloseRef} className="brand-drawer-close" type="button" onClick={() => setActiveArticle(null)} aria-label="Chiudi articolo">×</button>
+          <div className="article-drawer-hero"><SiteImage src={activeArticle.image} alt=""/><div><small>{activeArticle.category} · {activeArticle.time} di lettura</small><h2 id="article-drawer-title">{activeArticle.title}</h2></div></div>
           <div className="article-drawer-body"><p className="article-lead">{activeArticle.intro}</p>{activeArticle.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<blockquote><small>DA RICORDARE</small>{activeArticle.takeaway}</blockquote><a href="#contatti" onClick={() => setActiveArticle(null)} className="button primary">Chiedi info <span>↗</span></a></div>
         </article>
       </div>}
@@ -746,11 +701,11 @@ export default function Home() {
         <form className="contact-form reveal" onSubmit={submitForm} noValidate={false}>
           <span className="form-kicker">RICHIEDI INFORMAZIONI</span><h3>Scrivici, ti rispondiamo noi</h3>
           <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="form-honey" aria-hidden="true" />
-          <label>Nome e cognome<input required name="name" placeholder="Il tuo nome" /></label>
-          <div className="form-row"><label>Email<input required type="email" name="email" placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" placeholder="+39" /></label></div>
+          <label>Nome e cognome<input required name="name" autoComplete="name" maxLength={100} placeholder="Il tuo nome" /></label>
+          <div className="form-row"><label>Email<input required type="email" name="email" autoComplete="email" maxLength={254} placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" autoComplete="tel" maxLength={30} placeholder="+39" /></label></div>
           <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe', 'Sala relax'].map(area => <option key={area}>{area}</option>)}</select></label>
-          <label>Messaggio<textarea name="message" placeholder="Dicci cosa vuoi sapere: orari, abbonamenti, obiettivi..."></textarea></label>
-          <label className="privacy"><input required type="checkbox" name="privacy" value="accepted" /> <span>Accetto il trattamento dei dati personali.</span></label>
+          <label>Messaggio<textarea name="message" maxLength={2000} placeholder="Dicci cosa vuoi sapere: orari, abbonamenti, obiettivi..."></textarea></label>
+          <label className="privacy"><input required type="checkbox" name="privacy" value="accepted" /> <span>Ho letto e accetto la <Link href="/privacy/">privacy policy</Link>.</span></label>
           <button className="button primary" type="submit" disabled={formStatus === "sending"}>
             {formStatus === "sending" ? "Invio in corso…" : <>Chiedi info <span>↗</span></>}
           </button>
@@ -760,7 +715,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
+        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <p>Sala pesi · Ladispoli</p>
         <p className="footer-legal">
           <span>© 2026 Revenge Gym. Tutti i diritti riservati.</span>
