@@ -19,7 +19,7 @@ test("server-renders the Revenge Gym home page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<html lang="it">/i);
+  assert.match(html, /<html\b[^>]*\blang="it"/i);
   assert.match(html, /<title>Revenge Gym/i);
   assert.match(html, /<meta[^>]+name="description"/i);
   assert.match(html, /<h1[^>]*>[\s\S]*RIVINCITA/i);

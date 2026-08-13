@@ -26,7 +26,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      # npm 11 on Linux resolves optional native packages that macOS omits from
+      # the cross-platform lockfile; install keeps the runner reproducible while
+      # completing those platform-specific entries.
+      - run: npm install --include=optional
       - run: npm run check
       - run: GITHUB_PAGES=true npx next build --webpack
       - uses: actions/configure-pages@v5

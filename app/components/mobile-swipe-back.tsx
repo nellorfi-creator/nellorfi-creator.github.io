@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type MobileSwipeBackProps = {
   onSwipe?: () => void;
@@ -9,6 +10,7 @@ type MobileSwipeBackProps = {
 };
 
 export default function MobileSwipeBack({ onSwipe, edgeOnly = false, label = "Torna indietro" }: MobileSwipeBackProps) {
+  const router = useRouter();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export default function MobileSwipeBack({ onSwipe, edgeOnly = false, label = "To
       if (tracking && triggered) {
         if (onSwipe) onSwipe();
         else if (window.history.length > 1) window.history.back();
-        else window.location.href = "/?skipIntro=1#home";
+        else router.push("/?skipIntro=1#home");
       }
       tracking = false;
       triggered = false;
@@ -71,7 +73,7 @@ export default function MobileSwipeBack({ onSwipe, edgeOnly = false, label = "To
       window.removeEventListener("touchend", touchEnd);
       window.removeEventListener("touchcancel", touchEnd);
     };
-  }, [edgeOnly, onSwipe]);
+  }, [edgeOnly, onSwipe, router]);
 
   return <div className={`swipe-back-cue${progress > 0 ? " visible" : ""}${progress >= 1 ? " ready" : ""}`} style={{ "--swipe-progress": progress } as React.CSSProperties} aria-hidden="true"><span>←</span><small>{label}</small></div>;
 }

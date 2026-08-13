@@ -3,6 +3,7 @@
 import SiteImage from "@/app/components/site-image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
@@ -43,6 +44,7 @@ const verticalPurposes = ["Sviluppare forza nell’estensione di anche e ginocch
 const verticalErrors = ["Staccare bacino o schiena dal supporto", "Scendere oltre l’escursione che si riesce a controllare", "Far collassare le ginocchia verso l’interno", "Perdere l’appoggio stabile dell’intero piede", "Rimbalzare nella parte bassa del movimento", "Bloccare violentemente le ginocchia o inseguire il carico massimo"];
 
 export default function MachineShowcase() {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMachine, setActiveMachine] = useState(machines[0].id);
 
@@ -78,7 +80,7 @@ export default function MachineShowcase() {
 
   const goBack = () => {
     if (window.history.length > 1) window.history.back();
-    else window.location.href = "/?skipIntro=1#home";
+    else router.push("/?skipIntro=1#home");
   };
 
   return <main className={styles.page} id="top">
