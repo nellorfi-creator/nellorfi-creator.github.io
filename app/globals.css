@@ -283,7 +283,7 @@ h2 { font-size:clamp(46px,5.8vw,96px); margin:24px 0 38px; }
 .gym-video-copy h3 { margin:18px 0; font:900 clamp(38px,4.4vw,70px)/.9 'Barlow Condensed'; }
 .gym-video-copy h3 em { color:var(--orange); font-style:normal; }
 .gym-video-copy p { color:#aaa; font-size:13px; line-height:1.7; }
-.gym-video video { display:block; width:100%; min-height:470px; height:100%; object-fit:cover; background:#000; }
+.gym-video video { display:block; width:100%; min-height:470px; height:100%; object-fit:cover; background:#000; pointer-events:none; }
 
 .relax-lounge { position:relative; display:grid; grid-template-columns:1.05fr minmax(280px,400px); align-items:center; gap:clamp(36px,7vw,90px); padding:110px 7vw 132px; border-top:1px solid rgba(255,255,255,.12); overflow:visible; }
 .relax-lounge::before { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 52% 68% at 86% 48%,rgba(226,184,74,.14),transparent 64%); }

@@ -146,6 +146,7 @@ export default function Home() {
   const introAudioRef = useRef<HTMLAudioElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const gymTourVideoRef = useRef<HTMLVideoElement>(null);
   const relaxVideoRef = useRef<HTMLVideoElement>(null);
   const [relaxSound, setRelaxSound] = useState(false);
   const tickerMachines = legMachines.slice(0, 10);
@@ -203,6 +204,39 @@ export default function Home() {
     document.addEventListener("visibilitychange", sync);
     return () => document.removeEventListener("visibilitychange", sync);
   }, [introVisible]);
+
+  useEffect(() => {
+    const video = gymTourVideoRef.current;
+    if (!video) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    let inView = false;
+    const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
+    const sync = () => {
+      if (document.hidden || overlaysOpen || !inView) {
+        video.pause();
+        return;
+      }
+      video.play().catch(() => {});
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting && entry.intersectionRatio >= 0.18;
+        sync();
+      },
+      { threshold: [0, 0.1, 0.18, 0.35, 0.5, 0.75, 1] },
+    );
+    observer.observe(video);
+    document.addEventListener("visibilitychange", sync);
+    sync();
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+      video.pause();
+    };
+  }, [introVisible, activeBrand, activeArea, activeArticle]);
 
   useEffect(() => {
     const video = relaxVideoRef.current;
@@ -527,7 +561,17 @@ export default function Home() {
         </div>
         <div className="gym-video reveal">
           <div className="gym-video-copy"><small>TOUR DELLA PALESTRA</small><h3>ENTRA IN<br/><em>REVENGE GYM.</em></h3><p>Scopri gli ambienti, le aree di allenamento e l’atmosfera della palestra prima ancora di venirci a trovare.</p></div>
-          <video controls playsInline preload="metadata" poster="/media/sala-attrezzi.webp" aria-label="Video degli ambienti di Revenge Gym">
+          <video
+            ref={gymTourVideoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/media/sala-attrezzi.webp"
+            disablePictureInPicture
+            aria-label="Video degli ambienti di Revenge Gym"
+          >
             <source src="/media/revenge-gym-tour.mp4" type="video/mp4"/>
             Il tuo browser non supporta la riproduzione video.
           </video>
