@@ -146,6 +146,8 @@ export default function Home() {
   const introAudioRef = useRef<HTMLAudioElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const relaxVideoRef = useRef<HTMLVideoElement>(null);
+  const [relaxSound, setRelaxSound] = useState(false);
   const tickerMachines = legMachines.slice(0, 10);
 
   useEffect(() => {
@@ -201,6 +203,39 @@ export default function Home() {
     document.addEventListener("visibilitychange", sync);
     return () => document.removeEventListener("visibilitychange", sync);
   }, [introVisible]);
+
+  useEffect(() => {
+    const video = relaxVideoRef.current;
+    if (!video) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    let inView = false;
+    const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
+    const sync = () => {
+      if (document.hidden || overlaysOpen || !inView) {
+        video.pause();
+        return;
+      }
+      video.play().catch(() => {});
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+        sync();
+      },
+      { threshold: [0, 0.2, 0.35, 0.5, 0.75, 1] },
+    );
+    observer.observe(video);
+    document.addEventListener("visibilitychange", sync);
+    sync();
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+      video.pause();
+    };
+  }, [introVisible, activeBrand, activeArea, activeArticle]);
 
   useEffect(() => {
     if (!introVisible && !activeBrand && !activeArea && !activeArticle) return;
@@ -279,6 +314,14 @@ export default function Home() {
     introVideoRef.current?.pause();
     window.sessionStorage.setItem("revenge-intro-seen", "1");
     window.setTimeout(() => setIntroVisible(false), 700);
+  };
+
+  const toggleRelaxSound = async () => {
+    const video = relaxVideoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setRelaxSound(!video.muted);
+    if (!video.paused) await video.play().catch(() => {});
   };
 
   const toggleIntroSound = async () => {
@@ -490,10 +533,29 @@ export default function Home() {
           <small className="relax-credit">Musica: Latin Lovers · Ahjay Stelino · Mixkit</small>
         </div>
         <figure className="relax-player reveal">
-          <video controls playsInline preload="metadata" poster="/photos/live/sala-relax-poster.webp" aria-label="Video della sala relax di Revenge Gym: caffè, Vespa 50 e angolo retrò">
+          <video
+            ref={relaxVideoRef}
+            className="relax-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/photos/live/sala-relax-poster.webp"
+            disablePictureInPicture
+            aria-label="Video della sala relax di Revenge Gym: caffè, Vespa 50 e angolo retrò"
+          >
             <source src="/media/sala-relax.mp4" type="video/mp4" />
             Il tuo browser non supporta la riproduzione video.
           </video>
+          <button
+            className={`relax-audio${relaxSound ? " active" : ""}`}
+            type="button"
+            onClick={toggleRelaxSound}
+            aria-pressed={relaxSound}
+          >
+            <i>{relaxSound ? "▮▮" : "♪"}</i> {relaxSound ? "Musica attiva" : "Attiva musica"}
+          </button>
           <figcaption>Sala relax · caffè, Vespa e angolo retrò</figcaption>
         </figure>
       </section>
