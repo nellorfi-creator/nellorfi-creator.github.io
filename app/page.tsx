@@ -147,6 +147,7 @@ export default function Home() {
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const relaxVideoRef = useRef<HTMLVideoElement>(null);
+  const [relaxSound, setRelaxSound] = useState(false);
   const tickerMachines = legMachines.slice(0, 10);
 
   useEffect(() => {
@@ -188,13 +189,7 @@ export default function Home() {
     const audio = introAudioRef.current;
     if (!audio) return;
     audio.volume = 0.55;
-    audio.play().then(() => {
-      setIntroSound(true);
-      const relax = relaxVideoRef.current;
-      if (!relax) return;
-      relax.muted = false;
-      relax.volume = 0.42;
-    }).catch(() => setIntroSound(false));
+    audio.play().then(() => setIntroSound(true)).catch(() => setIntroSound(false));
   }, [introVisible]);
 
   useEffect(() => {
@@ -219,7 +214,6 @@ export default function Home() {
     video.playbackRate = 0.8;
     video.preservesPitch = true;
     let inView = false;
-    let unlocked = !video.muted;
     const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
 
     const sync = () => {
@@ -227,53 +221,21 @@ export default function Home() {
         video.pause();
         return;
       }
-      if (!video.muted) unlocked = true;
-      video.muted = !unlocked;
-      video.play().then(() => {
-        if (!video.muted) unlocked = true;
-      }).catch(() => {
-        video.muted = true;
-        video.play().catch(() => {});
-      });
-    };
-
-    const unlockSound = () => {
-      if (unlocked && !video.muted) {
-        if (inView && !document.hidden && !overlaysOpen && video.paused) video.play().catch(() => {});
-        return;
-      }
-      unlocked = true;
-      video.muted = false;
-      const shouldHear = inView && !document.hidden && !overlaysOpen;
-      video.volume = shouldHear ? 0.42 : 0;
-      video.play().then(() => {
-        if (!shouldHear) {
-          video.pause();
-          video.volume = 0.42;
-        }
-      }).catch(() => {
-        video.muted = true;
-        video.volume = 0.42;
-        unlocked = false;
-      });
+      video.play().catch(() => {});
     };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        inView = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+        inView = entry.isIntersecting && entry.intersectionRatio >= 0.18;
         sync();
       },
-      { threshold: [0, 0.2, 0.35, 0.5, 0.75, 1] },
+      { threshold: [0, 0.1, 0.18, 0.35, 0.5, 0.75, 1] },
     );
     observer.observe(video);
-    document.addEventListener("pointerdown", unlockSound, true);
-    document.addEventListener("keydown", unlockSound, true);
     document.addEventListener("visibilitychange", sync);
     sync();
     return () => {
       observer.disconnect();
-      document.removeEventListener("pointerdown", unlockSound, true);
-      document.removeEventListener("keydown", unlockSound, true);
       document.removeEventListener("visibilitychange", sync);
       video.pause();
     };
@@ -348,6 +310,25 @@ export default function Home() {
   const selectPhilosophySlide = (index: number) => {
     setPhilosophySlide(index);
     setPhilosophyTimerKey((key) => key + 1);
+  };
+
+  const toggleRelaxSound = async () => {
+    const video = relaxVideoRef.current;
+    if (!video) return;
+    if (video.muted) {
+      video.muted = false;
+      video.volume = 0.42;
+      try {
+        await video.play();
+        setRelaxSound(true);
+      } catch {
+        video.muted = true;
+        setRelaxSound(false);
+      }
+      return;
+    }
+    video.muted = true;
+    setRelaxSound(false);
   };
 
   const closeIntro = () => {
@@ -585,6 +566,14 @@ export default function Home() {
             <source src="/media/sala-relax.mp4" type="video/mp4" />
             Il tuo browser non supporta la riproduzione video.
           </video>
+          <button
+            className={`relax-audio${relaxSound ? " active" : ""}`}
+            type="button"
+            onClick={toggleRelaxSound}
+            aria-pressed={relaxSound}
+          >
+            <i>{relaxSound ? "▮▮" : "♪"}</i> {relaxSound ? "Musica attiva" : "Attiva musica"}
+          </button>
           <figcaption>Sala relax · caffè, Vespa e angolo retrò</figcaption>
         </figure>
       </section>
