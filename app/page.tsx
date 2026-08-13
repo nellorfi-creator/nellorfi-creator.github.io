@@ -524,7 +524,10 @@ export default function Home() {
           <p className="eyebrow"><span></span> Sala relax · Ladispoli</p>
           <h2>QUI SI SCENDE<br/><em>DI GIRI.</em></h2>
           <p className="lead">Dopo i carichi, il caffè. Uno spazio per rallentare, dissetarsi e restare un po’ tra oggetti di un’altra epoca.</p>
-          <p>Macchinetta del caffè, gadget, una Vespa 50, pompe vintage, flipper e pezzi di storia. L’angolo retrò di Revenge Gym: dove si chiacchiera, si riprende fiato e poi si torna in sala.</p>
+          <p>Macchinetta del caffè, gadget, una Vespa 50, il flipper acceso e pezzi di storia. L’angolo retrò di Revenge Gym: dove si chiacchiera, si riprende fiato e poi si torna in sala.</p>
+          <p>C’è un tavolino, la merce della casa, oggetti raccolti nel tempo: dal casco al popcorn, dai guantoni appesi a un frigo Coca-Cola d’altri tempi.</p>
+          <p>Qui non si dimostra niente. Si prende un espresso, si guarda intorno, si parla. È lo spazio tra una serie e l’altra, o alla fine della seduta: dissetarsi, rallentare, restare cinque minuti in più senza uscire dalla palestra.</p>
+          <p>La pausa, da Revenge Gym, ha lo stesso carattere del resto. Non è un corridoio di passaggio: è un angolo da vivere.</p>
           <div className="relax-facts" aria-label="Cosa trovi in sala relax">
             <div><strong>01</strong><span>Caffè</span></div>
             <div><strong>02</strong><span>Retrò</span></div>
