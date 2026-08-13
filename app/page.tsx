@@ -216,6 +216,8 @@ export default function Home() {
     if (reducedMotion) return;
 
     video.volume = 0.42;
+    video.playbackRate = 0.8;
+    video.preservesPitch = true;
     let inView = false;
     let unlocked = !video.muted;
     const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
