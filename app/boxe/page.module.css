@@ -70,3 +70,22 @@
 .spaceShowcase{background:transparent}
 .pillars article{background:transparent}
 .footer{background:rgba(5,5,5,.34)}
+
+/* Il ritratto verticale sfrutta meglio la colonna senza invadere titolo e video. */
+.videoAthlete{
+  top:-12px;
+  width:min(56vw,720px);
+  height:min(650px,78%);
+  min-height:480px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 82%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 8%,#000 80%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 82%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 8%,#000 80%,transparent 100%);
+}
+@media(max-width:700px){
+  .videoAthlete{
+    top:auto;
+    width:min(96vw,430px);
+    height:min(128vw,560px);
+    min-height:360px;
+    margin:-8px auto 10px;
+  }
+}
