@@ -4,8 +4,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://revenge-gym.github.io"),
   title: "Revenge Gym | Palestra e Sala Pesi a Ladispoli",
-  description: "Revenge Gym è la palestra in Via Berna 8 a Ladispoli, con sala pesi, macchinari professionali e area boxe con ring e sacchi.",
-  keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "Revenge Gym", "Panatta", "Hammer Strength", "Life Fitness", "Precor", "Hoist Fitness", "Nautilus", "Star Trac", "Gymleco"],
+  description: "Revenge Gym è la palestra in Via Berna 8 a Ladispoli, con sala pesi, macchinari professionali, area boxe con ring e sacchi, e una sala relax con caffè e angolo retrò.",
+  keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "sala relax palestra", "Revenge Gym", "Panatta", "Hammer Strength", "Life Fitness", "Precor", "Hoist Fitness", "Nautilus", "Star Trac", "Gymleco"],
   openGraph: {
     title: "Revenge Gym | La tua rivincita inizia oggi",
     description: "Palestra e sala pesi a Ladispoli. Allenati, evolvi, supera i tuoi limiti.",

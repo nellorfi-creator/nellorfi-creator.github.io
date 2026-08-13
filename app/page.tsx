@@ -117,6 +117,7 @@ const gymZones = [
   { id: "isotonic", number: "02", title: "Isotonica", subtitle: "Movimento guidato", className: "zone-isotonic", image: "/photos/live/sala-isotonica-oggi.webp", text: "Macchinari professionali che guidano la traiettoria e permettono di concentrare il lavoro sul gruppo muscolare scelto.", equipment: ["Macchine Panatta e Hammer Strength", "Postazioni per dorso, petto, spalle e gambe", "Regolazioni adatte a livelli diversi"] },
   { id: "cardio", number: "03", title: "Cardio", subtitle: "Fiato e resistenza", className: "zone-cardio", image: "/photos/live/sala-cardio-oggi.webp", text: "Una zona per riscaldarsi, migliorare la capacità cardiovascolare o completare la seduta con un lavoro aerobico.", equipment: ["Attrezzature cardio professionali", "Intensità facilmente regolabile", "Utilizzabile prima o dopo la sala pesi"] },
   { id: "boxing", number: "04", title: "Boxe", subtitle: "Tecnica e carattere", className: "zone-boxing", image: "/photos/live/boxe-sacchi.webp", text: "Uno spazio distinto dedicato alla boxe, dove allenare tecnica, coordinazione, condizionamento e sicurezza.", equipment: ["Ring", "Sacchi", "Spazio per tecnica e preparazione atletica"] },
+  { id: "relax", number: "05", title: "Sala relax", subtitle: "Caffè e retrò", className: "zone-relax", image: "/photos/live/sala-relax-poster.webp", href: "#sala-relax", text: "Dopo i carichi, il caffè. Un angolo per rallentare, dissetarsi e restare tra oggetti di un’altra epoca: Vespa 50, gadget e pezzi vintage.", equipment: ["Macchinetta del caffè", "Angolo retrò con Vespa 50", "Tavolino, flipper e oggetti vintage"] },
 ];
 
 const magazineArticles = [
@@ -135,7 +136,7 @@ export default function Home() {
   const [introSound, setIntroSound] = useState(false);
   const [activeBrand, setActiveBrand] = useState<(typeof equipmentBrands)[number] | null>(null);
   const [activeArea, setActiveArea] = useState<(typeof courses)[number] | null>(null);
-  const [activeZone, setActiveZone] = useState(gymZones[0]);
+  const [activeZone, setActiveZone] = useState<(typeof gymZones)[number]>(gymZones[0]);
   const [activeArticle, setActiveArticle] = useState<(typeof magazineArticles)[number] | null>(null);
   const [philosophySlide, setPhilosophySlide] = useState(0);
   const [philosophyInView, setPhilosophyInView] = useState(false);
@@ -340,7 +341,7 @@ export default function Home() {
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><img src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','#filosofia'],['Aree','#corsi'],['Mappa','#mappa'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
+          {[['La palestra','#filosofia'],['Aree','#corsi'],['Relax','#sala-relax'],['Mappa','#mappa'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
           <div className="nav-flyout">
             <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={zoneMenuOpen} onClick={() => setZoneMenuOpen(!zoneMenuOpen)}>Per zona <span>▾</span></button>
             <div className={`nav-flyout-panel${zoneMenuOpen ? " open" : ""}`} role="menu">
@@ -458,7 +459,7 @@ export default function Home() {
             <p className="eyebrow"><span></span> I titolari</p>
             <h3>GINO & STEFANIA.<br/><em>REVENGE GYM.</em></h3>
             <p>La palestra di Ladispoli guidata da chi ci crede ogni giorno: cura degli spazi, attenzione alle persone e la stessa passione per l’allenamento che si respira in sala.</p>
-            <small>LADISPOLI · SALA PESI · BOXE</small>
+            <small>LADISPOLI · SALA PESI · BOXE · RELAX</small>
           </div>
         </div>
         <div className="real-gym-strip reveal" aria-label="Foto reali di Revenge Gym">
@@ -473,6 +474,28 @@ export default function Home() {
             Il tuo browser non supporta la riproduzione video.
           </video>
         </div>
+      </section>
+
+      <section className="relax-lounge" id="sala-relax">
+        <div className="relax-copy reveal">
+          <p className="eyebrow"><span></span> Sala relax · Ladispoli</p>
+          <h2>QUI SI SCENDE<br/><em>DI GIRI.</em></h2>
+          <p className="lead">Dopo i carichi, il caffè. Uno spazio per rallentare, dissetarsi e restare un po’ tra oggetti di un’altra epoca.</p>
+          <p>Macchinetta del caffè, gadget, una Vespa 50, pompe vintage, flipper e pezzi di storia. L’angolo retrò di Revenge Gym: dove si chiacchiera, si riprende fiato e poi si torna in sala.</p>
+          <div className="relax-facts" aria-label="Cosa trovi in sala relax">
+            <div><strong>01</strong><span>Caffè</span></div>
+            <div><strong>02</strong><span>Retrò</span></div>
+            <div><strong>03</strong><span>Pausa</span></div>
+          </div>
+          <small className="relax-credit">Musica: Latin Lovers · Ahjay Stelino · Mixkit</small>
+        </div>
+        <figure className="relax-player reveal">
+          <video controls playsInline preload="metadata" poster="/photos/live/sala-relax-poster.webp" aria-label="Video della sala relax di Revenge Gym: caffè, Vespa 50 e angolo retrò">
+            <source src="/media/sala-relax.mp4" type="video/mp4" />
+            Il tuo browser non supporta la riproduzione video.
+          </video>
+          <figcaption>Sala relax · caffè, Vespa e angolo retrò</figcaption>
+        </figure>
       </section>
 
       <section className="section courses" id="corsi">
@@ -525,6 +548,7 @@ export default function Home() {
               <strong>{activeZone.title}</strong>
               <p>{activeZone.text}</p>
               <ul>{activeZone.equipment.map(item => <li key={item}>{item}</li>)}</ul>
+              {"href" in activeZone && activeZone.href ? <a className="text-link orange" href={activeZone.href}>Guarda il video <span>↗</span></a> : null}
             </div>
           </div>
           <div className="floor-plan" aria-label="Mappa interattiva delle aree di Revenge Gym">
@@ -600,7 +624,7 @@ export default function Home() {
           <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="form-honey" aria-hidden="true" />
           <label>Nome e cognome<input required name="name" placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" placeholder="+39" /></label></div>
-          <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
+          <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe', 'Sala relax'].map(area => <option key={area}>{area}</option>)}</select></label>
           <label>Messaggio<textarea name="message" placeholder="Dicci cosa vuoi sapere: orari, abbonamenti, obiettivi..."></textarea></label>
           <label className="privacy"><input required type="checkbox" name="privacy" value="accepted" /> <span>Accetto il trattamento dei dati personali.</span></label>
           <button className="button primary" type="submit" disabled={formStatus === "sending"}>
