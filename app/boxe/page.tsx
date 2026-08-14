@@ -132,19 +132,21 @@ export default function BoxePage() {
       </section>
 
       <section className={styles.videos} id="video">
-        <SiteImage
-          className={styles.videoAthlete}
-          src="/photos/boxe/atleta-pugile-pugno.webp"
-          alt="Pugile in azione, Revenge Boxing"
-          loading="lazy"
-          decoding="async"
-        />
-        <div className={styles.videoIntro}>
-          <div>
-            <p className={styles.eyebrow}><span /> Guarda lo spazio</p>
-            <h2>DENTRO<br/><em>REVENGE BOXING.</em></h2>
+        <div className={styles.videoHead}>
+          <SiteImage
+            className={styles.videoAthlete}
+            src="/photos/boxe/atleta-pugile-pugno.webp"
+            alt="Pugile in azione, Revenge Boxing"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className={styles.videoIntro}>
+            <div>
+              <p className={styles.eyebrow}><span /> Guarda lo spazio</p>
+              <h2>DENTRO<br/><em>REVENGE BOXING.</em></h2>
+            </div>
+            <p>Tre sguardi reali dentro Revenge Boxing: la sala, il ring e l’energia del lavoro tecnico in azione.</p>
           </div>
-          <p>Tre sguardi reali dentro Revenge Boxing: la sala, il ring e l’energia del lavoro tecnico in azione.</p>
         </div>
         <div className={styles.videoGrid}>
           <article><div className={styles.player}><video controls playsInline {...safariInline} preload="metadata" poster="/photos/boxe/sala-ring-sacchi.jpg"><source src="/media/boxe/tour-sala-sacchi.mp4" type="video/mp4"/></video></div><div><span>01 · TOUR</span><h3>LA SALA E I SACCHI.</h3></div></article>

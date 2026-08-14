@@ -8,6 +8,6 @@
 :HL["/_next/static/media/966258b9232ba178-s.p.02d3pf396kpkp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/d9b5d46d9a89ffe6-s.p.0xxdg0o7uh536.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/ddf6ae3f623ba878-s.p.2zhff3cxreb6s.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/_next/static/chunks/1mo_00as10iyq.css","style"]
+:HL["/_next/static/chunks/3wug8jio05yhj.css","style"]
 :HL["/photos/live/gino-corner-bono.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"ay4Dah4glvDMapggwKYqh"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"WqIV7U1TD4KtwJUMqFubj"}
