@@ -89,3 +89,29 @@
     margin:-8px auto 10px;
   }
 }
+
+/* Player più grandi: due tour affiancati, il verticale usa lo spazio sotto. */
+.videos{padding-bottom:88px}
+.videoGrid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:36px 28px;
+  margin-top:48px;
+}
+.player{min-height:clamp(280px,24vw,400px)}
+.videoPortrait{
+  grid-column:1/-1;
+  width:min(100%,440px);
+  justify-self:center;
+}
+.videoPortrait .player{
+  aspect-ratio:9/16;
+  min-height:0;
+  max-height:min(72vh,720px);
+}
+.videoPortrait>div:last-child{text-align:center}
+.videoGrid h3{font-size:clamp(28px,3vw,40px)}
+@media(max-width:900px){
+  .videoGrid{grid-template-columns:1fr;gap:48px}
+  .videoPortrait{width:min(100%,380px)}
+  .player{min-height:0}
+}
