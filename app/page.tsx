@@ -144,6 +144,7 @@ export default function Home() {
   const [philosophyInView, setPhilosophyInView] = useState(false);
   const [philosophyTimerKey, setPhilosophyTimerKey] = useState(0);
   const [tickerPaused, setTickerPaused] = useState(false);
+  const [visitCounts, setVisitCounts] = useState<{ uniqueVisitors: number; pageViews: number } | null>(null);
   const philosophyVisualRef = useRef<HTMLDivElement>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
@@ -267,6 +268,31 @@ export default function Home() {
     pauseTicker();
     document.addEventListener("visibilitychange", pauseTicker);
     return () => document.removeEventListener("visibilitychange", pauseTicker);
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev/visits", {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("counter unavailable");
+        return response.json() as Promise<{ uniqueVisitors?: number; pageViews?: number }>;
+      })
+      .then(({ uniqueVisitors, pageViews }) => {
+        if (
+          typeof uniqueVisitors === "number" && Number.isFinite(uniqueVisitors) &&
+          typeof pageViews === "number" && Number.isFinite(pageViews)
+        ) {
+          setVisitCounts({ uniqueVisitors, pageViews });
+        }
+      })
+      .catch((error: unknown) => {
+        if (!(error instanceof DOMException && error.name === "AbortError")) setVisitCounts(null);
+      });
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
@@ -717,6 +743,12 @@ export default function Home() {
       <footer>
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <p>Sala pesi · Ladispoli</p>
+        <div className="visit-counter" aria-live="polite" aria-label={visitCounts === null ? "Conteggi in caricamento" : `${visitCounts.uniqueVisitors.toLocaleString("it-IT")} visitatori unici e ${visitCounts.pageViews.toLocaleString("it-IT")} visualizzazioni`}>
+          <span className="visit-counter-eye" aria-hidden="true"><i></i></span>
+          <span className="visit-counter-stat"><small>Visitatori unici</small><strong>{visitCounts === null ? "—" : visitCounts.uniqueVisitors.toLocaleString("it-IT")}</strong></span>
+          <span className="visit-counter-divider" aria-hidden="true"></span>
+          <span className="visit-counter-stat"><small>Visualizzazioni</small><strong>{visitCounts === null ? "—" : visitCounts.pageViews.toLocaleString("it-IT")}</strong></span>
+        </div>
         <p className="footer-legal">
           <span>© 2026 Revenge Gym. Tutti i diritti riservati.</span>
           <span className="by-nello" style={{ textTransform: "none" }}>© by nello 2026</span>

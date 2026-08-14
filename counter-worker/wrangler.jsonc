@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "revenge-gym-visit-counter",
+  "main": "index.ts",
+  "compatibility_date": "2026-08-14",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "revenge-gym-visit-counter",
+      "database_id": "ff157045-dd82-4875-8ab9-3dab5df8dae7"
+    }
+  ]
+}

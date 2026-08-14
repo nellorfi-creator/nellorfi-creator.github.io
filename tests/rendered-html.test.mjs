@@ -24,6 +24,8 @@ test("server-renders the Revenge Gym home page", async () => {
   assert.match(html, /<meta[^>]+name="description"/i);
   assert.match(html, /<h1[^>]*>[\s\S]*RIVINCITA/i);
   assert.match(html, /id="contatti"/i);
+  assert.match(html, /Visitatori unici/i);
+  assert.match(html, /Visualizzazioni/i);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site|codex-preview/i);
 });
 
