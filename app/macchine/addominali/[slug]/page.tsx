@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { absMachines, getAbsMachine } from "@/lib/abs-machines";
-import AbsMachineDetail from "./machine-detail";
+import MachineDetailView from "@/app/components/machine-detail-view";
+import styles from "../../machine-detail.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${machine.name} · Revenge Gym`,
       description: machine.tagline,
-      images: [{ url: machine.image, alt: machine.alt }],
+      images: [{ url: machine.image, alt: machine.alt, width: 1200, height: 630 }],
     },
   };
 }
@@ -32,5 +33,16 @@ export default async function AbsMachinePage({ params }: Props) {
   const index = absMachines.findIndex((item) => item.id === machine.id);
   const prev = absMachines[(index - 1 + absMachines.length) % absMachines.length];
   const next = absMachines[(index + 1) % absMachines.length];
-  return <AbsMachineDetail machine={machine} prev={prev} next={next} />;
+  return (
+    <MachineDetailView
+      area="addominali"
+      areaLabel="Addominali"
+      leadLabel="ADDOMINALI"
+      pagerHomeLabel="Tutti gli addominali"
+      machine={machine}
+      prev={prev}
+      next={next}
+      styles={styles}
+    />
+  );
 }

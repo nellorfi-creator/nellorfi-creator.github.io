@@ -31,13 +31,19 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# wrangler / miniflare
+/.wrangler/
+counter-worker/.wrangler/
+
+# local promo scratch
+promo/_spot_tmp/
+
 # vercel
 .vercel
 
 # typescript
 next-env.d.ts
 /dist/
-/.wrangler/
 /outputs/
 /work/
 

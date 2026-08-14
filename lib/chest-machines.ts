@@ -1,4 +1,4 @@
-import type { LegMachine } from "./leg-machines";
+import type { Machine } from "./machines";
 
 export const chestZone = {
   title: "Petto",
@@ -14,7 +14,7 @@ export const chestZone = {
   ],
 };
 
-export const chestMachines: LegMachine[] = [
+export const chestMachines: Machine[] = [
   {
     id: "chest-press-declinata", number: "01", name: "Chest Press Declinata", brand: "Plate Loaded", category: "Spinta declinata", image: "/photos/machines/petto/chest-press-declinata.jpg", alt: "Chest press declinata arancione nella sala Revenge Gym", tagline: "Traiettoria discendente e spinta stabile per il petto.",
     brandNote: ["La Chest Press Declinata è una pressa plate loaded con bracci indipendenti, progettata per offrire una spinta potente e stabile mantenendo il busto sostenuto.", "La seduta e l’angolo di spinta orientano il gesto verso una traiettoria declinata, utile per variare lo stimolo rispetto alle classiche presse orizzontali e inclinate."],

@@ -34,15 +34,37 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Revenge Gym",
-    images: [{ url: "/media/sala-attrezzi.webp", alt: "Revenge Gym — La tua rivincita inizia oggi" }],
+    images: [{ url: "/media/sala-attrezzi.webp", alt: "Revenge Gym — La tua rivincita inizia oggi", width: 1200, height: 630 }],
   },
   twitter: { card: "summary_large_image", title: "Revenge Gym", description: "La tua rivincita inizia oggi.", images: ["/media/sala-attrezzi.webp"] },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HealthClub",
+  name: "Revenge Gym",
+  url: "https://revenge-gym.github.io",
+  telephone: "+393475368488",
+  email: "laurogino@tiscali.it",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Via Berna 8",
+    addressLocality: "Ladispoli",
+    postalCode: "00055",
+    addressRegion: "RM",
+    addressCountry: "IT",
+  },
+  image: "https://revenge-gym.github.io/media/sala-attrezzi.webp",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="it" className={`${inter.variable} ${barlow.variable}`}>
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#contenuto">Vai al contenuto</a>
+        <div id="contenuto">{children}</div>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      </body>
     </html>
   );
 }

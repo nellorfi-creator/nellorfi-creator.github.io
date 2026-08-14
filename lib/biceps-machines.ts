@@ -1,4 +1,4 @@
-import type { LegMachine } from "./leg-machines";
+import type { Machine } from "./machines";
 
 export const bicepsZone = {
   title: "Bicipiti",
@@ -14,7 +14,7 @@ export const bicepsZone = {
   ],
 };
 
-export const bicepsMachines: LegMachine[] = [
+export const bicepsMachines: Machine[] = [
   {
     id: "biceps-curl-hammer",
     number: "01",

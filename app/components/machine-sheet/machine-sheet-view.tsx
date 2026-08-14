@@ -2,13 +2,13 @@
 
 import SiteImage from "@/app/components/site-image";
 import Link from "next/link";
-import type { LegMachine } from "@/lib/leg-machines";
+import type { Machine } from "@/lib/machines";
 import type { MachineSheet } from "@/lib/machine-sheets";
 import LegSheetIllustration from "./leg-sheet-illustration";
 import styles from "./sheet.module.css";
 
 type Props = {
-  machine: LegMachine;
+  machine: Machine;
   sheet: MachineSheet;
 };
 

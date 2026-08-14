@@ -19,7 +19,9 @@ export default function PrivacyPage() {
         <h2>Finalità e base giuridica</h2>
         <p>I dati vengono utilizzati esclusivamente per rispondere alla richiesta dell’interessato. Il trattamento si basa sul consenso espresso prima dell’invio.</p>
         <h2>Modalità e destinatari</h2>
-        <p>Il modulo utilizza il servizio tecnico FormSubmit per recapitare la richiesta via email. I dati non vengono venduti né utilizzati per finalità pubblicitarie automatiche.</p>
+        <p>Il modulo utilizza il servizio tecnico FormSubmit per recapitare la richiesta via email. I dati non vengono venduti né utilizzati per finalità pubblicitarie automatiche. FormSubmit tratta il contenuto della richiesta al solo fine della consegna all’indirizzo della palestra.</p>
+        <h2>Mappa e servizi di terze parti</h2>
+        <p>La pagina contatti può mostrare una mappa incorporata di Google Maps, erogata da Google Ireland Ltd. L’uso della mappa può comportare il trasferimento di dati tecnici (incluso l’indirizzo IP) verso Google, secondo l’informativa disponibile su policies.google.com.</p>
         <h2>Contatore delle visite</h2>
         <p>La homepage mostra il numero complessivo di visualizzazioni e di visitatori unici. A ogni apertura viene registrata una visualizzazione. Per distinguere i visitatori, l’indirizzo IP viene trasformato immediatamente in un codice non leggibile mediante una chiave privata: l’IP originale non viene conservato. Il contatore non utilizza cookie e i dati tecnici sono archiviati tramite Cloudflare esclusivamente per produrre queste statistiche aggregate.</p>
         <h2>Conservazione e diritti</h2>

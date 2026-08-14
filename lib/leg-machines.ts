@@ -1,26 +1,9 @@
-export type LegMachine = {
-  id: string;
-  number: string;
-  name: string;
-  brand: string;
-  category: string;
-  image: string;
-  alt: string;
-  tagline: string;
-  brandNote: string[];
-  lead: string[];
-  qualityEdge: string;
-  focus: string;
-  primaryMuscles: string[];
-  secondaryMuscles: string[];
-  trainingRole: string[];
-  cues: string[];
-  programming: string[];
-  errors: string[];
-  trainer: string;
-};
+import type { Machine, MachineZone } from "./machines";
 
-export const legZone = {
+export type LegMachine = Machine;
+
+export const legZone: MachineZone = {
+
   title: "Gambe",
   eyebrow: "Allenamento per zona · Arti inferiori",
   heroTitle: ["ALLENA", "LE TUE", "GAMBE."],

@@ -1,4 +1,4 @@
-import type { LegMachine } from "./leg-machines";
+import type { Machine } from "./machines";
 
 export const absZone = {
   title: "Addominali",
@@ -14,7 +14,7 @@ export const absZone = {
   ],
 };
 
-export const absMachines: LegMachine[] = [
+export const absMachines: Machine[] = [
   {
     id: "abdominal-oblique-crunch-hammer",
     number: "01",

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { tricepsMachines, getTricepsMachine } from "@/lib/triceps-machines";
-import TricepsMachineDetail from "./machine-detail";
+import MachineDetailView from "@/app/components/machine-detail-view";
+import styles from "../../machine-detail.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${machine.name} · Revenge Gym`,
       description: machine.tagline,
-      images: [{ url: machine.image, alt: machine.alt }],
+      images: [{ url: machine.image, alt: machine.alt, width: 1200, height: 630 }],
     },
   };
 }
@@ -32,5 +33,16 @@ export default async function TricepsMachinePage({ params }: Props) {
   const index = tricepsMachines.findIndex((item) => item.id === machine.id);
   const prev = tricepsMachines[(index - 1 + tricepsMachines.length) % tricepsMachines.length];
   const next = tricepsMachines[(index + 1) % tricepsMachines.length];
-  return <TricepsMachineDetail machine={machine} prev={prev} next={next} />;
+  return (
+    <MachineDetailView
+      area="tricipiti"
+      areaLabel="Tricipiti"
+      leadLabel="TRICIPITI"
+      pagerHomeLabel="Tutti i tricipiti"
+      machine={machine}
+      prev={prev}
+      next={next}
+      styles={styles}
+    />
+  );
 }

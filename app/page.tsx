@@ -359,8 +359,12 @@ export default function Home() {
     if (!audio) return;
     if (audio.paused) {
       audio.volume = 0.48;
-      await audio.play();
-      setIntroSound(true);
+      try {
+        await audio.play();
+        setIntroSound(true);
+      } catch {
+        setIntroSound(false);
+      }
     } else {
       audio.pause();
       setIntroSound(false);
@@ -374,7 +378,7 @@ export default function Home() {
     const data = new FormData(form);
     data.set("_subject", "Revenge Gym — richiesta informazioni");
     data.set("_template", "table");
-    data.set("_captcha", "false");
+    data.set("_captcha", "true");
     try {
       const response = await fetch("https://formsubmit.co/ajax/laurogino@tiscali.it", {
         method: "POST",
@@ -412,7 +416,7 @@ export default function Home() {
       </section>}
       <header className="nav-wrap">
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
-        <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label="Apri menu" aria-expanded={menuOpen}><i></i><i></i></button>
+        <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label={menuOpen ? "Chiudi menu" : "Apri menu"} aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           {[['La palestra','#filosofia'],['Aree','#corsi'],['Relax','#sala-relax'],['Mappa','#mappa'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
           <div className="nav-flyout">
@@ -421,8 +425,8 @@ export default function Home() {
               <div className="nav-flyout-panel-inner">
                 <Link href="/macchine/gambe" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Gambe</Link>
                 <Link href="/macchine/petto" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Petto</Link>
-                <Link href="/macchine/dorso" role="menuitem">Dorso</Link>
-                <Link href="/macchine/spalle" role="menuitem">Spalle</Link>
+                <Link href="/macchine/dorso" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Dorso</Link>
+                <Link href="/macchine/spalle" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Spalle</Link>
                 <Link href="/macchine/bicipiti" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Bicipiti</Link>
                 <Link href="/macchine/tricipiti" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Tricipiti</Link>
                 <Link href="/macchine/addominali" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Addominali</Link>
@@ -674,7 +678,7 @@ export default function Home() {
             <section><small>LA STORIA</small><p>{activeBrand.history}</p></section>
             <section><small>COSA LO DISTINGUE</small><ul>{activeBrand.highlights.map(item => <li key={item}>{item}</li>)}</ul></section>
             <section className="brand-relevance"><small>PERCHÉ È IN REVENGE GYM</small><p>{activeBrand.relevance}</p></section>
-            <a className="brand-source" href={activeBrand.source} target="_blank" rel="noreferrer">{activeBrand.sourceLabel} <span>↗</span></a>
+            <a className="brand-source" href={activeBrand.source} target="_blank" rel="noopener noreferrer">{activeBrand.sourceLabel} <span>↗</span></a>
           </div>
         </aside>
       </div>}
@@ -714,14 +718,14 @@ export default function Home() {
         <div className="contact-info reveal">
           <p className="eyebrow"><span></span> Parliamone</p><h2>CI VEDIAMO<br/>IN <em>PALESTRA.</em></h2>
           <div className="info-list">
-            <div><small>Dove siamo</small><p>Via Berna, 8<br/>00055 Ladispoli RM</p><a href="https://maps.google.com/?q=Via+Berna+8+00055+Ladispoli+RM" target="_blank" rel="noreferrer">Apri in Google Maps ↗</a></div>
+            <div><small>Dove siamo</small><p>Via Berna, 8<br/>00055 Ladispoli RM</p><a href="https://maps.google.com/?q=Via+Berna+8+00055+Ladispoli+RM" target="_blank" rel="noopener noreferrer">Apri in Google Maps ↗</a></div>
             <div><small>Contatti</small><p><a href="tel:+393475368488">347 536 8488</a><br/><a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a></p></div>
-            <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noreferrer">Messenger ↗</a></p></div>
+            <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noopener noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noopener noreferrer">Messenger ↗</a></p></div>
           </div>
           <div className="map-placeholder">
             <div className="map-label"><span>●</span><div><strong>REVENGE GYM</strong><small>Via Berna 8 · Ladispoli</small></div></div>
             <iframe title="Mappa di Revenge Gym a Ladispoli" loading="lazy" src="https://www.google.com/maps?q=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM&z=14&output=embed" referrerPolicy="no-referrer-when-downgrade"></iframe>
-            <a className="map-open" href="https://www.google.com/maps/search/?api=1&query=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM" target="_blank" rel="noreferrer">Apri la mappa <span>↗</span></a>
+            <a className="map-open" href="https://www.google.com/maps/search/?api=1&query=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM" target="_blank" rel="noopener noreferrer">Apri la mappa <span>↗</span></a>
           </div>
         </div>
         <form className="contact-form reveal" onSubmit={submitForm} noValidate={false}>
@@ -751,6 +755,7 @@ export default function Home() {
         </div>
         <p className="footer-legal">
           <span>© 2026 Revenge Gym. Tutti i diritti riservati.</span>
+          <Link href="/privacy/" className="footer-privacy">Privacy</Link>
           <span className="by-nello" style={{ textTransform: "none" }}>© by nello 2026</span>
         </p>
         <a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a>

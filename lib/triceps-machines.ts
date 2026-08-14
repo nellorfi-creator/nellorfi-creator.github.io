@@ -1,4 +1,4 @@
-import type { LegMachine } from "./leg-machines";
+import type { Machine } from "./machines";
 
 export const tricepsZone = {
   title: "Tricipiti",
@@ -14,7 +14,7 @@ export const tricepsZone = {
   ],
 };
 
-export const tricepsMachines: LegMachine[] = [
+export const tricepsMachines: Machine[] = [
   {
     id: "seated-dip-hammer",
     number: "01",

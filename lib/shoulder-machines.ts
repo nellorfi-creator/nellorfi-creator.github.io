@@ -1,4 +1,4 @@
-import type { LegMachine } from "./leg-machines";
+import type { Machine } from "./machines";
 
 export const shoulderZone = {
   title: "Spalle",
@@ -13,7 +13,7 @@ export const shoulderZone = {
   ],
 };
 
-export const shoulderMachines: LegMachine[] = [
+export const shoulderMachines: Machine[] = [
   {
     id: "multi-flight-machine", number: "01", name: "Multi Flight Machine", brand: "Multi Flight", category: "Alzate laterali guidate", image: "/photos/machines/spalle/multi-flight-machine.webp", alt: "Multi Flight Machine per alzate laterali nella sala Revenge Gym", tagline: "Bracci regolabili per allenare le spalle da più angolazioni.",
     brandNote: ["La Multi Flight è una postazione selectorized con due bracci regolabili e appoggi dedicati agli avambracci. La configurazione consente di costruire un’alzata laterale guidata mantenendo costante la traiettoria.", "Il marchio non è leggibile nella fotografia: la scheda identifica quindi la macchina attraverso la sua funzione reale, senza attribuirle un produttore o un modello non verificato."],

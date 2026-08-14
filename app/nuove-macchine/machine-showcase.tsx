@@ -87,7 +87,7 @@ export default function MachineShowcase() {
     <MobileSwipeBack onSwipe={goBack} />
     <header className={styles.nav}>
       <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home senza intro"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
-      <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Apri menu di navigazione"><i></i><i></i></button>
+      <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={menuOpen ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}><i></i><i></i></button>
       <nav className={menuOpen ? styles.open : ""} aria-label="Menu nuove macchine">
         <button className={styles.back} type="button" onClick={() => { goBack(); setMenuOpen(false); }}>← Indietro</button>
         <Link className={styles.siteLink} href="/?skipIntro=1#filosofia" onClick={() => setMenuOpen(false)}>La palestra</Link>

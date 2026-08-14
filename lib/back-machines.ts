@@ -1,4 +1,4 @@
-import type { LegMachine } from "./leg-machines";
+import type { Machine } from "./machines";
 
 export const backZone = {
   title: "Dorso",
@@ -13,7 +13,7 @@ export const backZone = {
   ],
 };
 
-export const backMachines: LegMachine[] = [
+export const backMachines: Machine[] = [
   {
     id: "easy-power-station-precor", number: "01", name: "Easy Power Station", brand: "Precor", category: "Trazioni assistite", image: "/photos/machines/dorso/easy-power-station-precor.webp", alt: "Easy Power Station Precor per trazioni assistite nella sala Revenge Gym", tagline: "Trazioni e dip assistiti con progressione misurabile.",
     brandNote: ["La Easy Power Station Precor è una stazione assistita che utilizza il pacco pesi come contrappeso: più assistenza viene selezionata, minore è la quota di peso corporeo da sollevare.", "Le impugnature multiple permettono di lavorare sulle trazioni con prese diverse e di costruire gradualmente forza nel gesto a corpo libero."],
