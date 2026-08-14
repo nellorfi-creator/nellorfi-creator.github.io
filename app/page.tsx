@@ -8,6 +8,8 @@ import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
 import { useViewportVideo } from "@/app/hooks/use-viewport-video";
 
+const safariInline = { "webkit-playsinline": "true" } as const;
+
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
   { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "/photos/live/sala-isotonica-oggi.webp", text: "Attrezzature professionali di marchi selezionati per un allenamento preciso ed efficace.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
@@ -400,7 +402,7 @@ export default function Home() {
       {(activeBrand || activeArea || activeArticle) && <MobileSwipeBack edgeOnly={false} label="Chiudi" onSwipe={() => { setActiveBrand(null); setActiveArea(null); setActiveArticle(null); }} />}
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
         <div className="intro-frames is-running">
-          <video ref={introVideoRef} className="intro-video" autoPlay muted playsInline preload="auto" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true" onEnded={closeIntro}>
+          <video ref={introVideoRef} className="intro-video" autoPlay muted playsInline {...safariInline} preload="auto" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true" onEnded={closeIntro}>
             <source src="/media/intro-cinematic.mp4" type="video/mp4" />
           </video>
         </div>
@@ -456,7 +458,7 @@ export default function Home() {
 
       <section className="hero" id="home">
         <div className="hero-media" role="img" aria-label="Sala attrezzi di Revenge Gym a Ladispoli">
-          <video ref={heroVideoRef} className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true">
+          <video ref={heroVideoRef} className="hero-video" autoPlay muted loop playsInline {...safariInline} preload="metadata" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true">
             <source src="/media/hero-loop.mp4" type="video/mp4" />
           </video>
         </div>
@@ -552,6 +554,7 @@ export default function Home() {
             muted
             loop
             playsInline
+            {...safariInline}
             preload="auto"
             poster="/media/sala-attrezzi.webp"
             disablePictureInPicture
@@ -587,6 +590,7 @@ export default function Home() {
             muted
             loop
             playsInline
+            {...safariInline}
             preload="auto"
             poster="/photos/live/sala-relax-poster.webp"
             disablePictureInPicture

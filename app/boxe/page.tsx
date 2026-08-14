@@ -5,6 +5,8 @@ import styles from "./page.module.css";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import RingGallery, { type RingPhoto } from "./ring-gallery";
 
+const safariInline = { "webkit-playsinline": "true" } as const;
+
 export const metadata: Metadata = {
   title: "Boxe a Ladispoli | Ring e area sacchi · Revenge Gym",
   description: "Scopri l’area Boxe di Revenge Gym a Ladispoli: ring, sacchi, spazio tecnico, preparazione e immagini reali della sala.",
@@ -145,9 +147,9 @@ export default function BoxePage() {
           <p>Tre sguardi reali dentro Revenge Boxing: la sala, il ring e l’energia del lavoro tecnico in azione.</p>
         </div>
         <div className={styles.videoGrid}>
-          <article><div className={styles.player}><video controls playsInline preload="metadata" poster="/photos/boxe/sala-ring-sacchi.jpg"><source src="/media/boxe/tour-sala-sacchi.mp4" type="video/mp4"/></video></div><div><span>01 · TOUR</span><h3>LA SALA E I SACCHI.</h3></div></article>
-          <article><div className={styles.player}><video controls playsInline preload="metadata" poster="/photos/boxe/ring-revenge.jpg"><source src="/media/boxe/tour-ring.mp4" type="video/mp4"/></video></div><div><span>02 · RING</span><h3>DENTRO LE CORDE.</h3></div></article>
-          <article><div className={styles.player}><video controls playsInline preload="metadata" poster="/media/boxe-ring-non-mente-poster.jpg"><source src="/media/boxe-ring-non-mente.mp4" type="video/mp4"/></video></div><div><span>03 · IN AZIONE</span><h3>IL RING NON MENTE.</h3></div></article>
+          <article><div className={styles.player}><video controls playsInline {...safariInline} preload="metadata" poster="/photos/boxe/sala-ring-sacchi.jpg"><source src="/media/boxe/tour-sala-sacchi.mp4" type="video/mp4"/></video></div><div><span>01 · TOUR</span><h3>LA SALA E I SACCHI.</h3></div></article>
+          <article><div className={styles.player}><video controls playsInline {...safariInline} preload="metadata" poster="/photos/boxe/ring-revenge.jpg"><source src="/media/boxe/tour-ring.mp4" type="video/mp4"/></video></div><div><span>02 · RING</span><h3>DENTRO LE CORDE.</h3></div></article>
+          <article><div className={styles.player}><video controls playsInline {...safariInline} preload="metadata" poster="/media/boxe-ring-non-mente-poster.jpg"><source src="/media/boxe-ring-non-mente.mp4" type="video/mp4"/></video></div><div><span>03 · IN AZIONE</span><h3>IL RING NON MENTE.</h3></div></article>
         </div>
       </section>
 
