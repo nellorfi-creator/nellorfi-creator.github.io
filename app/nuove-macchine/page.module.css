@@ -34,6 +34,7 @@
 .footer{background:rgba(5,5,5,.34)}
 .sectionIntro a{color:var(--orange);font-weight:800;letter-spacing:.6px}
 .sectionIntro a:hover{color:var(--orange-hot)}
+.profileToggle{display:none}
 
 
 /* 7 cards in a 4-col gap-grid left an empty “ghost” cell after removing Back Row. */
@@ -44,6 +45,11 @@
 }
 .machineMenu a:last-child{grid-column:span 2}
 @media(max-width:900px){
+  .nav nav{padding-bottom:76px}
+  .profileToggle{display:flex;width:calc(100% - 44px);min-height:58px;margin:0 22px 44px;padding:0 18px;align-items:center;justify-content:space-between;color:#fff;background:var(--orange);border:0;font:800 11px var(--font-inter);letter-spacing:.8px;text-align:left;text-transform:uppercase}
+  .profileToggle span{font-size:24px;line-height:1}
+  .profileBody{display:none}
+  .profileBodyOpen{display:block}
   .machineMenu{gap:10px}
   .machineMenu a:last-child{grid-column:span 2}
 }

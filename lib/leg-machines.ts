@@ -8,10 +8,10 @@ export const legZone: MachineZone = {
   eyebrow: "Allenamento per zona · Arti inferiori",
   heroTitle: ["ALLENA", "LE TUE", "GAMBE."],
   heroLead:
-    "Revenge Gym non compete sul prezzo più basso di Ladispoli. Compete sulla qualità delle macchine, sulla pulizia maniacale e sull’ordine di una sala pensata per chi vuole allenarsi sul serio. Esplora l’area gambe: passa sulla striscia, ferma la foto, apri la scheda.",
+    "Revenge Gym punta sulla qualità delle macchine, sulla cura degli spazi e sull’ordine di una sala pensata per chi vuole allenarsi sul serio. Esplora l’area gambe, scegli una macchina e apri la sua scheda.",
   manifestoTitle: ["NON IL PREZZO.", "LA QUALITÀ."],
   manifesto: [
-    "A Ladispoli le palestre non mancano. Revenge Gym si distingue per un altro motivo: attrezzature di livello professionale, brand che trovi nelle migliori club machine europee, e una sala tenuta con standard che l’atleta nota dal primo ingresso — pulizia, ordine, macchinari curati e pronti all’uso.",
+    "Revenge Gym si distingue per attrezzature di livello professionale, marchi presenti nei migliori club europei e una sala curata fin dal primo ingresso: pulizia, ordine e macchinari pronti all’uso.",
     "Chi sceglie Revenge non cerca la convenienza a tutti i costi. Cerca una risposta seria a forza, ipertrofia e tecnica: presse, hack squat, isolamento, glute machine, hip thrust, calf, Smith e rack. Un arsenale completo per gli arti inferiori, non un angolo improvvisato.",
     "Ogni scheda qui sotto spiega marchio, ruolo allenante e come usare quella macchina per costruire gambe vere. Perché la differenza, in sala, si sente sotto i piedi — e si vede nei dettagli.",
   ],
@@ -28,7 +28,7 @@ export const legMachines: LegMachine[] = [
     alt: "Pressa orizzontale Life Fitness in Revenge Gym",
     tagline: "Spinta guidata, colonna protetta, carico serio.",
     brandNote: [
-      "Life Fitness è uno dei marchi più riconosciuti al mondo nel fitness da club. Non è una linea “economica da palestra low-cost”: è attrezzatura pensata per sale ad alto traffico, dove ogni giorno passano atleti che chiedono stabilità, sensazione di spinta pulita e componenti che resistono agli anni.",
+      "Life Fitness è uno dei marchi più riconosciuti al mondo nel fitness da club. Le sue attrezzature sono pensate per sale ad alto traffico e per atleti che cercano stabilità, una spinta pulita e componenti costruiti per durare.",
       "La pressa orizzontale della gamma porta in sala un’esperienza di lavoro sugli arti inferiori tipica dei centri professionali: regolazioni chiare, pedana ampia, percorso guidato e una risposta del carico che permette di concentrarsi su tecnica e progressione, non sulla lotta con una macchina approssimativa.",
       "Avere Life Fitness in Revenge Gym è un segnale preciso: qui l’allenamento gambe parte da uno standard internazionale, non da un compromesso di catalogo.",
     ],
@@ -38,7 +38,7 @@ export const legMachines: LegMachine[] = [
       "Per l’atleta che cerca risultati, la differenza la fa proprio questo: poter spingere carichi importanti in un contesto guidato, con una macchina che tiene, che non ballonzola, che restituisce feedback pulito ad ogni ripetizione.",
     ],
     qualityEdge:
-      "In Revenge Gym la pressa Life Fitness non è un optional di facciata: è parte dell’identità della sala. Chi vuole qualità sugli arti inferiori la riconosce al primo utilizzo — e capisce subito perché qui non si sceglie per il prezzo più basso, ma per il livello delle attrezzature.",
+      "In Revenge Gym la pressa Life Fitness è parte dell’identità della sala. La qualità sugli arti inferiori si riconosce al primo utilizzo, nella stabilità del gesto e nel livello dell’attrezzatura.",
     focus: "Forza e volume sugli arti inferiori",
     primaryMuscles: ["Quadricipite femorale", "Grande gluteo", "Ischiocrurali"],
     secondaryMuscles: ["Adduttori", "Polpacci", "Core e lombari profondi"],
@@ -85,7 +85,7 @@ export const legMachines: LegMachine[] = [
     tagline: "Angolo inclinato, spinta potente, sensazione diversa.",
     brandNote: [
       "Nella famiglia Life Fitness la pressa a 45° rappresenta l’altra grande voce della spinta guidata. Non è un doppione della pressa orizzontale: cambia l’angolo di lavoro, la gestione dei dischi e la percezione del carico lungo tutta l’escursione.",
-      "È il tipo di macchina che trovi nelle club machine strutturate, dove l’area gambe non si accontenta di “una pressa qualunque”, ma offre varianti vere per stimolare i tessuti da angolazioni diverse e far progredire atleti esigenti.",
+      "È il tipo di macchina presente nei club più strutturati, dove l’area gambe offre varianti reali per lavorare da angolazioni diverse e accompagnare la progressione dell’atleta.",
       "A Revenge Gym avere entrambe le presse Life Fitness significa offrire scelta di livello professionale: chi allena le gambe con criterio può periodizzare, ruotare e costruire volume senza scendere di standard.",
     ],
     lead: [
@@ -94,7 +94,7 @@ export const legMachines: LegMachine[] = [
       "In una sala curata, la differenza si nota anche qui — nella fluidità del carrello, nella solidità della struttura, nella sensazione che ogni ripetizione valga. È esattamente il livello che Revenge vuole far vivere a chi entra per allenarsi sul serio.",
     ],
     qualityEdge:
-      "Due presse Life Fitness nella stessa area non sono eccesso: sono standard. Revenge Gym punta su chi vuole attrezzature da club serio, non su chi cerca solo il prezzo più basso della zona.",
+      "Due presse Life Fitness nella stessa area permettono di scegliere traiettorie e sensazioni diverse. È una dotazione pensata per chi vuole allenarsi con attrezzature da club professionale.",
     focus: "Spinta inclinata per forza e massa",
     primaryMuscles: ["Quadricipite femorale", "Grande gluteo"],
     secondaryMuscles: ["Ischiocrurali", "Adduttori", "Polpacci"],
@@ -188,7 +188,7 @@ export const legMachines: LegMachine[] = [
     alt: "Hack Squat Gymleco in Revenge Gym",
     tagline: "Carrello inclinato, appoggi stabili, spinta pura.",
     brandNote: [
-      "Gymleco è un produttore scandinavo noto per macchine da forza compatte, robuste e estremamente funzionali. Non insegue il design “da vetrina low-cost”: costruisce attrezzi pensati per allenare davvero, con strutture solide e una filosofia da strength room.",
+      "Gymleco è un produttore scandinavo noto per macchine da forza compatte, robuste ed estremamente funzionali. Costruisce attrezzi essenziali e solidi, con una filosofia autentica da strength room.",
       "L’Hack Squat Gymleco presente in Revenge Gym porta in sala quella scuola nordica: pedana ampia, carrello inclinato, appoggi sicuri e caricamento a dischi per progressioni serie.",
       "È il genere di macchina che separa una palestra ordinaria da una sala attrezzata per atleti. E Revenge, su questo, non scende a compromessi.",
     ],
@@ -198,7 +198,7 @@ export const legMachines: LegMachine[] = [
       "Usarlo in una sala pulita, ordinata e attrezzata come Revenge cambia anche l’approccio mentale: entri, trovi la macchina pronta, esegui, progredisci. Niente improvvisazione, niente scuse.",
     ],
     qualityEdge:
-      "Gymleco in area gambe è una scelta di merito. Revenge Gym punta su brand che reggono l’uso intenso e restituiscono un feeling da palestra vera — non da abbonamento low-cost.",
+      "Gymleco in area gambe è una scelta di sostanza. Revenge Gym punta su marchi che reggono l’uso intenso e restituiscono una sensazione autentica di solidità.",
     focus: "Spinta guidata stile squat",
     primaryMuscles: ["Quadricipite femorale", "Grande gluteo"],
     secondaryMuscles: ["Ischiocrurali", "Adduttori", "Polpacci"],
@@ -344,7 +344,7 @@ export const legMachines: LegMachine[] = [
     alt: "Dual Leg Curl e Leg Extension Panatta in Revenge Gym",
     tagline: "Davanti e dietro la coscia, stessa postazione.",
     brandNote: [
-      "Panatta è eccellenza italiana nel fitness professionale. Non è un brand “di prezzo”: è un brand di biomeccanica, finitura e orgoglio costruttivo, presente nelle migliori club machine.",
+      "Panatta è un’eccellenza italiana nel fitness professionale: biomeccanica, finiture e qualità costruttiva presenti nei migliori club.",
       "La Dual Leg Extension / Seated Leg Curling riunisce due gesti fondamentali con cam, regolazioni precise e un cambio rapido tra lavoro anteriore e posteriore della coscia. È il tipo di macchina che un atleta esperto riconosce immediatamente.",
       "Averla in Revenge Gym significa portare in Ladispoli uno standard che normalmente si associa a centri di fascia alta — e farlo in una sala dove pulizia e ordine sono parte del servizio.",
     ],
@@ -552,7 +552,7 @@ export const legMachines: LegMachine[] = [
     alt: "Abductor Life Fitness in Revenge Gym",
     tagline: "Apertura controllata, gluteo medio e stabilità del bacino.",
     brandNote: [
-      "L’Abductor Life Fitness è una selettorizzata dedicata all’abduzione dell’anca. Nelle club machine di fascia professionale completa il lavoro su glutei e stabilità del bacino con la solidità tipica del marchio.",
+      "L’Abductor Life Fitness è una selettorizzata dedicata all’abduzione dell’anca. Nei club di fascia professionale completa il lavoro su glutei e stabilità del bacino con la solidità tipica del marchio.",
       "Troppe palestre trascurano queste stazioni o le trattano come macchine “secondarie da angolo”. Revenge le tiene in primo piano, pulite, ordinate e integrate in un’area gambe davvero completa.",
       "È un altro tassello del messaggio qualità: qui ogni gestualità utile ha una macchina degna di questo nome.",
     ],
@@ -656,7 +656,7 @@ export const legMachines: LegMachine[] = [
     alt: "Gluteus Machine Life Fitness in Revenge Gym",
     tagline: "Estensione dell’anca mirata, gluteo sotto tensione.",
     brandNote: [
-      "La Gluteus Machine Life Fitness è progettata per isolare l’estensione dell’anca. Nelle club machine di fascia alta permette di concentrare il lavoro sul grande gluteo con percorso guidato e regolazioni chiare.",
+      "La Gluteus Machine Life Fitness è progettata per isolare l’estensione dell’anca. Nei club di fascia alta permette di concentrare il lavoro sul grande gluteo con percorso guidato e regolazioni chiare.",
       "Avere una macchina dedicata ai glutei — e non solo squat generici — è tipico delle sale che ascoltano davvero le esigenze di atlete e atleti moderni, senza abbassare lo standard costruttivo.",
       "Revenge Gym la inserisce in un ecosistema già ricco (hip thrust, Master Gluteus Panatta, abductor/adductor): un’offerta da centro premium, non da palestra “basta che ci sia”.",
     ],
@@ -818,7 +818,7 @@ export const legMachines: LegMachine[] = [
     ],
     lead: [
       "L’Hip Thrust verticale è un’altra arma per i glutei. Può risultare più comoda o più intensa a seconda dell’atleta: l’importante è mantenere la qualità dell’estensione d’anca e una chiusura controllata.",
-      "Nei programmi di alto livello si ruota, si confronta, si sceglie la variante che “parla” di più — e si progredisce. Questa è cultura da atleti, non da abbonamento low-cost.",
+      "Nei programmi di alto livello si ruotano e si confrontano le varianti, scegliendo quella più adatta al proprio corpo e alla propria progressione.",
       "Con due thrust dedicate, Revenge dimostra ancora una volta di costruire l’area gambe per chi vuole il massimo dallo stimolo.",
     ],
     qualityEdge:
@@ -970,7 +970,7 @@ export const legMachines: LegMachine[] = [
     brandNote: [
       "Hammer Strength è il brand plate-loaded di riferimento in moltissime sale professionali e strength room di alto livello. Quando vedi Hammer in palestra, di solito sei in un posto che ha scelto la qualità del ferro.",
       "La calf machine consente di allenare gastrocnemio e soleo con carichi importanti e una base stabile, tipica delle stazioni plate-loaded serie.",
-      "A Revenge Gym il nome Hammer Strength sull’area gambe rafforza ancora il posizionamento: qui si allena con attrezzature da club, non con soluzioni low-cost.",
+      "La presenza di Hammer Strength nell’area gambe rafforza il livello della dotazione: attrezzature da club progettate per un lavoro intenso e progressivo.",
     ],
     lead: [
       "I polpacci rispondono a volume, frequenza e escursione completa. La macchina dedicata permette di lavorare la spinta plantare con progressioni chiare, senza dover bilanciare un bilanciere.",
@@ -1027,7 +1027,7 @@ export const legMachines: LegMachine[] = [
     lead: [
       "In chiave arti inferiori, la Smith è una piattaforma versatile: squat assistiti, affondi, spinte monolaterali e lavoro di tecnica. La guida riduce la richiesta di equilibrio, ma non elimina la necessità di assetto e controllo.",
       "Usata bene, è uno strumento da atleti e da programmi intelligenti. Usata male, diventa scorciatoia. In Revenge si punta al primo approccio: qualità del gesto, carichi sensati, sicurezze sempre regolate.",
-      "Avere una Smith Hammer in un contesto curato cambia l’esperienza rispetto alle Smith trascurate di molte palestre low-cost: qui la macchina è un asset, non un relitto.",
+      "Una Smith Hammer mantenuta con cura offre una traiettoria fluida e affidabile: qui la macchina è una risorsa concreta per costruire il proprio allenamento.",
     ],
     qualityEdge:
       "Smith Machine Hammer Strength + sala maniacalmente ordinata = lo standard Revenge. Si allena meglio dove l’attrezzatura è all’altezza degli obiettivi.",

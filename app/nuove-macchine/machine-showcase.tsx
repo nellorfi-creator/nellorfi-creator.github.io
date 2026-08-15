@@ -44,6 +44,19 @@ export default function MachineShowcase() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMachine, setActiveMachine] = useState(machines[0].id);
+  const [expandedMachine, setExpandedMachine] = useState<string | null>(null);
+
+  const mobileDetailsButton = (id: string, name: string) => (
+    <button
+      type="button"
+      className={styles.profileToggle}
+      aria-expanded={expandedMachine === id}
+      aria-controls={`${id}-details`}
+      onClick={() => setExpandedMachine(expandedMachine === id ? null : id)}
+    >
+      {expandedMachine === id ? "Chiudi approfondimento" : `Approfondisci ${name}`} <span>{expandedMachine === id ? "−" : "+"}</span>
+    </button>
+  );
 
   useEffect(() => {
     document.body.classList.toggle("menu-lock", menuOpen);
@@ -136,7 +149,8 @@ export default function MachineShowcase() {
         <div><span>01 · DISPONIBILE IN SALA</span><small>LIFE FITNESS</small><h2>PRESSA<br/><em>ORIZZONTALE.</em></h2><p>Sicurezza, potenza e massima efficacia per l’allenamento completo degli arti inferiori.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/life-fitness-leg-press.webp" alt="Pressa orizzontale Axiom Life Fitness"/><figcaption>Immagine ufficiale Life Fitness · configurazione indicativa</figcaption></figure>
       </div>
-      <div className={styles.profileBody}>
+      {mobileDetailsButton("pressa-life-fitness", "la Pressa Orizzontale")}
+      <div id="pressa-life-fitness-details" className={`${styles.profileBody} ${expandedMachine === "pressa-life-fitness" ? styles.profileBodyOpen : ""}`}>
         <section className={styles.leadSection}><p>La Pressa Orizzontale Life Fitness è una delle macchine più apprezzate nelle palestre professionali. Il movimento guidato permette di sviluppare forza, massa muscolare e stabilità, limitando il carico diretto sulla colonna rispetto a molti esercizi con bilanciere e lasciando l’atleta libero di concentrarsi sulla spinta.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
 
         <div className={styles.contentGrid}>
@@ -168,7 +182,8 @@ export default function MachineShowcase() {
         <div><span>02 · DISPONIBILE IN SALA</span><small>PANATTA</small><h2>LEG CURL /<br/><em>LEG EXTENSION.</em></h2><p>Due esercizi fondamentali, un’unica postazione: lavoro completo sulla parte anteriore e posteriore della coscia.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/panatta-dual-leg-extension-curl.webp" alt="Dual Leg Extension e Seated Leg Curling Panatta 1SCD080"/><figcaption>Panatta 1SCD080 · immagine ufficiale di prodotto</figcaption></figure>
       </div>
-      <div className={styles.profileBody}>
+      {mobileDetailsButton("leg-curl-extension", "Leg Curl / Leg Extension")}
+      <div id="leg-curl-extension-details" className={`${styles.profileBody} ${expandedMachine === "leg-curl-extension" ? styles.profileBodyOpen : ""}`}>
         <section className={styles.leadSection}><p>La Dual Leg Extension / Seated Leg Curling Panatta riunisce in una sola macchina l’estensione e la flessione del ginocchio. Permette così di allenare quadricipiti e ischiocrurali con una postazione compatta, regolabile e progettata per accompagnare il movimento in modo naturale.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
         <div className={styles.contentGrid}>
           <section><small>01 · DUE ESERCIZI</small><h3>DAVANTI E DIETRO.<br/>STESSO OBIETTIVO.</h3><div className={styles.dualList}><div><b>LEG EXTENSION</b><p>Retto femorale</p><p>Vasto laterale</p><p>Vasto mediale</p><p>Vasto intermedio</p></div><div><b>LEG CURL</b><p>Bicipite femorale</p><p>Semitendinoso</p><p>Semimembranoso</p><p>Gastrocnemio, in assistenza</p></div></div></section>
@@ -194,7 +209,8 @@ export default function MachineShowcase() {
         <div><span>03 · DISPONIBILE IN SALA</span><small>GYMLECO · MODELLO 244</small><h2>HACK<br/><em>SQUAT.</em></h2><p>Una traiettoria guidata e una struttura compatta per costruire gambe forti con stabilità e controllo.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/gymleco-hacklift.webp" alt="Hacklift 244 Gymleco, macchina professionale per hack squat"/><figcaption>Gymleco 244 Hacklift · fotografia ufficiale del modello</figcaption></figure>
       </div>
-      <div className={styles.profileBody}>
+      {mobileDetailsButton("hack-squat", "Hack Squat")}
+      <div id="hack-squat-details" className={`${styles.profileBody} ${expandedMachine === "hack-squat" ? styles.profileBodyOpen : ""}`}>
         <section className={styles.leadSection}><p>La Gymleco 244 Hacklift, chiamata anche Hack Squat dal produttore, guida il corpo lungo una traiettoria inclinata mentre schiena, testa e spalle restano sostenute. La struttura aperta e la grande pedana regolabile permettono di concentrarsi sulla spinta di gambe e anche, modulando posizione dei piedi e profondità in base alla propria mobilità.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
 
         <div className={styles.contentGrid}>
@@ -226,7 +242,8 @@ export default function MachineShowcase() {
         <div><span>04 · DISPONIBILE IN SALA</span><small>STAR TRAC · IMPACT STRENGTH</small><h2>BICEPS<br/><em>CURL.</em></h2><p>Appoggio stabile, movimento guidato e controllo continuo per un lavoro preciso sui flessori del gomito.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/startrac-impact-biceps-curl.webp" alt="Star Trac Impact Biceps Curl LA-S5301"/><figcaption>Star Trac Impact LA-S5301 · immagine dal catalogo del modello</figcaption></figure>
       </div>
-      <div className={styles.profileBody}>
+      {mobileDetailsButton("biceps-curl", "Biceps Curl")}
+      <div id="biceps-curl-details" className={`${styles.profileBody} ${expandedMachine === "biceps-curl" ? styles.profileBodyOpen : ""}`}>
         <section className={styles.leadSection}><p>La Star Trac Impact Biceps Curl LA-S5301 è una macchina selectorized dedicata alla flessione del gomito. Sedile regolabile, appoggio per le braccia e movimento bilaterale o unilaterale aiutano a limitare le compensazioni e a concentrare l’attenzione sulla qualità di ogni ripetizione.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
 
         <div className={styles.contentGrid}>
@@ -258,7 +275,8 @@ export default function MachineShowcase() {
         <div><span>05 · DISPONIBILE IN SALA</span><small>NAUTILUS · INSPIRATION IPDR5</small><h2>LATERAL<br/><em>RAISE.</em></h2><p>Movimento guidato, assetto regolabile e lavoro unilaterale per costruire spalle forti con precisione.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/nautilus-lateral-raise.webp" alt="Nautilus Inspiration Deltoid Raise IPDR5"/><figcaption>Nautilus Inspiration IPDR5 · immagine ufficiale del modello</figcaption></figure>
       </div>
-      <div className={styles.profileBody}>
+      {mobileDetailsButton("lateral-raise", "Lateral Raise")}
+      <div id="lateral-raise-details" className={`${styles.profileBody} ${expandedMachine === "lateral-raise" ? styles.profileBodyOpen : ""}`}>
         <section className={styles.leadSection}><p>La Nautilus Inspiration Deltoid Raise IPDR5 è una macchina selectorized progettata per allenare soprattutto il deltoide laterale, con il contributo del deltoide anteriore. La seduta, il sostegno del busto e i bracci indipendenti creano una postazione stabile, aiutando l’atleta a concentrarsi sulla traiettoria e sul controllo di ogni ripetizione.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
 
         <div className={styles.contentGrid}>
@@ -290,7 +308,8 @@ export default function MachineShowcase() {
         <div><span>06 · DISPONIBILE IN SALA</span><small>HOIST FITNESS · ROC-IT RPL-5303</small><h2>INCLINE<br/><em>CHEST PRESS.</em></h2><p>Una spinta inclinata dinamica, convergente e caricata a dischi per allenare il torace superiore.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/hoist-incline-chest-press.webp" alt="Incline Chest Press ROC-IT RPL-5303 Hoist Fitness"/><figcaption>Hoist ROC-IT RPL-5303 · immagine ufficiale del modello</figcaption></figure>
       </div>
-      <div className={styles.profileBody}>
+      {mobileDetailsButton("incline-chest-press", "Incline Chest Press")}
+      <div id="incline-chest-press-details" className={`${styles.profileBody} ${expandedMachine === "incline-chest-press" ? styles.profileBodyOpen : ""}`}>
         <section className={styles.leadSection}><p>La Hoist ROC-IT RPL-5303 è una Incline Chest Press professionale a dischi. Durante la spinta la seduta oscilla all’indietro, mantenendo l’utilizzatore allineato con i bracci di pressione e riproducendo la posizione inclinata. Le leve indipendenti e convergenti permettono un lavoro bilaterale o unilaterale con una traiettoria guidata.</p><div className={styles.rating}><span>VALUTAZIONE COMPLESSIVA</span><strong>5/5</strong><i>★★★★★</i></div></section>
 
         <div className={styles.contentGrid}>
@@ -322,7 +341,8 @@ export default function MachineShowcase() {
         <div><span>07 · IN ARRIVO A REVENGE GYM</span><small>PANATTA · FREEWEIGHT SPECIAL 1FW093</small><h2>SUPER VERTICAL<br/><em>LEG PRESS.</em></h2><p>La nuova protagonista dell’area gambe è in arrivo: traiettoria guidata, regolazioni evolute e caricamento a dischi.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/panatta-super-vertical-leg-press.webp" alt="Super Vertical Leg Press Panatta 1FW093"/><figcaption>Panatta 1FW093 · immagine del modello · macchina in arrivo</figcaption></figure>
       </div>
-      <div className={styles.profileBody}>
+      {mobileDetailsButton("super-vertical-leg-press", "Super Vertical Leg Press")}
+      <div id="super-vertical-leg-press-details" className={`${styles.profileBody} ${expandedMachine === "super-vertical-leg-press" ? styles.profileBodyOpen : ""}`}>
         <section className={styles.leadSection}><p>La Panatta Super Vertical Leg Press 1FW093 entrerà prossimamente nella dotazione di Revenge Gym. È una pressa professionale a dischi nella quale l’atleta spinge il carrello lungo una traiettoria quasi verticale, con schienale, pedana e finecorsa regolabili. La scheda descrive il modello ufficiale; configurazione e optional presenti in palestra saranno confermati dopo l’installazione.</p><div className={styles.rating}><span>VALUTAZIONE TECNICA</span><strong>5/5</strong><i>★★★★★</i></div></section>
 
         <div className={styles.contentGrid}>

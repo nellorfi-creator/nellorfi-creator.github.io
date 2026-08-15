@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SiteImage from "@/app/components/site-image";
 
 export const metadata: Metadata = {
   title: "Privacy policy | Revenge Gym",
@@ -10,6 +11,12 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="legal-page">
+      <header className="legal-header">
+        <Link href="/?skipIntro=1#home" aria-label="Revenge Gym, torna alla home">
+          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+        </Link>
+        <Link href="/?skipIntro=1#contatti">← Torna ai contatti</Link>
+      </header>
       <article>
         <p className="eyebrow"><span /> Privacy</p>
         <h1>INFORMATIVA SUL<br /><em>TRATTAMENTO DATI.</em></h1>

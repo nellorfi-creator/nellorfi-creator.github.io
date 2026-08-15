@@ -115,7 +115,7 @@ export default function MachineHub({
             </div>
             <div>
               <strong>01</strong>
-              <span>{singleMachine ? "Apri la scheda" : "Passa · pausa · click"}</span>
+              <span>{singleMachine ? "Apri la scheda" : "Scorri · apri la scheda"}</span>
             </div>
           </div>
         </div>

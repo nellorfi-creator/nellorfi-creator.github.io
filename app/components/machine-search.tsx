@@ -107,7 +107,7 @@ export default function MachineSearch({ variant, brands = [], onOpen, onNavigate
         aria-expanded={showList}
         aria-controls={listId}
         aria-activedescendant={activeHit ? `${listId}-${activeHit.key}` : undefined}
-        placeholder="Es. Panatta, Gym Equipe, Life Fitness…"
+        placeholder="Cerca macchina o marchio"
         value={query}
         onChange={(event) => {
           setQuery(event.target.value);
