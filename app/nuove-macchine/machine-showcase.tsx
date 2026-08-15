@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
+import { bodyZones } from "@/lib/body-zones";
 
 const machines = [
   { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.webp", alt: "Pressa orizzontale Axiom Life Fitness" },
@@ -45,6 +46,12 @@ export default function MachineShowcase() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMachine, setActiveMachine] = useState(machines[0].id);
   const [expandedMachine, setExpandedMachine] = useState<string | null>(null);
+  const [zonesOpen, setZonesOpen] = useState(false);
+
+  const closeMenu = () => {
+    setZonesOpen(false);
+    setMenuOpen(false);
+  };
 
   const mobileDetailsButton = (id: string, name: string) => (
     <button
@@ -102,7 +109,7 @@ export default function MachineShowcase() {
     <MobileSwipeBack onSwipe={goBack} />
     <header className={styles.nav}>
       <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home senza intro"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
-      <button className={styles.menuToggle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={menuOpen ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}><i></i><i></i></button>
+      <button className={styles.menuToggle} type="button" onClick={() => { if (menuOpen) setZonesOpen(false); setMenuOpen(!menuOpen); }} aria-expanded={menuOpen} aria-label={menuOpen ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}><i></i><i></i></button>
       <nav className={menuOpen ? styles.open : ""} aria-label="Menu nuove macchine">
         <button className={styles.back} type="button" onClick={() => { goBack(); setMenuOpen(false); }}>← Indietro</button>
         <Link className={styles.siteLink} href="/?skipIntro=1#filosofia" onClick={() => setMenuOpen(false)}>La palestra</Link>
@@ -110,8 +117,18 @@ export default function MachineShowcase() {
         <Link className={styles.siteLink} href="/?skipIntro=1#mappa" onClick={() => setMenuOpen(false)}>Mappa</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#gallery" onClick={() => setMenuOpen(false)}>Gallery</Link>
         <Link className={styles.siteLink} href="/?skipIntro=1#magazine" onClick={() => setMenuOpen(false)}>Magazine</Link>
-        <Link className={styles.siteLink} href="/macchine/gambe" onClick={() => setMenuOpen(false)}>Gambe</Link>
-        <Link className={styles.siteLink} href="/macchine/petto" onClick={() => setMenuOpen(false)}>Petto</Link>
+        <div className={`${styles.zoneMenu} ${zonesOpen ? styles.zoneOpen : ""}`}>
+          <button type="button" className={styles.zoneTrigger} aria-expanded={zonesOpen} onClick={() => setZonesOpen(!zonesOpen)}>
+            Per zona <span>▾</span>
+          </button>
+          <div className={styles.zonePanel} role="menu">
+            <div className={styles.zonePanelInner}>
+              {bodyZones.map((zone) => (
+                <Link key={zone.label} href={zone.href} role="menuitem" onClick={closeMenu}>{zone.label}</Link>
+              ))}
+            </div>
+          </div>
+        </div>
         <span className={styles.navDivider} aria-hidden="true"></span>
         {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => { setActiveMachine(machine.id); setMenuOpen(false); }}>{machine.number}</a>)}
         <Link href="/boxe/" className="nav-boxe" onClick={() => setMenuOpen(false)}>

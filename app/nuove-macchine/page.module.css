@@ -12,12 +12,22 @@
 .nav{padding-inline:2vw}.nav nav{gap:10px}.nav nav .siteLink{width:auto;min-width:0;padding:0 6px;color:#d8d8d8;border-color:transparent;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}.nav nav .siteLink:hover{color:#fff;border-color:var(--orange)}.back{height:34px;padding:0 12px;color:#fff;background:#171717;border:1px solid #383838;font:800 9px var(--font-inter);letter-spacing:.45px;text-transform:uppercase;cursor:pointer;transition:.2s}.back:hover{color:var(--orange);border-color:var(--orange)}.navDivider{width:1px;height:23px;margin:0 4px;background:#383838}
 .nav nav a.nav-boxe{display:inline-flex;align-items:center;min-width:0;width:auto;padding:0 6px;color:var(--boxe-gold,#e2b84a);border-color:transparent}
 .nav nav a.nav-boxe:hover{color:var(--boxe-gold-hot,#f0cf6a);border-color:transparent}
+.zoneMenu{position:relative}
+.zoneTrigger{height:34px;padding:0 9px;color:#d8d8d8;background:transparent;border:1px solid #383838;font:700 9px var(--font-inter);letter-spacing:.8px;text-transform:uppercase;cursor:pointer}
+.zoneTrigger span{margin-left:5px;color:var(--orange)}
+.zoneTrigger:hover,.zoneOpen .zoneTrigger{color:#fff;border-color:var(--orange)}
+.zonePanel{position:absolute;top:100%;left:0;display:none;min-width:190px;padding-top:10px}
+.zoneOpen .zonePanel{display:block}
+.zonePanelInner{display:flex;flex-direction:column;padding:9px;background:#0c0c0c;border:1px solid #333;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.zonePanel a{display:flex;align-items:center;min-height:38px;padding:0 11px;color:#ddd;border-bottom:1px solid #242424;font:700 10px var(--font-inter);letter-spacing:.6px;text-transform:uppercase}
+.zonePanel a:last-child{border-bottom:0}.zonePanel a:hover{color:var(--orange);background:#151515}
+@media(hover:hover) and (pointer:fine){.zoneMenu:hover .zonePanel{display:block}}
 
 .page,.index,.profile,.upcomingProfile{background:radial-gradient(ellipse 95% 72% at 84% 15%,rgba(104,29,16,.78),rgba(64,17,11,.54) 34%,transparent 70%),linear-gradient(135deg,#080808,#160a08 62%,#070707)}
 .profile:nth-of-type(even),.upcomingProfile:nth-of-type(even){background:radial-gradient(ellipse 90% 80% at 16% 20%,rgba(86,22,13,.7),transparent 68%),linear-gradient(145deg,#080808,#180a08 60%,#070707)}
 .machineMenu a{background:linear-gradient(145deg,#25100c,#0f0d0c)}
 @media(max-width:1280px){.nav nav{gap:6px}.nav nav .siteLink{font-size:9px;padding-inline:4px}.logo img{height:47px}.nav nav .contact{padding-inline:12px;font-size:10px}}
-@media(max-width:900px){.nav{padding-inline:18px}.nav nav{gap:0}.nav nav .siteLink,.nav nav .back,.nav nav>a:not(.siteLink):not(.contact){width:100%;height:44px;justify-content:flex-start;padding:0 4px;border:0;border-bottom:1px solid #2b2b2b;font-size:11px;letter-spacing:1px}.navDivider{display:none;width:100%;height:1px;margin:8px 0}.nav nav .contact{height:48px;justify-content:center;border:0}}
+@media(max-width:900px){.nav{padding-inline:18px}.nav nav{gap:0}.nav nav .siteLink,.nav nav .back,.nav nav>a:not(.siteLink):not(.contact){width:100%;height:44px;justify-content:flex-start;padding:0 4px;border:0;border-bottom:1px solid #2b2b2b;font-size:11px;letter-spacing:1px}.zoneMenu{width:100%}.zoneTrigger{width:100%;height:44px;padding:0 4px;text-align:left;border:0;border-bottom:1px solid #2b2b2b;font-size:11px}.zoneTrigger span{float:right}.zonePanel{position:static;min-width:0;padding:0 0 8px}.zonePanelInner{box-shadow:none}.zonePanel a{min-height:40px}.navDivider{display:none;width:100%;height:1px;margin:8px 0}.nav nav .contact{height:48px;justify-content:center;border:0}}
 .positionNote{max-width:850px;margin:28px 0 0;color:#777!important;font-size:11px!important}
 
 /* Fondale unico: contenuti e schede poggiano sul gradiente senza blocchi neri. */
