@@ -113,16 +113,16 @@ export default function MachineShowcase() {
     <section className={styles.hero}>
       <div className={styles.heroMedia}></div><div className={styles.heroShade}></div>
       <div className={styles.heroContent}>
-        <p className={styles.eyebrow}><span></span> Nuovi arrivi · 2025–2026</p>
+        <p className={styles.eyebrow}><span></span> Ultimi arrivi · 2025–2026</p>
         <h1>PIÙ SCELTA.<br/><em>PIÙ FORZA.</em><br/>PIÙ <em>REVENGE.</em></h1>
-        <p>Sette nuove protagoniste della sala: sei già disponibili e una grande novità Panatta in arrivo.</p>
-        <a href="#machine-index" className={styles.primary}>Scopri le macchine <span>↓</span></a>
+        <p>Questa pagina non è il catalogo della palestra: è solo la vetrina degli ultimi arrivi. Sei macchine nuove già in sala e una Panatta Super Vertical Leg Press in arrivo. Tutto il resto è nel menu Per zona.</p>
+        <a href="#machine-index" className={styles.primary}>Vedi gli ultimi arrivi <span>↓</span></a>
       </div>
-      <div className={styles.heroStats}><div><strong>06</strong><span>Già in sala</span></div><div><strong>01</strong><span>In arrivo</span></div></div>
+      <div className={styles.heroStats}><div><strong>06</strong><span>Ultimi arrivi in sala</span></div><div><strong>01</strong><span>In arrivo</span></div></div>
     </section>
 
     <section className={styles.index} id="machine-index">
-      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> La sala si evolve</p><h2>ULTIME<br/><em>MACCHINE.</em></h2><p>Seleziona una macchina per raggiungere la sua scheda. I contenuti tecnici vengono pubblicati soltanto dopo verifica.</p></div>
+      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>GLI ULTIMI<br/><em>ARRIVI.</em></h2><p>Il menu Per zona elenca tutte le macchine della sala. Qui sotto trovi solo quelle entrate di recente e la Panatta ancora in viaggio. <Link href="/macchine/gambe">Apri il catalogo per zona ↘</Link></p></div>
       <div className={styles.machineMenu}>
         {machines.map((machine) => <a key={machine.id} href={`#${machine.id}`} className={machine.incoming ? styles.incomingCard : ""}>
           <SiteImage src={machine.image} alt="" />
@@ -349,7 +349,7 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <section className={styles.cta}><p className={styles.eyebrow}><span></span> Vieni a conoscerle</p><h2>LEGGERE AIUTA.<br/><em>ALLENARSI CAMBIA TUTTO.</em></h2><p>Scopri dal vivo le nuove macchine e chiedi allo staff come inserirle nel tuo allenamento.</p><Link href="/?skipIntro=1#contatti" className={styles.primary}>Chiedi info <span>↗</span></Link></section>
+    <section className={styles.cta}><p className={styles.eyebrow}><span></span> Vieni a conoscerle</p><h2>LEGGERE AIUTA.<br/><em>ALLENARSI CAMBIA TUTTO.</em></h2><p>Questi sono solo gli ultimi arrivi. In sala il parco macchine è molto più ampio: scoprilo dal vivo e chiedi allo staff come inserirlo nel tuo allenamento.</p><Link href="/?skipIntro=1#contatti" className={styles.primary}>Chiedi info <span>↗</span></Link></section>
     <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Sala pesi · Ladispoli</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p><a href="#top" className={styles.backTop} aria-label="Torna all'inizio">↑</a></footer>
   </main>;
 }

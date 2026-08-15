@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import MachineShowcase from "./machine-showcase";
 
 export const metadata: Metadata = {
-  title: "Nuove macchine 2025–2026 | Revenge Gym Ladispoli",
-  description: "Scopri le nuove macchine arrivate a Revenge Gym e la Super Vertical Leg Press Panatta in arrivo.",
+  title: "Ultimi arrivi 2025–2026 | Revenge Gym Ladispoli",
+  description: "Gli ultimi arrivi a Revenge Gym: sei macchine nuove già in sala e la Super Vertical Leg Press Panatta in arrivo. Il catalogo completo è nel menu Per zona.",
   alternates: { canonical: "/nuove-macchine/" },
 };
 

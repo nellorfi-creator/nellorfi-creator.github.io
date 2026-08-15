@@ -32,3 +32,5 @@
 .exerciseSteps{background:rgba(255,255,255,.12)}
 .exerciseSteps div,.trainer blockquote,.safety{background:rgba(7,7,7,.55)}
 .footer{background:rgba(5,5,5,.34)}
+.sectionIntro a{color:var(--orange);font-weight:800;letter-spacing:.6px}
+.sectionIntro a:hover{color:var(--orange-hot)}
