@@ -1,7 +1,7 @@
 "use client";
 
 import SiteImage from "@/app/components/site-image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { bodyZones } from "@/lib/body-zones";
@@ -40,6 +40,11 @@ export default function MachineHub({
     setZonesOpen(false);
     setMenuOpen(false);
   };
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-lock", menuOpen);
+    return () => document.body.classList.remove("menu-lock");
+  }, [menuOpen]);
 
   return (
     <main className={styles.page} id="top">
@@ -115,7 +120,7 @@ export default function MachineHub({
           </div>
         </div>
         <div className={styles.marqueeWrap} aria-label={`Galleria macchine ${areaLabel.toLowerCase()}`}>
-          {!singleMachine && <p className={styles.marqueeHint}>Scorri con lo sguardo · ferma al passaggio · click per la scheda</p>}
+          {!singleMachine && <p className={styles.marqueeHint}>Scorri · tocca per la scheda</p>}
           <div className={`${styles.marquee}${singleMachine && styles.marqueeStatic ? ` ${styles.marqueeStatic}` : ""}`}>
             <div className={styles.marqueeTrack}>
               {loop.map((machine, index) => (
@@ -158,12 +163,22 @@ export default function MachineHub({
       <section className={styles.index} id="elenco">
         <div className={styles.sectionIntro}>
           <p className={styles.eyebrow}>
-            <span></span> Catalogo completo
+            <span></span> {singleMachine ? "In questa area" : "Catalogo completo"}
           </p>
           <h2>
-            SCEGLI LA
-            <br />
-            <em>MACCHINA.</em>
+            {singleMachine ? (
+              <>
+                LA MACCHINA
+                <br />
+                <em>DELL’AREA.</em>
+              </>
+            ) : (
+              <>
+                SCEGLI LA
+                <br />
+                <em>MACCHINA.</em>
+              </>
+            )}
           </h2>
           <p>{catalogIntro}</p>
         </div>

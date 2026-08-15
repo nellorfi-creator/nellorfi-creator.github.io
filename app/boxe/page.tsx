@@ -68,7 +68,7 @@ export default function BoxePage() {
           <p className={styles.eyebrow}><span /> Revenge Boxing · Ladispoli</p>
           <h1>IL RING<br/><em>NON MENTE.</em></h1>
           <p className={styles.heroLead}>Qui non contano le scorciatoie. Contano presenza, tecnica e carattere.</p>
-          <a className={styles.primary} href="#spazio">Entra nell’area Boxe <span>↓</span></a>
+          <a className={styles.primary} href="#spazio">Scopri lo spazio <span>↓</span></a>
           <div className={styles.fpiBadge} aria-label="Revenge Gym affiliata alla Federazione Pugilistica Italiana">
             <SiteImage src="/photos/boxe/fpi-logo-rotondo-grande.jpg" alt="Federazione Pugilistica Italiana" />
             <div><strong>AFFILIATA FPI</strong></div>

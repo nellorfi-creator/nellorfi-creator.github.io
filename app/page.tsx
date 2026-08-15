@@ -147,6 +147,7 @@ export default function Home() {
   const [philosophyInView, setPhilosophyInView] = useState(false);
   const [philosophyTimerKey, setPhilosophyTimerKey] = useState(0);
   const [tickerPaused, setTickerPaused] = useState(false);
+  const [tickerHidden, setTickerHidden] = useState(false);
   const [visitCounts, setVisitCounts] = useState<{ uniqueVisitors: number; pageViews: number } | null>(null);
   const philosophyVisualRef = useRef<HTMLDivElement>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
@@ -272,6 +273,28 @@ export default function Home() {
     document.addEventListener("visibilitychange", pauseTicker);
     return () => document.removeEventListener("visibilitychange", pauseTicker);
   }, []);
+
+  useEffect(() => {
+    const updateTicker = () => {
+      const hero = document.getElementById("home");
+      const hidden = hero ? hero.getBoundingClientRect().bottom <= 12 : window.scrollY > 80;
+      setTickerHidden(hidden);
+      document.documentElement.classList.toggle("ticker-collapsed", hidden);
+    };
+    updateTicker();
+    window.addEventListener("scroll", updateTicker, { passive: true });
+    window.addEventListener("resize", updateTicker);
+    return () => {
+      window.removeEventListener("scroll", updateTicker);
+      window.removeEventListener("resize", updateTicker);
+      document.documentElement.classList.remove("ticker-collapsed");
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-lock", menuOpen);
+    return () => document.body.classList.remove("menu-lock");
+  }, [menuOpen]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -456,7 +479,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className={`machine-ticker${tickerPaused ? " is-paused" : ""}`} aria-label="Anteprima macchinari Revenge Gym" role="presentation">
+      <div className={`machine-ticker${tickerPaused ? " is-paused" : ""}${tickerHidden ? " is-hidden" : ""}`} aria-label="Anteprima macchinari Revenge Gym" role="presentation">
         <div className="machine-ticker-track">
           {[...tickerMachines, ...tickerMachines].map((machine, index) => (
             <div className="machine-ticker-item" key={`${machine.id}-${index}`} aria-hidden="true">
@@ -504,7 +527,7 @@ export default function Home() {
           <h2>LA PALESTRA DOVE<br/>CAMBI DAVVERO.</h2>
           <p className="lead">Spazi curati, attrezzature di alto livello e una community che condivide la voglia di migliorarsi.</p>
           <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist Fitness, Nautilus, Star Trac, Gymleco e Gym Equipe.</p>
-          <a href="#contatti" className="text-link orange">Conosci la nostra community <span>↗</span></a>
+          <a href="#titolari" className="text-link orange">Conosci Gino e Stefania <span>↗</span></a>
         </div>
         <div className="philosophy-visual reveal" ref={philosophyVisualRef}>
           <div className="philosophy-stage" aria-live="polite" aria-atomic="true">
@@ -549,7 +572,7 @@ export default function Home() {
             <p>Non devi essere già in forma per iniziare. Devi solo decidere di iniziare.</p>
           </div>
         </div>
-        <div className="owners-spotlight reveal" aria-label="I titolari di Revenge Gym">
+        <div className="owners-spotlight reveal" id="titolari" aria-label="I titolari di Revenge Gym">
           <figure className="owners-photo">
             <SiteImage src="/photos/live/gino-stefania-revenge-gym.webp" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1797} decoding="async" />
           </figure>

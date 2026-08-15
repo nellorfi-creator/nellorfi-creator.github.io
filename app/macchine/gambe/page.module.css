@@ -101,7 +101,7 @@
   letter-spacing:-.035em;animation:riseIn .85s cubic-bezier(.2,.7,.2,1) both;
 }
 .heroContent>p:not(.eyebrow){
-  max-width:620px;margin:0;color:#d8d8d8;font-size:16px;line-height:1.7;
+  max-width:620px;margin:0;color:#ececec;font-size:16px;line-height:1.7;
   animation:riseIn .85s .1s both;
 }
 .heroMeta{
@@ -114,7 +114,7 @@
 
 .marqueeWrap{position:relative;z-index:3;padding:10px 0 42px}
 .marqueeHint{
-  margin:0 7vw 14px;color:#777;font-size:10px;font-weight:700;
+  margin:0 7vw 14px;color:#c4c4c4;font-size:10px;font-weight:700;
   letter-spacing:1.4px;text-transform:uppercase;
 }
 .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
@@ -125,13 +125,14 @@
 .marquee:hover .marqueeTrack{animation-play-state:paused}
 .marqueeCard{
   position:relative;flex:0 0 auto;width:min(220px,58vw);aspect-ratio:3/4;
-  overflow:hidden;border:1px solid #2a2a2a;background:#101010;
+  overflow:hidden;border:1px solid #2a2a2a;background:#1c1614;
   transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .25s,z-index 0s;
   transform-origin:center bottom;
 }
 .marqueeCard img{
-  width:100%;height:100%;object-fit:cover;
-  filter:saturate(1.05) contrast(1.05);
+  width:100%;height:100%;object-fit:contain;object-position:center;
+  background:radial-gradient(circle at 50% 42%,#2a221e,#120e0c 72%);
+  filter:saturate(1.08) contrast(1.1) brightness(1.12);
   transition:transform .45s;
 }
 .marqueeCard span{
@@ -161,7 +162,7 @@
 }
 .manifestoCopy h2{margin:22px 0 0;font-size:clamp(46px,6vw,92px);line-height:.86}
 .manifestoText{display:grid;gap:22px;padding-top:8px}
-.manifestoText p{margin:0;max-width:640px;color:#c2c2c2;font-size:16px;line-height:1.85}
+.manifestoText p{margin:0;max-width:640px;color:#ddd;font-size:16px;line-height:1.85}
 .manifestoText p:first-child{color:#e4e4e4;font-size:18px}
 
 .index{padding:100px 7vw;border-top:1px solid var(--line);background:#0a0a0a}
@@ -235,8 +236,9 @@
 @media(max-width:900px){
   .nav{--nav-h:67px;padding-inline:18px}
   .nav nav{
-    position:absolute;display:none;top:67px;left:0;right:0;padding:18px 22px 26px;
-    background:#0a0a0a;border-bottom:1px solid #333;flex-direction:column;align-items:stretch;gap:0;
+    position:fixed;display:none;top:var(--nav-h);bottom:0;left:0;right:0;z-index:120;
+    padding:18px 22px 0;overflow-y:auto;overscroll-behavior:contain;
+    background:#0a0a0a;border-bottom:0;flex-direction:column;align-items:stretch;gap:0;
   }
   .nav nav.open{display:flex}
   .menuToggle{display:block;padding:10px;background:none;border:0}
@@ -249,12 +251,17 @@
   .zonePanel{position:static;display:none;margin:0 0 8px;padding:0;box-shadow:none}
   .zonePanelInner{box-shadow:none}
   .zoneOpen .zonePanel,.zoneMenu:focus-within .zonePanel{display:flex}
-  .contact{justify-content:center;margin-top:10px;height:48px;border:0}
+  .contact{
+    position:sticky;bottom:0;z-index:2;justify-content:center;margin-top:auto;
+    flex-shrink:0;height:52px;border:0;background:var(--orange);
+    box-shadow:0 -16px 28px rgba(0,0,0,.55);
+  }
   .heroContent,.index,.cta,.manifesto{padding-left:22px;padding-right:22px}
+  .hero{min-height:0;padding:88px 0 0;justify-content:flex-start}
   .heroContent{order:1}
   .heroAthlete{
-    position:relative;order:2;top:auto;right:auto;width:100%;height:min(118vw,510px);min-height:390px;
-    margin-top:10px;object-fit:cover;object-position:70% top;
+    position:relative;order:2;top:auto;right:auto;width:100%;height:min(72vw,340px);min-height:240px;
+    margin-top:4px;object-fit:cover;object-position:70% top;
     mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 82%,transparent);
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 82%,transparent);
     -webkit-mask-composite:source-in;

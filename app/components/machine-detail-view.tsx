@@ -1,7 +1,7 @@
 "use client";
 
 import SiteImage from "@/app/components/site-image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { bodyZones } from "@/lib/body-zones";
@@ -46,6 +46,11 @@ export default function MachineDetailView({
     setZonesOpen(false);
     setMenuOpen(false);
   };
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-lock", menuOpen);
+    return () => document.body.classList.remove("menu-lock");
+  }, [menuOpen]);
 
   return (
     <main className={styles.page} id="top">
