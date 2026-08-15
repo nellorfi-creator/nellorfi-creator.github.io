@@ -6,6 +6,7 @@ import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
+import MachineSearch from "@/app/components/machine-search";
 import { useViewportVideo } from "@/app/hooks/use-viewport-video";
 
 const safariInline = { "webkit-playsinline": "true" } as const;
@@ -436,6 +437,7 @@ export default function Home() {
             </div>
           </div>
           <Link href="/nuove-macchine" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Nuove macchine</Link>
+          <MachineSearch variant="nav" onOpen={() => setZoneMenuOpen(false)} onNavigate={() => { setMenuOpen(false); setZoneMenuOpen(false); }} />
           <Link href="/boxe/" className="nav-boxe" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>
             <BoxingGloveIcon className="nav-boxe-glove nav-boxe-glove-left" />
             <span className="nav-boxe-label">Boxe</span>
@@ -467,6 +469,7 @@ export default function Home() {
           <p className="eyebrow"><span></span> Sala pesi · Ladispoli</p>
           <h1>NON CERCARE<br/>SCUSE. <em>CREA</em><br/>LA TUA <em>RIVINCITA.</em></h1>
           <p className="hero-copy">Una palestra completa, attrezzature di qualità e l’ambiente giusto per allenarti con costanza e superare ogni limite.</p>
+          <MachineSearch variant="hero" />
           <div className="hero-actions">
             <a href="#contatti" className="button primary">Chiedi info <span>↗</span></a>
             <a href="#corsi" className="text-link">Scopri la palestra <span>↓</span></a>
