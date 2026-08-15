@@ -34,3 +34,19 @@
 .footer{background:rgba(5,5,5,.34)}
 .sectionIntro a{color:var(--orange);font-weight:800;letter-spacing:.6px}
 .sectionIntro a:hover{color:var(--orange-hot)}
+
+
+/* 7 cards in a 4-col gap-grid left an empty “ghost” cell after removing Back Row. */
+.machineMenu{background:transparent;padding:0;gap:12px}
+.machineMenu a,.machineMenu a:hover,.machineMenu .incomingCard{
+  background:rgba(7,7,7,.55);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
+}
+.machineMenu a:last-child{grid-column:span 2}
+@media(max-width:900px){
+  .machineMenu{gap:10px}
+  .machineMenu a:last-child{grid-column:span 2}
+}
+@media(max-width:560px){
+  .machineMenu a:last-child{grid-column:auto}
+}
