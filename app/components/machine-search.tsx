@@ -3,8 +3,10 @@
 import SiteImage from "@/app/components/site-image";
 import {
   MACHINE_SEARCH_MIN_CHARS,
-  searchMachines,
-  type CatalogMachine,
+  foldSearchText,
+  searchCatalog,
+  type BrandSearchItem,
+  type SearchHit,
 } from "@/lib/machine-catalog";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,11 +14,13 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 type Props = {
   variant: "hero" | "nav";
+  brands?: BrandSearchItem[];
   onOpen?: () => void;
   onNavigate?: () => void;
+  onSelectBrand?: (name: string) => void;
 };
 
-export default function MachineSearch({ variant, onOpen, onNavigate }: Props) {
+export default function MachineSearch({ variant, brands = [], onOpen, onNavigate, onSelectBrand }: Props) {
   const router = useRouter();
   const inputId = useId();
   const listId = useId();
@@ -26,11 +30,12 @@ export default function MachineSearch({ variant, onOpen, onNavigate }: Props) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const trimmed = query.trim();
-  const ready = trimmed.length >= MACHINE_SEARCH_MIN_CHARS;
-  const results = useMemo(() => (ready ? searchMachines(trimmed) : []), [ready, trimmed]);
-  const showList = open && (variant === "nav" || trimmed.length > 0);
+  const compact = foldSearchText(query).replace(/\s/g, "");
+  const ready = compact.length >= MACHINE_SEARCH_MIN_CHARS;
+  const results = useMemo(() => (ready ? searchCatalog(query, brands) : []), [ready, query, brands]);
+  const showList = open && (variant === "nav" || compact.length > 0);
   const safeIndex = results.length ? Math.min(activeIndex, results.length - 1) : 0;
+  const activeHit = results[safeIndex];
 
   useEffect(() => {
     if (!open) return;
@@ -50,17 +55,25 @@ export default function MachineSearch({ variant, onOpen, onNavigate }: Props) {
     };
   }, [open, variant]);
 
+  const closeSearch = () => {
+    setOpen(false);
+    if (variant === "nav") setQuery("");
+    onNavigate?.();
+  };
+
   const openSearch = () => {
     setOpen(true);
     onOpen?.();
     window.requestAnimationFrame(() => inputRef.current?.focus());
   };
 
-  const selectMachine = (machine: CatalogMachine) => {
-    setOpen(false);
-    if (variant === "nav") setQuery("");
-    onNavigate?.();
-    router.push(machine.href);
+  const selectHit = (hit: SearchHit) => {
+    closeSearch();
+    if (hit.kind === "brand") {
+      onSelectBrand?.(hit.name);
+      return;
+    }
+    router.push(hit.machine.href);
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -72,10 +85,9 @@ export default function MachineSearch({ variant, onOpen, onNavigate }: Props) {
       event.preventDefault();
       setActiveIndex((index) => Math.max(index - 1, 0));
     } else if (event.key === "Enter") {
-      const machine = results[safeIndex];
-      if (!machine) return;
+      if (!activeHit) return;
       event.preventDefault();
-      selectMachine(machine);
+      selectHit(activeHit);
     }
   };
 
@@ -94,7 +106,7 @@ export default function MachineSearch({ variant, onOpen, onNavigate }: Props) {
         aria-autocomplete="list"
         aria-expanded={showList}
         aria-controls={listId}
-        aria-activedescendant={results[safeIndex] ? `${listId}-${results[safeIndex].key}` : undefined}
+        aria-activedescendant={activeHit ? `${listId}-${activeHit.key}` : undefined}
         placeholder="Es. Panatta, pressa, curl…"
         value={query}
         onChange={(event) => {
@@ -112,36 +124,53 @@ export default function MachineSearch({ variant, onOpen, onNavigate }: Props) {
   );
 
   const resultsList = showList ? (
-    <div className="machine-search-results" id={listId} role="listbox" aria-label="Macchine trovate">
+    <div className="machine-search-results" id={listId} role="listbox" aria-label="Macchine e marchi trovati">
       {!ready ? (
         <p className="machine-search-hint">Scrivi almeno {MACHINE_SEARCH_MIN_CHARS} lettere per iniziare.</p>
       ) : results.length === 0 ? (
-        <p className="machine-search-hint">Nessuna macchina trovata per “{trimmed}”.</p>
+        <p className="machine-search-hint">Nessun risultato per “{query.trim()}”.</p>
       ) : (
-        results.map((machine, index) => (
-          <Link
-            key={machine.key}
-            id={`${listId}-${machine.key}`}
-            href={machine.href}
-            role="option"
-            aria-selected={index === activeIndex}
-            className={index === safeIndex ? "is-active" : undefined}
-            onMouseEnter={() => setActiveIndex(index)}
-            onClick={() => {
-              setOpen(false);
-              if (variant === "nav") setQuery("");
-              onNavigate?.();
-            }}
-          >
-            <SiteImage src={machine.image} alt="" width={56} height={56} />
-            <span>
-              <small>
-                {machine.brand} · {machine.areaLabel}
-              </small>
-              <b>{machine.name}</b>
-            </span>
-          </Link>
-        ))
+        results.map((hit, index) =>
+          hit.kind === "machine" ? (
+            <Link
+              key={hit.key}
+              id={`${listId}-${hit.key}`}
+              href={hit.machine.href}
+              role="option"
+              aria-selected={index === safeIndex}
+              className={index === safeIndex ? "is-active" : undefined}
+              onMouseEnter={() => setActiveIndex(index)}
+              onClick={closeSearch}
+            >
+              <SiteImage src={hit.machine.image} alt="" width={56} height={56} />
+              <span>
+                <small>
+                  {hit.machine.brand} · {hit.machine.areaLabel}
+                </small>
+                <b>{hit.machine.name}</b>
+              </span>
+            </Link>
+          ) : (
+            <button
+              key={hit.key}
+              id={`${listId}-${hit.key}`}
+              type="button"
+              role="option"
+              aria-selected={index === safeIndex}
+              className={index === safeIndex ? "is-active" : undefined}
+              onMouseEnter={() => setActiveIndex(index)}
+              onClick={() => selectHit(hit)}
+            >
+              <span className="machine-search-brand" aria-hidden="true">
+                {brandInitials(hit.name)}
+              </span>
+              <span>
+                <small>Marchio · {hit.since}</small>
+                <b>{hit.name}</b>
+              </span>
+            </button>
+          ),
+        )
       )}
     </div>
   ) : null;
@@ -181,6 +210,16 @@ export default function MachineSearch({ variant, onOpen, onNavigate }: Props) {
       )}
     </div>
   );
+}
+
+function brandInitials(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return parts
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
 }
 
 function SearchIcon() {

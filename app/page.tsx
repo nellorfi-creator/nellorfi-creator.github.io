@@ -437,7 +437,16 @@ export default function Home() {
             </div>
           </div>
           <Link href="/nuove-macchine" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Nuove macchine</Link>
-          <MachineSearch variant="nav" onOpen={() => setZoneMenuOpen(false)} onNavigate={() => { setMenuOpen(false); setZoneMenuOpen(false); }} />
+          <MachineSearch
+            variant="nav"
+            brands={equipmentBrands}
+            onOpen={() => setZoneMenuOpen(false)}
+            onNavigate={() => { setMenuOpen(false); setZoneMenuOpen(false); }}
+            onSelectBrand={(name) => {
+              const brand = equipmentBrands.find((item) => item.name === name);
+              if (brand) setActiveBrand(brand);
+            }}
+          />
           <Link href="/boxe/" className="nav-boxe" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>
             <BoxingGloveIcon className="nav-boxe-glove nav-boxe-glove-left" />
             <span className="nav-boxe-label">Boxe</span>
@@ -469,7 +478,14 @@ export default function Home() {
           <p className="eyebrow"><span></span> Sala pesi · Ladispoli</p>
           <h1>NON CERCARE<br/>SCUSE. <em>CREA</em><br/>LA TUA <em>RIVINCITA.</em></h1>
           <p className="hero-copy">Una palestra completa, attrezzature di qualità e l’ambiente giusto per allenarti con costanza e superare ogni limite.</p>
-          <MachineSearch variant="hero" />
+          <MachineSearch
+            variant="hero"
+            brands={equipmentBrands}
+            onSelectBrand={(name) => {
+              const brand = equipmentBrands.find((item) => item.name === name);
+              if (brand) setActiveBrand(brand);
+            }}
+          />
           <div className="hero-actions">
             <a href="#contatti" className="button primary">Chiedi info <span>↗</span></a>
             <a href="#corsi" className="text-link">Scopri la palestra <span>↓</span></a>
