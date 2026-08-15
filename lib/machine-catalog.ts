@@ -101,6 +101,16 @@ export function searchCatalog(
   const query = queryReady(rawQuery);
   if (!query) return [];
 
+  const brandHits = brands
+    .map((brand) => {
+      const score = prefixScore(brand.name, query, 108, 102);
+      return score > 0
+        ? { kind: "brand" as const, key: `brand-${haystack(brand.name)}`, name: brand.name, origin: brand.origin, since: brand.since, score, label: brand.name }
+        : null;
+    })
+    .filter((entry) => entry !== null)
+    .sort((a, b) => b.score - a.score || a.label.localeCompare(b.label, "it"));
+
   const machineHits = machineCatalog
     .map((machine) => {
       const score = Math.max(
@@ -110,23 +120,12 @@ export function searchCatalog(
       );
       return score > 0 ? { kind: "machine" as const, key: machine.key, machine, score, label: machine.name } : null;
     })
-    .filter((entry) => entry !== null);
+    .filter((entry) => entry !== null)
+    .sort((a, b) => b.score - a.score || a.label.localeCompare(b.label, "it"));
 
-  const brandHits = brands
-    .map((brand) => {
-      const score = prefixScore(brand.name, query, 108, 102);
-      return score > 0
-        ? { kind: "brand" as const, key: `brand-${haystack(brand.name)}`, name: brand.name, origin: brand.origin, since: brand.since, score, label: brand.name }
-        : null;
-    })
-    .filter((entry) => entry !== null);
-
-  return [...brandHits, ...machineHits]
-    .sort((a, b) => b.score - a.score || a.label.localeCompare(b.label, "it"))
-    .slice(0, limit)
-    .map((hit) =>
-      hit.kind === "machine"
-        ? { kind: "machine" as const, key: hit.key, machine: hit.machine }
-        : { kind: "brand" as const, key: hit.key, name: hit.name, origin: hit.origin, since: hit.since },
-    );
+  return [...brandHits, ...machineHits].slice(0, limit).map((hit) =>
+    hit.kind === "machine"
+      ? { kind: "machine" as const, key: hit.key, machine: hit.machine }
+      : { kind: "brand" as const, key: hit.key, name: hit.name, origin: hit.origin, since: hit.since },
+  );
 }

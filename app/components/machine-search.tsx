@@ -107,7 +107,7 @@ export default function MachineSearch({ variant, brands = [], onOpen, onNavigate
         aria-expanded={showList}
         aria-controls={listId}
         aria-activedescendant={activeHit ? `${listId}-${activeHit.key}` : undefined}
-        placeholder="Es. Panatta, pressa, curl…"
+        placeholder="Es. Panatta, Gym Equipe, Life Fitness…"
         value={query}
         onChange={(event) => {
           setQuery(event.target.value);
@@ -123,34 +123,19 @@ export default function MachineSearch({ variant, brands = [], onOpen, onNavigate
     </div>
   );
 
+  const brandHits = results.filter((hit): hit is Extract<SearchHit, { kind: "brand" }> => hit.kind === "brand");
+  const machineHits = results.filter((hit): hit is Extract<SearchHit, { kind: "machine" }> => hit.kind === "machine");
+
   const resultsList = showList ? (
-    <div className="machine-search-results" id={listId} role="listbox" aria-label="Macchine e marchi trovati">
+    <div className="machine-search-results" id={listId} role="listbox" aria-label="Marchi e macchine trovati">
       {!ready ? (
         <p className="machine-search-hint">Scrivi almeno {MACHINE_SEARCH_MIN_CHARS} lettere per iniziare.</p>
       ) : results.length === 0 ? (
         <p className="machine-search-hint">Nessun risultato per “{query.trim()}”.</p>
       ) : (
-        results.map((hit, index) =>
-          hit.kind === "machine" ? (
-            <Link
-              key={hit.key}
-              id={`${listId}-${hit.key}`}
-              href={hit.machine.href}
-              role="option"
-              aria-selected={index === safeIndex}
-              className={index === safeIndex ? "is-active" : undefined}
-              onMouseEnter={() => setActiveIndex(index)}
-              onClick={closeSearch}
-            >
-              <SiteImage src={hit.machine.image} alt="" width={56} height={56} />
-              <span>
-                <small>
-                  {hit.machine.brand} · {hit.machine.areaLabel}
-                </small>
-                <b>{hit.machine.name}</b>
-              </span>
-            </Link>
-          ) : (
+        <>
+          {brandHits.length > 0 && <p className="machine-search-group">Macchinari selezionati</p>}
+          {brandHits.map((hit, index) => (
             <button
               key={hit.key}
               id={`${listId}-${hit.key}`}
@@ -165,12 +150,36 @@ export default function MachineSearch({ variant, brands = [], onOpen, onNavigate
                 {brandInitials(hit.name)}
               </span>
               <span>
-                <small>Marchio · {hit.since}</small>
+                <small>Marchio in sala · {hit.origin}</small>
                 <b>{hit.name}</b>
               </span>
             </button>
-          ),
-        )
+          ))}
+          {machineHits.length > 0 && <p className="machine-search-group">Per zona</p>}
+          {machineHits.map((hit, index) => {
+            const optionIndex = brandHits.length + index;
+            return (
+              <Link
+                key={hit.key}
+                id={`${listId}-${hit.key}`}
+                href={hit.machine.href}
+                role="option"
+                aria-selected={optionIndex === safeIndex}
+                className={optionIndex === safeIndex ? "is-active" : undefined}
+                onMouseEnter={() => setActiveIndex(optionIndex)}
+                onClick={closeSearch}
+              >
+                <SiteImage src={hit.machine.image} alt="" width={56} height={56} />
+                <span>
+                  <small>
+                    {hit.machine.brand} · {hit.machine.areaLabel}
+                  </small>
+                  <b>{hit.machine.name}</b>
+                </span>
+              </Link>
+            );
+          })}
+        </>
       )}
     </div>
   ) : null;
@@ -180,7 +189,7 @@ export default function MachineSearch({ variant, brands = [], onOpen, onNavigate
       {variant === "hero" ? (
         <>
           <label className="machine-search-label" htmlFor={inputId}>
-            Cerca macchine
+            Cerca marchi e macchine
           </label>
           {field}
           {resultsList}
@@ -200,7 +209,7 @@ export default function MachineSearch({ variant, brands = [], onOpen, onNavigate
           {open && (
             <div className="machine-search-nav-panel">
               <label className="machine-search-label" htmlFor={inputId}>
-                Cerca macchine
+                Cerca marchi e macchine
               </label>
               {field}
               {resultsList}
