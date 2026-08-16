@@ -444,7 +444,7 @@ export default function Home() {
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label={menuOpen ? "Chiudi menu" : "Apri menu"} aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','#filosofia'],['Aree','#corsi'],['Relax','#sala-relax'],['Mappa','#mappa'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
+          {[['La palestra','#filosofia'],['Aree','#corsi'],['Relax','#sala-relax'],['Mappa','#mappa'],['Orari','#orari'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
           <div className="nav-flyout">
             <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={zoneMenuOpen} onClick={() => setZoneMenuOpen(!zoneMenuOpen)}>Per zona <span>▾</span></button>
             <div className={`nav-flyout-panel${zoneMenuOpen ? " open" : ""}`} role="menu">
@@ -755,7 +755,7 @@ export default function Home() {
       </div>}
 
       <section className="trial" id="info">
-        <div className="trial-inner reveal"><p className="eyebrow"><span></span> Informazioni e iscrizioni</p><h2>HAI DOMANDE?<br/>SCRIVICI <em>ORA.</em></h2><p>Orari, abbonamenti, aree della palestra o la boxe: dicci cosa ti serve sapere. Ti rispondiamo noi e ti aiutiamo a capire come allenarti da Revenge Gym.</p><a href="#contatti" className="button primary">Chiedi info <span>↗</span></a></div>
+        <div className="trial-inner reveal"><p className="eyebrow"><span></span> Informazioni e iscrizioni</p><h2>HAI DOMANDE?<br/>SCRIVICI <em>ORA.</em></h2><p>Abbonamenti, aree della palestra o la boxe: dicci cosa ti serve sapere. Ti rispondiamo noi e ti aiutiamo a capire come allenarti da Revenge Gym.</p><a href="#contatti" className="button primary">Chiedi info <span>↗</span></a></div>
       </section>
 
       <section className="section contact" id="contatti">
@@ -763,6 +763,14 @@ export default function Home() {
           <p className="eyebrow"><span></span> Parliamone</p><h2>CI VEDIAMO<br/>IN <em>PALESTRA.</em></h2>
           <div className="info-list">
             <div><small>Dove siamo</small><p>Via Berna, 8<br/>00055 Ladispoli RM</p><a href="https://maps.google.com/?q=Via+Berna+8+00055+Ladispoli+RM" target="_blank" rel="noopener noreferrer">Apri in Google Maps ↗</a></div>
+            <div id="orari">
+              <small>Orari</small>
+              <dl className="hours">
+                <div><dt>Lun – Ven</dt><dd>6:30 – 22:00</dd></div>
+                <div><dt>Sabato</dt><dd>6:30 – 17:00</dd></div>
+                <div className="hours-closed"><dt>Domenica</dt><dd>Chiuso</dd></div>
+              </dl>
+            </div>
             <div><small>Contatti</small><p><a href="tel:+393475368488">347 536 8488</a><br/><a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a></p></div>
             <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noopener noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noopener noreferrer">Messenger ↗</a></p></div>
           </div>
@@ -778,7 +786,7 @@ export default function Home() {
           <label>Nome e cognome<input required name="name" autoComplete="name" maxLength={100} placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" autoComplete="email" maxLength={254} placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" autoComplete="tel" maxLength={30} placeholder="+39" /></label></div>
           <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe', 'Sala relax'].map(area => <option key={area}>{area}</option>)}</select></label>
-          <label>Messaggio<textarea name="message" maxLength={2000} placeholder="Dicci cosa vuoi sapere: orari, abbonamenti, obiettivi..."></textarea></label>
+          <label>Messaggio<textarea name="message" maxLength={2000} placeholder="Dicci cosa vuoi sapere: abbonamenti, obiettivi..."></textarea></label>
           <label className="privacy"><input required type="checkbox" name="privacy" value="accepted" /> <span>Ho letto e accetto la <Link href="/privacy/">privacy policy</Link>.</span></label>
           <button className="button primary" type="submit" disabled={formStatus === "sending"}>
             {formStatus === "sending" ? "Invio in corso…" : <>Chiedi info <span>↗</span></>}

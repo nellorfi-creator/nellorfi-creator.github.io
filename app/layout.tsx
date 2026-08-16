@@ -55,6 +55,10 @@ const jsonLd = {
     addressCountry: "IT",
   },
   image: "https://revenge-gym.github.io/media/sala-attrezzi.webp",
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "06:30", closes: "22:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "06:30", closes: "17:00" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
