@@ -446,7 +446,7 @@ export default function Home() {
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           {[['La palestra','#filosofia'],['Aree','#corsi'],['Relax','#sala-relax'],['Mappa','#mappa'],['Orari','#orari'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
           <div className="nav-flyout">
-            <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={zoneMenuOpen} onClick={() => setZoneMenuOpen(!zoneMenuOpen)}>Per zona <span>▾</span></button>
+            <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={zoneMenuOpen} onClick={() => setZoneMenuOpen(!zoneMenuOpen)}>Per gruppi muscolari <span>▾</span></button>
             <div className={`nav-flyout-panel${zoneMenuOpen ? " open" : ""}`} role="menu">
               <div className="nav-flyout-panel-inner">
                 <Link href="/macchine/gambe" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Gambe</Link>

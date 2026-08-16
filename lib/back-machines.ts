@@ -2,7 +2,7 @@ import type { Machine } from "./machines";
 
 export const backZone = {
   title: "Dorso",
-  eyebrow: "Allenamento per zona · Schiena",
+  eyebrow: "Allenamento per gruppi muscolari · Schiena",
   heroTitle: ["COSTRUISCI", "IL TUO", "DORSO."],
   heroLead: "Dieci postazioni dedicate alla schiena: trazioni verticali, rematori, pullover, T-Bar, lavoro lombare e una stazione per shrug e deadlift. Esplora l’area e apri la scheda della macchina che vuoi conoscere.",
   manifestoTitle: ["AMPIEZZA E SPESSORE.", "SENZA COMPROMESSI."],

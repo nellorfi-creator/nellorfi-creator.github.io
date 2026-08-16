@@ -119,7 +119,7 @@ export default function MachineShowcase() {
         <Link className={styles.siteLink} href="/?skipIntro=1#magazine" onClick={() => setMenuOpen(false)}>Magazine</Link>
         <div className={`${styles.zoneMenu} ${zonesOpen ? styles.zoneOpen : ""}`}>
           <button type="button" className={styles.zoneTrigger} aria-expanded={zonesOpen} onClick={() => setZonesOpen(!zonesOpen)}>
-            Per zona <span>▾</span>
+            Per gruppi muscolari <span>▾</span>
           </button>
           <div className={styles.zonePanel} role="menu">
             <div className={styles.zonePanelInner}>
@@ -145,14 +145,14 @@ export default function MachineShowcase() {
       <div className={styles.heroContent}>
         <p className={styles.eyebrow}><span></span> Ultimi arrivi · 2025–2026</p>
         <h1>PIÙ SCELTA.<br/><em>PIÙ FORZA.</em><br/>PIÙ <em>REVENGE.</em></h1>
-        <p>Questa pagina non è il catalogo della palestra: è solo la vetrina degli ultimi arrivi. Sei macchine nuove già in sala e una Panatta Super Vertical Leg Press in arrivo. Tutto il resto è nel menu Per zona.</p>
+        <p>Questa pagina non è il catalogo della palestra: è solo la vetrina degli ultimi arrivi. Sei macchine nuove già in sala e una Panatta Super Vertical Leg Press in arrivo. Tutto il resto è nel menu Per gruppi muscolari.</p>
         <a href="#machine-index" className={styles.primary}>Vedi gli ultimi arrivi <span>↓</span></a>
       </div>
       <div className={styles.heroStats}><div><strong>06</strong><span>Ultimi arrivi in sala</span></div><div><strong>01</strong><span>In arrivo</span></div></div>
     </section>
 
     <section className={styles.index} id="machine-index">
-      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>GLI ULTIMI<br/><em>ARRIVI.</em></h2><p>Il menu Per zona elenca tutte le macchine della sala. Qui sotto trovi solo quelle entrate di recente e la Panatta ancora in viaggio. <Link href="/macchine/gambe">Apri il catalogo per zona ↘</Link></p></div>
+      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>GLI ULTIMI<br/><em>ARRIVI.</em></h2><p>Il menu Per gruppi muscolari elenca tutte le macchine della sala. Qui sotto trovi solo quelle entrate di recente e la Panatta ancora in viaggio. <Link href="/macchine/gambe">Apri il catalogo per gruppi muscolari ↘</Link></p></div>
       <div className={styles.machineMenu}>
         {machines.map((machine) => <a key={machine.id} href={`#${machine.id}`} className={machine.incoming ? styles.incomingCard : ""}>
           <SiteImage src={machine.image} alt="" />

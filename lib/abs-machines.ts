@@ -2,7 +2,7 @@ import type { Machine } from "./machines";
 
 export const absZone = {
   title: "Addominali",
-  eyebrow: "Allenamento per zona · Core",
+  eyebrow: "Allenamento per gruppi muscolari · Core",
   heroTitle: ["COSTRUISCI", "IL TUO", "CORE."],
   heroLead:
     "Per ora una postazione dedicata: la Plate Loaded Abdominal Oblique Crunch Hammer Strength. Apri la scheda e scopri come usarla per crunch e lavoro obliquo con carico progressivo.",

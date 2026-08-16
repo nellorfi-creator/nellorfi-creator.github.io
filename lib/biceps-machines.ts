@@ -2,7 +2,7 @@ import type { Machine } from "./machines";
 
 export const bicepsZone = {
   title: "Bicipiti",
-  eyebrow: "Allenamento per zona · Flessori del gomito",
+  eyebrow: "Allenamento per gruppi muscolari · Flessori del gomito",
   heroTitle: ["COSTRUISCI", "I TUOI", "BICIPITI."],
   heroLead:
     "Quattro postazioni per lavorare i flessori del gomito con precisione: curl guidati, panca Scott e una stazione Panatta in piedi. Apri la scheda e scopri come usare ogni macchina.",

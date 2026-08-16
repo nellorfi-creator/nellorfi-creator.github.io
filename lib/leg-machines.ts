@@ -5,7 +5,7 @@ export type LegMachine = Machine;
 export const legZone: MachineZone = {
 
   title: "Gambe",
-  eyebrow: "Allenamento per zona · Arti inferiori",
+  eyebrow: "Allenamento per gruppi muscolari · Arti inferiori",
   heroTitle: ["ALLENA", "LE TUE", "GAMBE."],
   heroLead:
     "Revenge Gym punta sulla qualità delle macchine, sulla cura degli spazi e sull’ordine di una sala pensata per chi vuole allenarsi sul serio. Esplora l’area gambe, scegli una macchina e apri la sua scheda.",

@@ -2,7 +2,7 @@ import type { Machine } from "./machines";
 
 export const tricepsZone = {
   title: "Tricipiti",
-  eyebrow: "Allenamento per zona · Estensori del gomito",
+  eyebrow: "Allenamento per gruppi muscolari · Estensori del gomito",
   heroTitle: ["COSTRUISCI", "I TUOI", "TRICIPITI."],
   heroLead:
     "Tre postazioni per sviluppare gli estensori del gomito: dip plate loaded Hammer, Total Arms Panatta in piedi e Multi Press per la spinta a presa stretta. Apri la scheda e scopri come usare ogni macchina.",

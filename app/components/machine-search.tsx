@@ -155,7 +155,7 @@ export default function MachineSearch({ variant, brands = [], onOpen, onNavigate
               </span>
             </button>
           ))}
-          {machineHits.length > 0 && <p className="machine-search-group">Per zona</p>}
+          {machineHits.length > 0 && <p className="machine-search-group">Per gruppi muscolari</p>}
           {machineHits.map((hit, index) => {
             const optionIndex = brandHits.length + index;
             return (

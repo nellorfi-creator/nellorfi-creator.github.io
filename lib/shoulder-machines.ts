@@ -2,7 +2,7 @@ import type { Machine } from "./machines";
 
 export const shoulderZone = {
   title: "Spalle",
-  eyebrow: "Allenamento per zona · Cingolo scapolare",
+  eyebrow: "Allenamento per gruppi muscolari · Cingolo scapolare",
   heroTitle: ["COSTRUISCI", "LE TUE", "SPALLE."],
   heroLead: "Cinque postazioni per costruire spalle complete: alzate laterali, lavoro specifico sul deltoide posteriore e press guidate per una spinta verticale stabile. Apri la scheda e scopri come usare ogni macchina.",
   manifestoTitle: ["AMPIEZZA E CONTROLLO.", "DA OGNI ANGOLO."],

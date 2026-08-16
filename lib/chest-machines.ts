@@ -2,7 +2,7 @@ import type { Machine } from "./machines";
 
 export const chestZone = {
   title: "Petto",
-  eyebrow: "Allenamento per zona · Torace",
+  eyebrow: "Allenamento per gruppi muscolari · Torace",
   heroTitle: ["COSTRUISCI", "IL TUO", "PETTO."],
   heroLead:
     "Dodici postazioni dedicate al petto: spinte orizzontali e inclinate, convergenti, panche, Smith machine e aperture guidate. Esplora l’area e apri la scheda della macchina che vuoi conoscere.",

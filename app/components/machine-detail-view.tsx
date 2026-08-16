@@ -75,7 +75,7 @@ export default function MachineDetailView({
           </Link>
           <div className={`${styles.zoneMenu} ${zonesOpen ? styles.zoneOpen : ""}`}>
             <button type="button" className={styles.zoneTrigger} aria-expanded={zonesOpen} onClick={() => setZonesOpen(!zonesOpen)}>
-              Per zona <span>▾</span>
+              Per gruppi muscolari <span>▾</span>
             </button>
             <div className={styles.zonePanel} role="menu">
               <div className={styles.zonePanelInner}>
