@@ -449,12 +449,12 @@ export default function Home() {
             <div className={`nav-flyout-panel${navFlyout === "palestra" ? " open" : ""}`} role="menu">
               <div className="nav-flyout-panel-inner">
                 <Link href="#filosofia" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Filosofia</Link>
-                <Link href="#corsi" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Aree</Link>
                 <Link href="#sala-relax" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Relax</Link>
+                <Link href="#corsi" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Aree</Link>
                 <Link href="#mappa" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Mappa</Link>
-                <Link href="#orari" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Orari</Link>
                 <Link href="#gallery" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Gallery</Link>
                 <Link href="#magazine" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Magazine</Link>
+                <Link href="#orari" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Orari</Link>
               </div>
             </div>
           </div>
