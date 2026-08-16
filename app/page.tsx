@@ -133,7 +133,7 @@ const magazineArticles = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [zoneMenuOpen, setZoneMenuOpen] = useState(false);
+  const [navFlyout, setNavFlyout] = useState<null | "palestra" | "macchinari">(null);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [introVisible, setIntroVisible] = useState(true);
   const [introClosing, setIntroClosing] = useState(false);
@@ -442,40 +442,55 @@ export default function Home() {
       </section>}
       <header className="nav-wrap">
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
-        <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setZoneMenuOpen(false); }} aria-label={menuOpen ? "Chiudi menu" : "Apri menu"} aria-expanded={menuOpen}><i></i><i></i></button>
+        <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setNavFlyout(null); }} aria-label={menuOpen ? "Chiudi menu" : "Apri menu"} aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
-          {[['La palestra','#filosofia'],['Aree','#corsi'],['Relax','#sala-relax'],['Mappa','#mappa'],['Orari','#orari'],['Gallery','#gallery'],['Magazine','#magazine']].map(([label,href]) => <Link key={href} href={href} onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>{label}</Link>)}
           <div className="nav-flyout">
-            <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={zoneMenuOpen} onClick={() => setZoneMenuOpen(!zoneMenuOpen)}>Per gruppi muscolari <span>▾</span></button>
-            <div className={`nav-flyout-panel${zoneMenuOpen ? " open" : ""}`} role="menu">
+            <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={navFlyout === "palestra"} onClick={() => setNavFlyout(navFlyout === "palestra" ? null : "palestra")}>La palestra <span>▾</span></button>
+            <div className={`nav-flyout-panel${navFlyout === "palestra" ? " open" : ""}`} role="menu">
               <div className="nav-flyout-panel-inner">
-                <Link href="/macchine/gambe" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Gambe</Link>
-                <Link href="/macchine/petto" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Petto</Link>
-                <Link href="/macchine/dorso" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Dorso</Link>
-                <Link href="/macchine/spalle" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Spalle</Link>
-                <Link href="/macchine/bicipiti" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Bicipiti</Link>
-                <Link href="/macchine/tricipiti" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Tricipiti</Link>
-                <Link href="/macchine/addominali" role="menuitem" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Addominali</Link>
+                <Link href="#filosofia" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Filosofia</Link>
+                <Link href="#corsi" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Aree</Link>
+                <Link href="#sala-relax" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Relax</Link>
+                <Link href="#mappa" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Mappa</Link>
+                <Link href="#orari" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Orari</Link>
+                <Link href="#gallery" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Gallery</Link>
+                <Link href="#magazine" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Magazine</Link>
               </div>
             </div>
           </div>
-          <Link href="/nuove-macchine" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Nuove macchine</Link>
+          <div className="nav-flyout">
+            <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={navFlyout === "macchinari"} onClick={() => setNavFlyout(navFlyout === "macchinari" ? null : "macchinari")}>Macchinari <span>▾</span></button>
+            <div className={`nav-flyout-panel${navFlyout === "macchinari" ? " open" : ""}`} role="menu">
+              <div className="nav-flyout-panel-inner">
+                <Link href="#attrezzatura" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Macchinari selezionati</Link>
+                <Link href="/nuove-macchine" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Nuove macchine</Link>
+                <span className="nav-flyout-label">Per gruppi muscolari</span>
+                <Link href="/macchine/gambe" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Gambe</Link>
+                <Link href="/macchine/petto" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Petto</Link>
+                <Link href="/macchine/dorso" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Dorso</Link>
+                <Link href="/macchine/spalle" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Spalle</Link>
+                <Link href="/macchine/bicipiti" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Bicipiti</Link>
+                <Link href="/macchine/tricipiti" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Tricipiti</Link>
+                <Link href="/macchine/addominali" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Addominali</Link>
+              </div>
+            </div>
+          </div>
           <MachineSearch
             variant="nav"
             brands={equipmentBrands}
-            onOpen={() => setZoneMenuOpen(false)}
-            onNavigate={() => { setMenuOpen(false); setZoneMenuOpen(false); }}
+            onOpen={() => setNavFlyout(null)}
+            onNavigate={() => { setMenuOpen(false); setNavFlyout(null); }}
             onSelectBrand={(name) => {
               const brand = equipmentBrands.find((item) => item.name === name);
               if (brand) setActiveBrand(brand);
             }}
           />
-          <Link href="/boxe/" className="nav-boxe" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>
+          <Link href="/boxe/" className="nav-boxe" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>
             <BoxingGloveIcon className="nav-boxe-glove nav-boxe-glove-left" />
             <span className="nav-boxe-label">Boxe</span>
             <BoxingGloveIcon className="nav-boxe-glove nav-boxe-glove-right" />
           </Link>
-          <a className="nav-cta" href="#contatti" onClick={() => { setMenuOpen(false); setZoneMenuOpen(false); }}>Chiedi info <span>↗</span></a>
+          <a className="nav-cta" href="#contatti" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Chiedi info <span>↗</span></a>
         </nav>
       </header>
 
