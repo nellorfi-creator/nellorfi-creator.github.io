@@ -791,9 +791,9 @@ export default function Home() {
       <footer>
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <p>Sala pesi · Ladispoli</p>
-        <div className="visit-counter" aria-live="polite" aria-label={visitCounts === null ? "Conteggi in caricamento" : `${visitCounts.uniqueVisitors.toLocaleString("it-IT")} visitatori unici e ${visitCounts.pageViews.toLocaleString("it-IT")} visualizzazioni`}>
+        <div className="visit-counter" aria-live="polite" aria-label={visitCounts === null ? "Conteggi in caricamento" : `${visitCounts.uniqueVisitors.toLocaleString("it-IT")} visite uniche giornaliere e ${visitCounts.pageViews.toLocaleString("it-IT")} visualizzazioni`}>
           <span className="visit-counter-eye" aria-hidden="true"><i></i></span>
-          <span className="visit-counter-stat"><small>Visitatori unici</small><strong>{visitCounts === null ? "—" : visitCounts.uniqueVisitors.toLocaleString("it-IT")}</strong></span>
+          <span className="visit-counter-stat"><small>Visite uniche giornaliere</small><strong>{visitCounts === null ? "—" : visitCounts.uniqueVisitors.toLocaleString("it-IT")}</strong></span>
           <span className="visit-counter-divider" aria-hidden="true"></span>
           <span className="visit-counter-stat"><small>Visualizzazioni</small><strong>{visitCounts === null ? "—" : visitCounts.pageViews.toLocaleString("it-IT")}</strong></span>
         </div>

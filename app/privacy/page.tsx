@@ -30,7 +30,7 @@ export default function PrivacyPage() {
         <h2>Mappa e servizi di terze parti</h2>
         <p>La pagina contatti può mostrare una mappa incorporata di Google Maps, erogata da Google Ireland Ltd. L’uso della mappa può comportare il trasferimento di dati tecnici (incluso l’indirizzo IP) verso Google, secondo l’informativa disponibile su policies.google.com.</p>
         <h2>Contatore delle visite</h2>
-        <p>La homepage mostra il numero complessivo di visualizzazioni e di visitatori unici. A ogni apertura viene registrata una visualizzazione. Per distinguere i visitatori, l’indirizzo IP viene trasformato immediatamente in un codice non leggibile mediante una chiave privata: l’IP originale non viene conservato. Il contatore non utilizza cookie e i dati tecnici sono archiviati tramite Cloudflare esclusivamente per produrre queste statistiche aggregate.</p>
+        <p>La homepage mostra il numero complessivo di visualizzazioni e di visitatori giornalieri. A ogni apertura viene registrata una visualizzazione, mentre lo stesso indirizzo viene contato al massimo una volta per ciascun giorno. Per distinguere le visite giornaliere, l’indirizzo IP viene trasformato immediatamente in un codice non leggibile mediante una chiave privata: l’IP originale non viene conservato. Il contatore non utilizza cookie e i dati tecnici sono archiviati tramite Cloudflare esclusivamente per produrre queste statistiche aggregate.</p>
         <h2>Conservazione e diritti</h2>
         <p>I dati vengono conservati solo per il tempo necessario a gestire la richiesta. È possibile chiedere accesso, rettifica o cancellazione scrivendo a <a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a>.</p>
         <h2>Contatti</h2>

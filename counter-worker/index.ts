@@ -54,6 +54,17 @@ function shouldCount(visitorKey: string) {
   return true;
 }
 
+function currentRomeDate() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Rome",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
 const counterWorker = {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get("Origin");
@@ -79,8 +90,8 @@ const counterWorker = {
         if (shouldCount(visitorKey)) {
           await env.DB.batch([
             env.DB.prepare(
-              "INSERT OR IGNORE INTO unique_visitors (visitor_key) VALUES (?)",
-            ).bind(visitorKey),
+              "INSERT OR IGNORE INTO daily_visits (visitor_key, visit_date) VALUES (?, ?)",
+            ).bind(visitorKey, currentRomeDate()),
             env.DB.prepare(
               "UPDATE counter_totals SET page_views = page_views + 1 WHERE id = 1",
             ),
@@ -92,7 +103,7 @@ const counterWorker = {
         total?: number;
         page_views?: number;
       }>([
-        env.DB.prepare("SELECT COUNT(*) AS total FROM unique_visitors"),
+        env.DB.prepare("SELECT COUNT(*) AS total FROM daily_visits"),
         env.DB.prepare("SELECT page_views FROM counter_totals WHERE id = 1"),
       ]);
 
