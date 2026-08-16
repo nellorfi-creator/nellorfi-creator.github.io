@@ -133,7 +133,7 @@ const magazineArticles = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [navFlyout, setNavFlyout] = useState<null | "palestra" | "macchinari">(null);
+  const [navFlyout, setNavFlyout] = useState<null | "palestra" | "macchinari" | "gruppi">(null);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [introVisible, setIntroVisible] = useState(true);
   const [introClosing, setIntroClosing] = useState(false);
@@ -464,7 +464,13 @@ export default function Home() {
               <div className="nav-flyout-panel-inner">
                 <Link href="#attrezzatura" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Macchinari selezionati</Link>
                 <Link href="/nuove-macchine" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Nuove macchine</Link>
-                <span className="nav-flyout-label">Per gruppi muscolari</span>
+              </div>
+            </div>
+          </div>
+          <div className="nav-flyout">
+            <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={navFlyout === "gruppi"} onClick={() => setNavFlyout(navFlyout === "gruppi" ? null : "gruppi")}>Per gruppi muscolari <span>▾</span></button>
+            <div className={`nav-flyout-panel${navFlyout === "gruppi" ? " open" : ""}`} role="menu">
+              <div className="nav-flyout-panel-inner">
                 <Link href="/macchine/gambe" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Gambe</Link>
                 <Link href="/macchine/petto" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Petto</Link>
                 <Link href="/macchine/dorso" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Dorso</Link>
