@@ -680,7 +680,15 @@ export default function Home() {
       <section className="section schedule-section" id="attrezzatura">
         <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Qualità in sala</p><h2>MACCHINARI<br/><em>SELEZIONATI.</em></h2></div><p>Una palestra dotata di macchinari d’eccellenza, scelti tra i migliori marchi americani e italiani.</p></div>
         <div className="brand-grid reveal">
-          {equipmentBrands.map((brand, i) => <button type="button" key={brand.name} onClick={() => setActiveBrand(brand)} aria-label={`Scopri storia e caratteristiche di ${brand.name}`}><span>0{i+1}</span><strong>{brand.name}</strong><small>{brand.since}</small><i>Scopri il marchio ↗</i></button>)}
+          {equipmentBrands.map((brand, i) => (
+            <button type="button" key={brand.name} onClick={() => setActiveBrand(brand)} aria-label={`Scopri storia e caratteristiche di ${brand.name}`}>
+              <span>0{i + 1}</span>
+              <strong>{brand.name}</strong>
+              <small>{brand.since}</small>
+              <p className="brand-excerpt">{brand.intro}</p>
+              <i>Scopri il marchio ↗</i>
+            </button>
+          ))}
         </div>
         <div className="equipment-gallery reveal" aria-label="Attrezzature di Revenge Gym">
           {[
