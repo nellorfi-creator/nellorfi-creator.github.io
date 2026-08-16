@@ -13,8 +13,8 @@ const safariInline = { "webkit-playsinline": "true" } as const;
 
 const courses = [
   { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
-  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "/photos/live/sala-isotonica-oggi.webp", text: "Attrezzature professionali di marchi selezionati per un allenamento preciso ed efficace.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
-  { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "/photos/live/sala-cardio-oggi.webp", text: "Uno spazio dedicato al lavoro cardiovascolare, al riscaldamento e al miglioramento della resistenza.", description: "Un’area dedicata ad attivazione, resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature per riscaldamento e lavoro aerobico", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
+  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "/photos/live/sala-isotonica-oggi.webp", text: "Macchinari isotonici selezionati per il controllo e la qualità del movimento.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
+  { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "/photos/live/sala-cardio-oggi.webp", text: "Uno spazio dedicato al lavoro cardiovascolare e al miglioramento della resistenza.", description: "Un’area dedicata a resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature cardio professionali", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
   { icon: "◎", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "/photos/live/pesi-liberi-oggi.webp", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante.", description: "Lo spazio in cui costruire la tua routine combinando esercizi, attrezzi e intensità secondo il livello di partenza e il risultato che vuoi raggiungere.", features: ["Libertà di combinare forza, mobilità e condizionamento", "Spazio adatto a circuiti e lavoro a corpo libero", "Allenamento autonomo, flessibile e sempre diverso"], ideal: "Per chi ama gestire il proprio programma, variare gli stimoli e allenarsi seguendo ritmi e obiettivi personali." },
 ];
 
@@ -23,7 +23,7 @@ const gallery = [
   ["/photos/live/sala-isotonica-oggi.webp", "Area isotonica"],
   ["/photos/live/sala-cardio-oggi.webp", "Area cardio"],
   ["/photos/live/plate-loaded-oggi.webp", "Macchine plate loaded"],
-  ["/photos/live/pesi-liberi-oggi.webp", "Pesi liberi e manubri"],
+  ["/photos/live/pesi-liberi-oggi.webp", "Sala pesi e manubri"],
 ];
 
 const philosophyShots = [
@@ -33,7 +33,7 @@ const philosophyShots = [
   { src: "/photos/live/philosophy/plate-row.webp", alt: "Fila di macchine plate-loaded", label: "Plate loaded", focus: "center 40%" },
   { src: "/photos/live/philosophy/isotonica-brand.webp", alt: "Area isotonica con scritta Revenge Gym", label: "Isotonica", focus: "35% 42%" },
   { src: "/photos/live/philosophy/cardio.webp", alt: "Area cardio con tapis roulant", label: "Cardio", focus: "center 55%" },
-  { src: "/photos/live/philosophy/pesi-linea.webp", alt: "Rastrelliera manubri e pesi liberi", label: "Pesi liberi", focus: "center 38%" },
+  { src: "/photos/live/philosophy/pesi-linea.webp", alt: "Rastrelliera di manubri nella sala pesi", label: "Sala pesi", focus: "center 38%" },
   { src: "/photos/live/philosophy/cavi-verticale.webp", alt: "Area cavi vista in verticale", label: "Cavi", focus: "center 28%" },
 ];
 
@@ -58,7 +58,7 @@ const equipmentBrands = [
     name: "LIFE FITNESS", origin: "Illinois · Stati Uniti", since: "Radici dal 1968",
     intro: "La sua storia comincia con la Lifecycle, una delle attrezzature che ha contribuito a trasformare il cardio indoor.",
     history: "L’idea della Lifecycle risale al 1968; l’azienda fu costituita nel 1977 e negli anni successivi estese la propria esperienza dalle bike a tapis roulant, cardio, forza e soluzioni digitali per le palestre di tutto il mondo.",
-    highlights: ["Esperienza storica nel cardio professionale", "Attrezzature per forza e allenamento funzionale", "Console e soluzioni connesse", "Gamma pensata per utilizzo commerciale intensivo"],
+    highlights: ["Attrezzature per forza e allenamento funzionale", "Gamma pensata per utilizzo commerciale intensivo"],
     relevance: "La presenza di Life Fitness completa la sala con attrezzature intuitive e affidabili, adatte sia a chi comincia sia a chi si allena con continuità.",
     source: "https://www.lifefitness.com/en-us", sourceLabel: "Sito ufficiale Life Fitness",
   },
@@ -66,16 +66,16 @@ const equipmentBrands = [
     name: "PRECOR", origin: "Washington · Stati Uniti", since: "Dal 1980",
     intro: "Un marchio costruito intorno a ergonomia, affidabilità e movimenti capaci di seguire il corpo dell’utilizzatore.",
     history: "Fondata nel 1980 come Precision Corporation, lanciò il primo vogatore nel 1981 e assunse il nome Precor nel 1983. Nel 1995 presentò il primo Elliptical Fitness Crosstrainer EFX; in seguito introdusse l’Adaptive Motion Trainer e console cardio connesse.",
-    highlights: ["Pioniere dell’ellittica EFX", "Cardio, forza e functional training", "Movimenti ergonomici e regolazioni intuitive", "Attrezzature progettate per semplicità e affidabilità"],
+    highlights: ["Cardio, forza e functional training", "Movimenti ergonomici e regolazioni intuitive", "Attrezzature progettate per semplicità e affidabilità"],
     relevance: "È particolarmente apprezzata nelle aree cardio e nei percorsi in cui comfort, fluidità del gesto e facilità d’uso sono essenziali.",
     source: "https://www.precor.com/en-US/about-us", sourceLabel: "Storia ufficiale Precor",
   },
   {
-    name: "HOIST FITNESS", origin: "San Diego, California · Stati Uniti", since: "Dal 1977",
-    intro: "Un marchio statunitense specializzato in attrezzature per la forza, riconoscibile per la ricerca applicata alla meccanica del movimento.",
-    history: "La storia inizia nel 1977 con Coast Health Studio; nel 1980 apre lo stabilimento di Solana Beach e nel 1985 arriva il primo circuito di macchine selectorized. Oggi HOIST sviluppa soluzioni professionali e home fitness, dalle linee a pacco pesi e plate-loaded alle panche, ai rack e alle bike.",
-    highlights: ["Macchine professionali per la forza", "Linee selectorized e plate-loaded", "Sistemi ROC-IT con movimento dinamico del sedile", "Gamma per club, centri sportivi e preparazione atletica"],
-    relevance: "A Revenge Gym amplia le possibilità di lavorare sulla forza con postazioni solide e regolabili, utili per impostare il gesto con controllo e progredire gradualmente con il carico.",
+    name: "HOIST", origin: "San Diego, California · Stati Uniti", since: "Dal 1977",
+    intro: "Un marchio statunitense specializzato in macchine per il bodybuilding, riconoscibile per la ricerca applicata alla meccanica del movimento.",
+    history: "HOIST sviluppa macchine professionali a pacco pesi e a carico libero.",
+    highlights: ["Macchine professionali per il bodybuilding", "Selettori per il pacco pesi", "Sistemi ROC-IT con movimento dinamico del sedile"],
+    relevance: "A Revenge Gym amplia le possibilità di lavorare sulla forza con postazioni solide, regolabili e adatte a una progressione graduale del carico.",
     source: "https://www.hoistfitness.com/pages/about", sourceLabel: "Storia ufficiale HOIST Fitness",
   },
   {
@@ -88,9 +88,9 @@ const equipmentBrands = [
   },
   {
     name: "STAR TRAC", origin: "California · Stati Uniti", since: "Dal 1979",
-    intro: "Un marchio professionale noto soprattutto per il cardio e per avere unito robustezza, facilità d’uso ed esperienza digitale.",
-    history: "Le origini risalgono al 1979, quando Jim Doody fondò Unisen e iniziò a progettare componenti elettronici per tapis roulant. Nel 1987 arrivò Star Trac 2000, il primo tapis roulant commerciale alimentato in corrente continua sviluppato esclusivamente per gli health club; seguirono cardio, indoor cycling, console integrate e soluzioni connesse. Dal 2011 il marchio fa parte di Core Health & Fitness.",
-    highlights: ["Cardio professionale per uso intensivo", "Tapis roulant, bike e cross trainer", "Console e tracciamento dei dati di allenamento", "Progettazione attenta anche alla gestione da parte del club"],
+    intro: "Un marchio professionale noto soprattutto per il cardio, oggi leader anche nella produzione di macchine per palestra a pacco pesi e a carico libero.",
+    history: "Star Trac unisce una lunga esperienza nel cardio professionale a una gamma completa di macchine per la forza.",
+    highlights: ["Cardio professionale", "Macchine a pacco pesi", "Macchine a carico libero"],
     relevance: "Contribuisce a rendere più completa l’area cardio, offrendo strumenti adatti al riscaldamento, al lavoro aerobico e a sedute di resistenza con intensità facilmente modulabile.",
     source: "https://www.corehandf.com/pages/complete-line-of-cardio", sourceLabel: "Gamma ufficiale Star Trac",
   },
@@ -98,15 +98,15 @@ const equipmentBrands = [
     name: "GYMLECO", origin: "Stoccolma · Svezia", since: "Dal 1994",
     intro: "Un produttore scandinavo nato con l’obiettivo di creare macchine per la forza compatte, funzionali e semplici da mantenere.",
     history: "Dopo gli studi di ingegneria e l’esperienza nel bodybuilding, Kari Jernvall progettò in Svezia le prime tre macchine nel 1994. L’interesse raccolto alla prima esposizione del 1995 portò all’ampliamento della gamma; dal 2005 iniziò l’espansione nordica e nel 2018 la partecipazione a FIBO accelerò la presenza internazionale.",
-    highlights: ["Progettazione e produzione svedese", "Ingombri studiati per sfruttare bene lo spazio", "Macchine per forza, pesi liberi e accessori", "Costruzione orientata a durata e manutenzione ridotta"],
+    highlights: ["Progettazione e produzione svedese", "Ingombri studiati per sfruttare bene lo spazio", "Macchine per la forza", "Costruzione orientata a durata e manutenzione ridotta"],
     relevance: "Aggiunge alla sala macchine essenziali e robuste, pensate per offrire un movimento diretto e sfruttare in modo efficiente lo spazio senza rinunciare alla qualità del lavoro.",
     source: "https://gymleco.com/pages/our-history", sourceLabel: "Storia ufficiale Gymleco",
   },
   {
     name: "GYM EQUIPE", origin: "Origine non verificata", since: "Attrezzature professionali",
-    intro: "Una presenza meno documentata online rispetto ai grandi gruppi internazionali, ma riconoscibile nella dotazione della palestra per le sue macchine dedicate alla forza.",
-    history: "Il nome Gym Equipe compare su attrezzature professionali per l’allenamento muscolare; tra i riferimenti pubblicamente rintracciabili figurano macchine leg curl e leg extension. Non emerge però un sito ufficiale certo né una storia societaria documentata: per correttezza non attribuiamo al marchio una sede, un anno di fondazione o tecnologie proprietarie non verificabili.",
-    highlights: ["Macchine guidate per la muscolazione", "Postazioni leg curl e leg extension documentate online", "Lavoro mirato su distretti specifici", "Presenza dichiarata nella dotazione di Revenge Gym"],
+    intro: "Una presenza più giovane rispetto ai grandi gruppi internazionali, ma riconoscibile per i suoi macchinari solidi e per l’eccellente biomeccanica.",
+    history: "Gym Equipe realizza attrezzature professionali per l’allenamento muscolare, con macchine guidate dedicate a distretti specifici.",
+    highlights: ["Macchinari solidi", "Eccellente biomeccanica", "Macchine guidate per la muscolazione", "Lavoro mirato su distretti specifici"],
     relevance: "Completa la varietà delle stazioni disponibili e permette di inserire esercizi guidati e mirati all’interno di percorsi di forza, ipertrofia e condizionamento generale.",
     source: "https://www.google.com/search?q=%22Gym+Equipe%22+attrezzature+palestra", sourceLabel: "Ricerca web Gym Equipe · sito ufficiale non reperito",
   },
@@ -118,11 +118,11 @@ const INTRO_CLOSE_MS = 9800;
 const INTRO_EXIT_MS = 10500;
 
 const gymZones = [
-  { id: "free", number: "01", title: "Pesi liberi", subtitle: "Forza e fondamentali", className: "zone-free", image: "/photos/live/pesi-liberi-oggi.webp", text: "L’area dedicata a bilancieri, manubri e panche: il punto di partenza per costruire forza, tecnica e massa muscolare.", equipment: ["Panche e postazioni regolabili", "Manubri e bilancieri", "Spazio per i principali esercizi multiarticolari"] },
-  { id: "isotonic", number: "02", title: "Isotonica", subtitle: "Movimento guidato", className: "zone-isotonic", image: "/photos/live/sala-isotonica-oggi.webp", text: "Macchinari professionali che guidano la traiettoria e permettono di concentrare il lavoro sul gruppo muscolare scelto.", equipment: ["Macchine Panatta e Hammer Strength", "Postazioni per dorso, petto, spalle e gambe", "Regolazioni adatte a livelli diversi"] },
-  { id: "cardio", number: "03", title: "Cardio", subtitle: "Fiato e resistenza", className: "zone-cardio", image: "/photos/live/sala-cardio-oggi.webp", text: "Una zona per riscaldarsi, migliorare la capacità cardiovascolare o completare la seduta con un lavoro aerobico.", equipment: ["Attrezzature cardio professionali", "Intensità facilmente regolabile", "Utilizzabile prima o dopo la sala pesi"] },
+  { id: "free", number: "01", title: "Sala pesi", subtitle: "Forza e fondamentali", className: "zone-free", image: "/photos/live/sala-isotonica-oggi.webp", text: "Una sala completa per costruire forza, tecnica e massa muscolare con attrezzature professionali.", equipment: ["Panche e postazioni regolabili", "Manubri e bilancieri", "Spazio per i principali esercizi multiarticolari"] },
+  { id: "isotonic", number: "02", title: "Isotonica", subtitle: "Controllo e qualità del movimento", className: "zone-isotonic", image: "/photos/live/sala-isotonica-oggi.webp", text: "Macchinari isotonici professionali che guidano la traiettoria e permettono di concentrare il lavoro sul gruppo muscolare scelto.", equipment: ["Macchine Panatta e Hammer Strength", "Postazioni per dorso, petto, spalle e gambe", "Regolazioni adatte a livelli diversi"] },
+  { id: "cardio", number: "03", title: "Cardio", subtitle: "Fiato e resistenza", className: "zone-cardio", image: "/photos/live/sala-cardio-oggi.webp", text: "Una zona dedicata a migliorare la capacità cardiovascolare e a completare la seduta con un lavoro aerobico.", equipment: ["Attrezzature cardio professionali", "Intensità facilmente regolabile", "Utilizzabile prima, dopo o indipendentemente dalla sala pesi"] },
   { id: "boxing", number: "04", title: "Boxe", subtitle: "Tecnica e carattere", className: "zone-boxing", image: "/photos/live/boxe-sacchi.webp", text: "Uno spazio distinto dedicato alla boxe, dove allenare tecnica, coordinazione, condizionamento e sicurezza.", equipment: ["Ring", "Sacchi", "Spazio per tecnica e preparazione atletica"] },
-  { id: "relax", number: "05", title: "Sala relax", subtitle: "Caffè e retrò", className: "zone-relax", image: "/photos/live/sala-relax-poster.webp", href: "#sala-relax", text: "Dopo i carichi, il caffè. Un angolo per rallentare, dissetarsi e restare tra oggetti di un’altra epoca: Vespa 50, gadget e pezzi vintage.", equipment: ["Macchinetta del caffè", "Angolo retrò con Vespa 50", "Tavolino, flipper e oggetti vintage"] },
+  { id: "relax", number: "05", title: "Sala relax", subtitle: "Caffè e retrò", className: "zone-relax", image: "/photos/live/sala-relax-poster.webp", href: "#sala-relax", text: "Dopo esserti allenato, ricaricati con un caffè e vivi uno spazio accogliente da condividere a fine seduta.", equipment: ["Caffè, cappuccino e tè", "Bibite energizzanti, proteiche e integratori alimentari", "Gadget, Vespa 50, flipper e oggetti vintage"] },
 ];
 
 const magazineArticles = [
@@ -515,7 +515,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-stats">
-          <div><strong>9</strong><span>Brand professionali</span></div><div><strong>100%</strong><span>Allenamento</span></div><div><strong>1</strong><span>Grande community</span></div>
+          <div><strong>9</strong><span>Brand professionali</span></div><div><strong>100%</strong><span>Allenamento</span></div><div><strong>1</strong><span>Grande gruppo</span></div>
         </div>
         <a href="#filosofia" className="scroll-cue" aria-label="Scorri alla sezione successiva">SCROLL <span>↓</span></a>
       </section>
@@ -525,8 +525,8 @@ export default function Home() {
         <div className="philosophy-copy reveal">
           <p className="eyebrow"><span></span> Il nostro metodo</p>
           <h2>LA PALESTRA DOVE<br/>CAMBI DAVVERO.</h2>
-          <p className="lead">Spazi curati, attrezzature di alto livello e una community che condivide la voglia di migliorarsi.</p>
-          <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist Fitness, Nautilus, Star Trac, Gymleco e Gym Equipe.</p>
+          <p className="lead">Spazi curati, attrezzature di alto livello e un gruppo che condivide la voglia di migliorarsi.</p>
+          <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist, Nautilus, Star Trac, Gymleco e Gym Equipe.</p>
           <a href="#titolari" className="text-link orange">Conosci Gino e Stefania <span>↗</span></a>
         </div>
         <div className="philosophy-visual reveal" ref={philosophyVisualRef}>
@@ -612,9 +612,9 @@ export default function Home() {
         <div className="relax-copy reveal">
           <p className="eyebrow"><span></span> Sala relax · Ladispoli</p>
           <h2>QUI SI SCENDE<br/><em>DI GIRI.</em></h2>
-          <p className="lead">Dopo i carichi, il caffè. Uno spazio per rallentare, dissetarsi e restare un po’ tra oggetti di un’altra epoca.</p>
-          <p>Macchinetta del caffè, gadget, una Vespa 50, il flipper acceso e pezzi di storia: un angolo retrò dove chiacchierare, riprendere fiato e restare cinque minuti in più.</p>
-          <p>La pausa, da Revenge Gym, ha lo stesso carattere del resto. Non è un corridoio di passaggio, ma uno spazio da vivere tra una serie e l’altra o alla fine della seduta.</p>
+          <p className="lead">Dopo esserti allenato, ricaricati con un caffè in uno spazio pensato per rallentare, dissetarti e stare insieme.</p>
+          <p>Caffè, cappuccino, tè, bibite energizzanti e proteiche, integratori alimentari, gadget, una Vespa 50, il flipper acceso e pezzi di storia: un angolo retrò dove chiacchierare e riprendere fiato.</p>
+          <p>Non è un corridoio di passaggio, ma uno spazio da vivere e condividere a fine seduta: per incontrarsi o aspettare amici e figli.</p>
           <div className="relax-facts" aria-label="Cosa trovi in sala relax">
             <div><strong>01</strong><span>Caffè</span></div>
             <div><strong>02</strong><span>Retrò</span></div>
@@ -678,7 +678,7 @@ export default function Home() {
       </div>}
 
       <section className="section schedule-section" id="attrezzatura">
-        <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Qualità in sala</p><h2>MACCHINARI<br/><em>SELEZIONATI.</em></h2></div><p>Una dotazione completa con alcuni dei marchi più riconosciuti nel mondo del fitness e della preparazione fisica.</p></div>
+        <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Qualità in sala</p><h2>MACCHINARI<br/><em>SELEZIONATI.</em></h2></div><p>Una palestra dotata di macchinari d’eccellenza, scelti tra i migliori marchi americani e italiani.</p></div>
         <div className="brand-grid reveal">
           {equipmentBrands.map((brand, i) => <button type="button" key={brand.name} onClick={() => setActiveBrand(brand)} aria-label={`Scopri storia e caratteristiche di ${brand.name}`}><span>0{i+1}</span><strong>{brand.name}</strong><small>{brand.since}</small><i>Scopri il marchio ↗</i></button>)}
         </div>
