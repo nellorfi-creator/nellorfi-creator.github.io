@@ -448,12 +448,12 @@ export default function Home() {
             <button type="button" className="nav-flyout-trigger" aria-haspopup="true" aria-expanded={navFlyout === "palestra"} onClick={() => setNavFlyout(navFlyout === "palestra" ? null : "palestra")}>La palestra <span>▾</span></button>
             <div className={`nav-flyout-panel${navFlyout === "palestra" ? " open" : ""}`} role="menu">
               <div className="nav-flyout-panel-inner">
-                <Link href="#filosofia" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Filosofia</Link>
-                <Link href="#sala-relax" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Relax</Link>
-                <Link href="#corsi" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Aree</Link>
-                <Link href="#mappa" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Mappa</Link>
-                <Link href="#gallery" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Gallery</Link>
-                <Link href="#magazine" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Magazine</Link>
+                <Link href="#filosofia" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>La palestra dove cambi davvero</Link>
+                <Link href="#sala-relax" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Qui si scende di giri</Link>
+                <Link href="#corsi" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Allenati. Evolvi.</Link>
+                <Link href="#mappa" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Dentro Revenge</Link>
+                <Link href="#gallery" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Sudore. Energia. Risultati.</Link>
+                <Link href="#magazine" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Allenati con metodo</Link>
                 <Link href="#orari" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Orari</Link>
               </div>
             </div>
