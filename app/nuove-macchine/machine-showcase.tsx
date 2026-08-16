@@ -41,12 +41,23 @@ const hoistErrors = ["Caricare dischi in modo diverso sui due lati senza intenzi
 const verticalPurposes = ["Sviluppare forza nell’estensione di anche e ginocchia", "Aumentare il volume di lavoro per quadricipiti e glutei", "Allenare le gambe lungo una traiettoria guidata", "Variare l’assetto attraverso pedana e schienale regolabili", "Gestire progressioni a dischi con finecorsa di sicurezza"];
 const verticalErrors = ["Staccare bacino o schiena dal supporto", "Scendere oltre l’escursione che si riesce a controllare", "Far collassare le ginocchia verso l’interno", "Perdere l’appoggio stabile dell’intero piede", "Rimbalzare nella parte bassa del movimento", "Bloccare violentemente le ginocchia o inseguire il carico massimo"];
 
+const brandTicker =
+  "ULTIMI ARRIVI · LIFE FITNESS · PANATTA · GYMLECO · STAR TRAC · NAUTILUS · HOIST · REVENGE · ";
+
+const arrivalPillars = [
+  ["06", "IN SALA", "Macchine nuove già installate e utilizzabili."],
+  ["01", "IN ARRIVO", "Super Vertical Leg Press Panatta in viaggio."],
+  ["∞", "CATALOGO", "Il parco completo resta nel menu per gruppi muscolari."],
+] as const;
+
 export default function MachineShowcase() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMachine, setActiveMachine] = useState(machines[0].id);
   const [expandedMachine, setExpandedMachine] = useState<string | null>(null);
   const [zonesOpen, setZonesOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const railLoop = [...machines, ...machines];
 
   const closeMenu = () => {
     setZonesOpen(false);
@@ -71,6 +82,25 @@ export default function MachineShowcase() {
   }, [menuOpen]);
 
   useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const nodes = document.querySelectorAll(`.${styles.reveal}`);
+    if (reduced) {
+      nodes.forEach((node) => node.classList.add(styles.visible));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add(styles.visible);
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -6% 0px" },
+    );
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const updateFromHash = () => {
       const id = window.location.hash.slice(1);
       if (machines.some((machine) => machine.id === id)) setActiveMachine(id);
@@ -83,6 +113,9 @@ export default function MachineShowcase() {
         return box.top <= 170 && box.bottom > 170;
       });
       if (current) setActiveMachine(current.id);
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
     };
     window.addEventListener("scroll", updateActive, { passive: true });
     window.addEventListener("hashchange", updateFromHash);
@@ -107,6 +140,7 @@ export default function MachineShowcase() {
 
   return <main className={styles.page} id="top">
     <MobileSwipeBack onSwipe={goBack} />
+    <div className={styles.scrollProgress} aria-hidden="true"><i style={{ transform: `scaleX(${progress})` }} /></div>
     <header className={styles.nav}>
       <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home senza intro"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
       <button className={styles.menuToggle} type="button" onClick={() => { if (menuOpen) setZonesOpen(false); setMenuOpen(!menuOpen); }} aria-expanded={menuOpen} aria-label={menuOpen ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}><i></i><i></i></button>
@@ -141,27 +175,103 @@ export default function MachineShowcase() {
     </header>
 
     <section className={styles.hero}>
-      <div className={styles.heroMedia}></div><div className={styles.heroShade}></div>
+      <div className={styles.heroMedia} aria-hidden="true" />
+      <div className={styles.heroShade} aria-hidden="true" />
+      <div className={styles.heroStage} aria-hidden="true">
+        {[machines[0], machines[2], machines[5], machines[6]].map((machine, index) => (
+          <figure
+            key={machine.id}
+            className={[
+              styles.heroFloat,
+              index === 0 ? styles.heroFloat1 : "",
+              index === 1 ? styles.heroFloat2 : "",
+              index === 2 ? styles.heroFloat3 : "",
+              index === 3 ? styles.heroFloat4 : "",
+              machine.incoming ? styles.heroFloatIncoming : "",
+            ].filter(Boolean).join(" ")}
+          >
+            <SiteImage src={machine.image} alt="" />
+          </figure>
+        ))}
+      </div>
       <div className={styles.heroContent}>
         <p className={styles.eyebrow}><span></span> Ultimi arrivi · 2025–2026</p>
         <h1>PIÙ SCELTA.<br/><em>PIÙ FORZA.</em><br/>PIÙ <em>REVENGE.</em></h1>
-        <p>Questa pagina non è il catalogo della palestra: è solo la vetrina degli ultimi arrivi. Sei macchine nuove già in sala e una Panatta Super Vertical Leg Press in arrivo. Tutto il resto è nel menu Per gruppi muscolari.</p>
-        <a href="#machine-index" className={styles.primary}>Vedi gli ultimi arrivi <span>↓</span></a>
+        <p>Non è il catalogo della palestra: è la vetrina degli ultimi arrivi. Sei macchine nuove già in sala e una Panatta Super Vertical Leg Press in arrivo.</p>
+        <div className={styles.heroActions}>
+          <a href="#machine-rail" className={styles.primary}>Vedi gli ultimi arrivi <span>↓</span></a>
+          <a href="#super-vertical-leg-press" className={styles.ghost}>In arrivo <span>↗</span></a>
+        </div>
       </div>
-      <div className={styles.heroStats}><div><strong>06</strong><span>Ultimi arrivi in sala</span></div><div><strong>01</strong><span>In arrivo</span></div></div>
+      <div className={styles.heroStats}>
+        <div><strong>06</strong><span>Ultimi arrivi in sala</span></div>
+        <div><strong>01</strong><span>In arrivo</span></div>
+        <div><strong>07</strong><span>Schede tecniche</span></div>
+      </div>
     </section>
 
-    <section className={styles.index} id="machine-index">
-      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>GLI ULTIMI<br/><em>ARRIVI.</em></h2><p>Il menu Per gruppi muscolari elenca tutte le macchine della sala. Qui sotto trovi solo quelle entrate di recente e la Panatta ancora in viaggio. <Link href="/macchine/gambe">Apri il catalogo per gruppi muscolari ↘</Link></p></div>
+    <div className={styles.brandMarquee} aria-hidden="true">
+      <div className={styles.brandMarqueeTrack}>
+        <span>{brandTicker}</span>
+        <span>{brandTicker}</span>
+      </div>
+    </div>
+
+    <section className={`${styles.arrival} ${styles.reveal}`} id="perche">
+      <div>
+        <p className={styles.eyebrow}><span></span> Perché questa pagina</p>
+        <h2>NON UN CATALOGO.<br/><em>UNA VETRINA.</em></h2>
+      </div>
+      <div className={styles.arrivalCopy}>
+        <p className={styles.lead}>Revenge aggiorna la sala con marchi professionali, non con pezzi da riempire. Qui trovi solo ciò che è entrato di recente — e ciò che sta per arrivare.</p>
+        <p>Il menu Per gruppi muscolari resta il percorso completo. Questa pagina racconta il momento: nuove postazioni, nuovo ritmo, stessa ossessione per la qualità.</p>
+      </div>
+      <div className={styles.pillars}>
+        {arrivalPillars.map(([number, title, text]) => (
+          <article key={title}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>
+        ))}
+      </div>
+    </section>
+
+    <section className={`${styles.rail} ${styles.reveal}`} id="machine-rail" aria-label="Anteprima ultimi arrivi">
+      <div className={styles.railHead}>
+        <p className={styles.eyebrow}><span></span> Scorri · tocca per la scheda</p>
+        <h2>GLI ULTIMI<br/><em>ARRIVI.</em></h2>
+      </div>
+      <div className={styles.railMarquee}>
+        <div className={styles.railTrack}>
+          {railLoop.map((machine, index) => (
+            <a
+              key={`${machine.id}-${index}`}
+              href={`#${machine.id}`}
+              className={`${styles.railCard}${machine.incoming ? ` ${styles.railCardIncoming}` : ""}${activeMachine === machine.id ? ` ${styles.railCardActive}` : ""}`}
+              aria-label={`${machine.name} · ${machine.brand}`}
+              onClick={() => setActiveMachine(machine.id)}
+            >
+              <SiteImage src={machine.image} alt="" />
+              <span>
+                <small>{machine.brand}{machine.incoming ? " · In arrivo" : ""}</small>
+                <b>{machine.name}</b>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className={`${styles.index} ${styles.reveal}`} id="machine-index">
+      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>APRI LA<br/><em>SCHEDA.</em></h2><p>Scegli la macchina, leggi biomeccanica e consigli del trainer, poi provala in sala. <Link href="/macchine/gambe">Apri il catalogo per gruppi muscolari ↘</Link></p></div>
       <div className={styles.machineMenu}>
-        {machines.map((machine) => <a key={machine.id} href={`#${machine.id}`} className={machine.incoming ? styles.incomingCard : ""}>
-          <SiteImage src={machine.image} alt="" />
-          <span>{machine.number}</span><small>{machine.brand}</small><strong>{machine.name}</strong><i>{machine.status} ↘</i>
-        </a>)}
+        {machines.map((machine) => (
+          <a key={machine.id} href={`#${machine.id}`} className={`${machine.incoming ? styles.incomingCard : ""} ${activeMachine === machine.id ? styles.menuActive : ""}`.trim()}>
+            <SiteImage src={machine.image} alt="" />
+            <span>{machine.number}</span><small>{machine.brand}</small><strong>{machine.name}</strong><i>{machine.status} ↘</i>
+          </a>
+        ))}
       </div>
     </section>
 
-    <article className={styles.profile} id="pressa-life-fitness">
+    <article className={`${styles.profile} ${styles.reveal}`} id="pressa-life-fitness">
       <div className={styles.profileHero}>
         <div><span>01 · DISPONIBILE IN SALA</span><small>LIFE FITNESS</small><h2>PRESSA<br/><em>ORIZZONTALE.</em></h2><p>Sicurezza, potenza e massima efficacia per l’allenamento completo degli arti inferiori.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/life-fitness-leg-press.webp" alt="Pressa orizzontale Axiom Life Fitness"/><figcaption>Immagine ufficiale Life Fitness · configurazione indicativa</figcaption></figure>
@@ -194,7 +304,7 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <article className={`${styles.profile} ${styles.panattaProfile}`} id="leg-curl-extension">
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="leg-curl-extension">
       <div className={styles.profileHero}>
         <div><span>02 · DISPONIBILE IN SALA</span><small>PANATTA</small><h2>LEG CURL /<br/><em>LEG EXTENSION.</em></h2><p>Due esercizi fondamentali, un’unica postazione: lavoro completo sulla parte anteriore e posteriore della coscia.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/panatta-dual-leg-extension-curl.webp" alt="Dual Leg Extension e Seated Leg Curling Panatta 1SCD080"/><figcaption>Panatta 1SCD080 · immagine ufficiale di prodotto</figcaption></figure>
@@ -221,7 +331,7 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <article className={`${styles.profile} ${styles.panattaProfile}`} id="hack-squat">
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="hack-squat">
       <div className={styles.profileHero}>
         <div><span>03 · DISPONIBILE IN SALA</span><small>GYMLECO · MODELLO 244</small><h2>HACK<br/><em>SQUAT.</em></h2><p>Una traiettoria guidata e una struttura compatta per costruire gambe forti con stabilità e controllo.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/gymleco-hacklift.webp" alt="Hacklift 244 Gymleco, macchina professionale per hack squat"/><figcaption>Gymleco 244 Hacklift · fotografia ufficiale del modello</figcaption></figure>
@@ -254,7 +364,7 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <article className={`${styles.profile} ${styles.panattaProfile}`} id="biceps-curl">
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="biceps-curl">
       <div className={styles.profileHero}>
         <div><span>04 · DISPONIBILE IN SALA</span><small>STAR TRAC · IMPACT STRENGTH</small><h2>BICEPS<br/><em>CURL.</em></h2><p>Appoggio stabile, movimento guidato e controllo continuo per un lavoro preciso sui flessori del gomito.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/startrac-impact-biceps-curl.webp" alt="Star Trac Impact Biceps Curl LA-S5301"/><figcaption>Star Trac Impact LA-S5301 · immagine dal catalogo del modello</figcaption></figure>
@@ -287,7 +397,7 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <article className={`${styles.profile} ${styles.panattaProfile}`} id="lateral-raise">
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="lateral-raise">
       <div className={styles.profileHero}>
         <div><span>05 · DISPONIBILE IN SALA</span><small>NAUTILUS · INSPIRATION IPDR5</small><h2>LATERAL<br/><em>RAISE.</em></h2><p>Movimento guidato, assetto regolabile e lavoro unilaterale per costruire spalle forti con precisione.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/nautilus-lateral-raise.webp" alt="Nautilus Inspiration Deltoid Raise IPDR5"/><figcaption>Nautilus Inspiration IPDR5 · immagine ufficiale del modello</figcaption></figure>
@@ -320,7 +430,7 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <article className={`${styles.profile} ${styles.panattaProfile}`} id="incline-chest-press">
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="incline-chest-press">
       <div className={styles.profileHero}>
         <div><span>06 · DISPONIBILE IN SALA</span><small>HOIST FITNESS · ROC-IT RPL-5303</small><h2>INCLINE<br/><em>CHEST PRESS.</em></h2><p>Una spinta inclinata dinamica, convergente e caricata a dischi per allenare il torace superiore.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/hoist-incline-chest-press.webp" alt="Incline Chest Press ROC-IT RPL-5303 Hoist Fitness"/><figcaption>Hoist ROC-IT RPL-5303 · immagine ufficiale del modello</figcaption></figure>
@@ -353,9 +463,18 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <article className={`${styles.profile} ${styles.panattaProfile}`} id="super-vertical-leg-press">
+    <section className={`${styles.incomingBanner} ${styles.reveal}`} aria-label="Prossimo arrivo">
+      <div>
+        <p className={styles.eyebrow}><span></span> Prossimo arrivo</p>
+        <h2>LA VERTICALE<br/><em>STA ARRIVANDO.</em></h2>
+        <p>Panatta Super Vertical Leg Press 1FW093: caricamento a dischi, pedana e schienale regolabili, finecorsa di sicurezza. Non è ancora in sala — ma la scheda tecnica è già qui.</p>
+      </div>
+      <a href="#super-vertical-leg-press" className={styles.primary}>Apri la scheda <span>↓</span></a>
+    </section>
+
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.incomingProfile} ${styles.reveal}`} id="super-vertical-leg-press">
       <div className={styles.profileHero}>
-        <div><span>07 · IN ARRIVO A REVENGE GYM</span><small>PANATTA · FREEWEIGHT SPECIAL 1FW093</small><h2>SUPER VERTICAL<br/><em>LEG PRESS.</em></h2><p>La nuova protagonista dell’area gambe è in arrivo: traiettoria guidata, regolazioni evolute e caricamento a dischi.</p></div>
+        <div><span className={styles.pulseBadge}>07 · IN ARRIVO A REVENGE GYM</span><small>PANATTA · FREEWEIGHT SPECIAL 1FW093</small><h2>SUPER VERTICAL<br/><em>LEG PRESS.</em></h2><p>La nuova protagonista dell’area gambe è in arrivo: traiettoria guidata, regolazioni evolute e caricamento a dischi.</p></div>
         <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/panatta-super-vertical-leg-press.webp" alt="Super Vertical Leg Press Panatta 1FW093"/><figcaption>Panatta 1FW093 · immagine del modello · macchina in arrivo</figcaption></figure>
       </div>
       {mobileDetailsButton("super-vertical-leg-press", "Super Vertical Leg Press")}
@@ -386,7 +505,7 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <section className={styles.cta}><p className={styles.eyebrow}><span></span> Vieni a conoscerle</p><h2>LEGGERE AIUTA.<br/><em>ALLENARSI CAMBIA TUTTO.</em></h2><p>Questi sono solo gli ultimi arrivi. In sala il parco macchine è molto più ampio: scoprilo dal vivo e chiedi allo staff come inserirlo nel tuo allenamento.</p><Link href="/?skipIntro=1#contatti" className={styles.primary}>Chiedi info <span>↗</span></Link></section>
+    <section className={`${styles.cta} ${styles.reveal}`}><p className={styles.eyebrow}><span></span> Vieni a conoscerle</p><h2>LEGGERE AIUTA.<br/><em>ALLENARSI CAMBIA TUTTO.</em></h2><p>Questi sono solo gli ultimi arrivi. In sala il parco macchine è molto più ampio: scoprilo dal vivo e chiedi allo staff come inserirlo nel tuo allenamento.</p><Link href="/?skipIntro=1#contatti" className={styles.primary}>Chiedi info <span>↗</span></Link></section>
     <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Sala pesi · Ladispoli</p><p className={styles.footerLegal}><span>© 2026 Revenge Gym</span><span className={styles.byNello} style={{ textTransform: "none" }}>© by nello 2026</span></p><a href="#top" className={styles.backTop} aria-label="Torna all'inizio">↑</a></footer>
   </main>;
 }
