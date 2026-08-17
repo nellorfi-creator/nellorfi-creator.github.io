@@ -92,24 +92,6 @@
   letter-spacing:1px;text-transform:uppercase;transition:.25s;
 }
 .ghost:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px)}
-.heroStage{
-  position:absolute;z-index:1;inset:96px 2vw 120px auto;width:min(52vw,720px);pointer-events:none;
-}
-.heroFloat{
-  position:absolute;margin:0;padding:14px;border:1px solid rgba(255,255,255,.12);
-  background:radial-gradient(ellipse at 50% 42%,rgba(40,18,12,.55),rgba(8,8,8,.72));
-  box-shadow:0 28px 60px rgba(0,0,0,.45);overflow:hidden;
-  animation:floatSoft 7s ease-in-out infinite;
-}
-.heroFloat img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 16px 24px rgba(0,0,0,.45))}
-.heroFloat1{top:4%;right:8%;width:58%;aspect-ratio:1;animation-delay:0s}
-.heroFloat2{top:28%;right:48%;width:38%;aspect-ratio:1;opacity:.88;animation-delay:-1.6s}
-.heroFloat3{bottom:8%;right:4%;width:42%;aspect-ratio:1;opacity:.9;animation-delay:-3.2s}
-.heroFloat4{bottom:18%;right:42%;width:34%;aspect-ratio:1;animation-delay:-4.4s}
-.heroFloatIncoming{
-  box-shadow:0 0 0 1px rgba(255,77,0,.55),0 28px 60px rgba(0,0,0,.45);
-  animation:floatSoft 7s ease-in-out infinite, incomingGlow 2.4s ease-in-out infinite;
-}
 .brandMarquee{
   overflow:hidden;padding:16px 0;background:var(--orange);color:#fff;white-space:nowrap;
   border-top:1px solid rgba(0,0,0,.2);border-bottom:1px solid rgba(0,0,0,.2);
@@ -221,10 +203,6 @@
   from{transform:translateX(0)}
   to{transform:translateX(-50%)}
 }
-@keyframes floatSoft{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-}
 @keyframes heroKen{
   from{transform:scale(1)}
   to{transform:scale(1.06)}
@@ -239,12 +217,7 @@
   100%{box-shadow:0 0 0 0 rgba(255,77,0,0)}
 }
 
-@media(max-width:1100px){
-  .heroStage{width:min(46vw,520px);opacity:.78}
-  .heroFloat2,.heroFloat4{display:none}
-}
 @media(max-width:900px){
-  .heroStage{display:none}
   .arrival{grid-template-columns:1fr;padding:80px 22px 20px;gap:36px}
   .pillars{grid-template-columns:1fr}
   .pillars article,.pillars article:first-child{min-height:auto;border-left:0;border-top:1px solid rgba(255,255,255,.1)}
@@ -261,7 +234,7 @@
   .railCard{width:min(180px,70vw)}
 }
 @media(prefers-reduced-motion:reduce){
-  .heroMedia,.brandMarqueeTrack,.railTrack,.heroFloat,.heroFloatIncoming,.pulseBadge,.pulseBadge::before,
+  .heroMedia,.brandMarqueeTrack,.railTrack,.pulseBadge,.pulseBadge::before,
   .heroContent h1,.heroContent>p:not(.eyebrow),.heroActions,.heroStats{animation:none!important}
   .reveal{opacity:1;transform:none;transition:none}
   .machineMenu a:hover,.railCard:hover,.railCardActive{transform:none}

@@ -177,23 +177,6 @@ export default function MachineShowcase() {
     <section className={styles.hero}>
       <div className={styles.heroMedia} aria-hidden="true" />
       <div className={styles.heroShade} aria-hidden="true" />
-      <div className={styles.heroStage} aria-hidden="true">
-        {[machines[0], machines[2], machines[5], machines[6]].map((machine, index) => (
-          <figure
-            key={machine.id}
-            className={[
-              styles.heroFloat,
-              index === 0 ? styles.heroFloat1 : "",
-              index === 1 ? styles.heroFloat2 : "",
-              index === 2 ? styles.heroFloat3 : "",
-              index === 3 ? styles.heroFloat4 : "",
-              machine.incoming ? styles.heroFloatIncoming : "",
-            ].filter(Boolean).join(" ")}
-          >
-            <SiteImage src={machine.image} alt="" />
-          </figure>
-        ))}
-      </div>
       <div className={styles.heroContent}>
         <p className={styles.eyebrow}><span></span> Ultimi arrivi · 2025–2026</p>
         <h1>PIÙ SCELTA.<br/><em>PIÙ FORZA.</em><br/>PIÙ <em>REVENGE.</em></h1>
