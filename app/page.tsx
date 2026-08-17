@@ -150,6 +150,7 @@ export default function Home() {
   const [tickerHidden, setTickerHidden] = useState(false);
   const [visitCounts, setVisitCounts] = useState<{ uniqueVisitors: number; pageViews: number } | null>(null);
   const philosophyVisualRef = useRef<HTMLDivElement>(null);
+  const gymMapDetailRef = useRef<HTMLDivElement>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
@@ -166,9 +167,7 @@ export default function Home() {
 
   useEffect(() => {
     const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
-    const alreadySeen = window.sessionStorage.getItem("revenge-intro-seen") === "1";
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!skipRequested && !alreadySeen && !reducedMotion) return;
+    if (!skipRequested) return;
     const skipTimer = window.setTimeout(() => setIntroVisible(false), 0);
     return () => window.clearTimeout(skipTimer);
   }, []);
@@ -188,7 +187,6 @@ export default function Home() {
     const exitTimer = window.setTimeout(() => {
       introAudioRef.current?.pause();
       introVideoRef.current?.pause();
-      window.sessionStorage.setItem("revenge-intro-seen", "1");
       setIntroVisible(false);
     }, INTRO_EXIT_MS);
     return () => {
@@ -200,10 +198,23 @@ export default function Home() {
 
   useEffect(() => {
     if (!introVisible) return;
-    const audio = introAudioRef.current;
-    if (!audio) return;
-    audio.volume = 0.55;
-    audio.play().then(() => setIntroSound(true)).catch(() => setIntroSound(false));
+    const video = introVideoRef.current;
+    if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "true");
+    video.setAttribute("webkit-playsinline", "true");
+    const playIntro = () => {
+      void video.play().catch(() => undefined);
+    };
+    playIntro();
+    video.addEventListener("canplay", playIntro);
+    video.addEventListener("loadeddata", playIntro);
+    return () => {
+      video.removeEventListener("canplay", playIntro);
+      video.removeEventListener("loadeddata", playIntro);
+    };
   }, [introVisible]);
 
   useEffect(() => {
@@ -376,8 +387,20 @@ export default function Home() {
     setIntroClosing(true);
     introAudioRef.current?.pause();
     introVideoRef.current?.pause();
-    window.sessionStorage.setItem("revenge-intro-seen", "1");
     window.setTimeout(() => setIntroVisible(false), 700);
+  };
+
+  const selectGymZone = (zone: (typeof gymZones)[number]) => {
+    setActiveZone(zone);
+    const detail = gymMapDetailRef.current;
+    if (!detail) return;
+    const navH = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 67;
+    const rect = detail.getBoundingClientRect();
+    const visible = rect.bottom > navH + 40 && rect.top < window.innerHeight * 0.55;
+    if (visible) return;
+    window.requestAnimationFrame(() => {
+      detail.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
   const toggleIntroSound = async () => {
@@ -426,12 +449,12 @@ export default function Home() {
       {(activeBrand || activeArea || activeArticle) && <MobileSwipeBack edgeOnly={false} label="Chiudi" onSwipe={() => { setActiveBrand(null); setActiveArea(null); setActiveArticle(null); }} />}
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
         <div className="intro-frames is-running">
-          <video ref={introVideoRef} className="intro-video" autoPlay muted playsInline {...safariInline} preload="auto" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true" onEnded={closeIntro}>
+          <video ref={introVideoRef} className="intro-video" autoPlay muted playsInline {...safariInline} preload="auto" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true">
             <source src="/media/intro-cinematic.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="intro-shade"></div>
-        <div className="intro-logo logo"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></div>
+        <div className="intro-logo logo"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" loading="eager" /></div>
         <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
           <i>{introSound ? "▮▮" : "▶"}</i> {introSound ? "Musica attiva" : "Attiva musica"}
         </button>
@@ -725,7 +748,7 @@ export default function Home() {
             <p className="eyebrow"><span></span> Esplora gli spazi</p>
             <h3>DENTRO<br/><em>REVENGE.</em></h3>
             <p>Seleziona una zona della palestra per scoprire cosa trovi e come può entrare nel tuo allenamento.</p>
-            <div className="gym-map-detail" aria-live="polite">
+            <div className="gym-map-detail" ref={gymMapDetailRef} aria-live="polite">
               <small>{activeZone.number} · {activeZone.subtitle}</small>
               <strong>{activeZone.title}</strong>
               <p>{activeZone.text}</p>
@@ -734,8 +757,7 @@ export default function Home() {
             </div>
           </div>
           <div className="floor-plan" aria-label="Mappa interattiva delle aree di Revenge Gym">
-            <div className="floor-plan-label">INGRESSO <span>→</span></div>
-            {gymZones.map(zone => <button key={zone.id} type="button" className={`floor-zone ${zone.className}${activeZone.id === zone.id ? " active" : ""}`} onClick={() => setActiveZone(zone)} aria-pressed={activeZone.id === zone.id}>
+            {gymZones.map(zone => <button key={zone.id} type="button" className={`floor-zone ${zone.className}${activeZone.id === zone.id ? " active" : ""}`} onClick={() => selectGymZone(zone)} aria-pressed={activeZone.id === zone.id}>
               <span>{zone.number}</span><strong>{zone.title}</strong><small>{zone.subtitle}</small>
             </button>)}
             <div className="floor-core">REVENGE<br/><span>GYM</span></div>
