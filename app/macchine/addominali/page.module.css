@@ -173,7 +173,7 @@
 .index{padding:100px 7vw;border-top:1px solid var(--line);background:#0a0a0a}
 .sectionIntro{display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:6vw;margin-bottom:48px}
 .sectionIntro h2{margin:20px 0 0;font-size:clamp(46px,6vw,92px);line-height:.86}
-.sectionIntro>p:last-child{max-width:460px;color:#8a8a8a;line-height:1.8}
+.sectionIntro>p:last-child{max-width:540px;color:#c4c4c4;font-size:clamp(16px,1.45vw,19px);font-weight:500;line-height:1.78;text-wrap:balance}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .gridCard{
   display:grid;grid-template-rows:220px 1fr;overflow:hidden;
@@ -200,7 +200,7 @@
     url('/photos/machines/dorso/linear-row.webp') 80% 46%/cover;
 }
 .cta h2{max-width:980px;margin:22px 0;font-size:clamp(44px,6vw,100px);line-height:.86}
-.cta>p:not(.eyebrow){max-width:520px;color:#bbb;line-height:1.7}
+.cta>p:not(.eyebrow){max-width:560px;color:#d0d0d0;font-size:clamp(16px,1.35vw,18px);font-weight:500;line-height:1.78;text-wrap:balance}
 .primary{
   display:inline-flex;align-items:center;gap:20px;min-height:57px;margin-top:28px;padding:0 24px;
   background:var(--orange);color:#fff;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;transition:.25s;
