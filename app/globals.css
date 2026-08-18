@@ -547,6 +547,7 @@ footer { position:relative; min-height:120px; padding:28px 4vw; display:flex; al
 footer .logo img { height:48px; }
 footer .footer-legal { display:flex; flex-direction:column; align-items:flex-end; gap:8px; min-width:0; margin:0; text-align:right; }
 .footer-entity { max-width:min(46ch,100%); line-height:1.55; letter-spacing:.08em; }
+.footer-disclaimer { max-width:min(52ch,100%); color:#777; font-size:8px; line-height:1.55; letter-spacing:.04em; text-transform:none; }
 .footer-privacy { color:#888; }
 .footer-privacy:hover,.footer-privacy:focus-visible { color:var(--orange); }
 .visit-counter { display:flex; align-items:center; gap:11px; margin:0; padding:10px 14px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.035); color:#fff; }

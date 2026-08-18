@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
-import { LEGAL_ENTITY } from "@/lib/legal";
+import { CONTACT_EMAIL, CONTACT_PHONE_TEL, LEGAL_ENTITY } from "@/lib/legal";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -47,8 +47,8 @@ const jsonLd = {
   legalName: LEGAL_ENTITY.legalName,
   taxID: LEGAL_ENTITY.taxId,
   url: "https://revenge-gym.github.io",
-  telephone: "+393475368488",
-  email: "laurogino@tiscali.it",
+  telephone: CONTACT_PHONE_TEL,
+  email: CONTACT_EMAIL,
   address: {
     "@type": "PostalAddress",
     streetAddress: LEGAL_ENTITY.street,

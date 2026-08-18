@@ -2,6 +2,7 @@
 
 import SiteImage from "@/app/components/site-image";
 import LegalIdentity from "@/app/components/legal-identity";
+import { CONTACT_EMAIL, CONTACT_FORM_URL, CONTACT_PHONE, CONTACT_PHONE_TEL } from "@/lib/legal";
 import GymMap from "@/app/components/gym-map";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -427,14 +428,20 @@ export default function Home() {
     const form = event.currentTarget;
     setFormStatus("sending");
     const data = new FormData(form);
-    data.set("_subject", "Revenge Gym — richiesta informazioni");
-    data.set("_template", "table");
-    data.set("_captcha", "true");
+    const payload = {
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      phone: String(data.get("phone") ?? ""),
+      course: String(data.get("course") ?? ""),
+      message: String(data.get("message") ?? ""),
+      privacy: String(data.get("privacy") ?? ""),
+      honey: String(data.get("_honey") ?? ""),
+    };
     try {
-      const response = await fetch("https://formsubmit.co/ajax/laurogino@tiscali.it", {
+      const response = await fetch(CONTACT_FORM_URL, {
         method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(payload),
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
       });
       const result = (await response.json().catch(() => null)) as { success?: string | boolean } | null;
       const ok = response.ok && result?.success !== false && result?.success !== "false";
@@ -824,7 +831,7 @@ export default function Home() {
                 <div className="hours-closed"><dt>Domenica</dt><dd>Chiuso</dd></div>
               </dl>
             </div>
-            <div><small>Contatti</small><p><a href="tel:+393475368488">347 536 8488</a><br/><a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a></p></div>
+            <div><small>Contatti</small><p><a href={`tel:${CONTACT_PHONE_TEL}`}>{CONTACT_PHONE}</a><br/><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p></div>
             <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noopener noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noopener noreferrer">Messenger ↗</a></p></div>
           </div>
           <GymMap />
@@ -841,7 +848,7 @@ export default function Home() {
             {formStatus === "sending" ? "Invio in corso…" : <>Chiedi info <span>↗</span></>}
           </button>
           {formStatus === "sent" && <p className="success" role="status">Richiesta ricevuta! Ti richiamiamo al più presto.</p>}
-          {formStatus === "error" && <p className="form-error" role="alert">Invio non riuscito. Riprova o scrivi a laurogino@tiscali.it.</p>}
+          {formStatus === "error" && <p className="form-error" role="alert">Invio non riuscito. Riprova o scrivi a {CONTACT_EMAIL}.</p>}
         </form>
       </section>
 

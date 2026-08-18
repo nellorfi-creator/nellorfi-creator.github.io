@@ -13,3 +13,15 @@ export const LEGAL_ENTITY = {
 export const LEGAL_ADDRESS_LINE = "Via Berna 8, 00055 Ladispoli RM";
 
 export const LEGAL_FOOTER_ENTITY = `${LEGAL_ENTITY.legalName} · C.F. ${LEGAL_ENTITY.taxId} · ${LEGAL_ADDRESS_LINE}`;
+
+export const CONTACT_PHONE = "347 536 8488";
+export const CONTACT_PHONE_TEL = "+393475368488";
+
+/** Casella attuale. Dopo il dominio revenge-gym.it va sostituita con CONTACT_EMAIL_PLANNED. */
+export const CONTACT_EMAIL = "laurogino@tiscali.it";
+export const CONTACT_EMAIL_PLANNED = "info@revenge-gym.it";
+
+export const CONTACT_FORM_URL = "https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev/contact";
+
+export const LEGAL_TRADEMARK_DISCLAIMER =
+  "Panatta, Hammer Strength, Life Fitness, Precor, Hoist, Nautilus, Star Trac, Gymleco, Technogym e gli altri marchi citati sono di proprietà dei rispettivi titolari. Revenge Gym non è affiliata, sponsorizzata o certificata da tali aziende, salvo diverso accordo scritto.";
