@@ -11,12 +11,12 @@ import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
 import { bodyZones } from "@/lib/body-zones";
 
 const machines = [
-  { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.webp", alt: "Pressa orizzontale Axiom Life Fitness" },
-  { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/media/new-machines/panatta-dual-leg-extension-curl.webp", alt: "Dual Leg Extension e Seated Leg Curling Panatta 1SCD080" },
-  { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: true, image: "/media/new-machines/gymleco-hacklift.webp", alt: "Hacklift 244 Gymleco" },
-  { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: true, image: "/media/new-machines/startrac-impact-biceps-curl.webp", alt: "Star Trac Impact Biceps Curl LA-S5301" },
-  { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: true, image: "/media/new-machines/nautilus-lateral-raise.webp", alt: "Nautilus Inspiration Deltoid Raise IPDR5" },
-  { id: "incline-chest-press", number: "06", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/hoist-incline-chest-press.webp", alt: "Incline Chest Press ROC-IT RPL-5303 Hoist Fitness" },
+  { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.webp", alt: "Pressa orizzontale Life Fitness nella sala Revenge Gym" },
+  { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/media/new-machines/panatta-dual-leg-extension-curl.webp", alt: "Dual Leg Extension e Seated Leg Curling Panatta nella sala Revenge Gym" },
+  { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: true, image: "/media/new-machines/gymleco-hacklift.webp", alt: "Hack Squat Gymleco 244 nella sala Revenge Gym" },
+  { id: "biceps-curl", number: "04", name: "Biceps Curl", brand: "Star Trac", status: "Disponibile", ready: true, image: "/media/new-machines/startrac-impact-biceps-curl.webp", alt: "Biceps Curl Star Trac Inspiration nella sala Revenge Gym" },
+  { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: true, image: "/media/new-machines/nautilus-lateral-raise.webp", alt: "Lateral Raise Nautilus Nitro Plus nella sala Revenge Gym" },
+  { id: "incline-chest-press", number: "06", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/hoist-incline-chest-press.webp", alt: "Incline Chest Press Hoist ROC-IT nella sala Revenge Gym" },
   { id: "super-vertical-leg-press", number: "07", name: "Super Vertical Leg Press", brand: "Panatta", status: "In arrivo", ready: true, incoming: true, image: "/media/new-machines/panatta-super-vertical-leg-press.webp", alt: "Super Vertical Leg Press Panatta 1FW093" },
 ];
 
@@ -258,7 +258,7 @@ export default function MachineShowcase() {
     <article className={`${styles.profile} ${styles.reveal}`} id="pressa-life-fitness">
       <div className={styles.profileHero}>
         <div><span>01 · DISPONIBILE IN SALA</span><small>LIFE FITNESS</small><h2>PRESSA<br/><em>ORIZZONTALE.</em></h2><p>Sicurezza, potenza e massima efficacia per l’allenamento completo degli arti inferiori.</p></div>
-        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/life-fitness-leg-press.webp" alt="Pressa orizzontale Axiom Life Fitness"/><figcaption>Immagine ufficiale Life Fitness · configurazione indicativa</figcaption></figure>
+        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/life-fitness-leg-press.webp" alt="Pressa orizzontale Life Fitness nella sala Revenge Gym"/><figcaption>Foto dalla sala · Revenge Gym</figcaption></figure>
       </div>
       {mobileDetailsButton("pressa-life-fitness", "la Pressa Orizzontale")}
       <div id="pressa-life-fitness-details" className={`${styles.profileBody} ${expandedMachine === "pressa-life-fitness" ? styles.profileBodyOpen : ""}`}>
@@ -291,7 +291,7 @@ export default function MachineShowcase() {
     <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="leg-curl-extension">
       <div className={styles.profileHero}>
         <div><span>02 · DISPONIBILE IN SALA</span><small>PANATTA</small><h2>LEG CURL /<br/><em>LEG EXTENSION.</em></h2><p>Due esercizi fondamentali, un’unica postazione: lavoro completo sulla parte anteriore e posteriore della coscia.</p></div>
-        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/panatta-dual-leg-extension-curl.webp" alt="Dual Leg Extension e Seated Leg Curling Panatta 1SCD080"/><figcaption>Panatta 1SCD080 · immagine ufficiale di prodotto</figcaption></figure>
+        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/panatta-dual-leg-extension-curl.webp" alt="Dual Leg Extension e Seated Leg Curling Panatta nella sala Revenge Gym"/><figcaption>Foto dalla sala · Revenge Gym</figcaption></figure>
       </div>
       {mobileDetailsButton("leg-curl-extension", "Leg Curl / Leg Extension")}
       <div id="leg-curl-extension-details" className={`${styles.profileBody} ${expandedMachine === "leg-curl-extension" ? styles.profileBodyOpen : ""}`}>
@@ -318,7 +318,7 @@ export default function MachineShowcase() {
     <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="hack-squat">
       <div className={styles.profileHero}>
         <div><span>03 · DISPONIBILE IN SALA</span><small>GYMLECO · MODELLO 244</small><h2>HACK<br/><em>SQUAT.</em></h2><p>Una traiettoria guidata e una struttura compatta per costruire gambe forti con stabilità e controllo.</p></div>
-        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/gymleco-hacklift.webp" alt="Hacklift 244 Gymleco, macchina professionale per hack squat"/><figcaption>Gymleco 244 Hacklift · fotografia ufficiale del modello</figcaption></figure>
+        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/gymleco-hacklift.webp" alt="Hack Squat Gymleco 244 nella sala Revenge Gym"/><figcaption>Foto dalla sala · Revenge Gym</figcaption></figure>
       </div>
       {mobileDetailsButton("hack-squat", "Hack Squat")}
       <div id="hack-squat-details" className={`${styles.profileBody} ${expandedMachine === "hack-squat" ? styles.profileBodyOpen : ""}`}>
@@ -351,7 +351,7 @@ export default function MachineShowcase() {
     <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="biceps-curl">
       <div className={styles.profileHero}>
         <div><span>04 · DISPONIBILE IN SALA</span><small>STAR TRAC · IMPACT STRENGTH</small><h2>BICEPS<br/><em>CURL.</em></h2><p>Appoggio stabile, movimento guidato e controllo continuo per un lavoro preciso sui flessori del gomito.</p></div>
-        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/startrac-impact-biceps-curl.webp" alt="Star Trac Impact Biceps Curl LA-S5301"/><figcaption>Star Trac Impact LA-S5301 · immagine dal catalogo del modello</figcaption></figure>
+        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/startrac-impact-biceps-curl.webp" alt="Biceps Curl Star Trac Inspiration nella sala Revenge Gym"/><figcaption>Foto dalla sala · Revenge Gym</figcaption></figure>
       </div>
       {mobileDetailsButton("biceps-curl", "Biceps Curl")}
       <div id="biceps-curl-details" className={`${styles.profileBody} ${expandedMachine === "biceps-curl" ? styles.profileBodyOpen : ""}`}>
@@ -384,7 +384,7 @@ export default function MachineShowcase() {
     <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="lateral-raise">
       <div className={styles.profileHero}>
         <div><span>05 · DISPONIBILE IN SALA</span><small>NAUTILUS · INSPIRATION IPDR5</small><h2>LATERAL<br/><em>RAISE.</em></h2><p>Movimento guidato, assetto regolabile e lavoro unilaterale per costruire spalle forti con precisione.</p></div>
-        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/nautilus-lateral-raise.webp" alt="Nautilus Inspiration Deltoid Raise IPDR5"/><figcaption>Nautilus Inspiration IPDR5 · immagine ufficiale del modello</figcaption></figure>
+        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/nautilus-lateral-raise.webp" alt="Lateral Raise Nautilus Nitro Plus nella sala Revenge Gym"/><figcaption>Foto dalla sala · Revenge Gym</figcaption></figure>
       </div>
       {mobileDetailsButton("lateral-raise", "Lateral Raise")}
       <div id="lateral-raise-details" className={`${styles.profileBody} ${expandedMachine === "lateral-raise" ? styles.profileBodyOpen : ""}`}>
@@ -417,7 +417,7 @@ export default function MachineShowcase() {
     <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="incline-chest-press">
       <div className={styles.profileHero}>
         <div><span>06 · DISPONIBILE IN SALA</span><small>HOIST FITNESS · ROC-IT RPL-5303</small><h2>INCLINE<br/><em>CHEST PRESS.</em></h2><p>Una spinta inclinata dinamica, convergente e caricata a dischi per allenare il torace superiore.</p></div>
-        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/hoist-incline-chest-press.webp" alt="Incline Chest Press ROC-IT RPL-5303 Hoist Fitness"/><figcaption>Hoist ROC-IT RPL-5303 · immagine ufficiale del modello</figcaption></figure>
+        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/hoist-incline-chest-press.webp" alt="Incline Chest Press Hoist ROC-IT nella sala Revenge Gym"/><figcaption>Foto dalla sala · Revenge Gym</figcaption></figure>
       </div>
       {mobileDetailsButton("incline-chest-press", "Incline Chest Press")}
       <div id="incline-chest-press-details" className={`${styles.profileBody} ${expandedMachine === "incline-chest-press" ? styles.profileBodyOpen : ""}`}>
