@@ -106,6 +106,14 @@ const equipmentBrands = [
     source: "https://gymleco.com/pages/our-history", sourceLabel: "Storia ufficiale Gymleco",
   },
   {
+    name: "TECA", origin: "Italia · Made in Italy", since: "Dal 1985",
+    intro: "Un produttore italiano specializzato in macchine isotoniche professionali, con progettazione biomeccanica e produzione interamente nazionale.",
+    history: "TECA Fitness sviluppa attrezzature per centri fitness, sport e riabilitazione dal 1985. Il dipartimento SED (Science, Engineering & Design) unisce ricerca biomeccanica, ingegneria e design per costruire macchine pensate per l’uso intensivo in club. La linea isotonica copre i principali distretti muscolari con tecnologie come SAC (Self Adaptive Control), MME (Multiple Movement of Exercises) e ROM limiter su numerose postazioni.",
+    highlights: ["Produzione e design 100% Made in Italy", "Ricerca biomeccanica e linea isotonica completa", "Macchine compatte con ingombri ottimizzati", "Soluzioni per fitness, sport e recupero funzionale", "Premi internazionali FIBO Innovation Award"],
+    relevance: "In Revenge Gym le Leg Extension e Leg Curl Teca completano l’area gambe con postazioni dedicate, solide e facili da regolare: un marchio italiano che rafforza la profondità del parco macchine accanto a Panatta e Life Fitness.",
+    source: "https://tecafitness.com/", sourceLabel: "Sito ufficiale TECA Fitness",
+  },
+  {
     name: "GYM EQUIPE", origin: "Origine non verificata", since: "Attrezzature professionali",
     intro: "Una presenza più giovane rispetto ai grandi gruppi internazionali, ma riconoscibile per i suoi macchinari solidi e per l’eccellente biomeccanica.",
     history: "Gym Equipe realizza attrezzature professionali per l’allenamento muscolare, con macchine guidate dedicate a distretti specifici.",
@@ -579,7 +587,7 @@ export default function Home() {
           <p className="eyebrow"><span></span> Il nostro metodo</p>
           <h2>LA PALESTRA DOVE<br/>CAMBI DAVVERO.</h2>
           <p className="lead">Spazi curati, attrezzature di alto livello e un gruppo che condivide la voglia di migliorarsi.</p>
-          <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist, Nautilus, Star Trac, Gymleco e Gym Equipe.</p>
+          <p>Revenge Gym è una palestra completa a Ladispoli, pensata per chi vuole allenarsi seriamente in un ambiente pulito, accogliente e professionale. La sala riunisce macchinari Panatta, Hammer Strength, Life Fitness, Precor, Hoist, Nautilus, Star Trac, Gymleco, Teca e Gym Equipe.</p>
           <a href="#titolari" className="text-link orange">Conosci Gino e Stefania <span>↗</span></a>
         </div>
         <div className="philosophy-visual reveal" ref={philosophyVisualRef}>

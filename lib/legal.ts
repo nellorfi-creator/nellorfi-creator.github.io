@@ -24,4 +24,4 @@ export const CONTACT_EMAIL_PLANNED = "info@revenge-gym.it";
 export const CONTACT_FORM_URL = "https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev/contact";
 
 export const LEGAL_TRADEMARK_DISCLAIMER =
-  "Panatta, Hammer Strength, Life Fitness, Precor, Hoist, Nautilus, Star Trac, Gymleco, Technogym e gli altri marchi citati sono di proprietà dei rispettivi titolari. Revenge Gym non è affiliata, sponsorizzata o certificata da tali aziende, salvo diverso accordo scritto.";
+  "Panatta, Hammer Strength, Life Fitness, Precor, Hoist, Nautilus, Star Trac, Gymleco, Teca, Technogym e gli altri marchi citati sono di proprietà dei rispettivi titolari. Revenge Gym non è affiliata, sponsorizzata o certificata da tali aziende, salvo diverso accordo scritto.";

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     icon: "/brand/revenge-gym-logo.png",
     apple: "/brand/revenge-gym-logo.png",
   },
-  keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "sala relax palestra", "Revenge Gym", "Panatta", "Hammer Strength", "Life Fitness", "Precor", "Hoist Fitness", "Nautilus", "Star Trac", "Gymleco"],
+  keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "sala relax palestra", "Revenge Gym", "Panatta", "Hammer Strength", "Life Fitness", "Precor", "Hoist Fitness", "Nautilus", "Star Trac", "Gymleco", "Teca"],
   openGraph: {
     title: "Revenge Gym | La tua rivincita inizia oggi",
     description: "Palestra e sala pesi a Ladispoli. Allenati, evolvi, supera i tuoi limiti.",
