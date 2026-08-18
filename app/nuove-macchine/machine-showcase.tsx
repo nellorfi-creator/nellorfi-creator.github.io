@@ -51,6 +51,12 @@ const arrivalPillars = [
   ["∞", "CATALOGO", "Il parco completo resta nel menu per gruppi muscolari."],
 ] as const;
 
+const NAV_SCROLL_GAP = 20;
+
+function isMachineId(id: string) {
+  return machines.some((machine) => machine.id === id);
+}
+
 export default function MachineShowcase() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -102,10 +108,34 @@ export default function MachineShowcase() {
   }, []);
 
   useEffect(() => {
-    const updateFromHash = () => {
-      const id = window.location.hash.slice(1);
-      if (machines.some((machine) => machine.id === id)) setActiveMachine(id);
+    const navHeight = () => {
+      const nav = document.querySelector(`.${styles.nav}`) as HTMLElement | null;
+      return nav?.offsetHeight ?? 84;
     };
+
+    const revealMachine = (id: string) => {
+      const article = document.getElementById(id);
+      article?.classList.add(styles.visible);
+      return article?.querySelector(`.${styles.profileHero}`) as HTMLElement | null ?? article;
+    };
+
+    const scrollToMachine = (id: string, smooth: boolean) => {
+      if (!isMachineId(id)) return;
+      setActiveMachine(id);
+      const run = () => {
+        const target = revealMachine(id);
+        if (!target) return;
+        const top = target.getBoundingClientRect().top + window.scrollY - navHeight() - NAV_SCROLL_GAP;
+        window.scrollTo({ top: Math.max(0, top), behavior: smooth ? "smooth" : "auto" });
+      };
+      requestAnimationFrame(() => requestAnimationFrame(run));
+    };
+
+    const updateFromHash = (smooth: boolean) => {
+      const id = window.location.hash.slice(1);
+      if (isMachineId(id)) scrollToMachine(id, smooth);
+    };
+
     const updateActive = () => {
       const current = machines.find((machine) => {
         const element = document.getElementById(machine.id);
@@ -118,21 +148,34 @@ export default function MachineShowcase() {
       const max = doc.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
     };
+
+    const onHashChange = () => updateFromHash(true);
+
     window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("hashchange", updateFromHash);
-    updateFromHash();
+    window.addEventListener("hashchange", onHashChange);
+    updateFromHash(false);
     updateActive();
-    const initialCheck = window.requestAnimationFrame(() => {
-      updateFromHash();
-      const id = window.location.hash.slice(1);
-      if (machines.some((machine) => machine.id === id)) document.getElementById(id)?.scrollIntoView();
-    });
     return () => {
-      window.cancelAnimationFrame(initialCheck);
       window.removeEventListener("scroll", updateActive);
-      window.removeEventListener("hashchange", updateFromHash);
+      window.removeEventListener("hashchange", onHashChange);
     };
   }, []);
+
+  const focusMachine = (id: string) => {
+    if (!isMachineId(id)) return;
+    setActiveMachine(id);
+    window.history.pushState(null, "", `#${id}`);
+    requestAnimationFrame(() => {
+      const article = document.getElementById(id);
+      article?.classList.add(styles.visible);
+      const target = article?.querySelector(`.${styles.profileHero}`) as HTMLElement | null ?? article;
+      if (!target) return;
+      const nav = document.querySelector(`.${styles.nav}`) as HTMLElement | null;
+      const navH = nav?.offsetHeight ?? 84;
+      const top = target.getBoundingClientRect().top + window.scrollY - navH - NAV_SCROLL_GAP;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    });
+  };
 
   const goBack = () => {
     if (window.history.length > 1) window.history.back();
@@ -165,7 +208,20 @@ export default function MachineShowcase() {
           </div>
         </div>
         <span className={styles.navDivider} aria-hidden="true"></span>
-        {machines.map((machine) => <a className={activeMachine === machine.id ? styles.active : ""} key={machine.id} href={`#${machine.id}`} onClick={() => { setActiveMachine(machine.id); setMenuOpen(false); }}>{machine.number}</a>)}
+        {machines.map((machine) => (
+          <a
+            className={activeMachine === machine.id ? styles.active : ""}
+            key={machine.id}
+            href={`#${machine.id}`}
+            onClick={(event) => {
+              event.preventDefault();
+              focusMachine(machine.id);
+              setMenuOpen(false);
+            }}
+          >
+            {machine.number}
+          </a>
+        ))}
         <Link href="/boxe/" className="nav-boxe" onClick={() => setMenuOpen(false)}>
           <BoxingGloveIcon className="nav-boxe-glove nav-boxe-glove-left" />
           <span className="nav-boxe-label">Boxe</span>
@@ -184,7 +240,16 @@ export default function MachineShowcase() {
         <p>Non è il catalogo della palestra: è la vetrina degli ultimi arrivi. Sei macchine nuove già in sala e una Panatta Super Vertical Leg Press in arrivo.</p>
         <div className={styles.heroActions}>
           <a href="#machine-rail" className={styles.primary}>Vedi gli ultimi arrivi <span>↓</span></a>
-          <a href="#super-vertical-leg-press" className={styles.ghost}>In arrivo <span>↗</span></a>
+          <a
+            href="#super-vertical-leg-press"
+            className={styles.ghost}
+            onClick={(event) => {
+              event.preventDefault();
+              focusMachine("super-vertical-leg-press");
+            }}
+          >
+            In arrivo <span>↗</span>
+          </a>
         </div>
       </div>
       <div className={styles.heroStats}>
@@ -230,7 +295,10 @@ export default function MachineShowcase() {
               href={`#${machine.id}`}
               className={`${styles.railCard}${machine.incoming ? ` ${styles.railCardIncoming}` : ""}${activeMachine === machine.id ? ` ${styles.railCardActive}` : ""}`}
               aria-label={`${machine.name} · ${machine.brand}`}
-              onClick={() => setActiveMachine(machine.id)}
+              onClick={(event) => {
+                event.preventDefault();
+                focusMachine(machine.id);
+              }}
             >
               <SiteImage src={machine.image} alt="" />
               <span>
@@ -247,7 +315,15 @@ export default function MachineShowcase() {
       <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>APRI LA<br/><em>SCHEDA.</em></h2><p>Scegli la macchina, leggi biomeccanica e consigli del trainer, poi provala in sala. <Link href="/macchine/gambe">Apri il catalogo per gruppi muscolari ↘</Link></p></div>
       <div className={styles.machineMenu}>
         {machines.map((machine) => (
-          <a key={machine.id} href={`#${machine.id}`} className={`${machine.incoming ? styles.incomingCard : ""} ${activeMachine === machine.id ? styles.menuActive : ""}`.trim()}>
+          <a
+            key={machine.id}
+            href={`#${machine.id}`}
+            className={`${machine.incoming ? styles.incomingCard : ""} ${activeMachine === machine.id ? styles.menuActive : ""}`.trim()}
+            onClick={(event) => {
+              event.preventDefault();
+              focusMachine(machine.id);
+            }}
+          >
             <SiteImage src={machine.image} alt="" />
             <span>{machine.number}</span><small>{machine.brand}</small><strong>{machine.name}</strong><i>{machine.status} ↘</i>
           </a>
@@ -453,7 +529,16 @@ export default function MachineShowcase() {
         <h2>LA VERTICALE<br/><em>STA ARRIVANDO.</em></h2>
         <p>Panatta Super Vertical Leg Press 1FW093: caricamento a dischi, pedana e schienale regolabili, finecorsa di sicurezza. Non è ancora in sala — ma la scheda tecnica è già qui.</p>
       </div>
-      <a href="#super-vertical-leg-press" className={styles.primary}>Apri la scheda <span>↓</span></a>
+      <a
+        href="#super-vertical-leg-press"
+        className={styles.primary}
+        onClick={(event) => {
+          event.preventDefault();
+          focusMachine("super-vertical-leg-press");
+        }}
+      >
+        Apri la scheda <span>↓</span>
+      </a>
     </section>
 
     <article className={`${styles.profile} ${styles.panattaProfile} ${styles.incomingProfile} ${styles.reveal}`} id="super-vertical-leg-press">
