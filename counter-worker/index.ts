@@ -1,4 +1,4 @@
-import { CONTACT_FORM_RECIPIENT } from "../lib/legal";
+import { CONTACT_EMAIL } from "../lib/legal";
 import { SITE_ORIGIN } from "../lib/site";
 
 interface Env {
@@ -131,10 +131,10 @@ async function handleContact(request: Request, env: Env, headers: Record<string,
   body.set("_replyto", email);
   body.set("_url", SITE_ORIGIN);
 
-  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_FORM_RECIPIENT}`, {
+  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
     method: "POST",
     body,
-    headers: { Accept: "application/json" },
+    headers: { Accept: "application/json", Referer: SITE_ORIGIN },
   });
   const result = await response.json().catch(() => null) as { success?: string | boolean } | null;
   const ok = response.ok && result?.success !== false && result?.success !== "false";

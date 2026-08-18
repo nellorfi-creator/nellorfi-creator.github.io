@@ -18,8 +18,6 @@ export const CONTACT_PHONE = "347 536 8488";
 export const CONTACT_PHONE_TEL = "+393475368488";
 
 export const CONTACT_EMAIL = "info@revengegymboxe.it";
-/** Casella che riceve il modulo: Tophost/Seeweb non consegna le mail di FormSubmit su info@. */
-export const CONTACT_FORM_RECIPIENT = "nello.rfi@gmail.com";
 
 export const CONTACT_FORM_URL = "https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev/contact";
 
