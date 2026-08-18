@@ -2,6 +2,7 @@
 
 import SiteImage from "@/app/components/site-image";
 import LegalIdentity from "@/app/components/legal-identity";
+import GymMap from "@/app/components/gym-map";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
@@ -826,11 +827,7 @@ export default function Home() {
             <div><small>Contatti</small><p><a href="tel:+393475368488">347 536 8488</a><br/><a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a></p></div>
             <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noopener noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noopener noreferrer">Messenger ↗</a></p></div>
           </div>
-          <div className="map-placeholder">
-            <div className="map-label"><span>●</span><div><strong>REVENGE GYM</strong><small>Via Berna 8 · Ladispoli</small></div></div>
-            <iframe title="Mappa di Revenge Gym a Ladispoli" loading="lazy" src="https://www.google.com/maps?q=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM&z=14&output=embed" referrerPolicy="no-referrer-when-downgrade"></iframe>
-            <a className="map-open" href="https://www.google.com/maps/search/?api=1&query=Revenge%20Gym%2C%20Via%20Berna%208%2C%2000055%20Ladispoli%20RM" target="_blank" rel="noopener noreferrer">Apri la mappa <span>↗</span></a>
-          </div>
+          <GymMap />
         </div>
         <form className="contact-form reveal" onSubmit={submitForm} noValidate={false}>
           <span className="form-kicker">RICHIEDI INFORMAZIONI</span><h3>Scrivici, ti rispondiamo noi</h3>
