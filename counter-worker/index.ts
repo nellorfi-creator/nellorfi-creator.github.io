@@ -4,6 +4,7 @@ import { SITE_ORIGIN } from "../lib/site";
 interface Env {
   DB: D1Database;
   COUNTER_SALT: string;
+  RESEND_API_KEY: string;
 }
 
 const ALLOWED_ORIGINS = new Set([
@@ -79,6 +80,54 @@ function asText(value: unknown, max: number) {
   return value.trim().slice(0, max);
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+async function sendContactEmail(env: Env, fields: {
+  name: string;
+  email: string;
+  phone: string;
+  course: string;
+  message: string;
+}) {
+  const rows = [
+    ["Nome", fields.name],
+    ["Email", fields.email],
+    ["Telefono", fields.phone],
+    ["Area", fields.course],
+    ["Messaggio", fields.message || "(nessun messaggio)"],
+  ];
+  const html = `
+    <p>Nuova richiesta dal sito Revenge Gym.</p>
+    <table>${rows.map(([label, value]) =>
+      `<tr><th align="left">${label}</th><td>${escapeHtml(value).replaceAll("\n", "<br/>")}</td></tr>`
+    ).join("")}</table>
+  `;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Revenge Gym <onboarding@resend.dev>",
+      to: [CONTACT_EMAIL],
+      reply_to: fields.email,
+      subject: `Revenge Gym — ${fields.course} — ${fields.name}`,
+      html,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`resend-${response.status}`);
+  }
+}
+
 async function handleContact(request: Request, env: Env, headers: Record<string, string>) {
   if (request.method !== "POST") {
     return Response.json({ error: "Method not allowed" }, { status: 405, headers });
@@ -118,27 +167,13 @@ async function handleContact(request: Request, env: Env, headers: Record<string,
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ error: "Invalid email" }, { status: 400, headers });
   }
+  if (!env.RESEND_API_KEY) {
+    return Response.json({ error: "Delivery failed" }, { status: 503, headers });
+  }
 
-  const body = new FormData();
-  body.set("name", name);
-  body.set("email", email);
-  body.set("phone", phone);
-  body.set("course", course);
-  body.set("message", message);
-  body.set("_subject", "Revenge Gym — richiesta informazioni");
-  body.set("_template", "table");
-  body.set("_captcha", "false");
-  body.set("_replyto", email);
-  body.set("_url", SITE_ORIGIN);
-
-  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
-    method: "POST",
-    body,
-    headers: { Accept: "application/json", Referer: SITE_ORIGIN },
-  });
-  const result = await response.json().catch(() => null) as { success?: string | boolean } | null;
-  const ok = response.ok && result?.success !== false && result?.success !== "false";
-  if (!ok) {
+  try {
+    await sendContactEmail(env, { name, email, phone, course, message });
+  } catch {
     return Response.json({ error: "Delivery failed" }, { status: 502, headers });
   }
 
