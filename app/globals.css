@@ -705,6 +705,9 @@ footer { background:rgba(5,5,5,.34); }
 .legal-page h1 em { color:var(--orange); font-style:italic; }
 .legal-page h2 { margin:42px 0 12px; font:800 clamp(28px,4vw,42px)/1 var(--font-barlow),sans-serif; text-transform:uppercase; }
 .legal-page p { color:#c7c7c7; line-height:1.8; }
-.legal-page p a { color:var(--orange); text-decoration:underline; text-underline-offset:3px; }
+.legal-page p strong { color:#ececec; }
+.legal-page ul { margin:0 0 18px; padding:0 0 0 1.15em; color:#c7c7c7; line-height:1.8; }
+.legal-page li { margin:0 0 6px; }
+.legal-page p a,.legal-page li a { color:var(--orange); text-decoration:underline; text-underline-offset:3px; }
 .legal-page .button { margin-top:34px; }
 @media(max-width:560px){.legal-header img{height:43px}.legal-header>a:last-child{font-size:8px}.legal-page{padding-top:28px}}
