@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
+import { LEGAL_ENTITY } from "@/lib/legal";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -42,17 +43,19 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HealthClub",
-  name: "Revenge Gym",
+  name: LEGAL_ENTITY.brand,
+  legalName: LEGAL_ENTITY.legalName,
+  taxID: LEGAL_ENTITY.taxId,
   url: "https://revenge-gym.github.io",
   telephone: "+393475368488",
   email: "laurogino@tiscali.it",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Via Berna 8",
-    addressLocality: "Ladispoli",
-    postalCode: "00055",
-    addressRegion: "RM",
-    addressCountry: "IT",
+    streetAddress: LEGAL_ENTITY.street,
+    addressLocality: LEGAL_ENTITY.city,
+    postalCode: LEGAL_ENTITY.postalCode,
+    addressRegion: LEGAL_ENTITY.province,
+    addressCountry: LEGAL_ENTITY.country,
   },
   image: "https://revenge-gym.github.io/media/sala-attrezzi.webp",
   openingHoursSpecification: [

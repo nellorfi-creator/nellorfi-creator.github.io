@@ -1,4 +1,5 @@
 import SiteImage from "@/app/components/site-image";
+import LegalIdentity from "@/app/components/legal-identity";
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -189,7 +190,9 @@ export default function BoxePage() {
       <footer className={styles.footer}>
         <Link className={styles.logo} href="/?skipIntro=1#home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym"/></Link>
         <p>Via Berna, 8 · Ladispoli RM</p>
-        <p>© 2026 Revenge Gym</p>
+        <p className="footer-legal">
+          <LegalIdentity />
+        </p>
         <a href="#top" aria-label="Torna in alto">↑</a>
       </footer>
     </main>

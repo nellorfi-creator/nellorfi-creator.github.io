@@ -1,6 +1,7 @@
 "use client";
 
 import SiteImage from "@/app/components/site-image";
+import LegalIdentity from "@/app/components/legal-identity";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
@@ -857,7 +858,7 @@ export default function Home() {
           <span className="visit-counter-stat"><small>Visualizzazioni</small><strong>{visitCounts === null ? "—" : visitCounts.pageViews.toLocaleString("it-IT")}</strong></span>
         </div>
         <p className="footer-legal">
-          <span>© 2026 Revenge Gym. Tutti i diritti riservati.</span>
+          <LegalIdentity copyright="© 2026 Revenge Gym. Tutti i diritti riservati." />
           <Link href="/privacy/" className="footer-privacy">Privacy</Link>
           <span className="by-nello" style={{ textTransform: "none" }}>© by nello 2026</span>
         </p>

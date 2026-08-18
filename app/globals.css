@@ -538,6 +538,7 @@ h2 { font-size:clamp(46px,5.8vw,96px); margin:24px 0 38px; }
 footer { position:relative; min-height:120px; padding:28px 4vw; display:flex; align-items:center; justify-content:space-between; gap:24px; background:var(--ink); border-top:1px solid var(--line); color:#888; font-size:10px; text-transform:uppercase; letter-spacing:1.2px; }
 footer .logo img { height:48px; }
 footer .footer-legal { display:flex; flex-direction:column; align-items:flex-end; gap:8px; min-width:0; margin:0; text-align:right; }
+.footer-entity { max-width:min(46ch,100%); line-height:1.55; letter-spacing:.08em; }
 .footer-privacy { color:#888; }
 .footer-privacy:hover,.footer-privacy:focus-visible { color:var(--orange); }
 .visit-counter { display:flex; align-items:center; gap:11px; margin:0; padding:10px 14px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.035); color:#fff; }

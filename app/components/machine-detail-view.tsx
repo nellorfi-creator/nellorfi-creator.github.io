@@ -1,6 +1,7 @@
 "use client";
 
 import SiteImage from "@/app/components/site-image";
+import LegalIdentity from "@/app/components/legal-identity";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
@@ -271,7 +272,7 @@ export default function MachineDetailView({
           {machine.brand} · {areaLabel}
         </p>
         <p className={styles.footerLegal}>
-          <span>© 2026 Revenge Gym</span>
+          <LegalIdentity />
           <span className={styles.byNello} style={{ textTransform: "none" }}>
             © by nello 2026
           </span>

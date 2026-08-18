@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteImage from "@/app/components/site-image";
+import { LEGAL_ADDRESS_LINE, LEGAL_ENTITY } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Privacy policy | Revenge Gym",
@@ -20,7 +21,9 @@ export default function PrivacyPage() {
       <article>
         <p className="eyebrow"><span /> Privacy</p>
         <h1>INFORMATIVA SUL<br /><em>TRATTAMENTO DATI.</em></h1>
-        <p>Questa informativa descrive come Revenge Gym tratta i dati inviati tramite il modulo contatti e i dati tecnici utilizzati dal contatore del sito.</p>
+        <p>Questa informativa descrive come {LEGAL_ENTITY.legalName}, titolare del trattamento, tratta i dati inviati tramite il modulo contatti e i dati tecnici utilizzati dal contatore del sito {LEGAL_ENTITY.brand}.</p>
+        <h2>Titolare</h2>
+        <p>Titolare del trattamento è {LEGAL_ENTITY.legalName}, C.F. {LEGAL_ENTITY.taxId}, {LEGAL_ADDRESS_LINE}.</p>
         <h2>Dati raccolti</h2>
         <p>Nome e cognome, indirizzo email, numero di telefono, area di interesse e l’eventuale messaggio inserito volontariamente.</p>
         <h2>Finalità e base giuridica</h2>
@@ -34,7 +37,7 @@ export default function PrivacyPage() {
         <h2>Conservazione e diritti</h2>
         <p>I dati vengono conservati solo per il tempo necessario a gestire la richiesta. È possibile chiedere accesso, rettifica o cancellazione scrivendo a <a href="mailto:laurogino@tiscali.it">laurogino@tiscali.it</a>.</p>
         <h2>Contatti</h2>
-        <p>Revenge Gym · Via Berna 8, 00055 Ladispoli RM · <a href="tel:+393475368488">347 536 8488</a>.</p>
+        <p>{LEGAL_ENTITY.legalName} · {LEGAL_ENTITY.brand} · C.F. {LEGAL_ENTITY.taxId} · {LEGAL_ADDRESS_LINE} · <a href="tel:+393475368488">347 536 8488</a>.</p>
         <Link className="button primary" href="/?skipIntro=1#contatti">← Torna ai contatti</Link>
       </article>
     </main>
