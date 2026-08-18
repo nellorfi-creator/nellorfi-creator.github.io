@@ -849,7 +849,7 @@ export default function Home() {
           <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="form-honey" aria-hidden="true" />
           <label>Nome e cognome<input required name="name" autoComplete="name" maxLength={100} placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" autoComplete="email" maxLength={254} placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" autoComplete="tel" maxLength={30} placeholder="+39" /></label></div>
-          <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe', 'Sala relax'].map(area => <option key={area}>{area}</option>)}</select></label>
+          <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
           <label>Messaggio<textarea name="message" maxLength={2000} placeholder="Dicci cosa vuoi sapere: abbonamenti, obiettivi..."></textarea></label>
           <label className="privacy"><input required type="checkbox" name="privacy" value="accepted" /> <span>Ho letto e accetto la <Link href="/privacy/">privacy policy</Link>.</span></label>
           <button className="button primary" type="submit" disabled={formStatus === "sending"}>

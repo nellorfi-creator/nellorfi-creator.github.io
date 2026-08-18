@@ -17,9 +17,7 @@ export const LEGAL_FOOTER_ENTITY = `${LEGAL_ENTITY.legalName} · C.F. ${LEGAL_EN
 export const CONTACT_PHONE = "347 536 8488";
 export const CONTACT_PHONE_TEL = "+393475368488";
 
-/** Casella attuale. Dopo il dominio revenge-gym.it va sostituita con CONTACT_EMAIL_PLANNED. */
-export const CONTACT_EMAIL = "laurogino@tiscali.it";
-export const CONTACT_EMAIL_PLANNED = "info@revenge-gym.it";
+export const CONTACT_EMAIL = "info@revengegymboxe.it";
 
 export const CONTACT_FORM_URL = "https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev/contact";
 
