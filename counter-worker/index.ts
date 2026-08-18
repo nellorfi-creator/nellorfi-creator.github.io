@@ -1,4 +1,5 @@
 import { CONTACT_EMAIL } from "../lib/legal";
+import { SITE_ORIGIN } from "../lib/site";
 
 interface Env {
   DB: D1Database;
@@ -6,6 +7,8 @@ interface Env {
 }
 
 const ALLOWED_ORIGINS = new Set([
+  SITE_ORIGIN,
+  "https://www.revengegymboxe.it",
   "https://revenge-gym.github.io",
   "https://revenge-gym.it",
   "https://www.revenge-gym.it",
@@ -21,7 +24,7 @@ const recentContacts = new Map<string, number>();
 function corsHeaders(origin: string | null) {
   const allowedOrigin = origin && ALLOWED_ORIGINS.has(origin)
     ? origin
-    : "https://revenge-gym.github.io";
+    : SITE_ORIGIN;
 
   return {
     "Access-Control-Allow-Origin": allowedOrigin,

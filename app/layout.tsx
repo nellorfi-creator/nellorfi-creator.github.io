@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import { CONTACT_EMAIL, CONTACT_PHONE_TEL, LEGAL_ENTITY } from "@/lib/legal";
+import { SITE_ORIGIN } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -19,7 +20,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://revenge-gym.github.io"),
+  metadataBase: new URL(SITE_ORIGIN),
   title: "Revenge Gym | Palestra e Sala Pesi a Ladispoli",
   description: "Revenge Gym è la palestra in Via Berna 8 a Ladispoli, con sala pesi, macchinari professionali, area boxe con ring e sacchi, e una sala relax con caffè e angolo retrò.",
   alternates: { canonical: "/" },
@@ -46,7 +47,7 @@ const jsonLd = {
   name: LEGAL_ENTITY.brand,
   legalName: LEGAL_ENTITY.legalName,
   taxID: LEGAL_ENTITY.taxId,
-  url: "https://revenge-gym.github.io",
+  url: SITE_ORIGIN,
   telephone: CONTACT_PHONE_TEL,
   email: CONTACT_EMAIL,
   address: {
@@ -57,7 +58,7 @@ const jsonLd = {
     addressRegion: LEGAL_ENTITY.province,
     addressCountry: LEGAL_ENTITY.country,
   },
-  image: "https://revenge-gym.github.io/media/sala-attrezzi.webp",
+  image: `${SITE_ORIGIN}/media/sala-attrezzi.webp`,
   openingHoursSpecification: [
     { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "06:30", closes: "22:00" },
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "06:30", closes: "17:00" },

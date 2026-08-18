@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE_ORIGIN } from "@/lib/site";
 import { absMachines } from "@/lib/abs-machines";
 import { backMachines } from "@/lib/back-machines";
 import { bicepsMachines } from "@/lib/biceps-machines";
@@ -9,7 +10,7 @@ import { tricepsMachines } from "@/lib/triceps-machines";
 
 export const dynamic = "force-static";
 
-const origin = "https://revenge-gym.github.io";
+const origin = SITE_ORIGIN;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
