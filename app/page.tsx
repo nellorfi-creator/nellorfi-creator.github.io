@@ -743,7 +743,7 @@ export default function Home() {
         <div className="brand-grid reveal">
           {equipmentBrands.map((brand, i) => (
             <button type="button" key={brand.name} onClick={() => setActiveBrand(brand)} aria-label={`Scopri storia e caratteristiche di ${brand.name}`}>
-              <span>0{i + 1}</span>
+              <span>{String(i + 1).padStart(2, "0")}</span>
               <strong>{brand.name}</strong>
               <small>{brand.since}</small>
               <p className="brand-excerpt">{brand.intro}</p>

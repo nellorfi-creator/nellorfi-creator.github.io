@@ -407,6 +407,8 @@ h2 { font-size:clamp(46px,5.8vw,96px); margin:24px 0 38px; }
 .schedule-section .eyebrow { color:var(--paper-muted); }
 .schedule { border:1px solid var(--paper-line); }
 .brand-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; padding:1px; background:var(--paper-line); }
+.brand-grid button:last-child:nth-child(3n + 1) { grid-column:1 / -1; }
+.brand-grid button:nth-last-child(2):nth-child(3n + 1) { grid-column:span 2; }
 .brand-grid button { position:relative; overflow:hidden; min-height:250px; padding:28px; display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between; color:var(--ink); background:var(--paper); border:0; text-align:left; cursor:pointer; transition:.3s; }
 .brand-grid button:hover { color:#fff; background:var(--ink); }
 .brand-grid button:focus-visible { color:#fff; background:var(--ink); outline:2px solid var(--orange); outline-offset:-2px; }
