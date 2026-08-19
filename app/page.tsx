@@ -443,7 +443,6 @@ export default function Home() {
       course: String(data.get("course") ?? ""),
       message: String(data.get("message") ?? ""),
       privacy: String(data.get("privacy") ?? ""),
-      honey: String(data.get("_honey") ?? ""),
     };
     try {
       const response = await fetch(CONTACT_FORM_URL, {
@@ -846,7 +845,6 @@ export default function Home() {
         </div>
         <form className="contact-form reveal" onSubmit={submitForm} noValidate={false}>
           <span className="form-kicker">RICHIEDI INFORMAZIONI</span><h3>Scrivici, ti rispondiamo noi</h3>
-          <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="form-honey" aria-hidden="true" />
           <label>Nome e cognome<input required name="name" autoComplete="name" maxLength={100} placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" autoComplete="email" maxLength={254} placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" autoComplete="tel" maxLength={30} placeholder="+39" /></label></div>
           <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>

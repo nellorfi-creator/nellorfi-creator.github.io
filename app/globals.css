@@ -541,7 +541,6 @@ h2 { font-size:clamp(46px,5.8vw,96px); margin:24px 0 38px; }
 .contact-form textarea { min-height:76px; resize:vertical; }.form-row { display:grid; grid-template-columns:1fr 1fr; gap:25px; }
 .privacy { display:flex!important; align-items:center; gap:10px; text-transform:none!important; }.privacy input { width:18px; height:18px; margin:0; accent-color:var(--orange); }.privacy span { font-size:9px; letter-spacing:0; }.privacy a { color:var(--orange); text-decoration:underline; text-underline-offset:2px; }
 .contact-form .button { width:100%; }.contact-form .button:disabled { opacity:.65; cursor:wait; }
-.form-honey { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none; }
 .success { color:#69d98c; font-size:12px; margin-top:15px; }
 .form-error { color:#ff8a8a; font-size:12px; margin-top:15px; }
 

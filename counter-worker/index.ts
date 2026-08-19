@@ -116,7 +116,7 @@ async function sendContactEmail(env: Env, fields: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Revenge Gym <onboarding@resend.dev>",
+      from: "Revenge Gym <info@revengegymboxe.it>",
       to: [CONTACT_EMAIL],
       reply_to: fields.email,
       subject: `Revenge Gym — ${fields.course} — ${fields.name}`,
@@ -126,6 +126,8 @@ async function sendContactEmail(env: Env, fields: {
   if (!response.ok) {
     throw new Error(`resend-${response.status}`);
   }
+  const result = await response.json().catch(() => null) as { id?: unknown } | null;
+  return typeof result?.id === "string" ? result.id : null;
 }
 
 async function handleContact(request: Request, env: Env, headers: Record<string, string>) {
@@ -150,10 +152,6 @@ async function handleContact(request: Request, env: Env, headers: Record<string,
     return Response.json({ error: "Invalid payload" }, { status: 400, headers });
   }
 
-  if (asText(payload.honey, 80)) {
-    return Response.json({ success: true }, { headers });
-  }
-
   const name = asText(payload.name, 100);
   const email = asText(payload.email, 254);
   const phone = asText(payload.phone, 30);
@@ -171,9 +169,26 @@ async function handleContact(request: Request, env: Env, headers: Record<string,
     return Response.json({ error: "Delivery failed" }, { status: 503, headers });
   }
 
+  let requestId: number;
   try {
-    await sendContactEmail(env, { name, email, phone, course, message });
+    const stored = await env.DB.prepare(
+      `INSERT INTO contact_requests (name, email, phone, course, message, delivery_status)
+       VALUES (?, ?, ?, ?, ?, 'pending')`,
+    ).bind(name, email, phone, course, message).run();
+    requestId = Number(stored.meta.last_row_id);
   } catch {
+    return Response.json({ error: "Delivery unavailable" }, { status: 503, headers });
+  }
+
+  try {
+    const resendId = await sendContactEmail(env, { name, email, phone, course, message });
+    await env.DB.prepare(
+      "UPDATE contact_requests SET delivery_status = 'accepted', resend_id = ?, delivered_at = CURRENT_TIMESTAMP WHERE id = ?",
+    ).bind(resendId, requestId).run();
+  } catch {
+    await env.DB.prepare(
+      "UPDATE contact_requests SET delivery_status = 'failed' WHERE id = ?",
+    ).bind(requestId).run().catch(() => undefined);
     return Response.json({ error: "Delivery failed" }, { status: 502, headers });
   }
 
