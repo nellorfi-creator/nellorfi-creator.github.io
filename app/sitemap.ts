@@ -39,9 +39,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     machines.map((machine) => `/macchine/${area}/${machine.id}/`),
   );
 
+  const lastModified = new Date();
   return [...staticPaths, ...machinePaths].map((path) => ({
     url: `${origin}${path}`,
-    changeFrequency: "weekly",
+    lastModified,
+    changeFrequency: "weekly" as const,
     priority: path === "/" ? 1 : 0.7,
   }));
 }

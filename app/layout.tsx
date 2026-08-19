@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import { CONTACT_EMAIL, CONTACT_PHONE_TEL, LEGAL_ENTITY } from "@/lib/legal";
-import { SITE_ORIGIN } from "@/lib/site";
+import { SITE_ORIGIN, SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -50,6 +50,8 @@ const jsonLd = {
   url: SITE_ORIGIN,
   telephone: CONTACT_PHONE_TEL,
   email: CONTACT_EMAIL,
+  sameAs: [SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM],
+  hasMap: "https://maps.google.com/?q=Via+Berna+8+00055+Ladispoli+RM",
   address: {
     "@type": "PostalAddress",
     streetAddress: LEGAL_ENTITY.street,

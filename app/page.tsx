@@ -3,6 +3,7 @@
 import SiteImage from "@/app/components/site-image";
 import LegalIdentity from "@/app/components/legal-identity";
 import { CONTACT_EMAIL, CONTACT_FORM_URL, CONTACT_PHONE, CONTACT_PHONE_TEL } from "@/lib/legal";
+import { SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM, SOCIAL_MESSENGER } from "@/lib/site";
 import GymMap from "@/app/components/gym-map";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -839,7 +840,7 @@ export default function Home() {
               </dl>
             </div>
             <div><small>Contatti</small><p><a href={`tel:${CONTACT_PHONE_TEL}`}>{CONTACT_PHONE}</a><br/><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p></div>
-            <div><small>Seguici</small><p className="socials"><a href="https://www.facebook.com/Revengebox/directory_basic_info?locale=it_IT" target="_blank" rel="noopener noreferrer">Facebook ↗</a><a href="https://www.facebook.com/messages/t/Revengebox/" target="_blank" rel="noopener noreferrer">Messenger ↗</a></p></div>
+            <div><small>Seguici</small><p className="socials"><a href={SOCIAL_FACEBOOK} target="_blank" rel="noopener noreferrer">Facebook ↗</a><a href={SOCIAL_INSTAGRAM} target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href={SOCIAL_MESSENGER} target="_blank" rel="noopener noreferrer">Messenger ↗</a></p></div>
           </div>
           <GymMap />
         </div>
