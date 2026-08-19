@@ -540,14 +540,24 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className={`machine-ticker${tickerPaused ? " is-paused" : ""}${tickerHidden ? " is-hidden" : ""}`} aria-label="Anteprima macchinari Revenge Gym" role="presentation">
+      <div className={`machine-ticker${tickerPaused ? " is-paused" : ""}${tickerHidden ? " is-hidden" : ""}`} aria-label="Macchinari in evidenza">
         <div className="machine-ticker-track">
-          {[...tickerMachines, ...tickerMachines].map((machine, index) => (
-            <div className="machine-ticker-item" key={`${machine.id}-${index}`} aria-hidden="true">
-              <SiteImage src={machine.image} alt="" width={76} height={76} decoding="async" loading={index < 6 ? "eager" : "lazy"} />
-              <span>{machine.name}</span>
-            </div>
-          ))}
+          {[...tickerMachines, ...tickerMachines].map((machine, index) => {
+            const duplicate = index >= tickerMachines.length;
+            return (
+              <Link
+                className="machine-ticker-item"
+                key={`${machine.id}-${index}`}
+                href={`/macchine/gambe/${machine.id}`}
+                aria-hidden={duplicate || undefined}
+                tabIndex={duplicate ? -1 : undefined}
+                aria-label={duplicate ? undefined : `Apri la scheda di ${machine.name}`}
+              >
+                <SiteImage src={machine.image} alt="" width={76} height={76} decoding="async" loading={index < 6 ? "eager" : "lazy"} />
+                <span>{machine.name}</span>
+              </Link>
+            );
+          })}
         </div>
       </div>
 
