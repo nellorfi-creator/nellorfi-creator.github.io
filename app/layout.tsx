@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
+import Analytics from "@/app/components/analytics";
 import { CONTACT_EMAIL, CONTACT_PHONE_TEL, LEGAL_ENTITY } from "@/lib/legal";
 import { SITE_ORIGIN, SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM } from "@/lib/site";
 import "./globals.css";
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <a className="skip-link" href="#contenuto">Vai al contenuto</a>
         <div id="contenuto">{children}</div>
+        <Analytics />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
