@@ -1,13 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { GA_MEASUREMENT_ID } from "@/lib/site";
-
-const STORAGE_KEY = "rg-ga-consent";
-
-type Consent = "granted" | "denied";
 
 declare global {
   interface Window {
@@ -47,42 +42,10 @@ function loadGtag(pagePath: string) {
 
 export default function Analytics() {
   const pathname = usePathname();
-  const [consent, setConsent] = useState<Consent | null>(null);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored === "granted" || stored === "denied") setConsent(stored);
-    setReady(true);
-  }, []);
-
-  useEffect(() => {
-    if (consent !== "granted") return;
     loadGtag(pathname);
-  }, [consent, pathname]);
+  }, [pathname]);
 
-  function choose(value: Consent) {
-    window.localStorage.setItem(STORAGE_KEY, value);
-    setConsent(value);
-  }
-
-  if (!ready || consent !== null) return null;
-
-  return (
-    <div className="ga-banner" role="dialog" aria-label="Consenso alle statistiche di visita">
-      <p>
-        Usiamo Google Analytics solo se accetti, per capire quali pagine vengono aperte.
-        Niente pubblicità.{" "}
-        <Link href="/privacy/">Privacy</Link>
-      </p>
-      <div className="ga-banner-actions">
-        <button type="button" className="ga-banner-decline" onClick={() => choose("denied")}>
-          Rifiuta
-        </button>
-        <button type="button" className="ga-banner-accept" onClick={() => choose("granted")}>
-          Accetta
-        </button>
-      </div>
-    </div>
-  );
+  return null;
 }

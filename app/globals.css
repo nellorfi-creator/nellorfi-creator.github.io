@@ -724,25 +724,3 @@ footer { background:rgba(5,5,5,.34); }
 .legal-page p a,.legal-page li a { color:var(--orange); text-decoration:underline; text-underline-offset:3px; }
 .legal-page .button { margin-top:34px; }
 @media(max-width:560px){.legal-header img{height:43px}.legal-header>a:last-child{font-size:8px}.legal-page{padding-top:28px}}
-
-.ga-banner {
-  position:fixed; z-index:2500; left:0; right:0; bottom:0;
-  display:flex; align-items:center; justify-content:space-between; gap:18px;
-  padding:16px 4vw; background:rgba(8,8,8,.97); border-top:1px solid rgba(255,255,255,.12);
-}
-.ga-banner p { margin:0; max-width:62ch; color:#d4d4d4; font-size:13px; line-height:1.55; }
-.ga-banner a { color:var(--orange); text-decoration:underline; text-underline-offset:3px; }
-.ga-banner-actions { display:flex; flex-shrink:0; gap:10px; }
-.ga-banner-accept,.ga-banner-decline {
-  min-height:44px; padding:0 18px; border:0; cursor:pointer;
-  text-transform:uppercase; font-size:11px; font-weight:800; letter-spacing:1px;
-}
-.ga-banner-accept { background:var(--orange); color:#fff; }
-.ga-banner-accept:hover { background:var(--orange-hot); }
-.ga-banner-decline { color:#fff; background:#1b1b1b; border:1px solid #454545; }
-.ga-banner-decline:hover { border-color:var(--orange); background:#25150f; }
-@media (max-width:720px) {
-  .ga-banner { flex-direction:column; align-items:stretch; padding:14px 18px 18px; }
-  .ga-banner-actions { justify-content:stretch; }
-  .ga-banner-accept,.ga-banner-decline { flex:1; }
-}
