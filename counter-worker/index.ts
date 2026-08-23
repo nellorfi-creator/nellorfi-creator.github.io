@@ -5,7 +5,10 @@ interface Env {
   DB: D1Database;
   COUNTER_SALT: string;
   RESEND_API_KEY: string;
+  STATS_PASSWORD?: string;
 }
+
+const STATS_PASSWORD_SHA256 = "70afe8772142c0a0b773a50f3aed28e60473a6d585d060c563807e4fe3358e18";
 
 const ALLOWED_ORIGINS = new Set([
   SITE_ORIGIN,
@@ -19,8 +22,32 @@ const ALLOWED_ORIGINS = new Set([
 
 const RATE_LIMIT_MS = 10_000;
 const CONTACT_RATE_LIMIT_MS = 60_000;
+const STATS_RATE_LIMIT_MS = 2_000;
 const recentHits = new Map<string, number>();
 const recentContacts = new Map<string, number>();
+const recentStats = new Map<string, number>();
+
+async function sha256Hex(value: string) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function statsPasswordOk(password: string, env: Env) {
+  if (env.STATS_PASSWORD) return passwordsMatch(password, env.STATS_PASSWORD);
+  return passwordsMatch(await sha256Hex(password), STATS_PASSWORD_SHA256);
+}
+
+function passwordsMatch(given: string, expected: string) {
+  const encoder = new TextEncoder();
+  const a = encoder.encode(given);
+  const b = encoder.encode(expected);
+  const length = Math.max(a.byteLength, b.byteLength);
+  let diff = a.byteLength ^ b.byteLength;
+  for (let i = 0; i < length; i++) {
+    diff |= (a[i] ?? 0) ^ (b[i] ?? 0);
+  }
+  return diff === 0;
+}
 
 function corsHeaders(origin: string | null) {
   const allowedOrigin = origin && ALLOWED_ORIGINS.has(origin)
@@ -195,6 +222,44 @@ async function handleContact(request: Request, env: Env, headers: Record<string,
   return Response.json({ success: true }, { headers });
 }
 
+async function handleStats(request: Request, env: Env, headers: Record<string, string>) {
+  if (request.method !== "POST") {
+    return Response.json({ error: "Method not allowed" }, { status: 405, headers });
+  }
+
+  const origin = request.headers.get("Origin");
+  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    return Response.json({ error: "Forbidden" }, { status: 403, headers });
+  }
+
+  const ip = request.headers.get("CF-Connecting-IP") ?? "unknown";
+  if (!allowOnce(recentStats, ip, STATS_RATE_LIMIT_MS)) {
+    return Response.json({ error: "Too many requests" }, { status: 429, headers });
+  }
+
+  const payload = await request.json().catch(() => null) as { password?: unknown } | null;
+  const password = typeof payload?.password === "string" ? payload.password : "";
+  if (!(await statsPasswordOk(password, env))) {
+    return Response.json({ error: "Unauthorized" }, { status: 401, headers });
+  }
+
+  const today = currentRomeDate();
+  const [todayVisits, historicalVisits, views] = await env.DB.batch<{
+    total?: number;
+    page_views?: number;
+  }>([
+    env.DB.prepare("SELECT COUNT(*) AS total FROM daily_visits WHERE visit_date = ?").bind(today),
+    env.DB.prepare("SELECT COUNT(*) AS total FROM daily_visits"),
+    env.DB.prepare("SELECT page_views FROM counter_totals WHERE id = 1"),
+  ]);
+
+  return Response.json({
+    uniqueToday: Number(todayVisits.results[0]?.total ?? 0),
+    uniqueHistorical: Number(historicalVisits.results[0]?.total ?? 0),
+    pageViews: Number(views.results[0]?.page_views ?? 0),
+  }, { headers });
+}
+
 const counterWorker = {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get("Origin");
@@ -209,41 +274,31 @@ const counterWorker = {
       if (url.pathname === "/contact") {
         return handleContact(request, env, headers);
       }
-      if (url.pathname !== "/visits" || !["GET", "POST"].includes(request.method)) {
+      if (url.pathname === "/stats") {
+        return handleStats(request, env, headers);
+      }
+      if (url.pathname !== "/visits" || request.method !== "POST") {
         return Response.json({ error: "Not found" }, { status: 404, headers });
       }
 
-      if (request.method === "POST") {
-        const ip = request.headers.get("CF-Connecting-IP");
-        if (!ip || !env.COUNTER_SALT) {
-          return Response.json({ error: "Counter unavailable" }, { status: 503, headers });
-        }
-
-        const visitorKey = await hmac(ip, env.COUNTER_SALT);
-        if (allowOnce(recentHits, visitorKey, RATE_LIMIT_MS)) {
-          await env.DB.batch([
-            env.DB.prepare(
-              "INSERT OR IGNORE INTO daily_visits (visitor_key, visit_date) VALUES (?, ?)",
-            ).bind(visitorKey, currentRomeDate()),
-            env.DB.prepare(
-              "UPDATE counter_totals SET page_views = page_views + 1 WHERE id = 1",
-            ),
-          ]);
-        }
+      const ip = request.headers.get("CF-Connecting-IP");
+      if (!ip || !env.COUNTER_SALT) {
+        return Response.json({ error: "Counter unavailable" }, { status: 503, headers });
       }
 
-      const [visitors, views] = await env.DB.batch<{
-        total?: number;
-        page_views?: number;
-      }>([
-        env.DB.prepare("SELECT COUNT(*) AS total FROM daily_visits"),
-        env.DB.prepare("SELECT page_views FROM counter_totals WHERE id = 1"),
-      ]);
+      const visitorKey = await hmac(ip, env.COUNTER_SALT);
+      if (allowOnce(recentHits, visitorKey, RATE_LIMIT_MS)) {
+        await env.DB.batch([
+          env.DB.prepare(
+            "INSERT OR IGNORE INTO daily_visits (visitor_key, visit_date) VALUES (?, ?)",
+          ).bind(visitorKey, currentRomeDate()),
+          env.DB.prepare(
+            "UPDATE counter_totals SET page_views = page_views + 1 WHERE id = 1",
+          ),
+        ]);
+      }
 
-      return Response.json({
-        uniqueVisitors: Number(visitors.results[0]?.total ?? 0),
-        pageViews: Number(views.results[0]?.page_views ?? 0),
-      }, { headers });
+      return Response.json({ ok: true }, { headers });
     } catch {
       return Response.json({ error: "Counter unavailable" }, { status: 503, headers });
     }

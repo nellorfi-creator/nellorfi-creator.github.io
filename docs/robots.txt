@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
+Disallow: /stats/
 
 Sitemap: https://revengegymboxe.it/sitemap.xml

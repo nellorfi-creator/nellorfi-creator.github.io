@@ -24,9 +24,17 @@ test("server-renders the Revenge Gym home page", async () => {
   assert.match(html, /<meta[^>]+name="description"/i);
   assert.match(html, /<h1[^>]*>[\s\S]*RIVINCITA/i);
   assert.match(html, /id="contatti"/i);
-  assert.match(html, /Visite uniche giornaliere/i);
-  assert.match(html, /Visualizzazioni/i);
+  assert.match(html, /by nello 2026/i);
+  assert.doesNotMatch(html, /Visite uniche giornaliere/i);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site|codex-preview/i);
+});
+
+test("keeps the stats page private", async () => {
+  const response = await render("/stats");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /noindex/i);
+  assert.match(html, /type="password"/i);
 });
 
 test("renders core public routes", async () => {

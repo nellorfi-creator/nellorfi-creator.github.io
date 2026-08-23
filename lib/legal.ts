@@ -19,7 +19,8 @@ export const CONTACT_PHONE_TEL = "+393475368488";
 
 export const CONTACT_EMAIL = "info@revengegymboxe.it";
 
-export const CONTACT_FORM_URL = "https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev/contact";
+export const COUNTER_WORKER_URL = "https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev";
+export const CONTACT_FORM_URL = `${COUNTER_WORKER_URL}/contact`;
 
 export const LEGAL_TRADEMARK_DISCLAIMER =
   "Panatta, Hammer Strength, Life Fitness, Precor, Hoist, Nautilus, Star Trac, Gymleco, Teca, Technogym e gli altri marchi citati sono di proprietà dei rispettivi titolari. Revenge Gym non è affiliata, sponsorizzata o certificata da tali aziende, salvo diverso accordo scritto.";

@@ -2,7 +2,8 @@
 
 import SiteImage from "@/app/components/site-image";
 import LegalIdentity from "@/app/components/legal-identity";
-import { CONTACT_EMAIL, CONTACT_FORM_URL, CONTACT_PHONE, CONTACT_PHONE_TEL } from "@/lib/legal";
+import NelloCredit from "@/app/components/nello-credit";
+import { CONTACT_EMAIL, CONTACT_FORM_URL, CONTACT_PHONE, CONTACT_PHONE_TEL, COUNTER_WORKER_URL } from "@/lib/legal";
 import { SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM, SOCIAL_MESSENGER } from "@/lib/site";
 import GymMap from "@/app/components/gym-map";
 import { FormEvent, useEffect, useRef, useState } from "react";
@@ -160,7 +161,6 @@ export default function Home() {
   const [philosophyTimerKey, setPhilosophyTimerKey] = useState(0);
   const [tickerPaused, setTickerPaused] = useState(false);
   const [tickerHidden, setTickerHidden] = useState(false);
-  const [visitCounts, setVisitCounts] = useState<{ uniqueVisitors: number; pageViews: number } | null>(null);
   const philosophyVisualRef = useRef<HTMLDivElement>(null);
   const gymMapDetailRef = useRef<HTMLDivElement>(null);
   const introAudioRef = useRef<HTMLAudioElement>(null);
@@ -321,26 +321,13 @@ export default function Home() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("https://revenge-gym-visit-counter.revenge-gym-ladispoli.workers.dev/visits", {
+    fetch(`${COUNTER_WORKER_URL}/visits`, {
       method: "POST",
       headers: { Accept: "application/json" },
       signal: controller.signal,
-    })
-      .then(async (response) => {
-        if (!response.ok) throw new Error("counter unavailable");
-        return response.json() as Promise<{ uniqueVisitors?: number; pageViews?: number }>;
-      })
-      .then(({ uniqueVisitors, pageViews }) => {
-        if (
-          typeof uniqueVisitors === "number" && Number.isFinite(uniqueVisitors) &&
-          typeof pageViews === "number" && Number.isFinite(pageViews)
-        ) {
-          setVisitCounts({ uniqueVisitors, pageViews });
-        }
-      })
-      .catch((error: unknown) => {
-        if (!(error instanceof DOMException && error.name === "AbortError")) setVisitCounts(null);
-      });
+    }).catch((error: unknown) => {
+      if (!(error instanceof DOMException && error.name === "AbortError")) return;
+    });
     return () => controller.abort();
   }, []);
 
@@ -872,16 +859,10 @@ export default function Home() {
       <footer>
         <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
         <p>Sala pesi · Ladispoli</p>
-        <div className="visit-counter" aria-live="polite" aria-label={visitCounts === null ? "Conteggi in caricamento" : `${visitCounts.uniqueVisitors.toLocaleString("it-IT")} visite uniche giornaliere e ${visitCounts.pageViews.toLocaleString("it-IT")} visualizzazioni`}>
-          <span className="visit-counter-eye" aria-hidden="true"><i></i></span>
-          <span className="visit-counter-stat"><small>Visite uniche giornaliere</small><strong>{visitCounts === null ? "—" : visitCounts.uniqueVisitors.toLocaleString("it-IT")}</strong></span>
-          <span className="visit-counter-divider" aria-hidden="true"></span>
-          <span className="visit-counter-stat"><small>Visualizzazioni</small><strong>{visitCounts === null ? "—" : visitCounts.pageViews.toLocaleString("it-IT")}</strong></span>
-        </div>
         <p className="footer-legal">
           <LegalIdentity copyright="© 2026 Revenge Gym. Tutti i diritti riservati." />
           <Link href="/privacy/" className="footer-privacy">Privacy</Link>
-          <span className="by-nello" style={{ textTransform: "none" }}>© by nello 2026</span>
+          <NelloCredit />
         </p>
         <a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a>
       </footer>

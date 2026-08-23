@@ -2,6 +2,7 @@
 
 import SiteImage from "@/app/components/site-image";
 import LegalIdentity from "@/app/components/legal-identity";
+import NelloCredit from "@/app/components/nello-credit";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
@@ -273,9 +274,7 @@ export default function MachineDetailView({
         </p>
         <p className={styles.footerLegal}>
           <LegalIdentity />
-          <span className={styles.byNello} style={{ textTransform: "none" }}>
-            © by nello 2026
-          </span>
+          <NelloCredit className={styles.byNello} />
         </p>
       </footer>
     </main>

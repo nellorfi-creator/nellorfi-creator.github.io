@@ -4,6 +4,7 @@
   "main": "index.ts",
   "compatibility_date": "2026-08-14",
   "workers_dev": true,
+  // Secret: STATS_PASSWORD — wrangler secret put STATS_PASSWORD
   "d1_databases": [
     {
       "binding": "DB",
