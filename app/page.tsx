@@ -172,6 +172,8 @@ export default function Home() {
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const gymTourVideoRef = useRef<HTMLVideoElement>(null);
   const relaxVideoRef = useRef<HTMLVideoElement>(null);
+  const transformSpotVideoRef = useRef<HTMLVideoElement>(null);
+  const socialProofVideoRef = useRef<HTMLVideoElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
   const drawerCloseRef = useRef<HTMLButtonElement>(null);
   const [relaxSound, setRelaxSound] = useState(false);
@@ -180,6 +182,8 @@ export default function Home() {
 
   useViewportVideo(gymTourVideoRef, { paused: overlaysOpen });
   useViewportVideo(relaxVideoRef, { paused: overlaysOpen, volume: 0.42, playbackRate: 0.8 });
+  useViewportVideo(transformSpotVideoRef, { paused: overlaysOpen });
+  useViewportVideo(socialProofVideoRef, { paused: overlaysOpen });
 
   useEffect(() => {
     const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
@@ -648,7 +652,7 @@ export default function Home() {
         </div>
         <div className="owners-spotlight reveal" id="titolari" aria-label="I titolari di Revenge Gym">
           <figure className="owners-photo">
-            <SiteImage src="/photos/live/gino-stefania-revenge-gym.webp" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1797} decoding="async" />
+            <SiteImage src="/photos/live/gino-stefania-revenge-gym.webp?v=3" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1099} decoding="async" />
           </figure>
           <div className="owners-copy">
             <p className="eyebrow"><span></span> I titolari</p>
@@ -835,12 +839,33 @@ export default function Home() {
         </article>
       </div>}
 
-      <section className="section social-proof" id="fiducia">
-        <div className="social-proof-head reveal">
-          <p className="eyebrow"><span></span> Recensioni Google</p>
-          <h2>CHI CI HA<br/><em>PROVATO.</em></h2>
-          <p>Opinioni reali lasciate su Google Maps da chi si allena in sala — nomi e testi originali, tradotti in italiano dove necessario.</p>
+      <section className="social-proof" id="fiducia">
+        <div className="social-proof-hero">
+          <div className="social-proof-hero-media" role="img" aria-label="Community in sala pesi di Revenge Gym">
+            <video
+              ref={socialProofVideoRef}
+              className="social-proof-hero-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              {...safariInline}
+              preload="metadata"
+              poster="/photos/live/sala-community.webp"
+              disablePictureInPicture
+              aria-hidden="true"
+            >
+              <source src="/media/hero-loop.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div className="social-proof-hero-shade" aria-hidden="true"></div>
+          <div className="social-proof-hero-content reveal">
+            <p className="eyebrow"><span></span> Recensioni Google</p>
+            <h2>CHI CI HA<br/><em>PROVATO.</em></h2>
+            <p className="social-proof-hero-copy">Opinioni reali lasciate su Google Maps da chi si allena in sala — nomi e testi originali, tradotti in italiano dove necessario.</p>
+          </div>
         </div>
+        <div className="social-proof-body">
         <SocialProofReviews />
         <div className="social-proof-trust reveal">
           <div className="social-proof-fpi">
@@ -853,6 +878,36 @@ export default function Home() {
           <div className="social-proof-brands" aria-label="Marchi presenti in sala">
             {partnerBrands.map((brand) => <span key={brand}>{brand}</span>)}
           </div>
+        </div>
+        </div>
+      </section>
+
+      <section className="section transform-spot" id="trasformazione" aria-label="Spot trasformazione Revenge Gym">
+        <div className="transform-spot-grid reveal">
+          <div className="transform-spot-copy">
+            <p className="eyebrow"><span></span> Spot · Revenge Gym</p>
+            <h2>NON È SOLO<br/><em>ALLENAMENTO.</em><br/>È TRASFORMAZIONE.</h2>
+            <p className="lead">Lo stesso impegno che vedi in sala, lo stesso ambiente che ti spinge a non mollare.</p>
+            <p>Qui si costruisce la tua rivincita, giorno dopo giorno — con metodo, continuità e un gruppo che non ti lascia solo.</p>
+            <a href="#contatti" className="button primary">Inizia da qui <span>↗</span></a>
+          </div>
+          <figure className="transform-spot-player">
+            <video
+              ref={transformSpotVideoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              {...safariInline}
+              preload="metadata"
+              poster="/photos/live/hero-sala.webp"
+              disablePictureInPicture
+              aria-label="Video spot trasformazione Revenge Gym"
+            >
+              <source src="/media/spot-trasformazione.mp4" type="video/mp4" />
+            </video>
+            <figcaption>Spot trasformazione · Ladispoli</figcaption>
+          </figure>
         </div>
       </section>
 
