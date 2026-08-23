@@ -11,17 +11,21 @@ import Link from "next/link";
 import { legMachines } from "@/lib/leg-machines";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
+import { CourseAreaIcon, type CourseAreaIconKind } from "@/app/components/course-area-icon";
+import SocialProofReviews from "@/app/components/social-proof-reviews";
 import MachineSearch from "@/app/components/machine-search";
 import { useViewportVideo } from "@/app/hooks/use-viewport-video";
 
 const safariInline = { "webkit-playsinline": "true" } as const;
 
-const courses = [
-  { icon: "↗", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
-  { icon: "＋", title: "Area Isotonica", tag: "Controllo · Qualità", image: "/photos/live/sala-isotonica-oggi.webp", text: "Macchinari isotonici selezionati per il controllo e la qualità del movimento.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
-  { icon: "⌁", title: "Area Cardio", tag: "Resistenza · Energia", image: "/photos/live/sala-cardio-oggi.webp", text: "Uno spazio dedicato al lavoro cardiovascolare e al miglioramento della resistenza.", description: "Un’area dedicata a resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature cardio professionali", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
-  { icon: "◎", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "/photos/live/pesi-liberi-oggi.webp", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante.", description: "Lo spazio in cui costruire la tua routine combinando esercizi, attrezzi e intensità secondo il livello di partenza e il risultato che vuoi raggiungere.", features: ["Libertà di combinare forza, mobilità e condizionamento", "Spazio adatto a circuiti e lavoro a corpo libero", "Allenamento autonomo, flessibile e sempre diverso"], ideal: "Per chi ama gestire il proprio programma, variare gli stimoli e allenarsi seguendo ritmi e obiettivi personali." },
+const courses: Array<{ icon: CourseAreaIconKind; title: string; tag: string; image: string; text: string; description: string; features: string[]; ideal: string }> = [
+  { icon: "strength", title: "Sala Pesi", tag: "Forza · Performance", image: "/photos/live/hero-sala.webp", text: "Una sala completa per costruire forza e massa muscolare con macchinari selezionati e pesi liberi.", description: "Il cuore di Revenge Gym: uno spazio pensato per allenare la forza con libertà, metodo e progressione, dal primo carico fino agli obiettivi più ambiziosi.", features: ["Pesi liberi, panche e postazioni per i fondamentali", "Spazi organizzati per allenarsi con continuità", "Soluzioni adatte a forza, ipertrofia e ricomposizione corporea"], ideal: "Per chi vuole aumentare forza e massa muscolare, migliorare la tecnica e costruire un percorso personale misurabile nel tempo." },
+  { icon: "isotonic", title: "Area Isotonica", tag: "Controllo · Qualità", image: "/photos/live/sala-isotonica-oggi.webp", text: "Macchinari isotonici selezionati per il controllo e la qualità del movimento.", description: "Macchinari selezionati per guidare il movimento, offrire stabilità e concentrare il lavoro sui gruppi muscolari desiderati con regolazioni semplici e precise.", features: ["Macchine a pacco pesi e plate-loaded", "Traiettorie controllate e numerose possibilità di regolazione", "Brand professionali scelti per solidità e qualità del movimento"], ideal: "Per principianti ed esperti che cercano un gesto controllato, un lavoro muscolare mirato e una progressione facile da gestire." },
+  { icon: "cardio", title: "Area Cardio", tag: "Resistenza · Energia", image: "/photos/live/sala-cardio-oggi.webp", text: "Uno spazio dedicato al lavoro cardiovascolare e al miglioramento della resistenza.", description: "Un’area dedicata a resistenza e consumo energetico, da utilizzare come allenamento completo oppure in abbinamento al lavoro di forza.", features: ["Attrezzature cardio professionali", "Intensità adattabile al proprio livello di preparazione", "Ideale prima, dopo o indipendentemente dalla sala pesi"], ideal: "Per migliorare fiato e capacità cardiovascolare, sostenere il controllo del peso o preparare il corpo alla parte principale dell’allenamento." },
+  { icon: "free", title: "Allenamento Libero", tag: "I tuoi obiettivi", image: "/photos/live/pesi-liberi-oggi.webp", text: "Organizza il tuo percorso e allenati con continuità in un ambiente curato, attrezzato e motivante.", description: "Lo spazio in cui costruire la tua routine combinando esercizi, attrezzi e intensità secondo il livello di partenza e il risultato che vuoi raggiungere.", features: ["Libertà di combinare forza, mobilità e condizionamento", "Spazio adatto a circuiti e lavoro a corpo libero", "Allenamento autonomo, flessibile e sempre diverso"], ideal: "Per chi ama gestire il proprio programma, variare gli stimoli e allenarsi seguendo ritmi e obiettivi personali." },
 ];
+
+const partnerBrands = ["PANATTA", "HAMMER STRENGTH", "LIFE FITNESS", "PRECOR", "HOIST", "NAUTILUS"];
 
 const gallery = [
   ["/photos/live/hero-sala.webp", "La sala pesi di Revenge Gym"],
@@ -179,9 +183,13 @@ export default function Home() {
 
   useEffect(() => {
     const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
-    if (!skipRequested) return;
-    const skipTimer = window.setTimeout(() => setIntroVisible(false), 0);
-    return () => window.clearTimeout(skipTimer);
+    let skipStored = false;
+    try { skipStored = localStorage.getItem("revenge-gym-skip-intro") === "1"; } catch { /* ignore */ }
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (skipRequested || skipStored || reducedMotion) {
+      const skipTimer = window.setTimeout(() => setIntroVisible(false), 0);
+      return () => window.clearTimeout(skipTimer);
+    }
   }, []);
 
   useEffect(() => {
@@ -194,6 +202,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!introVisible) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const slideTimer = window.setInterval(() => setIntroSlide((slide) => Math.min(slide + 1, introBeats.length - 1)), INTRO_BEAT_MS);
     const closingTimer = window.setTimeout(() => setIntroClosing(true), INTRO_CLOSE_MS);
     const exitTimer = window.setTimeout(() => {
@@ -315,6 +324,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const active = tickerHidden && !overlaysOpen && window.innerWidth <= 760;
+    document.body.classList.toggle("mobile-cta-active", active);
+    return () => document.body.classList.remove("mobile-cta-active");
+  }, [tickerHidden, overlaysOpen]);
+
+  useEffect(() => {
     document.body.classList.toggle("menu-lock", menuOpen);
     return () => document.body.classList.remove("menu-lock");
   }, [menuOpen]);
@@ -383,6 +398,7 @@ export default function Home() {
   };
 
   const closeIntro = () => {
+    try { localStorage.setItem("revenge-gym-skip-intro", "1"); } catch { /* ignore */ }
     setIntroClosing(true);
     introAudioRef.current?.pause();
     introVideoRef.current?.pause();
@@ -718,7 +734,7 @@ export default function Home() {
           {courses.map((course, i) => <button type="button" className="course-card reveal" key={course.title} onClick={() => setActiveArea(course)} aria-label={`Scopri l’area ${course.title}`}>
             <SiteImage src={course.image} alt={course.title} loading="lazy" />
             <div className="course-overlay"></div><span className="course-number">0{i+1}</span>
-            <div className="course-content"><span className="course-icon">{course.icon}</span><small>{course.tag}</small><h3>{course.title}</h3><p>{course.text}</p><span className="course-open">Scopri l’area <span>↗</span></span></div>
+            <div className="course-content"><span className="course-icon"><CourseAreaIcon kind={course.icon} /></span><small>{course.tag}</small><h3>{course.title}</h3><p>{course.text}</p><span className="course-open">Scopri l’area <span>↗</span></span></div>
           </button>)}
         </div>
       </section>
@@ -819,6 +835,27 @@ export default function Home() {
         </article>
       </div>}
 
+      <section className="section social-proof" id="fiducia">
+        <div className="social-proof-head reveal">
+          <p className="eyebrow"><span></span> Recensioni Google</p>
+          <h2>CHI CI HA<br/><em>PROVATO.</em></h2>
+          <p>Opinioni reali lasciate su Google Maps da chi si allena in sala — nomi e testi originali, tradotti in italiano dove necessario.</p>
+        </div>
+        <SocialProofReviews />
+        <div className="social-proof-trust reveal">
+          <div className="social-proof-fpi">
+            <SiteImage src="/photos/boxe/fpi-logo-circolare.jpg" alt="Logo Federazione Pugilistica Italiana" width={72} height={72} loading="lazy" />
+            <div>
+              <strong>Affiliati FPI</strong>
+              <span>Area boxe con ring e spazio tecnico, in linea con gli standard della Federazione Pugilistica Italiana.</span>
+            </div>
+          </div>
+          <div className="social-proof-brands" aria-label="Marchi presenti in sala">
+            {partnerBrands.map((brand) => <span key={brand}>{brand}</span>)}
+          </div>
+        </div>
+      </section>
+
       <section className="trial" id="info">
         <div className="trial-inner reveal"><p className="eyebrow"><span></span> Informazioni e iscrizioni</p><h2>HAI DOMANDE?<br/>SCRIVICI <em>ORA.</em></h2><p>Abbonamenti, aree della palestra o la boxe: dicci cosa ti serve sapere. Ti rispondiamo noi e ti aiutiamo a capire come allenarti da Revenge Gym.</p><a href="#contatti" className="button primary">Chiedi info <span>↗</span></a></div>
       </section>
@@ -846,7 +883,7 @@ export default function Home() {
           <label>Nome e cognome<input required name="name" autoComplete="name" maxLength={100} placeholder="Il tuo nome" /></label>
           <div className="form-row"><label>Email<input required type="email" name="email" autoComplete="email" maxLength={254} placeholder="nome@email.it" /></label><label>Telefono<input required type="tel" name="phone" autoComplete="tel" maxLength={30} placeholder="+39" /></label></div>
           <label>Area di interesse<select name="course" defaultValue="" required><option value="" disabled>Seleziona un’area</option>{[...courses.map(c => c.title), 'Boxe'].map(area => <option key={area}>{area}</option>)}</select></label>
-          <label>Messaggio<textarea name="message" maxLength={2000} placeholder="Dicci cosa vuoi sapere: abbonamenti, obiettivi..."></textarea></label>
+          <label>Messaggio <span className="label-optional">(facoltativo)</span><textarea name="message" maxLength={2000} placeholder="Dicci cosa vuoi sapere: abbonamenti, obiettivi..."></textarea></label>
           <label className="privacy"><input required type="checkbox" name="privacy" value="accepted" /> <span>Ho letto e accetto la <Link href="/privacy/">privacy policy</Link>.</span></label>
           <button className="button primary" type="submit" disabled={formStatus === "sending"}>
             {formStatus === "sending" ? "Invio in corso…" : <>Chiedi info <span>↗</span></>}
@@ -866,6 +903,13 @@ export default function Home() {
         </p>
         <a href="#home" className="back-top" aria-label="Torna all'inizio">↑</a>
       </footer>
+
+      {!overlaysOpen && tickerHidden ? (
+        <div className="mobile-cta-bar is-visible" aria-label="Azioni rapide">
+          <a className="mobile-cta-call" href={`tel:${CONTACT_PHONE_TEL}`}>Chiama</a>
+          <a className="mobile-cta-primary" href="#contatti">Chiedi info</a>
+        </div>
+      ) : null}
     </main>
   );
 }

@@ -26,9 +26,13 @@ export const metadata: Metadata = {
   description: "Revenge Gym è la palestra in Via Berna 8 a Ladispoli, con sala pesi, macchinari professionali, area boxe con ring e sacchi, e una sala relax con caffè e angolo retrò.",
   alternates: { canonical: "/" },
   icons: {
-    icon: "/brand/revenge-gym-logo.png",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/brand/revenge-gym-logo.png", type: "image/png" },
+    ],
     apple: "/brand/revenge-gym-logo.png",
   },
+  manifest: "/manifest.webmanifest",
   keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "sala relax palestra", "Revenge Gym", "Panatta", "Hammer Strength", "Life Fitness", "Precor", "Hoist Fitness", "Nautilus", "Star Trac", "Gymleco", "Teca"],
   openGraph: {
     title: "Revenge Gym | La tua rivincita inizia oggi",

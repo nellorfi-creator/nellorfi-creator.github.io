@@ -1,0 +1,24 @@
+{
+  "name": "Revenge Gym",
+  "short_name": "Revenge Gym",
+  "description": "Palestra e sala pesi a Ladispoli",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090909",
+  "theme_color": "#ff4d00",
+  "lang": "it",
+  "icons": [
+    {
+      "src": "/brand/revenge-gym-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/revenge-gym-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
