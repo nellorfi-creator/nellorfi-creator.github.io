@@ -891,23 +891,25 @@ export default function Home() {
             <p>Qui si costruisce la tua rivincita, giorno dopo giorno — con metodo, continuità e un gruppo che non ti lascia solo.</p>
             <a href="#contatti" className="button primary">Inizia da qui <span>↗</span></a>
           </div>
-          <figure className="transform-spot-player">
-            <video
-              ref={transformSpotVideoRef}
-              autoPlay
-              muted
-              loop
-              playsInline
-              {...safariInline}
-              preload="metadata"
-              poster="/photos/live/hero-sala.webp"
-              disablePictureInPicture
-              aria-label="Video spot trasformazione Revenge Gym"
-            >
-              <source src="/media/spot-trasformazione.mp4" type="video/mp4" />
-            </video>
-            <figcaption>Spot trasformazione · Ladispoli</figcaption>
-          </figure>
+          <div className="transform-spot-frame">
+            <figure className="transform-spot-player">
+              <video
+                ref={transformSpotVideoRef}
+                autoPlay
+                muted
+                loop
+                playsInline
+                {...safariInline}
+                preload="metadata"
+                poster="/photos/live/hero-sala.webp"
+                disablePictureInPicture
+                aria-label="Video spot trasformazione Revenge Gym"
+              >
+                <source src="/media/spot-trasformazione.mp4" type="video/mp4" />
+              </video>
+              <figcaption>Spot trasformazione · Ladispoli</figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
