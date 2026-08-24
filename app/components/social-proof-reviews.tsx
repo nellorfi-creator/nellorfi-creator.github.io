@@ -29,13 +29,9 @@ export default function SocialProofReviews() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const pageCount = Math.ceil(googleReviews.length / perPage);
-  const safePage = Math.min(page, Math.max(0, pageCount - 1));
+  const pageCount = Math.max(1, Math.ceil(googleReviews.length / perPage));
+  const safePage = ((page % pageCount) + pageCount) % pageCount;
   const visible = googleReviews.slice(safePage * perPage, safePage * perPage + perPage);
-
-  useEffect(() => {
-    setPage((current) => Math.min(current, Math.max(0, pageCount - 1)));
-  }, [pageCount]);
 
   const goPrev = () => setPage((current) => (current - 1 + pageCount) % pageCount);
   const goNext = () => setPage((current) => (current + 1) % pageCount);
@@ -79,15 +75,15 @@ export default function SocialProofReviews() {
                     key={index}
                     type="button"
                     role="tab"
-                    aria-selected={index === page}
+                    aria-selected={index === safePage}
                     aria-label={`Pagina recensioni ${index + 1} di ${pageCount}`}
-                    className={index === page ? "is-active" : undefined}
+                    className={index === safePage ? "is-active" : undefined}
                     onClick={() => setPage(index)}
                   />
                 ))}
               </div>
               <p className="social-proof-page" aria-hidden="true">
-                {page + 1} / {pageCount}
+                {safePage + 1} / {pageCount}
               </p>
             </div>
             <button type="button" onClick={goNext} aria-label="Recensioni successive">
