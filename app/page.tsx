@@ -651,9 +651,11 @@ export default function Home() {
           </div>
         </div>
         <div className="owners-spotlight reveal" id="titolari" aria-label="I titolari di Revenge Gym">
-          <figure className="owners-photo">
-            <SiteImage src="/photos/live/gino-stefania-revenge-gym.webp?v=3" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1099} decoding="async" />
-          </figure>
+          <div className="owners-photo-frame">
+            <figure className="owners-photo">
+              <SiteImage src="/photos/live/gino-stefania-revenge-gym.webp?v=3" alt="Gino e Stefania nella sala di Revenge Gym" loading="lazy" width={875} height={1099} decoding="async" />
+            </figure>
+          </div>
           <div className="owners-copy">
             <p className="eyebrow"><span></span> I titolari</p>
             <h3>GINO & STEFANIA.<br/><em>REVENGE GYM.</em></h3>

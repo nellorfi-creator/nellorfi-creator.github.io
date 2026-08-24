@@ -351,11 +351,21 @@ h2 { font-size:clamp(46px,5.8vw,96px); margin:24px 0 38px; }
 }
 .quote span { flex:0 0 auto; font:900 52px/.85 var(--font-barlow),sans-serif; }
 .quote p { margin:0; font:700 16px/1.35 var(--font-barlow),sans-serif; text-transform:uppercase; }
-.owners-spotlight { grid-column:1/-1; display:grid; grid-template-columns:minmax(280px,.92fr) 1fr; gap:0; align-items:start; margin-top:70px; background:#0a0a0a; color:#fff; overflow:hidden; }
-.owners-photo { margin:0; overflow:hidden; width:100%; }
+.owners-spotlight { grid-column:1/-1; display:grid; grid-template-columns:minmax(280px,.92fr) 1fr; gap:0; align-items:start; margin-top:70px; background:#0a0a0a; color:#fff; overflow:visible; }
+.owners-photo-frame {
+  --frame:clamp(22px,2.4vw,32px);
+  position:relative; isolation:isolate; width:100%;
+  padding:0 var(--frame) var(--frame) 0;
+}
+.owners-photo-frame::before {
+  content:""; position:absolute; z-index:0;
+  top:var(--frame); left:var(--frame); right:0; bottom:0;
+  background:var(--orange);
+}
+.owners-photo { position:relative; z-index:1; margin:0; overflow:hidden; width:100%; background:#0a0a0a; }
 .owners-photo img { display:block; width:100%; height:auto; filter:grayscale(.08) contrast(1.04); transition:transform .55s ease, filter .45s ease; }
 .owners-spotlight:hover .owners-photo img { filter:grayscale(0) contrast(1.06); transform:scale(1.025); }
-.owners-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(32px,4vw,44px) 7vw; border-left:4px solid var(--orange); }
+.owners-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(32px,4vw,44px) 7vw; border-left:0; }
 .owners-copy h3 { margin:18px 0 20px; font-size:clamp(42px,5.2vw,82px); line-height:.9; overflow-wrap:break-word; }
 .owners-copy .eyebrow { color:#888; }
 .owners-copy h3 em { color:var(--orange); }
@@ -808,7 +818,7 @@ footer .footer-legal { display:flex; flex-direction:column; align-items:flex-end
   .machine-ticker-item { height:72px; gap:12px; padding:4px 14px 4px 4px; }
   .machine-ticker-item img { width:64px; height:64px; }
   h1 { font-size:clamp(40px,12vw,64px); letter-spacing:-1.2px; line-height:.9; margin:18px 0 22px; }.hero-copy { font-size:14px; max-width:100%; color:#ebebeb; }.machine-search.is-hero { max-width:100%; }.machine-search.is-hero .machine-search-results { top:auto; bottom:calc(100% + 8px); }.machine-search-field, .machine-search-field input { min-height:52px; height:52px; }.hero-actions { align-items:flex-start; flex-direction:column; gap:22px; }.scroll-cue { display:none; }
-  .section { padding:85px 22px; }.section-index { display:none; }.philosophy { grid-template-columns:1fr; gap:55px; }.philosophy .lead { font-size:18px; }.philosophy-visual { padding-bottom:48px; }.philosophy-stage { height:min(58vh,460px); -webkit-clip-path:none; clip-path:none; }.philosophy-slide-meta { left:14px; right:14px; bottom:70px; }.philosophy-progress button { width:22px; }.owners-spotlight { grid-template-columns:1fr; margin-top:40px; }.owners-copy { padding:32px 22px 38px; border-left:0; border-top:4px solid var(--orange); }.quote { left:14px; right:14px; bottom:0; width:auto; }.real-gym-strip { grid-template-columns:1fr 1fr; margin-top:20px; }.real-gym-caption { grid-column:1/-1; grid-row:1; min-height:220px; }.real-gym-strip figure img { min-height:350px; }.gym-video { grid-template-columns:1fr; }.gym-video video { min-height:260px; }.equipment-gallery { grid-template-columns:1fr; }.boxing-section { grid-template-columns:1fr; }.boxing-media { min-height:430px; }.boxing-media::after { background:linear-gradient(0deg,#090909 0%,transparent 38%); }.boxing-copy { padding:40px 22px 85px; }.boxing-shots { padding:55px 22px 70px; }.boxing-shots-rail { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }.boxing-shot:hover img,.boxing-shot:focus-within img { transform:scale(1.1); }.boxing-reel { grid-template-columns:1fr; padding:80px 22px 95px; gap:50px; }.boxing-reel-player { width:min(100%,500px); justify-self:center; box-shadow:12px 12px 0 var(--orange); }.boxing-reel-copy h3 { font-size:clamp(44px,12vw,72px); }
+  .section { padding:85px 22px; }.section-index { display:none; }.philosophy { grid-template-columns:1fr; gap:55px; }.philosophy .lead { font-size:18px; }.philosophy-visual { padding-bottom:48px; }.philosophy-stage { height:min(58vh,460px); -webkit-clip-path:none; clip-path:none; }.philosophy-slide-meta { left:14px; right:14px; bottom:70px; }.philosophy-progress button { width:22px; }.owners-spotlight { grid-template-columns:1fr; margin-top:40px; }.owners-photo-frame { --frame:18px; }.owners-copy { padding:32px 22px 38px; border-left:0; border-top:0; }.quote { left:14px; right:14px; bottom:0; width:auto; }.real-gym-strip { grid-template-columns:1fr 1fr; margin-top:20px; }.real-gym-caption { grid-column:1/-1; grid-row:1; min-height:220px; }.real-gym-strip figure img { min-height:350px; }.gym-video { grid-template-columns:1fr; }.gym-video video { min-height:260px; }.equipment-gallery { grid-template-columns:1fr; }.boxing-section { grid-template-columns:1fr; }.boxing-media { min-height:430px; }.boxing-media::after { background:linear-gradient(0deg,#090909 0%,transparent 38%); }.boxing-copy { padding:40px 22px 85px; }.boxing-shots { padding:55px 22px 70px; }.boxing-shots-rail { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }.boxing-shot:hover img,.boxing-shot:focus-within img { transform:scale(1.1); }.boxing-reel { grid-template-columns:1fr; padding:80px 22px 95px; gap:50px; }.boxing-reel-player { width:min(100%,500px); justify-self:center; box-shadow:12px 12px 0 var(--orange); }.boxing-reel-copy h3 { font-size:clamp(44px,12vw,72px); }
   .relax-lounge { grid-template-columns:1fr; padding:80px 22px 95px; gap:42px; overflow:visible; }.relax-player { width:min(100%,420px); justify-self:center; box-shadow:12px 12px 0 var(--orange); }.relax-copy h2 { font-size:clamp(40px,11vw,68px); }.relax-audio { font-size:0; padding:9px 11px; }.relax-audio i { font-size:11px; }
   .section-heading { display:block; }.section-heading > p { margin-top:25px; font-size:17px; line-height:1.72; padding-bottom:0; }.section-heading h2,h2 { letter-spacing:-1.5px; font-size:clamp(42px,12vw,72px); }
   .course-grid { grid-template-columns:1fr; }.course-card { min-height:510px; border-right:0; border-bottom:1px solid #333; }
@@ -914,7 +924,7 @@ main,
 }
 .philosophy,.schedule-section,.magazine { border-color:rgba(255,255,255,.12); }
 .owners-spotlight { border-block:1px solid rgba(255,255,255,.12); }
-.owners-copy { border-left-color:var(--orange); }
+.owners-photo-frame::before { background:var(--orange); }
 .real-gym-strip,.gym-video { border:1px solid rgba(255,255,255,.12); }
 .real-gym-caption { border-color:rgba(255,255,255,.12); }
 .brand-grid { background:rgba(255,255,255,.12); }
