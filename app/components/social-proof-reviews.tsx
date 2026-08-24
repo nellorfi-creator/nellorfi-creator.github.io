@@ -30,7 +30,12 @@ export default function SocialProofReviews() {
   }, []);
 
   const pageCount = Math.ceil(googleReviews.length / perPage);
-  const visible = googleReviews.slice(page * perPage, page * perPage + perPage);
+  const safePage = Math.min(page, Math.max(0, pageCount - 1));
+  const visible = googleReviews.slice(safePage * perPage, safePage * perPage + perPage);
+
+  useEffect(() => {
+    setPage((current) => Math.min(current, Math.max(0, pageCount - 1)));
+  }, [pageCount]);
 
   const goPrev = () => setPage((current) => (current - 1 + pageCount) % pageCount);
   const goNext = () => setPage((current) => (current + 1) % pageCount);
@@ -67,18 +72,23 @@ export default function SocialProofReviews() {
             <button type="button" onClick={goPrev} aria-label="Recensioni precedenti">
               ←
             </button>
-            <div className="social-proof-dots" role="tablist" aria-label="Pagine recensioni">
-              {Array.from({ length: pageCount }, (_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  role="tab"
-                  aria-selected={index === page}
-                  aria-label={`Pagina recensioni ${index + 1} di ${pageCount}`}
-                  className={index === page ? "is-active" : undefined}
-                  onClick={() => setPage(index)}
-                />
-              ))}
+            <div className="social-proof-pager">
+              <div className="social-proof-dots" role="tablist" aria-label="Pagine recensioni">
+                {Array.from({ length: pageCount }, (_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    role="tab"
+                    aria-selected={index === page}
+                    aria-label={`Pagina recensioni ${index + 1} di ${pageCount}`}
+                    className={index === page ? "is-active" : undefined}
+                    onClick={() => setPage(index)}
+                  />
+                ))}
+              </div>
+              <p className="social-proof-page" aria-hidden="true">
+                {page + 1} / {pageCount}
+              </p>
             </div>
             <button type="button" onClick={goNext} aria-label="Recensioni successive">
               →
