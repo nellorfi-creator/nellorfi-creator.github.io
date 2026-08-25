@@ -188,7 +188,7 @@ export default function Home() {
   useEffect(() => {
     const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
     let skipStored = false;
-    try { skipStored = localStorage.getItem("revenge-gym-skip-intro") === "1"; } catch { /* ignore */ }
+    try { skipStored = sessionStorage.getItem("revenge-gym-skip-intro") === "1"; } catch { /* ignore */ }
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (skipRequested || skipStored || reducedMotion) {
       const skipTimer = window.setTimeout(() => setIntroVisible(false), 0);
@@ -402,7 +402,7 @@ export default function Home() {
   };
 
   const closeIntro = () => {
-    try { localStorage.setItem("revenge-gym-skip-intro", "1"); } catch { /* ignore */ }
+    try { sessionStorage.setItem("revenge-gym-skip-intro", "1"); } catch { /* ignore */ }
     setIntroClosing(true);
     introAudioRef.current?.pause();
     introVideoRef.current?.pause();
