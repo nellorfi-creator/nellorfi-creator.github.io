@@ -10,6 +10,11 @@ CREATE TABLE IF NOT EXISTS daily_visits (
   PRIMARY KEY (visitor_key, visit_date)
 );
 
+CREATE TABLE IF NOT EXISTS daily_page_views (
+  visit_date TEXT PRIMARY KEY,
+  views INTEGER NOT NULL DEFAULT 0
+);
+
 CREATE TABLE IF NOT EXISTS counter_totals (
   id INTEGER PRIMARY KEY CHECK (id = 1),
   page_views INTEGER NOT NULL DEFAULT 0

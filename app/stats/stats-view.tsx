@@ -124,9 +124,9 @@ export default function StatsView() {
           <>
             <div className="stats-grid">
               <article>
-                <small>Visite uniche giornaliere</small>
+                <small>Visite giornaliere</small>
                 <strong>{formatCount(counts.uniqueToday)}</strong>
-                <p>Persone diverse che hanno aperto il sito oggi, fuso orario di Roma.</p>
+                <p>Tutte le aperture di oggi, anche dallo stesso indirizzo. Fuso orario di Roma.</p>
               </article>
               <article>
                 <small>Visite uniche storiche</small>
@@ -136,7 +136,7 @@ export default function StatsView() {
               <article>
                 <small>Visite totali</small>
                 <strong>{formatCount(counts.pageViews)}</strong>
-                <p>Tutte le aperture, anche dello stesso utente nello stesso giorno.</p>
+                <p>Tutte le aperture dall’inizio, anche dello stesso utente nello stesso giorno.</p>
               </article>
             </div>
             <button className="button light" type="button" onClick={logout}>Esci</button>

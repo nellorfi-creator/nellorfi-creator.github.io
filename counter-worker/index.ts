@@ -244,17 +244,18 @@ async function handleStats(request: Request, env: Env, headers: Record<string, s
   }
 
   const today = currentRomeDate();
-  const [todayVisits, historicalVisits, views] = await env.DB.batch<{
+  const [todayViews, historicalVisits, views] = await env.DB.batch<{
     total?: number;
+    views?: number;
     page_views?: number;
   }>([
-    env.DB.prepare("SELECT COUNT(*) AS total FROM daily_visits WHERE visit_date = ?").bind(today),
+    env.DB.prepare("SELECT views FROM daily_page_views WHERE visit_date = ?").bind(today),
     env.DB.prepare("SELECT COUNT(*) AS total FROM daily_visits"),
     env.DB.prepare("SELECT page_views FROM counter_totals WHERE id = 1"),
   ]);
 
   return Response.json({
-    uniqueToday: Number(todayVisits.results[0]?.total ?? 0),
+    uniqueToday: Number(todayViews.results[0]?.views ?? 0),
     uniqueHistorical: Number(historicalVisits.results[0]?.total ?? 0),
     pageViews: Number(views.results[0]?.page_views ?? 0),
   }, { headers });
@@ -288,10 +289,15 @@ const counterWorker = {
 
       const visitorKey = await hmac(ip, env.COUNTER_SALT);
       if (allowOnce(recentHits, visitorKey, RATE_LIMIT_MS)) {
+        const today = currentRomeDate();
         await env.DB.batch([
           env.DB.prepare(
             "INSERT OR IGNORE INTO daily_visits (visitor_key, visit_date) VALUES (?, ?)",
-          ).bind(visitorKey, currentRomeDate()),
+          ).bind(visitorKey, today),
+          env.DB.prepare(
+            `INSERT INTO daily_page_views (visit_date, views) VALUES (?, 1)
+             ON CONFLICT(visit_date) DO UPDATE SET views = views + 1`,
+          ).bind(today),
           env.DB.prepare(
             "UPDATE counter_totals SET page_views = page_views + 1 WHERE id = 1",
           ),
