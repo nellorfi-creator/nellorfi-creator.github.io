@@ -4,7 +4,7 @@ import SiteImage from "@/app/components/site-image";
 import LegalIdentity from "@/app/components/legal-identity";
 import NelloCredit from "@/app/components/nello-credit";
 import { CONTACT_EMAIL, CONTACT_FORM_URL, CONTACT_PHONE, CONTACT_PHONE_TEL, COUNTER_WORKER_URL } from "@/lib/legal";
-import { SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM, SOCIAL_MESSENGER } from "@/lib/site";
+import { BRAND_LOGO, SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM, SOCIAL_MESSENGER } from "@/lib/site";
 import GymMap from "@/app/components/gym-map";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -153,7 +153,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navFlyout, setNavFlyout] = useState<null | "palestra" | "macchinari" | "gruppi">(null);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [introVisible, setIntroVisible] = useState(true);
+  const [introVisible, setIntroVisible] = useState(false);
   const [introClosing, setIntroClosing] = useState(false);
   const [introSlide, setIntroSlide] = useState(0);
   const [introSound, setIntroSound] = useState(false);
@@ -181,21 +181,11 @@ export default function Home() {
   const tickerMachines = legMachines.slice(0, 10);
   const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
 
-  useViewportVideo(gymTourVideoRef, { paused: overlaysOpen });
-  useViewportVideo(relaxVideoRef, { paused: overlaysOpen, volume: 0.42, playbackRate: 0.8 });
-  useViewportVideo(transformSpotVideoRef, { paused: overlaysOpen });
-  useViewportVideo(socialProofVideoRef, { paused: overlaysOpen });
-
-  useEffect(() => {
-    const skipRequested = new URLSearchParams(window.location.search).get("skipIntro") === "1";
-    let skipStored = false;
-    try { skipStored = sessionStorage.getItem("revenge-gym-skip-intro") === "1"; } catch { /* ignore */ }
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (skipRequested || skipStored || reducedMotion) {
-      const skipTimer = window.setTimeout(() => setIntroVisible(false), 0);
-      return () => window.clearTimeout(skipTimer);
-    }
-  }, []);
+  useViewportVideo(heroVideoRef, { paused: introVisible, src: "/media/hero-loop.mp4", load: "idle" });
+  useViewportVideo(gymTourVideoRef, { paused: overlaysOpen, src: "/media/revenge-gym-tour.mp4", poster: "/media/sala-attrezzi.webp" });
+  useViewportVideo(relaxVideoRef, { paused: overlaysOpen, volume: 0.42, playbackRate: 0.8, src: "/media/sala-relax.mp4", poster: "/photos/live/sala-relax-poster.webp" });
+  useViewportVideo(transformSpotVideoRef, { paused: overlaysOpen, src: "/media/spot-trasformazione.mp4", poster: "/photos/live/hero-sala-poster.webp" });
+  useViewportVideo(socialProofVideoRef, { paused: overlaysOpen, src: "/media/hero-loop.mp4", poster: "/photos/live/sala-community.webp" });
 
   useEffect(() => {
     const items = document.querySelectorAll(".reveal");
@@ -346,14 +336,29 @@ export default function Home() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`${COUNTER_WORKER_URL}/visits`, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      signal: controller.signal,
-    }).catch((error: unknown) => {
-      if (!(error instanceof DOMException && error.name === "AbortError")) return;
-    });
-    return () => controller.abort();
+    let idleHandle = 0;
+    let timer: ReturnType<typeof globalThis.setTimeout> | undefined;
+    const send = () => {
+      fetch(`${COUNTER_WORKER_URL}/visits`, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        signal: controller.signal,
+      }).catch((error: unknown) => {
+        if (!(error instanceof DOMException && error.name === "AbortError")) return;
+      });
+    };
+    const onLoad = () => {
+      if ("requestIdleCallback" in window) idleHandle = window.requestIdleCallback(send, { timeout: 4000 });
+      else timer = globalThis.setTimeout(send, 2500);
+    };
+    if (document.readyState === "complete") onLoad();
+    else window.addEventListener("load", onLoad, { once: true });
+    return () => {
+      controller.abort();
+      window.removeEventListener("load", onLoad);
+      if (idleHandle) window.cancelIdleCallback(idleHandle);
+      if (timer) globalThis.clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -405,6 +410,13 @@ export default function Home() {
     }
     video.muted = true;
     setRelaxSound(false);
+  };
+
+  const openIntro = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setIntroSlide(0);
+    setIntroClosing(false);
+    setIntroVisible(true);
   };
 
   const closeIntro = () => {
@@ -479,12 +491,12 @@ export default function Home() {
       {(activeBrand || activeArea || activeArticle) && <MobileSwipeBack edgeOnly={false} label="Chiudi" onSwipe={() => { setActiveBrand(null); setActiveArea(null); setActiveArticle(null); }} />}
       {introVisible && <section className={`intro-screen${introClosing ? " is-closing" : ""}`} aria-label="Presentazione Revenge Gym">
         <div className="intro-frames is-running">
-          <video ref={introVideoRef} className="intro-video" autoPlay muted playsInline {...safariInline} preload="auto" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true">
+          <video ref={introVideoRef} className="intro-video" autoPlay muted playsInline {...safariInline} preload="metadata" poster="/photos/live/hero-sala-poster.webp" disablePictureInPicture aria-hidden="true">
             <source src="/media/intro-cinematic.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="intro-shade"></div>
-        <div className="intro-logo logo"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" loading="eager" /></div>
+        <div className="intro-logo logo"><SiteImage src={BRAND_LOGO.src} alt="Revenge Gym" width={BRAND_LOGO.width} height={BRAND_LOGO.height} loading="eager" /></div>
         <button className={`intro-audio${introSound ? " active" : ""}`} type="button" onClick={toggleIntroSound} aria-pressed={introSound}>
           <i>{introSound ? "▮▮" : "▶"}</i> {introSound ? "Musica attiva" : "Attiva musica"}
         </button>
@@ -494,7 +506,7 @@ export default function Home() {
         <audio ref={introAudioRef} src="/media/revenge-gym-intro.m4a" loop preload="none"/>
       </section>}
       <header className="nav-wrap">
-        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
+        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src={BRAND_LOGO.src} alt="Revenge Gym" width={BRAND_LOGO.width} height={BRAND_LOGO.height} loading="eager" /></a>
         <button className="menu-toggle" onClick={() => { setMenuOpen(!menuOpen); if (menuOpen) setNavFlyout(null); }} aria-label={menuOpen ? "Chiudi menu" : "Apri menu"} aria-expanded={menuOpen}><i></i><i></i></button>
         <nav className={menuOpen ? "open" : ""} aria-label="Navigazione principale">
           <div className="nav-flyout">
@@ -569,7 +581,7 @@ export default function Home() {
                 tabIndex={duplicate ? -1 : undefined}
                 aria-label={duplicate ? undefined : `Apri la scheda di ${machine.name}`}
               >
-                <SiteImage src={machine.image} alt="" width={76} height={76} decoding="async" loading={index < 6 ? "eager" : "lazy"} />
+                <SiteImage src={machine.image.replace("/photos/machines/gambe/", "/photos/machines/gambe/thumbs/")} alt="" width={144} height={192} decoding="async" loading={index < 4 ? "eager" : "lazy"} />
                 <span>{machine.name}</span>
               </Link>
             );
@@ -579,12 +591,11 @@ export default function Home() {
 
       <section className="hero" id="home">
         <div className="hero-media" role="img" aria-label="Sala attrezzi di Revenge Gym a Ladispoli">
-          <video ref={heroVideoRef} className="hero-video" autoPlay muted loop playsInline {...safariInline} preload="metadata" poster="/photos/live/hero-sala.webp" disablePictureInPicture aria-hidden="true">
-            <source src="/media/hero-loop.mp4" type="video/mp4" />
+          <video ref={heroVideoRef} className="hero-video" autoPlay muted loop playsInline {...safariInline} preload="none" poster="/photos/live/hero-sala-poster.webp" disablePictureInPicture aria-hidden="true">
           </video>
         </div>
         <div className="hero-shade"></div>
-        <div className="hero-content reveal">
+        <div className="hero-content">
           <p className="eyebrow"><span></span> Sala pesi · Ladispoli</p>
           <h1>NON CERCARE<br/>SCUSE. <em>CREA</em><br/>LA TUA <em>RIVINCITA.</em></h1>
           <p className="hero-copy">Una palestra completa, attrezzature di qualità e l’ambiente giusto per allenarti con costanza e superare ogni limite.</p>
@@ -599,6 +610,7 @@ export default function Home() {
           <div className="hero-actions">
             <a href="#contatti" className="button primary">Chiedi info <span>↗</span></a>
             <a href="#filosofia" className="text-link">Scopri la palestra <span>↓</span></a>
+            <button type="button" className="text-link intro-open" onClick={openIntro}>Guarda l&apos;intro <span>▶</span></button>
           </div>
         </div>
         <div className="hero-stats">
@@ -627,9 +639,9 @@ export default function Home() {
                   alt={shot.alt}
                   className={index === philosophySlide ? "is-active" : undefined}
                   style={{ objectPosition: shot.focus }}
-                  loading={index === philosophySlide ? "eager" : "lazy"}
+                  loading="lazy"
                   decoding="async"
-                  fetchPriority={index === philosophySlide ? "high" : "low"}
+                  fetchPriority="low"
                 />
               );
             })}
@@ -686,12 +698,10 @@ export default function Home() {
             loop
             playsInline
             {...safariInline}
-            preload="auto"
-            poster="/media/sala-attrezzi.webp"
+            preload="none"
             disablePictureInPicture
             aria-label="Video degli ambienti di Revenge Gym"
           >
-            <source src="/media/revenge-gym-tour.mp4" type="video/mp4"/>
             Il tuo browser non supporta la riproduzione video.
           </video>
         </div>
@@ -720,12 +730,10 @@ export default function Home() {
             loop
             playsInline
             {...safariInline}
-            preload="auto"
-            poster="/photos/live/sala-relax-poster.webp"
+            preload="none"
             disablePictureInPicture
             aria-label="Video della sala relax di Revenge Gym: caffè, Vespa 50 e angolo retrò"
           >
-            <source src="/media/sala-relax.mp4" type="video/mp4" />
             Il tuo browser non supporta la riproduzione video.
           </video>
           <button
@@ -746,7 +754,7 @@ export default function Home() {
           <p>Spazi e attrezzature per costruire un allenamento completo, efficace e adatto ai tuoi obiettivi.</p>
         </div>
         <div className="course-grid">
-          {courses.map((course, i) => <button type="button" className="course-card reveal" key={course.title} onClick={() => setActiveArea(course)} aria-label={`Scopri l’area ${course.title}`}>
+          {courses.map((course, i) => <button type="button" className="course-card reveal" key={course.title} onClick={() => setActiveArea(course)}>
             <SiteImage src={course.image} alt={course.title} loading="lazy" />
             <div className="course-overlay"></div><span className="course-number">0{i+1}</span>
             <div className="course-content"><span className="course-icon"><CourseAreaIcon kind={course.icon} /></span><small>{course.tag}</small><h3>{course.title}</h3><p>{course.text}</p><span className="course-open">Scopri l’area <span>↗</span></span></div>
@@ -770,7 +778,7 @@ export default function Home() {
         <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Qualità in sala</p><h2>MACCHINARI<br/><em>SELEZIONATI.</em></h2></div><p>Una palestra dotata di macchinari d’eccellenza, scelti tra i migliori marchi americani e italiani.</p></div>
         <div className="brand-grid reveal">
           {equipmentBrands.map((brand, i) => (
-            <button type="button" key={brand.name} onClick={() => setActiveBrand(brand)} aria-label={`Scopri storia e caratteristiche di ${brand.name}`}>
+            <button type="button" key={brand.name} onClick={() => setActiveBrand(brand)}>
               <span>{String(i + 1).padStart(2, "0")}</span>
               <strong>{brand.name}</strong>
               <small>{brand.since}</small>
@@ -834,7 +842,7 @@ export default function Home() {
         <div className="section-heading reveal"><div><p className="eyebrow"><span></span> Revenge Journal</p><h2>ALLENATI<br/><em>CON METODO.</em></h2></div><p>Guide semplici per orientarti in palestra, capire gli strumenti e costruire un percorso che duri nel tempo.</p></div>
         <div className="magazine-grid">
           {magazineArticles.map((article, i) => <article className={`article-card article-${i + 1} reveal`} key={article.title}>
-            <button type="button" onClick={() => setActiveArticle(article)} aria-label={`Leggi: ${article.title}`}>
+            <button type="button" onClick={() => setActiveArticle(article)}>
               <div className="article-image"><SiteImage src={article.image} alt="" loading="lazy"/><span>0{i + 1}</span></div>
               <div className="article-copy"><small>{article.category} · {article.time} di lettura</small><h3>{article.title}</h3><p>{article.excerpt}</p><b>Leggi l’articolo <span>↗</span></b></div>
             </button>
@@ -852,7 +860,8 @@ export default function Home() {
 
       <section className="social-proof" id="fiducia">
         <div className="social-proof-hero">
-          <div className="social-proof-hero-media" role="img" aria-label="Community in sala pesi di Revenge Gym">
+          <div className="social-proof-hero-media">
+            <SiteImage src="/photos/live/sala-community.webp" alt="Community in sala pesi di Revenge Gym" width={1368} height={943} loading="lazy" />
             <video
               ref={socialProofVideoRef}
               className="social-proof-hero-video"
@@ -861,12 +870,10 @@ export default function Home() {
               loop
               playsInline
               {...safariInline}
-              preload="metadata"
-              poster="/photos/live/sala-community.webp"
+              preload="none"
               disablePictureInPicture
               aria-hidden="true"
             >
-              <source src="/media/hero-loop.mp4" type="video/mp4" />
             </video>
           </div>
           <div className="social-proof-hero-shade" aria-hidden="true"></div>
@@ -911,12 +918,10 @@ export default function Home() {
                 loop
                 playsInline
                 {...safariInline}
-                preload="metadata"
-                poster="/photos/live/hero-sala.webp"
+                preload="none"
                 disablePictureInPicture
                 aria-label="Video spot trasformazione Revenge Gym"
               >
-                <source src="/media/spot-trasformazione.mp4" type="video/mp4" />
               </video>
               <figcaption>Spot trasformazione · Ladispoli</figcaption>
             </figure>
@@ -962,7 +967,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></a>
+        <a href="#home" className="logo" aria-label="Revenge Gym, torna all'inizio"><SiteImage src={BRAND_LOGO.src} alt="Revenge Gym" width={BRAND_LOGO.width} height={BRAND_LOGO.height} /></a>
         <p>Sala pesi · Ladispoli</p>
         <p className="footer-legal">
           <LegalIdentity copyright="© 2026 Revenge Gym. Tutti i diritti riservati." />

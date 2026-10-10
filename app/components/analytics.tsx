@@ -11,6 +11,11 @@ declare global {
   }
 }
 
+const INTERACTION_EVENTS = ["pointerdown", "keydown", "scroll", "touchstart"] as const;
+
+let pendingPath = "/";
+let scheduleArmed = false;
+
 function loadGtag(pagePath: string) {
   if (typeof window.gtag === "function") {
     window.gtag("config", GA_MEASUREMENT_ID, { page_path: pagePath });
@@ -40,11 +45,32 @@ function loadGtag(pagePath: string) {
   document.head.appendChild(script);
 }
 
+function scheduleGtag(pagePath: string) {
+  pendingPath = pagePath;
+  if (typeof window.gtag === "function") {
+    window.gtag("config", GA_MEASUREMENT_ID, { page_path: pagePath });
+    return;
+  }
+  if (scheduleArmed) return;
+  scheduleArmed = true;
+
+  let fallback = 0;
+  const start = () => {
+    INTERACTION_EVENTS.forEach((eventName) => window.removeEventListener(eventName, start));
+    window.clearTimeout(fallback);
+    loadGtag(pendingPath);
+  };
+  INTERACTION_EVENTS.forEach((eventName) => {
+    window.addEventListener(eventName, start, { passive: true });
+  });
+  fallback = window.setTimeout(start, 15000);
+}
+
 export default function Analytics() {
   const pathname = usePathname();
 
   useEffect(() => {
-    loadGtag(pathname);
+    scheduleGtag(pathname);
   }, [pathname]);
 
   return null;

@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/brand/revenge-gym-logo.png", type: "image/png" },
+      { url: "/brand/revenge-gym-apple.png", sizes: "180x180", type: "image/png" },
     ],
-    apple: "/brand/revenge-gym-logo.png",
+    apple: "/brand/revenge-gym-apple.png",
   },
   manifest: "/manifest.webmanifest",
   keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "sala relax palestra", "Revenge Gym", "Panatta", "Hammer Strength", "Life Fitness", "Precor", "Hoist Fitness", "Nautilus", "Star Trac", "Gymleco", "Teca"],
@@ -76,6 +76,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="it" className={`${inter.variable} ${barlow.variable}`}>
       <body>
+        <link rel="preload" as="image" href="/photos/live/hero-sala-poster.webp" fetchPriority="high" />
         <a className="skip-link" href="#contenuto">Vai al contenuto</a>
         <div id="contenuto">{children}</div>
         <Analytics />

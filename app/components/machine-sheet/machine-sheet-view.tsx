@@ -31,7 +31,7 @@ export default function MachineSheetView({ machine, sheet }: Props) {
       <article className={styles.sheet} id="machine-sheet">
         <header className={styles.header}>
           <div className={styles.brandRow}>
-            <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" className={styles.logo} />
+            <SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180} className={styles.logo} />
             <div className={styles.meta}>
               <span>{sheet.zone === "glutei" ? "Glutei" : "Gambe"} · {machine.number}</span>
               <strong>{machine.brand}</strong>

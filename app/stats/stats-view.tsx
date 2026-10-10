@@ -113,7 +113,7 @@ export default function StatsView() {
     <main className="stats-page">
       <header className="stats-header">
         <Link href="/?skipIntro=1#home" aria-label="Revenge Gym, torna alla home">
-          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180} />
         </Link>
         <Link href="/?skipIntro=1#home">← Home</Link>
       </header>

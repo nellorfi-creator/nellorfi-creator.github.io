@@ -53,7 +53,7 @@ export default function MachineHub({
       <MobileSwipeBack />
       <header className={styles.nav}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, home">
-          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180} />
         </Link>
         <button
           className={styles.menuToggle}
@@ -219,7 +219,7 @@ export default function MachineHub({
 
       <footer className={styles.footer}>
         <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym home">
-          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180} />
         </Link>
         <p>Allenamento · {areaLabel} · Ladispoli</p>
         <p className={styles.footerLegal}>

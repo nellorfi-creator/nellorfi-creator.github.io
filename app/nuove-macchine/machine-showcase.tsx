@@ -190,7 +190,7 @@ export default function MachineShowcase() {
     <MobileSwipeBack onSwipe={goBack} />
     <div className={styles.scrollProgress} aria-hidden="true"><i style={{ transform: `scaleX(${progress})` }} /></div>
     <header className={styles.nav}>
-      <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home senza intro"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link>
+      <Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home senza intro"><SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180} /></Link>
       <button className={styles.menuToggle} type="button" onClick={() => { if (menuOpen) setZonesOpen(false); setMenuOpen(!menuOpen); }} aria-expanded={menuOpen} aria-label={menuOpen ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}><i></i><i></i></button>
       <nav className={menuOpen ? styles.open : ""} aria-label="Menu nuove macchine">
         <button className={styles.back} type="button" onClick={() => { goBack(); setMenuOpen(false); }}>← Indietro</button>
@@ -612,6 +612,6 @@ export default function MachineShowcase() {
     </article>
 
     <section className={`${styles.cta} ${styles.reveal}`}><p className={styles.eyebrow}><span></span> Vieni a conoscerle</p><h2>LEGGERE AIUTA.<br/><em>ALLENARSI CAMBIA TUTTO.</em></h2><p>Questi sono solo gli ultimi arrivi. In sala il parco macchine è molto più ampio: scoprilo dal vivo e chiedi allo staff come inserirlo nel tuo allenamento.</p><Link href="/?skipIntro=1#contatti" className={styles.primary}>Chiedi info <span>↗</span></Link></section>
-    <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" /></Link><p>Sala pesi · Ladispoli</p><p className={styles.footerLegal}><LegalIdentity /><NelloCredit className={styles.byNello} /></p><a href="#top" className={styles.backTop} aria-label="Torna all'inizio">↑</a></footer>
+    <footer className={styles.footer}><Link href="/?skipIntro=1#home" className={styles.logo} aria-label="Revenge Gym, torna alla home"><SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180} /></Link><p>Sala pesi · Ladispoli</p><p className={styles.footerLegal}><LegalIdentity /><NelloCredit className={styles.byNello} /></p><a href="#top" className={styles.backTop} aria-label="Torna all'inizio">↑</a></footer>
   </main>;
 }

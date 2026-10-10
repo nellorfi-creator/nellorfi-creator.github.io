@@ -50,7 +50,7 @@ export default function BoxePage() {
       <MobileSwipeBack />
       <header className={styles.nav}>
         <Link className={styles.logo} href="/?skipIntro=1#home" aria-label="Revenge Gym home">
-          <SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym" />
+          <SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180} />
         </Link>
         <nav aria-label="Navigazione Boxe">
           <Link className={styles.homeLink} href="/?skipIntro=1#home">Torna alla home</Link>
@@ -188,7 +188,7 @@ export default function BoxePage() {
       </section>
 
       <footer className={styles.footer}>
-        <Link className={styles.logo} href="/?skipIntro=1#home"><SiteImage src="/brand/revenge-gym-logo.png" alt="Revenge Gym"/></Link>
+        <Link className={styles.logo} href="/?skipIntro=1#home"><SiteImage src="/brand/revenge-gym-logo.webp" alt="Revenge Gym" width={656} height={180}/></Link>
         <p>Via Berna, 8 · Ladispoli RM</p>
         <p className="footer-legal">
           <LegalIdentity />
