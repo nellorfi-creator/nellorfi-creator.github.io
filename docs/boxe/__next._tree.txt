@@ -12,4 +12,4 @@
 :HL["/_next/static/css/658ea3b5359b639a.css","style"]
 :HL["/photos/live/hero-sala-poster.webp","image",{"fetchPriority":"high"}]
 :HL["/photos/live/gino-corner-bono.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"tgJBy7392WxSmkwKtgAb6"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"boxe","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"G51G9_JEOEp4c5swJp41f"}

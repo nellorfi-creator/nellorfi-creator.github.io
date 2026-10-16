@@ -35,15 +35,20 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   keywords: ["palestra Ladispoli", "sala pesi Ladispoli", "boxe Ladispoli", "sala relax palestra", "Revenge Gym", "Panatta", "Hammer Strength", "Life Fitness", "Precor", "Hoist Fitness", "Nautilus", "Star Trac", "Gymleco", "Teca"],
   openGraph: {
-    title: "Revenge Gym | La tua rivincita inizia oggi",
-    description: "Palestra e sala pesi a Ladispoli. Allenati, evolvi, supera i tuoi limiti.",
+    title: "Revenge Gym | Vieni a trovarci",
+    description: "Sala pesi, boxe e sala relax in Via Berna 8 a Ladispoli.",
     locale: "it_IT",
     type: "website",
     url: "/",
     siteName: "Revenge Gym",
-    images: [{ url: "/media/sala-attrezzi.webp", alt: "Revenge Gym — La tua rivincita inizia oggi", width: 1200, height: 630 }],
+    images: [{ url: "/media/og-vieni-a-trovarci.jpg", alt: "Revenge Gym, vieni a trovarci in Via Berna 8 a Ladispoli", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Revenge Gym", description: "La tua rivincita inizia oggi.", images: ["/media/sala-attrezzi.webp"] },
+  twitter: {
+    card: "summary_large_image",
+    title: "Revenge Gym | Vieni a trovarci",
+    description: "Sala pesi, boxe e sala relax in Via Berna 8 a Ladispoli.",
+    images: ["/media/og-vieni-a-trovarci.jpg"],
+  },
 };
 
 const jsonLd = {
@@ -65,7 +70,7 @@ const jsonLd = {
     addressRegion: LEGAL_ENTITY.province,
     addressCountry: LEGAL_ENTITY.country,
   },
-  image: `${SITE_ORIGIN}/media/sala-attrezzi.webp`,
+  image: `${SITE_ORIGIN}/media/og-vieni-a-trovarci.jpg`,
   openingHoursSpecification: [
     { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "06:30", closes: "22:00" },
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "06:30", closes: "17:00" },
