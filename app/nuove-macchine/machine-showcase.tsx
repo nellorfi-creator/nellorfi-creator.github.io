@@ -19,7 +19,7 @@ const machines = [
   { id: "lateral-raise", number: "05", name: "Lateral Raise", brand: "Nautilus", status: "Disponibile", ready: true, image: "/media/new-machines/nautilus-lateral-raise.webp", alt: "Lateral Raise Nautilus Nitro Plus nella sala Revenge Gym" },
   { id: "incline-chest-press", number: "06", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/hoist-incline-chest-press.webp", alt: "Incline Chest Press Hoist ROC-IT nella sala Revenge Gym" },
   { id: "hip-thrust-sidea", number: "07", name: "Hip Thrust", brand: "Sidea", status: "Disponibile", ready: true, image: "/media/new-machines/sidea-hip-thrust.webp", alt: "Hip Thrust Sidea nella sala Revenge Gym" },
-  { id: "super-vertical-leg-press", number: "08", name: "Super Vertical Leg Press", brand: "Panatta", status: "In arrivo", ready: true, incoming: true, image: "/media/new-machines/panatta-super-vertical-leg-press.webp", alt: "Super Vertical Leg Press Panatta 1FW093" },
+  { id: "super-vertical-leg-press", number: "08", name: "Super Vertical Leg Press", brand: "Panatta", status: "Disponibile", ready: true, image: "/photos/machines/gambe/super-vertical-leg-press-panatta.webp", alt: "Super Vertical Leg Press Panatta nella sala Revenge Gym" },
 ];
 
 const primaryMuscles = ["Quadricipite femorale", "Grande gluteo", "Bicipite femorale", "Semitendinoso", "Semimembranoso"];
@@ -50,8 +50,8 @@ const brandTicker =
   "ULTIMI ARRIVI · LIFE FITNESS · PANATTA · GYMLECO · STAR TRAC · NAUTILUS · HOIST · SIDEA · REVENGE · ";
 
 const arrivalPillars = [
-  ["07", "IN SALA", "Macchine nuove già installate e utilizzabili."],
-  ["01", "IN ARRIVO", "Super Vertical Leg Press Panatta in viaggio."],
+  ["08", "IN SALA", "Macchine nuove già installate e utilizzabili."],
+  ["01", "APPENA ARRIVATA", "Super Vertical Leg Press Panatta ora in area gambe."],
   ["∞", "CATALOGO", "Il parco completo resta nel menu per gruppi muscolari."],
 ] as const;
 
@@ -241,7 +241,7 @@ export default function MachineShowcase() {
       <div className={styles.heroContent}>
         <p className={styles.eyebrow}><span></span> Ultimi arrivi · 2025–2026</p>
         <h1>PIÙ SCELTA.<br/><em>PIÙ FORZA.</em><br/>PIÙ <em>REVENGE.</em></h1>
-        <p>Non è il catalogo della palestra: è la vetrina degli ultimi arrivi. Sette macchine nuove già in sala e una Panatta Super Vertical Leg Press in arrivo.</p>
+        <p>Non è il catalogo della palestra: è la vetrina degli ultimi arrivi. Otto macchine nuove già in sala, compresa la Panatta Super Vertical Leg Press.</p>
         <div className={styles.heroActions}>
           <a href="#machine-rail" className={styles.primary}>Vedi gli ultimi arrivi <span>↓</span></a>
           <a
@@ -252,13 +252,13 @@ export default function MachineShowcase() {
               focusMachine("super-vertical-leg-press");
             }}
           >
-            In arrivo <span>↗</span>
+            Super Vertical <span>↗</span>
           </a>
         </div>
       </div>
       <div className={styles.heroStats}>
-        <div><strong>07</strong><span>Ultimi arrivi in sala</span></div>
-        <div><strong>01</strong><span>In arrivo</span></div>
+        <div><strong>08</strong><span>Ultimi arrivi in sala</span></div>
+        <div><strong>16</strong><span>Macchine nell’area gambe</span></div>
         <div><strong>08</strong><span>Schede tecniche</span></div>
       </div>
     </section>
@@ -276,7 +276,7 @@ export default function MachineShowcase() {
         <h2>NON UN CATALOGO.<br/><em>UNA VETRINA.</em></h2>
       </div>
       <div className={styles.arrivalCopy}>
-        <p className={styles.lead}>Revenge aggiorna la sala con marchi professionali, non con pezzi da riempire. Qui trovi solo ciò che è entrato di recente — e ciò che sta per arrivare.</p>
+        <p className={styles.lead}>Revenge aggiorna la sala con marchi professionali, non con pezzi da riempire. Qui trovi solo ciò che è entrato di recente, già installato e utilizzabile.</p>
         <p>Il menu Per gruppi muscolari resta il percorso completo. Questa pagina racconta il momento: nuove postazioni, nuovo ritmo, stessa ossessione per la qualità.</p>
       </div>
       <div className={styles.pillars}>
@@ -297,7 +297,7 @@ export default function MachineShowcase() {
             <a
               key={`${machine.id}-${index}`}
               href={`#${machine.id}`}
-              className={`${styles.railCard}${machine.incoming ? ` ${styles.railCardIncoming}` : ""}${activeMachine === machine.id ? ` ${styles.railCardActive}` : ""}`}
+              className={`${styles.railCard}${activeMachine === machine.id ? ` ${styles.railCardActive}` : ""}`}
               aria-label={`${machine.name} · ${machine.brand}`}
               onClick={(event) => {
                 event.preventDefault();
@@ -306,7 +306,7 @@ export default function MachineShowcase() {
             >
               <SiteImage src={machine.image} alt="" />
               <span>
-                <small>{machine.brand}{machine.incoming ? " · In arrivo" : ""}</small>
+                <small>{machine.brand}</small>
                 <b>{machine.name}</b>
               </span>
             </a>
@@ -322,7 +322,7 @@ export default function MachineShowcase() {
           <a
             key={machine.id}
             href={`#${machine.id}`}
-            className={`${machine.incoming ? styles.incomingCard : ""} ${activeMachine === machine.id ? styles.menuActive : ""}`.trim()}
+            className={activeMachine === machine.id ? styles.menuActive : undefined}
             onClick={(event) => {
               event.preventDefault();
               focusMachine(machine.id);
@@ -560,32 +560,25 @@ export default function MachineShowcase() {
       </div>
     </article>
 
-    <section className={`${styles.incomingBanner} ${styles.reveal}`} aria-label="Prossimo arrivo">
+    <section className={`${styles.incomingBanner} ${styles.reveal}`} aria-label="Appena arrivata">
       <div>
-        <p className={styles.eyebrow}><span></span> Prossimo arrivo</p>
-        <h2>LA VERTICALE<br/><em>STA ARRIVANDO.</em></h2>
-        <p>Panatta Super Vertical Leg Press 1FW093: caricamento a dischi, pedana e schienale regolabili, finecorsa di sicurezza. Non è ancora in sala — ma la scheda tecnica è già qui.</p>
+        <p className={styles.eyebrow}><span></span> Appena arrivata</p>
+        <h2>LA VERTICALE<br/><em>È IN SALA.</em></h2>
+        <p>Panatta Super Vertical Leg Press 1FW093: caricamento a dischi, pedana e schienale regolabili, finecorsa di sicurezza. È installata nell’area gambe e già nel catalogo.</p>
       </div>
-      <a
-        href="#super-vertical-leg-press"
-        className={styles.primary}
-        onClick={(event) => {
-          event.preventDefault();
-          focusMachine("super-vertical-leg-press");
-        }}
-      >
-        Apri la scheda <span>↓</span>
-      </a>
+      <Link href="/macchine/gambe/super-vertical-leg-press-panatta" className={styles.primary}>
+        Apri la scheda gambe <span>↗</span>
+      </Link>
     </section>
 
-    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.incomingProfile} ${styles.reveal}`} id="super-vertical-leg-press">
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.reveal}`} id="super-vertical-leg-press">
       <div className={styles.profileHero}>
-        <div><span className={styles.pulseBadge}>08 · IN ARRIVO A REVENGE GYM</span><small>PANATTA · FREEWEIGHT SPECIAL 1FW093</small><h2>SUPER VERTICAL<br/><em>LEG PRESS.</em></h2><p>La nuova protagonista dell’area gambe è in arrivo: traiettoria guidata, regolazioni evolute e caricamento a dischi.</p></div>
-        <figure className={styles.productPhoto}><SiteImage src="/media/new-machines/panatta-super-vertical-leg-press.webp" alt="Super Vertical Leg Press Panatta 1FW093"/><figcaption>Panatta 1FW093 · immagine del modello · macchina in arrivo</figcaption></figure>
+        <div><span className={styles.pulseBadge}>08 · IN SALA A REVENGE GYM</span><small>PANATTA · FREEWEIGHT SPECIAL 1FW093</small><h2>SUPER VERTICAL<br/><em>LEG PRESS.</em></h2><p>La nuova protagonista dell’area gambe è in sala: traiettoria guidata, regolazioni evolute e caricamento a dischi.</p></div>
+        <figure className={styles.productPhoto}><SiteImage src="/photos/machines/gambe/super-vertical-leg-press-panatta.webp" alt="Super Vertical Leg Press Panatta nella sala Revenge Gym"/><figcaption>Panatta 1FW093 · foto dalla sala · Revenge Gym Ladispoli</figcaption></figure>
       </div>
       {mobileDetailsButton("super-vertical-leg-press", "Super Vertical Leg Press")}
       <div id="super-vertical-leg-press-details" className={`${styles.profileBody} ${expandedMachine === "super-vertical-leg-press" ? styles.profileBodyOpen : ""}`}>
-        <section className={styles.leadSection}><p>La Panatta Super Vertical Leg Press 1FW093 entrerà prossimamente nella dotazione di Revenge Gym. È una pressa professionale a dischi nella quale l’atleta spinge il carrello lungo una traiettoria quasi verticale, con schienale, pedana e finecorsa regolabili. La scheda descrive il modello ufficiale; configurazione e optional presenti in palestra saranno confermati dopo l’installazione.</p><div className={styles.rating}><span>VALUTAZIONE TECNICA</span><strong>5/5</strong><i>★★★★★</i></div></section>
+        <section className={styles.leadSection}><p>La Panatta Super Vertical Leg Press 1FW093 è in sala a Revenge Gym. È una pressa professionale a dischi nella quale l’atleta spinge il carrello lungo una traiettoria quasi verticale, con schienale, pedana e finecorsa regolabili. La scheda tecnica resta quella ufficiale del modello; la foto è scattata sulla macchina installata.</p><div className={styles.rating}><span>VALUTAZIONE TECNICA</span><strong>5/5</strong><i>★★★★★</i></div></section>
 
         <div className={styles.contentGrid}>
           <section><small>01 · MUSCOLI COINVOLTI</small><h3>SPINTA VERTICALE.<br/>GAMBE COMPLETE.</h3><div className={styles.dualList}><div><b>PRINCIPALI</b><p>Quadricipite femorale</p><p>Grande gluteo</p></div><div><b>IN ASSISTENZA</b><p>Ischiocrurali</p><p>Adduttori</p><p>Gastrocnemio e soleo</p><p>Muscoli stabilizzatori del tronco</p></div></div></section>
@@ -602,12 +595,12 @@ export default function MachineShowcase() {
         <section className={styles.positions}><div><small>06 · POSIZIONE DEI PIEDI</small><h3>UNA GRANDE PEDANA.<br/><em>PIÙ ASSETTI POSSIBILI.</em></h3></div><div className={styles.positionGrid}>{footPositions.map(([title,text], index) => <div key={title}><span>0{index+1}</span><strong>{title}</strong><p>{text}</p></div>)}</div><p className={styles.positionNote}>Altezza, larghezza e inclinazione dei piedi modificano soprattutto angoli articolari, comfort e contributo relativo dei muscoli. Non isolano completamente una singola porzione della gamba: scegli sempre un appoggio stabile e compatibile con la tua mobilità.</p></section>
 
         <div className={styles.contentGrid}>
-          <section><small>07 · VERTICALE O ORIZZONTALE?</small><h3>DUE PRESSE.<br/>DUE ESPERIENZE.</h3><p>La pressa orizzontale Life Fitness già presente e la nuova Panatta non sono doppioni. Cambiano orientamento, tipo di carico, regolazioni e sensazione di spinta; possono quindi occupare ruoli diversi nello stesso programma.</p><ul><li>Panatta con caricamento a dischi</li><li>Traiettoria quasi verticale e carrello guidato</li><li>Life Fitness con selezione rapida del carico</li><li>Entrambe da regolare sulla persona</li></ul></section>
+          <section><small>07 · VERTICALE O ORIZZONTALE?</small><h3>DUE PRESSE.<br/>DUE ESPERIENZE.</h3><p>La pressa orizzontale Life Fitness e la Panatta verticale non sono doppioni. Cambiano orientamento, tipo di carico, regolazioni e sensazione di spinta; possono quindi occupare ruoli diversi nello stesso programma.</p><ul><li>Panatta con caricamento a dischi</li><li>Traiettoria quasi verticale e carrello guidato</li><li>Life Fitness con selezione rapida del carico</li><li>Entrambe da regolare sulla persona</li></ul></section>
           <section className={styles.errorPanel}><small>08 · ERRORI DA EVITARE</small><h3>800 KG È UN LIMITE.<br/>NON UN OBIETTIVO.</h3><ul>{verticalErrors.map(item => <li key={item}>{item}</li>)}</ul></section>
         </div>
 
-        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>CONOSCI LA MACCHINA.<br/><em>POI AUMENTA.</em></h3></div><blockquote>“Quando arriverà, impara prima regolazioni, leva di sicurezza e finecorsa con un carico gestibile. Profondità e peso contano soltanto se bacino, piedi e ginocchia restano sotto controllo.”</blockquote></section>
-        <section className={styles.safety}><strong>IN ARRIVO · FONTE UFFICIALE</strong><p>La macchina non è ancora utilizzabile in sala. Dati e caratteristiche provengono dalla scheda Panatta del modello 1FW093; colori e optional effettivi saranno verificati dopo consegna e montaggio.</p><a href="https://www.panattasport.com/it/free-weight-special/super-vertical-leg-press/" target="_blank" rel="noreferrer">Scheda ufficiale Panatta <span>↗</span></a></section>
+        <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>CONOSCI LA MACCHINA.<br/><em>POI AUMENTA.</em></h3></div><blockquote>“Impara prima regolazioni, leva di sicurezza e finecorsa con un carico gestibile. Profondità e peso contano soltanto se bacino, piedi e ginocchia restano sotto controllo.”</blockquote></section>
+        <section className={styles.safety}><strong>IN SALA · FONTE UFFICIALE</strong><p>La macchina è utilizzabile in sala. Dati e caratteristiche provengono dalla scheda Panatta del modello 1FW093. Il carico massimo dichiarato non è un obiettivo di allenamento.</p><p><Link href="/macchine/gambe/super-vertical-leg-press-panatta">Scheda nel gruppo gambe <span>↗</span></Link></p><a href="https://www.panattasport.com/it/free-weight-special/super-vertical-leg-press/" target="_blank" rel="noreferrer">Scheda ufficiale Panatta <span>↗</span></a></section>
       </div>
     </article>
 

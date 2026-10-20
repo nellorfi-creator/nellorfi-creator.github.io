@@ -25,6 +25,7 @@ const ILLUSTRATION_BY_ID: Record<string, LegIllustrationType> = {
   "pressa-orizzontale-life-fitness": "pressa-orizzontale",
   "pressa-45-life-fitness": "pressa-angolata",
   "v-squat-life-fitness": "pressa-angolata",
+  "super-vertical-leg-press-panatta": "pressa-angolata",
   "hack-squat-gymleco": "hack-squat",
   "hack-squat-pendulum": "hack-squat",
   "belt-squat": "belt-squat",
@@ -79,6 +80,11 @@ const SETUP_BY_ID: Record<string, string[]> = {
     "Spalle e schiena salde sugli appoggi prima di sbloccare",
     "Piede intero in appoggio per tutta la corsa",
     "Impara la traiettoria a carico leggero",
+  ],
+  "super-vertical-leg-press-panatta": [
+    "Regola schienale, pedana e finecorsa prima di sbloccare",
+    "Bacino e schiena aderenti allo schienale per tutta la serie",
+    "Piede intero in appoggio, ginocchia sulla linea delle punte",
   ],
   "hack-squat-gymleco": [
     "Testa, schiena e bacino a contatto con i supporti",

@@ -179,8 +179,61 @@ export const legMachines: LegMachine[] = [
       "Usa il V-Squat per imparare a spingere con qualità da club professionale. La profondità si guadagna, non si forza — e la macchina giusta rende ogni centimetro più produttivo.",
   },
   {
-    id: "hack-squat-gymleco",
+    id: "super-vertical-leg-press-panatta",
     number: "04",
+    name: "Super Vertical Leg Press",
+    brand: "Panatta",
+    category: "Presse e spinta",
+    image: "/photos/machines/gambe/super-vertical-leg-press-panatta.webp",
+    alt: "Super Vertical Leg Press Panatta nella sala Revenge Gym",
+    tagline: "Spinta quasi verticale, dischi e regolazioni da club.",
+    brandNote: [
+      "Panatta Sport è un marchio italiano di riferimento per le macchine da forza professionali. La Super Vertical Leg Press, modello FreeWeight Special 1FW093, è pensata per sale che vogliono una pressa a dischi seria: struttura pesante, traiettoria guidata e regolazioni che si adattano alla persona, non il contrario.",
+      "Schienale su tre inclinazioni, pedana antiscivolo 80 × 60 cm su quattro assetti, finecorsa di sicurezza su cinque posizioni e una leva che facilita lo sblocco del carrello. Il carrello a vuoto pesa 90 kg; il carico massimo dichiarato dal costruttore è 800 kg.",
+      "A Revenge Gym questa Panatta entra nell’area gambe accanto alle presse Life Fitness. Non è un doppione: cambia orientamento, tipo di carico e sensazione di spinta. È il tipo di macchina che si sceglie quando la sala vuole un altro modo, altrettanto professionale, di costruire forza sugli arti inferiori.",
+    ],
+    lead: [
+      "La Super Vertical Leg Press guida il carrello lungo una traiettoria quasi verticale. L’atleta spinge con schiena e bacino aderenti allo schienale, i piedi sulla pedana ampia, e può variare l’angolo di lavoro senza uscire da un percorso ripetibile.",
+      "È uno strumento da forza e da ipertrofia: quadricipiti e grande gluteo fanno il lavoro principale, con ischiocrurali, adduttori e polpacci in assistenza a seconda di altezza, larghezza e inclinazione dei piedi. Il caricamento a dischi rende le progressioni chiare e piccole.",
+      "In sala si usa come pressa primaria o come variante rispetto all’orizzontale e alla 45°. La qualità sta nel setup: prima si scelgono schienale, pedana e finecorsa, poi si sblocca, poi si spinge. Il carico arriva dopo, non prima.",
+    ],
+    qualityEdge:
+      "Una Panatta 1FW093 fotografata in sala, non in catalogo. Revenge aggiunge una verticale a dischi alle presse già presenti: stessa cura, un’altra traiettoria, un altro modo di progredire.",
+    focus: "Spinta verticale guidata per forza e massa",
+    primaryMuscles: ["Quadricipite femorale", "Grande gluteo"],
+    secondaryMuscles: ["Ischiocrurali", "Adduttori", "Gastrocnemio e soleo", "Stabilizzatori del tronco"],
+    trainingRole: [
+      "Esercizio primario di spinta nelle sedute gambe",
+      "Variante rispetto a pressa orizzontale, 45° e V-Squat",
+      "Progressioni a dischi con finecorsa e leva di sicurezza",
+      "Volume su quadricipiti e glutei senza gestire l’equilibrio di uno squat libero",
+    ],
+    cues: [
+      "Scegli inclinazione dello schienale, assetto della pedana e altezza dei finecorsa prima di sederti",
+      "Bacino e schiena restano aderenti al supporto per tutta la serie",
+      "Piede intero in appoggio, ginocchia sulla linea delle punte",
+      "Scendi solo fin dove controlli il ritorno, poi spingi senza bloccare le ginocchia",
+      "Riaggancia la sicura prima di uscire dalla macchina",
+    ],
+    programming: [
+      "Forza: 4×5–8 con dischi equilibrati e recupero completo",
+      "Ipertrofia: 3–4×8–12, discesa controllata di circa 2″",
+      "Dopo squat o hack squat: 3×10 come volume secondario",
+      "Prime sedute: carico gestibile, solo per imparare leva, finecorsa e profondità",
+    ],
+    errors: [
+      "Staccare bacino o zona lombare dallo schienale sotto carico",
+      "Scendere oltre l’escursione che si riesce a controllare",
+      "Far collassare le ginocchia verso l’interno",
+      "Rimbalzare in basso o bloccare violentemente le ginocchia in alto",
+      "Trattare gli 800 kg dichiarati come un obiettivo di allenamento",
+    ],
+    trainer:
+      "Impara prima regolazioni, leva di sicurezza e finecorsa. Profondità e peso contano soltanto se bacino, piedi e ginocchia restano sotto controllo. La verticale non perdona l’assetto improvvisato: quando il setup è solido, la spinta diventa pulita.",
+  },
+  {
+    id: "hack-squat-gymleco",
+    number: "05",
     name: "Hack Squat",
     brand: "Gymleco",
     category: "Presse e spinta",
@@ -232,7 +285,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "hack-squat-pendulum",
-    number: "05",
+    number: "06",
     name: "Hack Squat Pendulum",
     brand: "Pendulum",
     category: "Presse e spinta",
@@ -284,7 +337,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "belt-squat",
-    number: "06",
+    number: "07",
     name: "Belt Squat",
     brand: "Plate Loaded",
     category: "Presse e spinta",
@@ -336,7 +389,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "dual-leg-curl-extension-panatta",
-    number: "07",
+    number: "08",
     name: "Leg Curl / Leg Extension",
     brand: "Panatta",
     category: "Isolamento cosce",
@@ -388,7 +441,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "leg-extension-teca",
-    number: "08",
+    number: "09",
     name: "Leg Extension",
     brand: "Teca",
     category: "Isolamento cosce",
@@ -440,7 +493,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "leg-curl-teca",
-    number: "09",
+    number: "10",
     name: "Leg Curl",
     brand: "Teca",
     category: "Isolamento cosce",
@@ -492,7 +545,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "standing-leg-curl",
-    number: "10",
+    number: "11",
     name: "Standing Leg Curl",
     brand: "Sala Revenge",
     category: "Isolamento cosce",
@@ -544,7 +597,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "lunge-deadlift-machine",
-    number: "11",
+    number: "12",
     name: "Lunge / Deadlift Machine",
     brand: "Plate Loaded",
     category: "Funzionale guidato",
@@ -596,7 +649,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "sissy-squat",
-    number: "12",
+    number: "13",
     name: "Sissy Squat",
     brand: "Plate Loaded",
     category: "Funzionale guidato",
@@ -648,7 +701,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "calf-machine-hammer",
-    number: "13",
+    number: "14",
     name: "Calf Machine",
     brand: "Hammer Strength",
     category: "Polpacci",
@@ -700,7 +753,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "smith-machine-hammer",
-    number: "14",
+    number: "15",
     name: "Smith Machine",
     brand: "Hammer Strength",
     category: "Multi-uso gambe",
@@ -752,7 +805,7 @@ export const legMachines: LegMachine[] = [
   },
   {
     id: "rack-hammer",
-    number: "15",
+    number: "16",
     name: "Rack",
     brand: "Hammer Strength",
     category: "Multi-uso gambe",
