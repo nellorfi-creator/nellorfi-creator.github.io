@@ -10,10 +10,24 @@ export type GoogleReview = {
 export const GOOGLE_REVIEWS_URL =
   "https://www.google.com/maps/place/PALESTRA+Revenge+GYM/@41.9576599,12.085695,17z/data=!4m8!3m7!1s0x132f55238ac55763:0xff27476fde67d78!8m2!3d41.9576599!4d12.085695!9m1!1b1";
 
-export const GOOGLE_REVIEW_COUNT = 29;
+export const GOOGLE_REVIEW_COUNT = 31;
 export const GOOGLE_REVIEW_AVERAGE = 4.8;
 
 export const googleReviews: GoogleReview[] = [
+  {
+    id: "jacopo",
+    author: "Jacopo",
+    rating: 5,
+    relativeDate: "1 giorno fa",
+    text: "La mecca di Ladispoli.",
+  },
+  {
+    id: "aniello-chierchia",
+    author: "Aniello Chierchia",
+    rating: 5,
+    relativeDate: "3 giorni fa",
+    text: "Palestra fantastica, molto pulita ed ordinata con i manubri perfettamente disposti nel loro alloggio in ordine di carico crescente (una vera rarità per i frequentatori di palestre), attrezzi di ultima generazione, personale estremamente cortese e disponibile.",
+  },
   {
     id: "silvia-silvia",
     author: "Silvia Silvia",
