@@ -34,20 +34,34 @@ const areas: { area: MachineArea; label: string; machines: Machine[] }[] = [
   { area: "gambe", label: "Gambe", machines: legMachines },
 ];
 
-export const machineCatalog: CatalogMachine[] = areas.flatMap(({ area, label, machines }) =>
-  machines.map((machine) => ({
-    key: `${area}-${machine.id}`,
-    id: machine.id,
-    name: machine.name,
-    brand: machine.brand,
-    category: machine.category,
-    image: machine.image,
-    alt: machine.alt,
-    area,
-    areaLabel: label,
-    href: `/macchine/${area}/${machine.id}`,
-  })),
-);
+export const machineCatalog: CatalogMachine[] = [
+  ...areas.flatMap(({ area, label, machines }) =>
+    machines.map((machine) => ({
+      key: `${area}-${machine.id}`,
+      id: machine.id,
+      name: machine.name,
+      brand: machine.brand,
+      category: machine.category,
+      image: machine.image,
+      alt: machine.alt,
+      area,
+      areaLabel: label,
+      href: `/macchine/${area}/${machine.id}`,
+    })),
+  ),
+  {
+    key: "nuove-hoist-rs-1201-lat-pulldown",
+    id: "hoist-lat-pulldown",
+    name: "RS-1201 Lat Pulldown ROC-IT",
+    brand: "Hoist Fitness",
+    category: "Trazione verticale dinamica · In arrivo fine dicembre",
+    image: "/media/new-machines/hoist-rs-1201-lat-pulldown.webp",
+    alt: "HOIST Fitness RS-1201 ROC-IT Lat Pulldown in arrivo a Revenge Gym",
+    area: "dorso",
+    areaLabel: "Dorso · In arrivo fine dicembre",
+    href: "/nuove-macchine#hoist-lat-pulldown",
+  },
+];
 
 export type BrandSearchItem = {
   name: string;

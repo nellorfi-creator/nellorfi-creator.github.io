@@ -10,8 +10,21 @@ import styles from "./page.module.css";
 import MobileSwipeBack from "@/app/components/mobile-swipe-back";
 import { BoxingGloveIcon } from "@/app/components/boxing-glove-icon";
 import { bodyZones } from "@/lib/body-zones";
+import HoistRocItLab from "./hoist-roc-it-lab";
 
-const machines = [
+type ShowcaseMachine = {
+  id: string;
+  number: string;
+  name: string;
+  brand: string;
+  status: string;
+  ready: boolean;
+  incoming?: boolean;
+  image: string;
+  alt: string;
+};
+
+const machines: ShowcaseMachine[] = [
   { id: "pressa-life-fitness", number: "01", name: "Pressa Orizzontale", brand: "Life Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/life-fitness-leg-press.webp", alt: "Pressa orizzontale Life Fitness nella sala Revenge Gym" },
   { id: "leg-curl-extension", number: "02", name: "Leg Curl / Leg Extension", brand: "Panatta", status: "Disponibile", ready: true, image: "/media/new-machines/panatta-dual-leg-extension-curl.webp", alt: "Dual Leg Extension e Seated Leg Curling Panatta nella sala Revenge Gym" },
   { id: "hack-squat", number: "03", name: "Hack Squat", brand: "Gymleco", status: "Disponibile", ready: true, image: "/media/new-machines/gymleco-hacklift.webp", alt: "Hack Squat Gymleco 244 nella sala Revenge Gym" },
@@ -20,6 +33,7 @@ const machines = [
   { id: "incline-chest-press", number: "06", name: "Incline Chest Press", brand: "Hoist Fitness", status: "Disponibile", ready: true, image: "/media/new-machines/hoist-incline-chest-press.webp", alt: "Incline Chest Press Hoist ROC-IT nella sala Revenge Gym" },
   { id: "hip-thrust-sidea", number: "07", name: "Hip Thrust", brand: "Sidea", status: "Disponibile", ready: true, image: "/media/new-machines/sidea-hip-thrust.webp", alt: "Hip Thrust Sidea nella sala Revenge Gym" },
   { id: "super-vertical-leg-press", number: "08", name: "Super Vertical Leg Press", brand: "Panatta", status: "Disponibile", ready: true, image: "/photos/machines/gambe/super-vertical-leg-press-panatta.webp", alt: "Super Vertical Leg Press Panatta nella sala Revenge Gym" },
+  { id: "hoist-lat-pulldown", number: "09", name: "RS-1201 Lat Pulldown", brand: "Hoist Fitness", status: "In arrivo · Fine dicembre", ready: true, incoming: true, image: "/media/new-machines/hoist-rs-1201-lat-pulldown.webp", alt: "HOIST Fitness RS-1201 ROC-IT Lat Pulldown in arrivo a Revenge Gym" },
 ];
 
 const primaryMuscles = ["Quadricipite femorale", "Grande gluteo", "Bicipite femorale", "Semitendinoso", "Semimembranoso"];
@@ -46,12 +60,57 @@ const verticalErrors = ["Staccare bacino o schiena dal supporto", "Scendere oltr
 const hipThrustPurposes = ["Sviluppare forza e volume nel grande gluteo", "Allenare l’estensione dell’anca con bilanciere in sicurezza", "Ridurre i tempi di setup rispetto a panca e bilanciere improvvisati", "Progredire con dischi su una stazione dedicata", "Completare squat, presse e affondi con un lavoro mirato"];
 const hipThrustErrors = ["Inarcare eccessivamente la lombare in chiusura", "Spingere soprattutto con i quadricipiti dimenticando l’anca", "Posizionare male le scapole sul rullo", "Usare un ROM incompleto solo per caricare di più", "Lasciare scivolare i piedi sulla piattaforma", "Caricare i due lati in modo sbilanciato"];
 
+const hoistLatPurposes = [
+  "Costruire ampiezza e spessore del grande dorsale con traiettoria naturale",
+  "Ottenere un pre-stretch superiore su dorsali e trapezi nella partenza inclinata",
+  "Replicare la biomeccanica reale di una trazione libera alla sbarra (chin-up)",
+  "Attivare il complesso lombo-pelvico (Core / LPHC) grazie al baricentro dinamico",
+  "Lavorare bilateralmente oppure a braccio singolo con maniglie auto-allineanti",
+];
+const hoistLatErrors = [
+  "Salire o scendere dalla postazione prima che la seduta sia completamente ferma",
+  "Staccare i piedi dalle pedane durante l’oscillazione del carrello",
+  "Tirare di bicipiti e avambracci invece di guidare i gomiti verso i fianchi",
+  "Inarcare forzatamente la zona lombare invece di assecondare il sistema ROX™",
+  "Lasciare ricadere di colpo il pacco pesi nella fase eccentrica",
+  "Scegliere un carico che impedisce di portare le maniglie fino al livello del mento",
+];
+const hoistLatGrips = [
+  ["Larga prona", "Enfasi sull’ampiezza del grande dorsale e del grande rotondo"],
+  ["Neutra convergente", "Allineamento naturale dei polsi e corsa profonda dei gomiti"],
+  ["Supina stretta", "Maggiore contributo dei flessori del gomito e allungamento toracico"],
+  ["Unilaterale", "Correzione delle asimmetrie lavorando un lato alla volta"],
+  ["Pre-Stretch +11°", "Partenza inclinata per allungare dorsali e trapezi prima della tirata"],
+] as const;
+const hoistHistory = [
+  [
+    "1977",
+    "San Diego · Le origini",
+    "Tutto inizia al Coast Health Studio in California: Randall “Randy” T. Webber e Jeff Partrick, insoddisfatti delle macchine rigide dell’epoca, studiano ingegneria e manifattura per creare attrezzature modellate sul corpo umano.",
+  ],
+  [
+    "1980–1985",
+    "Solana Beach & Club Line",
+    "HOIST apre lo stabilimento produttivo a Solana Beach nel 1980 e nel 1985 lancia il primo circuito professionale selectorized, entrando nelle università americane, nei club e nei centri atletici militari e pro.",
+  ],
+  [
+    "2003–2008",
+    "Il Brevetto US 7,361,125",
+    "Il 3 novembre 2003 Webber, Bruce Hockridge e Jeffrey O. Meredith depositano il brevetto della RS-1201: un leveraggio sincronizzato che collega braccio di tirata e seduta per riprodurre l’arco naturale del busto nelle trazioni libere.",
+  ],
+  [
+    "FINE DIC. 2026",
+    "L’arrivo a Revenge Gym",
+    "Con oltre 20.000 installazioni nel mondo e la tecnologia ROX™ (Ride Oriented Xercise), la RS-1201 entra nell’area dorso di Ladispoli accanto alla sorella ROC-IT Incline Chest Press RPL-5303.",
+  ],
+] as const;
+
 const brandTicker =
-  "ULTIMI ARRIVI · LIFE FITNESS · PANATTA · GYMLECO · STAR TRAC · NAUTILUS · HOIST · SIDEA · REVENGE · ";
+  "ULTIMI ARRIVI · HOIST RS-1201 IN ARRIVO · LIFE FITNESS · PANATTA · GYMLECO · STAR TRAC · NAUTILUS · SIDEA · REVENGE · ";
 
 const arrivalPillars = [
   ["08", "IN SALA", "Macchine nuove già installate e utilizzabili."],
-  ["01", "APPENA ARRIVATA", "Super Vertical Leg Press Panatta ora in area gambe."],
+  ["01", "FINE DICEMBRE", "HOIST Fitness RS-1201 Lat Pulldown ROC-IT in arrivo per il dorso."],
   ["∞", "CATALOGO", "Il parco completo resta nel menu per gruppi muscolari."],
 ] as const;
 
@@ -65,7 +124,7 @@ export default function MachineShowcase() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMachine, setActiveMachine] = useState(machines[0].id);
-  const [expandedMachine, setExpandedMachine] = useState<string | null>(null);
+  const [expandedMachine, setExpandedMachine] = useState<string | null>("hoist-lat-pulldown");
   const [zonesOpen, setZonesOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const railLoop = [...machines, ...machines];
@@ -126,6 +185,7 @@ export default function MachineShowcase() {
     const scrollToMachine = (id: string, smooth: boolean) => {
       if (!isMachineId(id)) return;
       setActiveMachine(id);
+      setExpandedMachine(id);
       const run = () => {
         const target = revealMachine(id);
         if (!target) return;
@@ -168,6 +228,7 @@ export default function MachineShowcase() {
   const focusMachine = (id: string) => {
     if (!isMachineId(id)) return;
     setActiveMachine(id);
+    setExpandedMachine(id);
     window.history.pushState(null, "", `#${id}`);
     requestAnimationFrame(() => {
       const article = document.getElementById(id);
@@ -241,25 +302,27 @@ export default function MachineShowcase() {
       <div className={styles.heroContent}>
         <p className={styles.eyebrow}><span></span> Ultimi arrivi · 2025–2026</p>
         <h1>PIÙ SCELTA.<br/><em>PIÙ FORZA.</em><br/>PIÙ <em>REVENGE.</em></h1>
-        <p>Non è il catalogo della palestra: è la vetrina degli ultimi arrivi. Otto macchine nuove già in sala, compresa la Panatta Super Vertical Leg Press.</p>
+        <p>Non è il catalogo della palestra: è la vetrina degli ultimi arrivi. Otto macchine nuove già in sala e la <strong>HOIST Fitness RS-1201 Lat Pulldown ROC-IT®</strong> in arrivo a fine dicembre con guida animata e laboratorio interattivo.</p>
         <div className={styles.heroActions}>
-          <a href="#machine-rail" className={styles.primary}>Vedi gli ultimi arrivi <span>↓</span></a>
           <a
-            href="#super-vertical-leg-press"
-            className={styles.ghost}
+            href="#hoist-lat-pulldown"
+            className={styles.primary}
             onClick={(event) => {
               event.preventDefault();
-              focusMachine("super-vertical-leg-press");
+              focusMachine("hoist-lat-pulldown");
             }}
           >
-            Super Vertical <span>↗</span>
+            Novità Fine Dicembre · RS-1201 <span>↓</span>
+          </a>
+          <a href="#machine-rail" className={styles.ghost}>
+            Tutti gli ultimi arrivi <span>↓</span>
           </a>
         </div>
       </div>
       <div className={styles.heroStats}>
         <div><strong>08</strong><span>Ultimi arrivi in sala</span></div>
-        <div><strong>16</strong><span>Macchine nell’area gambe</span></div>
-        <div><strong>08</strong><span>Schede tecniche</span></div>
+        <div><strong>01</strong><span>In arrivo · Fine Dic.</span></div>
+        <div><strong>09</strong><span>Schede tecniche</span></div>
       </div>
     </section>
 
@@ -276,8 +339,8 @@ export default function MachineShowcase() {
         <h2>NON UN CATALOGO.<br/><em>UNA VETRINA.</em></h2>
       </div>
       <div className={styles.arrivalCopy}>
-        <p className={styles.lead}>Revenge aggiorna la sala con marchi professionali, non con pezzi da riempire. Qui trovi solo ciò che è entrato di recente, già installato e utilizzabile.</p>
-        <p>Il menu Per gruppi muscolari resta il percorso completo. Questa pagina racconta il momento: nuove postazioni, nuovo ritmo, stessa ossessione per la qualità.</p>
+        <p className={styles.lead}>Revenge aggiorna la sala con marchi professionali, non con pezzi da riempire. Qui trovi ciò che è entrato di recente — e l’anteprima tecnica di ciò che sta per arrivare.</p>
+        <p>Il menu Per gruppi muscolari resta il percorso completo. Questa pagina racconta il momento: otto postazioni già attive in sala più la HOIST RS-1201 Lat Pulldown attesa per fine dicembre.</p>
       </div>
       <div className={styles.pillars}>
         {arrivalPillars.map(([number, title, text]) => (
@@ -297,7 +360,7 @@ export default function MachineShowcase() {
             <a
               key={`${machine.id}-${index}`}
               href={`#${machine.id}`}
-              className={`${styles.railCard}${activeMachine === machine.id ? ` ${styles.railCardActive}` : ""}`}
+              className={`${styles.railCard}${machine.incoming ? ` ${styles.railCardIncoming}` : ""}${activeMachine === machine.id ? ` ${styles.railCardActive}` : ""}`}
               aria-label={`${machine.name} · ${machine.brand}`}
               onClick={(event) => {
                 event.preventDefault();
@@ -306,7 +369,7 @@ export default function MachineShowcase() {
             >
               <SiteImage src={machine.image} alt="" />
               <span>
-                <small>{machine.brand}</small>
+                <small>{machine.brand}{machine.incoming ? " · Fine dicembre" : ""}</small>
                 <b>{machine.name}</b>
               </span>
             </a>
@@ -316,20 +379,37 @@ export default function MachineShowcase() {
     </section>
 
     <section className={`${styles.index} ${styles.reveal}`} id="machine-index">
-      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>APRI LA<br/><em>SCHEDA.</em></h2><p>Scegli la macchina, leggi biomeccanica e consigli del trainer, poi provala in sala. <Link href="/macchine/glutei">Apri il catalogo glutei ↘</Link></p></div>
+      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span></span> Ultimi arrivi · non il catalogo</p><h2>APRI LA<br/><em>SCHEDA.</em></h2><p>Scegli la macchina, esplora biomeccanica, storia e consigli del trainer, poi provala in sala. <Link href="/macchine/dorso">Apri il catalogo dorso ↘</Link></p></div>
       <div className={styles.machineMenu}>
         {machines.map((machine) => (
           <a
             key={machine.id}
             href={`#${machine.id}`}
-            className={activeMachine === machine.id ? styles.menuActive : undefined}
+            className={[
+              machine.incoming ? styles.incomingCardFeatured : "",
+              activeMachine === machine.id ? styles.menuActive : "",
+            ].filter(Boolean).join(" ") || undefined}
             onClick={(event) => {
               event.preventDefault();
               focusMachine(machine.id);
             }}
           >
             <SiteImage src={machine.image} alt="" />
-            <span>{machine.number}</span><small>{machine.brand}</small><strong>{machine.name}</strong><i>{machine.status} ↘</i>
+            {machine.incoming ? (
+              <>
+                <span>{machine.number}</span>
+                <div className={styles.incomingCardCopy}>
+                  <small>{machine.brand} · IN ARRIVO A FINE DICEMBRE</small>
+                  <strong>{machine.name} ROC-IT®</strong>
+                  <p>La lat machine dinamica con tecnologia brevettata ROX™: guida video animata, simulatore interattivo e storia completa del modello.</p>
+                </div>
+                <b className={styles.incomingCardCta}>Apri Motion Lab <span>↘</span></b>
+              </>
+            ) : (
+              <>
+                <span>{machine.number}</span><small>{machine.brand}</small><strong>{machine.name}</strong><i>{machine.status} ↘</i>
+              </>
+            )}
           </a>
         ))}
       </div>
@@ -601,6 +681,190 @@ export default function MachineShowcase() {
 
         <section className={styles.trainer}><div><small>CONSIGLI DEL TRAINER</small><h3>CONOSCI LA MACCHINA.<br/><em>POI AUMENTA.</em></h3></div><blockquote>“Impara prima regolazioni, leva di sicurezza e finecorsa con un carico gestibile. Profondità e peso contano soltanto se bacino, piedi e ginocchia restano sotto controllo.”</blockquote></section>
         <section className={styles.safety}><strong>IN SALA · FONTE UFFICIALE</strong><p>La macchina è utilizzabile in sala. Dati e caratteristiche provengono dalla scheda Panatta del modello 1FW093. Il carico massimo dichiarato non è un obiettivo di allenamento.</p><p><Link href="/macchine/gambe/super-vertical-leg-press-panatta">Scheda nel gruppo gambe <span>↗</span></Link></p><a href="https://www.panattasport.com/it/free-weight-special/super-vertical-leg-press/" target="_blank" rel="noreferrer">Scheda ufficiale Panatta <span>↗</span></a></section>
+      </div>
+    </article>
+
+    <section className={`${styles.incomingBanner} ${styles.reveal}`} aria-label="Prossimo arrivo fine dicembre">
+      <div>
+        <p className={styles.eyebrow}><span></span> Prossimo arrivo · Fine dicembre 2026</p>
+        <h2>LA LAT MACHINE<br/><em>CHE SI MUOVE CON TE.</em></h2>
+        <p>HOIST Fitness RS-1201 ROC-IT® Lat Pulldown: progettata a San Diego con sistema dinamico brevettato ROX™, maniglie auto-allineanti e pacco pesi da 157 kg. Arriva nell’area dorso di Revenge Gym a fine dicembre — ma puoi già studiarla e simularla qui sotto.</p>
+        <div className={styles.arrivalMetaPills}>
+          <span><b>CONSEGNA</b> Fine dicembre 2026</span>
+          <span><b>TECNOLOGIA</b> ROC-IT® / ROX™</span>
+          <span><b>BREVETTO</b> US 7,361,125 B2</span>
+          <span><b>PACCO PESI</b> 157 kg (345 lb)</span>
+        </div>
+      </div>
+      <a
+        href="#hoist-lat-pulldown"
+        className={styles.primary}
+        onClick={(event) => {
+          event.preventDefault();
+          focusMachine("hoist-lat-pulldown");
+        }}
+      >
+        Apri il Motion Lab <span>↓</span>
+      </a>
+    </section>
+
+    <article className={`${styles.profile} ${styles.panattaProfile} ${styles.incomingProfile} ${styles.reveal}`} id="hoist-lat-pulldown">
+      <div className={styles.profileHero}>
+        <div>
+          <span className={styles.pulseBadge}>09 · IN ARRIVO A FINE DICEMBRE · AREA DORSO</span>
+          <small>HOIST FITNESS · ROC-IT® SELECTORIZED RS-1201</small>
+          <h2>RS-1201<br/><em>LAT PULLDOWN.</em></h2>
+          <p>Non una lat machine tradizionale: la seduta oscilla dinamicamente durante la trazione, unendo la libertà biomeccanica delle trazioni alla sbarra alla stabilità di una stazione professionale.</p>
+        </div>
+        <figure className={styles.productPhoto}>
+          <SiteImage src="/media/new-machines/hoist-rs-1201-lat-pulldown.webp" alt="HOIST Fitness RS-1201 ROC-IT Lat Pulldown in arrivo a Revenge Gym"/>
+          <figcaption>HOIST RS-1201 · linea ROC-IT® Selectorized · arrivo previsto fine dicembre</figcaption>
+        </figure>
+      </div>
+      {mobileDetailsButton("hoist-lat-pulldown", "la HOIST RS-1201 Lat Pulldown")}
+      <div id="hoist-lat-pulldown-details" className={`${styles.profileBody} ${expandedMachine === "hoist-lat-pulldown" ? styles.profileBodyOpen : ""}`}>
+        <section className={styles.leadSection}>
+          <p>La HOIST Fitness RS-1201 appartiene alla celebre serie ROC-IT® Selectorized. A differenza delle lat machine a seduta fissa — dove a fine corsa l’atleta è spesso costretto a inarcare la zona lombare per fare spazio alla sbarra — qui un leveraggio brevettato sincronizza il braccio di trazione con il telaio della seduta: parti in leggero allungamento anteriore per stirare dorsali e trapezi, poi l’intera postazione oscilla con te verso un assetto neutro e potente.</p>
+          <div className={styles.rating}><span>VALUTAZIONE TECNICA</span><strong>5/5</strong><i>★★★★★</i></div>
+        </section>
+
+        <HoistRocItLab />
+
+        <section className={styles.historySection} aria-label="Storia di HOIST Fitness e della RS-1201">
+          <div className={styles.historyIntro}>
+            <div>
+              <small>STORIA ED EVOLUZIONE DEL MODELLO</small>
+              <h3>DA SAN DIEGO 1977<br/><em>ALLA SALA REVENGE.</em></h3>
+            </div>
+            <p>Capire da dove nasce la RS-1201 significa capire perché non assomiglia a nessun’altra lat machine. Quasi cinquant’anni di ingegneria californiana condensati in un movimento fluido che trasforma la macchina intorno al corpo umano — non il contrario.</p>
+          </div>
+          <div className={styles.historyGrid}>
+            {hoistHistory.map(([year, title, text]) => (
+              <div className={styles.historyCard} key={year}>
+                <span className={styles.historyYear}>{year}</span>
+                <strong>{title}</strong>
+                <p>{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className={styles.contentGrid}>
+          <section>
+            <small>01 · MUSCOLI COINVOLTI</small>
+            <h3>AMPIEZZA, SPESSORE<br/>E CORE ATTIVO.</h3>
+            <div className={styles.dualList}>
+              <div>
+                <b>PRINCIPALI</b>
+                <p>Grande dorsale</p>
+                <p>Grande rotondo</p>
+                <p>Trapezio medio e inferiore</p>
+              </div>
+              <div>
+                <b>IN ASSISTENZA</b>
+                <p>Bicipite brachiale e brachiale</p>
+                <p>Romboidi e deltoide posteriore</p>
+                <p>Complesso Core / LPHC</p>
+                <p>Stabilizzatori scapolari</p>
+              </div>
+            </div>
+          </section>
+          <section className={styles.darkPanel}>
+            <small>02 · A COSA SERVE</small>
+            <h3>TRAZIONE LIBERA,<br/>GUIDA PERFETTA.</h3>
+            <ul>{hoistLatPurposes.map((item) => <li key={item}>{item}</li>)}</ul>
+          </section>
+        </div>
+
+        <section className={styles.howItWorks}>
+          <div>
+            <small>03 · SCIENZA BIOMECCANICA ROX™</small>
+            <h3>UNISCE TE<br/><em>ALLA MACCHINA.</em></h3>
+          </div>
+          <div>
+            <p>Nelle trazioni libere alla sbarra (<i>chin-up</i>) il busto non sale lungo un binario rigido: descrive un leggero arco naturale per allineare spalle, scapole e gomiti alla linea di forza. Il sistema ROX™ (<i>Ride Oriented Xercise</i>) riproduce esattamente questa cinematica collegando il braccio superiore controbilanciato al fulcro inferiore del carrello.</p>
+            <p>All’inizio della ripetizione il busto si trova in una lieve inclinazione anteriore non supportata dal petto: questo aumenta il pre-stretch su grande dorsale e trapezio e richiede una stabilizzazione naturale del tronco. Mentre tiri le maniglie verso il mento, il carrello bascula dolcemente riducendo le forze di taglio articolari e prevenendo l’iperestensione lombare.</p>
+          </div>
+        </section>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.accentPanel}>
+            <small>04 · PROGETTO HOIST RS-1201</small>
+            <h3>INGEGNERIA<br/>SENZA ATTRITI.</h3>
+            <ul>
+              <li>Tecnologia dinamica brevettata ROC-IT® / ROX™</li>
+              <li>Braccio di esercizio rigido controbilanciato brevettato</li>
+              <li>Maniglie indipendenti auto-allineanti girevoli</li>
+              <li>Funzionalità bilaterale o unilaterale (braccio singolo)</li>
+              <li>Rulli fermacosce imbottiti regolabili e pedane sagomate</li>
+              <li>Torre schermata con porta-borraccia e vano oggetti integrati</li>
+            </ul>
+          </section>
+          <section>
+            <small>05 · DATI UFFICIALI</small>
+            <h3>MODELLO<br/>RS-1201.</h3>
+            <ul>
+              <li>Dimensioni (L × P × H): 167 × 150 × 218 cm (65.5” × 59” × 86”)</li>
+              <li>Peso macchina: 330 kg (728 lb)</li>
+              <li>Pacco pesi integrato: 157 kg (345 lb)</li>
+              <li>Brevetto di riferimento: US Patent 7,361,125 B2</li>
+              <li>Linea: HOIST Commercial ROC-IT® Selectorized</li>
+            </ul>
+          </section>
+        </div>
+
+        <section className={styles.positions}>
+          <div>
+            <small>06 · PRESE E MODALITÀ D’USO</small>
+            <h3>MANIGLIE LIBERE.<br/><em>CINQUE STIMOLI.</em></h3>
+          </div>
+          <div className={styles.positionGrid}>
+            {hoistLatGrips.map(([title, text], index) => (
+              <div key={title}>
+                <span>0{index + 1}</span>
+                <strong>{title}</strong>
+                <p>{text}</p>
+              </div>
+            ))}
+          </div>
+          <p className={styles.positionNote}>Sequenza ufficiale HOIST in 5 passi: 1) Regola il rullo fermacosce sulle cosce · 2) In piedi, impugna le maniglie · 3) Siediti appoggiando entrambi i piedi sulle pedane · 4) Tira le maniglie fino all’altezza del mento guidando dai gomiti · 5) Ritorna lentamente alla posizione iniziale.</p>
+        </section>
+
+        <div className={styles.contentGrid}>
+          <section>
+            <small>07 · FISSA O DINAMICA ROC-IT?</small>
+            <h3>DUE LAT MACHINE.<br/>DUE RUOLI IN SALA.</h3>
+            <p>La Lat Machine Precor classica con barra dritta e la Lateral Front plate-loaded già presenti nell’area dorso non vengono sostituite: vengono affiancate da uno stimolo biomeccanico completamente diverso.</p>
+            <ul>
+              <li>Precor: barra unica tradizionale e assetto fisso</li>
+              <li>Plate-loaded: caricamento a dischi su leve convergenti</li>
+              <li>HOIST RS-1201: seduta oscillante, pre-stretch attivo e pacco da 157 kg</li>
+              <li>Ideale sia per chi impara a sentire il dorsale sia per atleti avanzati</li>
+            </ul>
+          </section>
+          <section className={styles.errorPanel}>
+            <small>08 · ERRORI E AVVERTENZE</small>
+            <h3>ASSECONDARE IL MOTO.<br/>MAI IMPROVVISARE.</h3>
+            <ul>{hoistLatErrors.map((item) => <li key={item}>{item}</li>)}</ul>
+          </section>
+        </div>
+
+        <section className={styles.trainer}>
+          <div>
+            <small>CONSIGLI DEL TRAINER</small>
+            <h3>SENTI L’ALLUNGAMENTO.<br/><em>GUIDA DAI GOMITI.</em></h3>
+          </div>
+          <blockquote>“Nelle prime serie usa un carico moderato per prendere confidenza con l’oscillazione della seduta. Parti lasciando allungare bene le scapole, abbassale prima di flettere le braccia e porta i gomiti verso i fianchi senza mai staccare i piedi dalle pedane.”</blockquote>
+        </section>
+
+        <section className={styles.safety}>
+          <strong>IN ARRIVO · FONTI UFFICIALI</strong>
+          <p>Consegna prevista a Revenge Gym Ladispoli: fine dicembre 2026. Specifiche tecniche, avvertenze d’uso e dati costruttivi sono verificati sulla scheda ufficiale HOIST Fitness RS-1201 e sul brevetto US 7,361,125 B2; finitura telaio e selleria saranno confermate all’installazione in sala.</p>
+          <div className={styles.safetyLinks}>
+            <a href="https://www.hoistfitness.com/pages/rs-1201-lat-pulldown" target="_blank" rel="noreferrer">Scheda ufficiale HOIST <span>↗</span></a>
+            <a href="https://www.youtube.com/watch?v=Gj9lVEstCVE" target="_blank" rel="noreferrer">Video YouTube HOIST <span>↗</span></a>
+          </div>
+        </section>
       </div>
     </article>
 

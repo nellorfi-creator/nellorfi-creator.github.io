@@ -53,7 +53,11 @@
   background:rgba(7,7,7,.55);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
 }
-.machineMenu a:last-child{grid-column:span 2}
+.machineMenu a:last-child{grid-column:1/-1;display:grid;grid-template-columns:220px 1fr auto;align-items:center;gap:28px;min-height:210px}
+.machineMenu a:last-child>img{height:175px;margin:0}
+.machineMenu a:last-child>span{position:absolute;top:20px;left:24px}
+.machineMenu a:last-child>small{margin-top:0}
+.machineMenu a:last-child>strong{margin:6px 0 0}
 @media(max-width:900px){
   .nav nav{padding-bottom:76px}
   .profileToggle{display:flex;width:calc(100% - 44px);min-height:58px;margin:0 22px 44px;padding:0 18px;align-items:center;justify-content:space-between;color:#fff;background:var(--orange);border:0;font:800 11px var(--font-inter);letter-spacing:.8px;text-align:left;text-transform:uppercase}
@@ -61,10 +65,12 @@
   .profileBody{display:none}
   .profileBodyOpen{display:block}
   .machineMenu{gap:10px}
-  .machineMenu a:last-child{grid-column:span 2}
+  .machineMenu a:last-child{grid-column:1/-1;grid-template-columns:150px 1fr;gap:18px}
 }
 @media(max-width:560px){
-  .machineMenu a:last-child{grid-column:auto}
+  .machineMenu a:last-child{grid-column:auto;display:flex;min-height:280px}
+  .machineMenu a:last-child>span{position:static}
+  .machineMenu a:last-child>img{height:155px;margin:0 0 18px}
 }
 
 /* ——— Presence layer: motion, rail, marquee, sticky photos ——— */
@@ -238,4 +244,245 @@
   .heroContent h1,.heroContent>p:not(.eyebrow),.heroActions,.heroStats{animation:none!important}
   .reveal{opacity:1;transform:none;transition:none}
   .machineMenu a:hover,.railCard:hover,.railCardActive{transform:none}
+}
+
+/* ——— HOIST RS-1201 ROC-IT® Motion Lab, Dual Cinema & History Timeline ——— */
+.incomingCardFeatured{
+  box-shadow:inset 0 0 0 1px rgba(255,77,0,.55),0 18px 44px rgba(0,0,0,.35)!important;
+  background:radial-gradient(ellipse 65% 95% at 88% 50%,rgba(255,77,0,.22),transparent 65%),rgba(12,9,8,.82)!important;
+}
+.incomingCardCopy{display:flex;flex-direction:column;gap:6px;min-width:0}
+.incomingCardCopy small{color:var(--orange)!important;font-size:10px!important;letter-spacing:1.6px!important}
+.incomingCardCopy strong{margin:2px 0 6px!important;font:900 clamp(26px,2.8vw,44px)/.92 var(--font-barlow)!important;text-transform:uppercase}
+.incomingCardCopy p{margin:0;max-width:640px;color:#c8c8c8;font-size:13px;line-height:1.6}
+.incomingCardCta{
+  display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:0 20px;
+  background:var(--orange);color:#fff;font:800 11px var(--font-inter);letter-spacing:1px;text-transform:uppercase;
+  white-space:nowrap;
+}
+.arrivalMetaPills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.arrivalMetaPills span{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 14px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(10,10,12,.72);
+  color:#e4e4e7;font:700 10px var(--font-inter);letter-spacing:1.1px;text-transform:uppercase;
+}
+.arrivalMetaPills span b{color:var(--orange);font-weight:800}
+
+.rocLab{
+  padding:96px 0;border-bottom:1px solid #292929;
+}
+.rocLabHead{
+  display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:5vw;margin-bottom:44px;
+}
+.rocLabHead small{
+  display:block;color:var(--orange);font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;
+}
+.rocLabHead h3{margin:16px 0 0;font-size:clamp(38px,4.6vw,72px);line-height:.88}
+.rocLabHead p{margin:0;color:#c9c9cf;font-size:15px;line-height:1.75}
+.rocLabHead p strong{color:#fff}
+
+.cinemaCard,.simCard{
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(160deg,rgba(18,18,22,.94),rgba(9,9,11,.96));
+  box-shadow:0 28px 64px rgba(0,0,0,.45);
+}
+.cinemaCard{margin-bottom:36px}
+.cinemaTabs{
+  display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid rgba(255,255,255,.12);background:rgba(6,6,8,.85);
+}
+.cinemaTab,.cinemaTabActive{
+  flex:1 1 260px;min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:0 20px;border:0;border-bottom:3px solid transparent;background:transparent;
+  color:#a1a1aa;font:800 11px var(--font-inter);letter-spacing:1px;text-transform:uppercase;
+  cursor:pointer;transition:color .2s,background .2s,border-color .2s;
+}
+.cinemaTab:hover{color:#fff;background:rgba(255,255,255,.04)}
+.cinemaTabActive{
+  color:#fff;border-bottom-color:var(--orange);background:rgba(255,77,0,.12);
+}
+.cinemaTab:focus-visible,.cinemaTabActive:focus-visible,
+.cinemaControlBtn:focus-visible,.chapterBtn:focus-visible,.chapterBtnActive:focus-visible,
+.ytPlayBtn:focus-visible,.simToggleBtn:focus-visible,.simPresets button:focus-visible,.simRange:focus-visible{
+  outline:2px solid var(--orange);outline-offset:2px;
+}
+
+.cinemaStage{
+  position:relative;width:100%;aspect-ratio:16/9;background:#070709;overflow:hidden;
+}
+.cinemaVideo,.cinemaIframe{
+  display:block;width:100%;height:100%;border:0;object-fit:contain;background:#070709;
+}
+.cinemaOverlayControls{
+  position:absolute;right:18px;bottom:18px;z-index:3;display:flex;flex-wrap:wrap;gap:10px;
+}
+.cinemaControlBtn{
+  min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.26);
+  background:rgba(9,9,12,.86);backdrop-filter:blur(8px);color:#fff;
+  font:800 11px var(--font-inter);letter-spacing:.9px;text-transform:uppercase;cursor:pointer;transition:.2s;
+}
+.cinemaControlBtn:hover{border-color:var(--orange);color:var(--orange-hot)}
+.cinemaControlActive{background:var(--orange);border-color:var(--orange);color:#fff}
+.cinemaControlActive:hover{background:var(--orange-hot);color:#fff}
+
+.chapterBar{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.1);
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.chapterBtn,.chapterBtnActive{
+  min-height:64px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;
+  padding:12px 16px;border:0;background:#0f1014;color:#b4b4bc;text-align:left;cursor:pointer;transition:.2s;
+}
+.chapterBtn:hover{background:#17181f;color:#fff}
+.chapterBtnActive{background:rgba(36,16,10,.95);color:#fff;box-shadow:inset 0 3px 0 var(--orange)}
+.chapterBtn span,.chapterBtnActive span{
+  color:var(--orange);font:800 11px var(--font-barlow);letter-spacing:1.2px;
+}
+.chapterBtn strong,.chapterBtnActive strong{
+  font:700 12px/1.25 var(--font-inter);text-transform:uppercase;letter-spacing:.4px;
+}
+
+.ytPosterFacade{position:relative;width:100%;height:100%;display:grid;place-items:center}
+.ytPosterFacade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55) contrast(1.06)}
+.ytPosterShade{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(9,9,12,.38),rgba(6,6,8,.88))}
+.ytPosterCenter{
+  position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px;
+  padding:24px;text-align:center;max-width:580px;
+}
+.ytKicker{
+  color:var(--orange-hot);font:800 10px var(--font-inter);letter-spacing:1.8px;text-transform:uppercase;
+}
+.ytPosterCenter h4{
+  margin:0;color:#fff;font:900 clamp(26px,3.2vw,44px)/.95 var(--font-barlow);text-transform:uppercase;
+}
+.ytPlayBtn{
+  min-height:54px;display:inline-flex;align-items:center;gap:12px;padding:0 26px;
+  border:0;background:var(--orange);color:#fff;font:800 12px var(--font-inter);
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.22s;
+}
+.ytPlayBtn:hover{background:var(--orange-hot);transform:translateY(-2px)}
+.ytFooterBar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 22px;border-top:1px solid rgba(255,255,255,.1);background:#0c0d10;
+  color:#a1a1aa;font-size:12px;
+}
+.ytFooterBar a{
+  color:var(--orange-hot);font:800 11px var(--font-inter);letter-spacing:.9px;text-transform:uppercase;
+  text-decoration:underline;text-underline-offset:3px;
+}
+
+.simCard{padding:34px}
+.simHeader{
+  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;
+  padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:28px;
+}
+.simHeader small{
+  display:block;color:var(--orange);font:800 10px var(--font-inter);letter-spacing:1.6px;text-transform:uppercase;
+}
+.simHeader h4{
+  margin:8px 0 0;color:#fff;font:900 clamp(28px,3vw,42px)/.95 var(--font-barlow);text-transform:uppercase;
+}
+.simToolbar{display:flex;flex-wrap:wrap;gap:10px}
+.simToggleBtn{
+  min-height:48px;padding:0 16px;border:1px solid rgba(255,255,255,.22);background:#14151b;
+  color:#e4e4e7;font:700 11px var(--font-inter);letter-spacing:.7px;text-transform:uppercase;
+  cursor:pointer;transition:.2s;
+}
+.simToggleBtn:hover{border-color:var(--orange);color:#fff}
+.simToggleOn{border-color:var(--orange);background:rgba(255,77,0,.18);color:#fff}
+.simToggleDanger{border-color:#ef4444;background:rgba(239,68,68,.16);color:#fecaca}
+
+.simGrid{
+  display:grid;grid-template-columns:1.35fr .65fr;gap:28px;align-items:start;
+}
+.simCanvasWrap{display:flex;flex-direction:column;gap:18px}
+.simSvg{
+  display:block;width:100%;height:auto;border:1px solid rgba(255,255,255,.1);border-radius:10px;
+}
+.simScrubberBox{
+  padding:20px 22px;border:1px solid rgba(255,255,255,.12);background:#111217;
+}
+.simScrubberLabels{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;
+}
+.simScrubberLabels label{
+  color:#b4b4bc;font:800 10px var(--font-inter);letter-spacing:1.3px;text-transform:uppercase;
+}
+.simScrubberLabels strong{
+  color:var(--orange-hot);font:800 11px var(--font-inter);letter-spacing:.9px;text-transform:uppercase;
+}
+.simRange{
+  width:100%;height:48px;accent-color:var(--orange);cursor:pointer;background:transparent;
+}
+.simPresets{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;
+}
+.simPresets button{
+  min-height:48px;padding:8px 10px;border:1px solid rgba(255,255,255,.16);background:#181920;
+  color:#e4e4e7;font:700 10.5px var(--font-inter);letter-spacing:.4px;text-transform:uppercase;
+  cursor:pointer;transition:.2s;
+}
+.simPresets button:hover{border-color:var(--orange);color:var(--orange-hot)}
+
+.simMetrics{display:grid;gap:14px}
+.simMetricBox{
+  padding:20px;border:1px solid rgba(255,255,255,.1);background:#111217;
+}
+.simMetricBox span{
+  display:block;color:#a1a1aa;font:800 9.5px var(--font-inter);letter-spacing:1.4px;text-transform:uppercase;
+}
+.simMetricBox strong{
+  display:block;margin:6px 0 10px;color:#fff;font:900 36px/1 var(--font-barlow);
+}
+.simMeter{
+  width:100%;height:7px;background:#262833;overflow:hidden;margin-bottom:10px;
+}
+.simMeter i{display:block;height:100%;background:var(--orange);transition:width .08s linear}
+.simMeterAmber{background:#fbbf24!important}
+.simMeterGreen{background:#34d399!important}
+.simMetricBox p{margin:0;color:#b4b4bc;font-size:12px!important;line-height:1.55!important}
+
+/* Historical Timeline inside Machine Profile */
+.historySection{
+  padding:96px 0;border-bottom:1px solid #292929;
+}
+.historyIntro{
+  display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:6vw;margin-bottom:52px;
+}
+.historyIntro small{
+  display:block;color:var(--orange);font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;
+}
+.historyIntro h3{margin:16px 0 0;font-size:clamp(38px,4.4vw,68px);line-height:.88}
+.historyIntro p{margin:0;color:#c8c8cf;font-size:15px;line-height:1.8}
+.historyGrid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
+}
+.historyCard{
+  padding:28px 24px;background:rgba(10,10,12,.9);display:flex;flex-direction:column;gap:12px;
+}
+.historyYear{
+  color:var(--orange);font:900 32px/1 var(--font-barlow);letter-spacing:.5px;
+}
+.historyCard strong{
+  color:#fff;font:800 18px/1.15 var(--font-barlow);text-transform:uppercase;letter-spacing:.4px;
+}
+.historyCard p{
+  margin:0;color:#b4b4bc!important;font-size:13px!important;line-height:1.7!important;
+}
+.safetyLinks{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+
+@media(max-width:1024px){
+  .simGrid{grid-template-columns:1fr}
+  .historyGrid{grid-template-columns:1fr 1fr}
+  .chapterBar{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .rocLabHead,.historyIntro{grid-template-columns:1fr;gap:20px}
+  .simCard{padding:22px 18px}
+  .incomingCardCta{display:none}
+}
+@media(max-width:560px){
+  .chapterBar,.simPresets,.historyGrid{grid-template-columns:1fr}
+  .cinemaOverlayControls{left:12px;right:12px;bottom:12px}
+  .cinemaControlBtn{flex:1;justify-content:center;padding:0 10px}
 }

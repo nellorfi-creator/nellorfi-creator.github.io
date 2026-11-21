@@ -44,5 +44,9 @@ test("renders core public routes", async () => {
     const html = await response.text();
     assert.match(html, /<title>[^<]*Revenge Gym/i, path);
     assert.match(html, /<h1\b/i, path);
+    if (path === "/nuove-macchine") {
+      assert.match(html, /RS-1201/i, path);
+      assert.match(html, /hoist-rs-1201-guida-animata\.mp4/i, path);
+    }
   }
 });

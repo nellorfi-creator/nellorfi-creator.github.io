@@ -82,10 +82,10 @@ const equipmentBrands = [
   },
   {
     name: "HOIST", origin: "San Diego, California · Stati Uniti", since: "Dal 1977",
-    intro: "Un marchio statunitense specializzato in macchine per il bodybuilding, riconoscibile per la ricerca applicata alla meccanica del movimento.",
-    history: "HOIST sviluppa macchine professionali a pacco pesi e a carico libero.",
-    highlights: ["Macchine professionali per il bodybuilding", "Selettori per il pacco pesi", "Sistemi ROC-IT con movimento dinamico del sedile"],
-    relevance: "A Revenge Gym amplia le possibilità di lavorare sulla forza con postazioni solide, regolabili e adatte a una progressione graduale del carico.",
+    intro: "Il marchio californiano pioniere della biomeccanica dinamica ROC-IT®, dove la seduta si muove in sincronia con il gesto atletico.",
+    history: "Nata a San Diego nel 1977 dall’intuizione di Randall “Randy” T. Webber e Jeff Partrick al Coast Health Studio, HOIST Fitness aprì il primo stabilimento a Solana Beach nel 1980 e lanciò la prima linea professionale selectorized nel 1985. Tra il 2003 e il 2008 rivoluzionò il settore depositando i brevetti della linea ROC-IT® con tecnologia ROX™ (Ride Oriented Xercise): un sistema di leveraggi che fa oscillare dinamicamente il corpo durante la ripetizione per rispettare le articolazioni, attivare il core e replicare la naturalezza dei pesi liberi.",
+    highlights: ["Tecnologia brevettata ROC-IT® / ROX™ a seduta oscillante", "Quasi 50 anni di ingegneria biomeccanica a San Diego, USA", "Linee commerciali selectorized e plate-loaded presenti in oltre 20.000 centri nel mondo", "Bracci controbilanciati e impugnature auto-allineanti"],
+    relevance: "A Revenge Gym è già attiva la ROC-IT RPL-5303 Incline Chest Press per il torace superiore, affiancata a fine dicembre dal nuovo arrivo per l’area dorso: la HOIST RS-1201 Lat Pulldown.",
     source: "https://www.hoistfitness.com/pages/about", sourceLabel: "Storia ufficiale HOIST Fitness",
   },
   {
