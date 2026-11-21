@@ -175,13 +175,34 @@ export default function Home() {
   const relaxVideoRef = useRef<HTMLVideoElement>(null);
   const transformSpotVideoRef = useRef<HTMLVideoElement>(null);
   const socialProofVideoRef = useRef<HTMLVideoElement>(null);
+  const hoistHomeVideoRef = useRef<HTMLVideoElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
   const drawerCloseRef = useRef<HTMLButtonElement>(null);
   const [relaxSound, setRelaxSound] = useState(false);
-  const tickerMachines = legMachines.slice(0, 10);
+  const tickerMachines = [
+    {
+      id: "hoist-lat-pulldown",
+      name: "HOIST RS-1201 Lat Pulldown",
+      thumb: "/media/new-machines/hoist-rs-1201-lat-pulldown.webp",
+      href: "/nuove-macchine#hoist-lat-pulldown",
+      badge: "In arrivo Dic.",
+    },
+    ...legMachines.slice(0, 10).map((machine) => ({
+      id: machine.id,
+      name: machine.name,
+      thumb: machine.image.replace("/photos/machines/gambe/", "/photos/machines/gambe/thumbs/"),
+      href: `/macchine/gambe/${machine.id}`,
+      badge: undefined,
+    })),
+  ];
   const overlaysOpen = introVisible || Boolean(activeBrand || activeArea || activeArticle);
 
   useViewportVideo(heroVideoRef, { paused: introVisible, src: "/media/hero-loop.mp4", load: "idle" });
+  useViewportVideo(hoistHomeVideoRef, {
+    paused: overlaysOpen,
+    src: "/media/new-machines/hoist-rs-1201-guida-animata.mp4",
+    poster: "/media/new-machines/hoist-rs-1201-guida-poster.jpg",
+  });
   useViewportVideo(gymTourVideoRef, { paused: overlaysOpen, src: "/media/revenge-gym-tour.mp4", poster: "/media/sala-attrezzi.webp" });
   useViewportVideo(relaxVideoRef, { paused: overlaysOpen, volume: 0.42, playbackRate: 0.8, src: "/media/sala-relax.mp4", poster: "/photos/live/sala-relax-poster.webp" });
   useViewportVideo(transformSpotVideoRef, { paused: overlaysOpen, src: "/media/spot-trasformazione.mp4", poster: "/photos/live/hero-sala-poster.webp" });
@@ -529,6 +550,7 @@ export default function Home() {
               <div className="nav-flyout-panel-inner">
                 <Link href="#attrezzatura" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Macchinari selezionati</Link>
                 <Link href="/nuove-macchine" role="menuitem" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>Nuove macchine</Link>
+                <Link href="/nuove-macchine#hoist-lat-pulldown" role="menuitem" className="nav-flyout-highlight" onClick={() => { setMenuOpen(false); setNavFlyout(null); }}>HOIST RS-1201 · In arrivo Dic.</Link>
               </div>
             </div>
           </div>
@@ -574,15 +596,18 @@ export default function Home() {
             const duplicate = index >= tickerMachines.length;
             return (
               <Link
-                className="machine-ticker-item"
+                className={`machine-ticker-item${machine.badge ? " is-incoming" : ""}`}
                 key={`${machine.id}-${index}`}
-                href={`/macchine/gambe/${machine.id}`}
+                href={machine.href}
                 aria-hidden={duplicate || undefined}
                 tabIndex={duplicate ? -1 : undefined}
                 aria-label={duplicate ? undefined : `Apri la scheda di ${machine.name}`}
               >
-                <SiteImage src={machine.image.replace("/photos/machines/gambe/", "/photos/machines/gambe/thumbs/")} alt="" width={144} height={192} decoding="async" loading={index < 4 ? "eager" : "lazy"} />
-                <span>{machine.name}</span>
+                <SiteImage src={machine.thumb} alt="" width={144} height={192} decoding="async" loading={index < 4 ? "eager" : "lazy"} />
+                <span className="machine-ticker-copy">
+                  {machine.badge ? <em>{machine.badge}</em> : null}
+                  <b>{machine.name}</b>
+                </span>
               </Link>
             );
           })}
@@ -596,6 +621,12 @@ export default function Home() {
         </div>
         <div className="hero-shade"></div>
         <div className="hero-content">
+          <Link href="/nuove-macchine#hoist-lat-pulldown" className="hero-incoming-pill">
+            <span className="hero-incoming-dot" aria-hidden="true"></span>
+            <small>IN ARRIVO FINE DICEMBRE</small>
+            <strong>HOIST RS-1201 Lat Pulldown ROC-IT®</strong>
+            <span className="hero-incoming-cta">Motion Lab + Video ↗</span>
+          </Link>
           <p className="eyebrow"><span></span> Sala pesi · Ladispoli</p>
           <h1>NON CERCARE<br/>SCUSE. <em>CREA</em><br/>LA TUA <em>RIVINCITA.</em></h1>
           <p className="hero-copy">Una palestra completa, attrezzature di qualità e l’ambiente giusto per allenarti con costanza e superare ogni limite.</p>
@@ -616,7 +647,76 @@ export default function Home() {
         <div className="hero-stats">
           <div><strong>9</strong><span>Brand professionali</span></div><div><strong>100%</strong><span>Allenamento</span></div><div><strong>1</strong><span>Grande gruppo</span></div>
         </div>
-        <a href="#filosofia" className="scroll-cue" aria-label="Scorri alla sezione successiva">SCROLL <span>↓</span></a>
+        <a href="#prossimo-arrivo" className="scroll-cue" aria-label="Scorri alla sezione successiva">SCROLL <span>↓</span></a>
+      </section>
+
+      <section className="section incoming-home-spotlight" id="prossimo-arrivo" aria-labelledby="incoming-home-title">
+        <div className="incoming-home-grid">
+          <div className="incoming-home-copy reveal">
+            <div className="incoming-home-badges">
+              <span className="incoming-home-live-pill"><i></i> IN ARRIVO · FINE DICEMBRE 2026</span>
+              <span className="incoming-home-sub-pill">AREA DORSO · BREVETTO USA ROC-IT®</span>
+            </div>
+            <p className="eyebrow"><span></span> Nuovo innesto ufficiale · San Diego, California (dal 1977)</p>
+            <h2 id="incoming-home-title">IL DORSO CAMBIA<br/>ASSETTO: <em>HOIST RS-1201.</em></h2>
+            <p className="lead">La nuova Lat Pulldown selectorized della linea ROC-IT® entra a Revenge Gym a fine dicembre: la seduta bascula dinamicamente con te durante ogni trazione.</p>
+            <p>Grazie al quadrilatero articolato brevettato ROX™ (Ride Oriented Xercise), mentre porti le impugnature verso le clavicole il sedile si inclina all’indietro di 25°: il busto trova la linea di trazione ideale senza inarcare la zona lombare, scaricando le spalle e massimizzando il reclutamento del gran dorsale.</p>
+            <div className="incoming-home-specs" aria-label="Dati tecnici principali HOIST RS-1201">
+              <div><strong>25°</strong><span>Escursione ROX™</span></div>
+              <div><strong>157 kg</strong><span>Pacco pesi schermato</span></div>
+              <div><strong>330 kg</strong><span>Struttura USA</span></div>
+            </div>
+            <div className="incoming-home-actions">
+              <Link href="/nuove-macchine#hoist-lat-pulldown" className="button primary">Apri scheda + Motion Lab <span>↗</span></Link>
+              <Link href="/nuove-macchine" className="text-link">Tutti i 9 nuovi arrivi <span>→</span></Link>
+            </div>
+          </div>
+
+          <div className="incoming-home-visual reveal">
+            <div className="incoming-home-frame">
+              <Link
+                href="/nuove-macchine#hoist-lat-pulldown"
+                className="incoming-home-cinema"
+                aria-label="Apri la guida biomeccanica animata e il simulatore interattivo della HOIST RS-1201 Lat Pulldown"
+              >
+                <div className="incoming-home-cinema-top">
+                  <span>GUIDA BIOMECCANICA ANIMATA · ROC-IT® MOTION LAB</span>
+                  <b>SIMULATORE + VIDEO HD</b>
+                </div>
+                <video
+                  ref={hoistHomeVideoRef}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  {...safariInline}
+                  preload="none"
+                  poster="/media/new-machines/hoist-rs-1201-guida-poster.jpg"
+                  disablePictureInPicture
+                  aria-hidden="true"
+                >
+                </video>
+                <div className="incoming-home-cinema-bottom">
+                  <div className="incoming-home-cutout">
+                    <SiteImage
+                      src="/media/new-machines/hoist-rs-1201-lat-pulldown.webp"
+                      alt=""
+                      width={120}
+                      height={150}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="incoming-home-cinema-meta">
+                    <small>HOIST FITNESS · LINEA COMMERCIALE ROC-IT®</small>
+                    <strong>RS-1201 Lat Pulldown · Prova il simulatore interattivo</strong>
+                  </div>
+                  <span className="incoming-home-cinema-go" aria-hidden="true">↗</span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="section philosophy" id="filosofia">
@@ -826,7 +926,14 @@ export default function Home() {
             <section><small>LA STORIA</small><p>{activeBrand.history}</p></section>
             <section><small>COSA LO DISTINGUE</small><ul>{activeBrand.highlights.map(item => <li key={item}>{item}</li>)}</ul></section>
             <section className="brand-relevance"><small>PERCHÉ È IN REVENGE GYM</small><p>{activeBrand.relevance}</p></section>
-            <a className="brand-source" href={activeBrand.source} target="_blank" rel="noopener noreferrer">{activeBrand.sourceLabel} <span>↗</span></a>
+            <div className="brand-drawer-links">
+              {activeBrand.name === "HOIST" ? (
+                <Link className="button primary" href="/nuove-macchine#hoist-lat-pulldown" onClick={() => setActiveBrand(null)}>
+                  Scheda + Motion Lab RS-1201 <span>↗</span>
+                </Link>
+              ) : null}
+              <a className="brand-source" href={activeBrand.source} target="_blank" rel="noopener noreferrer">{activeBrand.sourceLabel} <span>↗</span></a>
+            </div>
           </div>
         </aside>
       </div>}

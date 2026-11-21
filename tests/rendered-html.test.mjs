@@ -23,6 +23,9 @@ test("server-renders the Revenge Gym home page", async () => {
   assert.match(html, /<title>Revenge Gym/i);
   assert.match(html, /<meta[^>]+name="description"/i);
   assert.match(html, /<h1[^>]*>[\s\S]*RIVINCITA/i);
+  assert.match(html, /id="prossimo-arrivo"/i);
+  assert.match(html, /HOIST RS-1201/i);
+  assert.match(html, /\/nuove-macchine\/?#hoist-lat-pulldown/i);
   assert.match(html, /id="contatti"/i);
   assert.match(html, /by nello 2026/i);
   assert.doesNotMatch(html, /Visite uniche giornaliere/i);
